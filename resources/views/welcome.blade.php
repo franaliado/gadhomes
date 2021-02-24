@@ -28,7 +28,7 @@
                     @csrf
             
                     <div class="body bg-gray">
-                        <p><a href="#">Please enter your User Name and Password</a></p>
+                        <p><a href="#">Por favor ponga su Clave</a></p>
             
                         <div class="form-group">
                             <label for="user" class="col-md-4 col-form-label text-md-right">User Name:</label>
