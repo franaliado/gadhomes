@@ -186,7 +186,7 @@ img {
   background-color: #222222 !important;
 }
 .bg-red {
-  background-color: #f56954 !important;
+  background-color: #e3342f !important;
 }
 .bg-yellow {
   background-color: #f39c12 !important;
@@ -1098,7 +1098,7 @@ body > .header .logo .icon {
 }
 .progress-bar-green,
 .progress-bar-success {
-  background-color: #00a65a;
+  background-color: #eb1710;
 }
 .progress-striped .progress-bar-green,
 .progress-striped .progress-bar-success {
@@ -2291,7 +2291,7 @@ Component: timeline
   border-top-right-radius: 4px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-  background: #3d9970;
+  background: #e3342f;
   box-shadow: inset 0px -3px 0px rgba(0, 0, 0, 0.2);
   padding: 20px 10px;
   text-align: center;

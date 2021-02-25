@@ -2,7 +2,7 @@
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>AdminLTE | Log in</title>
+        <title>GADHOMES | Log in</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
         <link href="../../adminlte/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -22,13 +22,13 @@
         <h1  align="center">GADHOMES</h1>
         <div class="form-box" id="login-box">
             <div class="form-box" id="login-box">
-                <div class="header">Sign In</div>
+                <div class="header">Log In</div>
             
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
             
                     <div class="body bg-gray">
-                        <p><a href="#">Por favor ponga su Clave</a></p>
+                        <p><a href="#">Please enter your User Name and Password</a></p>
             
                         <div class="form-group">
                             <label for="user" class="col-md-4 col-form-label text-md-right">User Name:</label>
@@ -53,7 +53,7 @@
             
                     </div>
                     <div class="footer">                                                               
-                        <button type="submit" class="btn bg-olive btn-block">Login</button> 
+                        <button type="submit" class="btn bg-red btn-block">Login</button> 
                     </div>
                 </form>
             

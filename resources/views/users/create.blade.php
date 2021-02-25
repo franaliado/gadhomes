@@ -3,7 +3,7 @@
 @section('content')
         <div class="form-box" id="login-box">
             <div class="header">Register New Membership</div>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ url('/users') }}">
                 @csrf
 
                 <div class="body bg-gray">
@@ -37,10 +37,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="cargo" class="col-md-4 col-form-label text-md-right">{{ __('Cargo') }}</label>
+                        <label for="cargo" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
         
                         <div class="col-md-12">
-                            <input id="cargo" type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo" value="{{ old('cargo') }}" required autocomplete="cargo" autofocus placeholder="Cargo">
+                            <input id="cargo" type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo" value="{{ old('cargo') }}" required autocomplete="cargo" autofocus placeholder="Position">
         
                             @error('cargo')
                                 <span class="invalid-feedback" role="alert">
@@ -51,16 +51,15 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="nivel" class="col-md-4 col-form-label text-md-right">{{ __('Nivel') }}</label>
+                        <label for="nivel" class="col-md-4 col-form-label text-md-right">{{ __('Access Level') }}</label>
         
                         <div class="col-md-12">
-                            <input id="nivel" type="text" class="form-control @error('nivel') is-invalid @enderror" name="nivel" value="{{ old('nivel') }}" required autocomplete="nivel" autofocus placeholder="Nivel">
-        
-                            @error('nivel')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <select id="nivel" name="nivel" class="form-control">
+                                <option value="1">Administrator</option>
+                                <option value="2">Superintendente</option>
+                                <option value="3">Assistant</option>
+                                <option value="4">Vendor</option>
+                            </select>
                         </div>
                     </div>
 
@@ -103,12 +102,11 @@
 
                 <div class="footer">                    
 
-                    <button type="submit" class="btn bg-olive btn-block">Sign me up</button>
+                    <button type="submit" class="btn bg-red btn-block">Sign me up</button>
          
                 </div>
             </form>
         </div>
 @endsection
-
 
 

@@ -35,7 +35,7 @@
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
-            <a href="home" class="logo">
+            <a href="/home" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
                 GADHOMES
             </a>
@@ -61,7 +61,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
-                                <li class="user-header bg-light-blue">
+                                <li class="user-header bg-red">
                                     <img src="adminlte/img/avatar0.png" class="img-circle" alt="User Image" />
                                     <p>
                                         {{ Auth::user()->name }} - {{ Auth::user()->cargo }}
@@ -94,11 +94,6 @@
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="home">
-                                <i class="fa fa-tachometer-alt"></i> <span>Dashboard</span>
-                            </a>
-                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-bar-chart-o"></i>
@@ -106,7 +101,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> Morris</a></li>
+                                <li><a href="/users/create"><i class="fa fa-angle-double-right"></i> Users</a></li>
                                 <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
                                 <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
                             </ul>
@@ -190,7 +185,7 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-table"></i> <span>Reports</span>
+                                <i class="fa fa-table"></i> <span>GAD Framing INC</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
@@ -198,10 +193,17 @@
                                 <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a href="registernew">
-                                <i class="fa fa-th"></i> <span>Register</span> <small class="badge pull-right bg-green">new</small>
+
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-table"></i> <span>Reports</span>
+                                <i class="fa fa-angle-left pull-right"></i>
                             </a>
+                            <ul class="treeview-menu">
+                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
+                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
+                            </ul>
                         </li>
                     </ul>
                 </section>
