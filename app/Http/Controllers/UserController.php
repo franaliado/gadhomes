@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -36,15 +37,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        $user->name=$request->name;
-        $user->username=$request->username;
-        $user->email=$request->email;
-        $user->cargo=$request->cargo;
-        $user->nivel=$request->nivel;
-        /**$user->password=Hash::make($request->password);*/
-        $user->password=$request->password;  
-        $user->save();
+        $data=request()-> except('_token');
+        $data['password']=Hash::make($data['password']);
+        User::create($data);
     }
 
     /**
