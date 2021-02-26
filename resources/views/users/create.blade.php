@@ -11,8 +11,8 @@
             </div>
           </div>
         @endif
-        
-        <div class="form-box" id="login-box">
+
+        <div class="form-box2" id="login-box">
             <div class="header">Register New Membership</div>
             <form method="POST" action="{{ url('/users') }}">
                 @csrf
@@ -71,6 +71,20 @@
                                 <option value="3">Assistant</option>
                                 <option value="4">Vendor</option>
                             </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="telefono" class="col-md-8 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+
+                        <div class="col-md-12">
+                            <input id="telefono" type="text" maxlength="15" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono" autofocus placeholder="Phone Number">
+
+                            @error('telefono')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 

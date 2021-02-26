@@ -2278,6 +2278,13 @@ Component: timeline
   width: 360px;
   margin: 90px auto 0 auto;
 }
+
+.form-box2 {
+  width: 560px;
+  margin: 5px auto 0 auto;
+}
+
+.form-box2 .header,
 .form-box .header {
   -webkit-border-top-left-radius: 4px;
   -webkit-border-top-right-radius: 4px;
@@ -2299,24 +2306,38 @@ Component: timeline
   font-weight: 300;
   color: #fff;
 }
+
+.form-box2 .body,
+.form-box2 .footer,
 .form-box .body,
 .form-box .footer {
   padding: 10px 20px;
   background: #fff;
   color: #444;
 }
+
+.form-box2 .body > .form-group,
+.form-box2 .footer > .form-group,
 .form-box .body > .form-group,
 .form-box .footer > .form-group {
   margin-top: 20px;
 }
+
+.form-box2 .body > .form-group > input,
+.form-box2 .footer > .form-group > input,
 .form-box .body > .form-group > input,
 .form-box .footer > .form-group > input {
   border: #fff;
 }
+
+.form-box2 .body > .btn,
+.form-box2 .footer > .btn,
 .form-box .body > .btn,
 .form-box .footer > .btn {
   margin-bottom: 10px;
 }
+
+.form-box2 .footer,
 .form-box .footer {
   -webkit-border-top-left-radius: 0;
   -webkit-border-top-right-radius: 0;
@@ -2332,6 +2353,7 @@ Component: timeline
   border-bottom-left-radius: 4px;
 }
 @media (max-width: 767px) {
+  .form-box2,
   .form-box {
     width: 90%;
   }

@@ -7,6 +7,7 @@ use App\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -31,12 +32,34 @@ class UserController extends Controller
     }
 
     /**
+    * Get a validator for an incoming registration request.
+    *
+    * @param  array  $data
+    * @return \Illuminate\Contracts\Validation\Validator
+    */
+   protected function validator(array $data)
+   {
+       return Validator::make($data, [
+           'name' => ['required', 'string', 'max:255'],
+           'username' => ['required', 'string', 'max:15', 'unique:users'],
+           'cargo' => ['required', 'string', 'max:255'],
+           'nivel' => ['required', 'integer'],
+           'telefono' => ['required', 'string', 'max:15'],
+           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+           'password' => ['required', 'string', 'min:8', 'confirmed'],
+       ]);
+   }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
+
+      $this->validator($request->all())->validate();
 
       DB::beginTransaction();
       try {
@@ -46,6 +69,7 @@ class UserController extends Controller
           'username' => $request->username,
           'cargo' => $request->cargo,
           'nivel' => $request->nivel,
+          'telefono' => $request->telefono,
           'email' => $request->email,
           'password' => bcrypt($request->password)
         );
