@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\User;
 
 use Illuminate\Support\Facades\Hash;
@@ -35,11 +36,30 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $data=request()-> except('_token');
-        $data['password']=Hash::make($data['password']);
+    public function store(Request $request){
+
+      DB::beginTransaction();
+      try {
+
+        $data = array(
+          'name' => $request->name,
+          'username' => $request->username,
+          'cargo' => $request->cargo,
+          'nivel' => $request->nivel,
+          'email' => $request->email,
+          'password' => bcrypt($request->password)
+        );
+
         User::create($data);
+        // User::where('id', $request->id)->update($data);
+
+        DB::commit();
+        return redirect('/home')->with(['success' => 'Usuario registrado correctamente']);
+
+      }catch (\Exception $e) {
+        DB::rollback();
+        return view('users.create')->with(['error' => $e->getMessage()]);
+      }
     }
 
     /**
