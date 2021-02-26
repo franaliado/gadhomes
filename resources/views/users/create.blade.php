@@ -26,7 +26,7 @@
                         <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('User Name') }}</label>
         
                         <div class="col-md-12">
-                            <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="User Name">
+                            <input id="username" type="text" maxlength="12" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus placeholder="User Name">
         
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                         <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
         
                         <div class="col-md-12">
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
+                            <input id="password" type="password" maxlength="15" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
         
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
@@ -92,10 +92,10 @@
                     </div>
         
                     <div class="form-group row">
-                        <label for="password-confirm" class="col-md-8 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <label for="password-confirm" min='6' class="col-md-8 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
         
                         <div class="col-md-12">
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype Password">
+                            <input id="password-confirm" type="password" maxlength="15" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype Password">
                         </div>
                     </div>
                 </div>
