@@ -42,9 +42,9 @@ class UserController extends Controller
        return Validator::make($data, [
            'name' => ['required', 'string', 'max:255'],
            'username' => ['required', 'string', 'max:15', 'unique:users'],
-           'cargo' => ['required', 'string', 'max:50'],
-           'rol' => ['required', 'integer'],
-           'telefono' => ['required', 'string', 'max:15'],
+           'position' => ['required', 'string', 'max:50'],
+           'role' => ['required', 'integer'],
+           'phone' => ['required', 'string', 'max:15'],
            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
            'password' => ['required', 'string', 'min:8', 'confirmed'],
        ]);
@@ -67,9 +67,9 @@ class UserController extends Controller
         $data = array(
           'name' => $request->name,
           'username' => $request->username,
-          'cargo' => $request->cargo,
-          'rol' => $request->rol,
-          'telefono' => $request->telefono,
+          'position' => $request->position,
+          'role' => $request->role,
+          'phone' => $request->phone,
           'email' => $request->email,
           'password' => bcrypt($request->password)
         );
@@ -78,7 +78,7 @@ class UserController extends Controller
         // User::where('id', $request->id)->update($data);
 
         DB::commit();
-        return redirect('/home')->with(['success' => 'Usuario registrado correctamente']);
+        return redirect('/home')->with(['success' => 'User successfully registered']);
 
       }catch (\Exception $e) {
         DB::rollback();

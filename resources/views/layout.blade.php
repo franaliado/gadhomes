@@ -58,7 +58,7 @@
                                 <li class="user-header bg-red">
                                     <img src="adminlte/img/avatar0.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{ Auth::user()->name }} - {{ Auth::user()->cargo }}
+                                        {{ Auth::user()->name }} - {{ Auth::user()->position }}
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->

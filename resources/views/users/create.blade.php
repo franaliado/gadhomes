@@ -48,12 +48,12 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="cargo" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
+                        <label for="position" class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
 
                         <div class="col-md-12">
-                            <input id="cargo" type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo" value="{{ old('cargo') }}" required autocomplete="cargo" autofocus placeholder="Position">
+                            <input id="position" type="text" class="form-control @error('position') is-invalid @enderror" name="position" value="{{ old('position') }}" required autocomplete="position" autofocus placeholder="Position">
 
-                            @error('cargo')
+                            @error('position')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -62,10 +62,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Access Level') }}</label>
+                        <label for="role" class="col-md-4 col-form-label text-md-right">{{ __('Role') }}</label>
 
                         <div class="col-md-12">
-                            <select id="rol" name="rol" class="form-control">
+                            <select id="role" name="role" class="form-control">
                                 <option value="1">Administrator</option>
                                 <option value="2">Superintendente</option>
                                 <option value="3">Assistant</option>
@@ -75,12 +75,12 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="telefono" class="col-md-8 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+                        <label for="phone" class="col-md-8 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                         <div class="col-md-12">
-                            <input id="telefono" type="text" maxlength="15" class="form-control @error('telefono') is-invalid @enderror" name="telefono" value="{{ old('telefono') }}" required autocomplete="telefono" autofocus placeholder="Phone Number">
+                            <input id="phone" type="text" maxlength="15" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone" autofocus placeholder="Phone Number">
 
-                            @error('telefono')
+                            @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
