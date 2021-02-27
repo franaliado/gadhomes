@@ -62,10 +62,10 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="nivel" class="col-md-4 col-form-label text-md-right">{{ __('Access Level') }}</label>
+                        <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Access Level') }}</label>
 
                         <div class="col-md-12">
-                            <select id="nivel" name="nivel" class="form-control">
+                            <select id="rol" name="rol" class="form-control">
                                 <option value="1">Administrator</option>
                                 <option value="2">Superintendente</option>
                                 <option value="3">Assistant</option>

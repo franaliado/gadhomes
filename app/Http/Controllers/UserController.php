@@ -42,8 +42,8 @@ class UserController extends Controller
        return Validator::make($data, [
            'name' => ['required', 'string', 'max:255'],
            'username' => ['required', 'string', 'max:15', 'unique:users'],
-           'cargo' => ['required', 'string', 'max:255'],
-           'nivel' => ['required', 'integer'],
+           'cargo' => ['required', 'string', 'max:50'],
+           'rol' => ['required', 'integer'],
            'telefono' => ['required', 'string', 'max:15'],
            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
            'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -68,7 +68,7 @@ class UserController extends Controller
           'name' => $request->name,
           'username' => $request->username,
           'cargo' => $request->cargo,
-          'nivel' => $request->nivel,
+          'rol' => $request->rol,
           'telefono' => $request->telefono,
           'email' => $request->email,
           'password' => bcrypt($request->password)
