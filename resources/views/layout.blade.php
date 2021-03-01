@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link href="adminlte/img/logo-leon-ico.ico" rel="shortcut icon" type="image/x-icon" />
         <title>Gadhomes | Dashboard</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
@@ -37,6 +38,7 @@
         <header class="header">
             <a href="/home" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                <img src="adminlte/img/logo-leon2.png" class="img-circle" alt="logo" width="40" height="40"/>
                 GADHOMES
             </a>
             <!-- Header Navbar: style can be found in header.less -->
@@ -183,8 +185,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
+                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Homes</a></li>
+                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Purchase Orders</a></li>
+                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Invoices</a></li>
                             </ul>
                         </li>
 

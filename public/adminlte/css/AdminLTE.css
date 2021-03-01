@@ -763,7 +763,7 @@ body > .header .logo .icon {
   margin-right: 5px;
   /* Default background and font colors */
 
-  background: #00c0ef;
+  background: #f81303;
   color: #f9f9f9;
   /* Fallback for browsers that doesn't support rgba */
 
@@ -2601,8 +2601,8 @@ Component: timeline
 */
 /* skin-black navbar */
 .skin-black .navbar {
-  background-color: #ffffff;
-  border-bottom: 1px solid #eee;
+  background-color: #fd0404;
+  border-bottom: 1px solid rgb(250, 3, 3);
 }
 .skin-black .navbar .nav a {
   color: #333333;
@@ -2627,7 +2627,7 @@ Component: timeline
 }
 /* skin-black logo */
 .skin-black .logo {
-  background-color: #333333;
+  background-color: #fd0404;
   color: #f9f9f9;
 }
 .skin-black .logo > a {
