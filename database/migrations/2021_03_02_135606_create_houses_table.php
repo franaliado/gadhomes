@@ -17,27 +17,25 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('community_id');
+            $table->unsignedBigInteger('community_id')->nullable();
             $table->string('address', 150);
             $table->integer('lot');
             $table->integer('state');
             $table->boolean('withou-po')->default(1);
             $table->date('start_date');
             //Datos del Subcontratista
-            $table->unsignedBigInteger('subcontractor_id');
-            $table->decimal('amount_assigned', 8, 2)->default(0);
-            $table->decimal('amount_delivery', 8, 2)->default(0);
-            $table->date('date_delivery')->nullable();
+            $table->unsignedBigInteger('subcontractor_id')->nullable();
+            $table->decimal('amount_assigned_subc', 8, 2)->default(0);
 
             $table->foreign('community_id')
                 ->references('id')
                 ->on('communities')
-                ->onDelete('cascade');
+                ->onDelete('set null');
 
             $table->foreign('subcontractor_id')
                     ->references('id')
                     ->on('subcontractors')
-                    ->onDelete('cascade');
+                    ->onDelete('set null');
 
             $table->timestamps();
         });

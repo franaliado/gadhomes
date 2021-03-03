@@ -19,10 +19,11 @@ class CreateOrdersTable extends Migration
             $table->integer('num_po');
             $table->string('description', 100);
             $table->string('option', 100);
+            $table->date('date_order');
             $table->decimal('qty_po', 8, 2);
             $table->decimal('unit_price', 8, 2);
             $table->string('name_Superint', 50);
-            $table->string('phone_Superint');
+            $table->string('phone_Superint', 15);
             $table->unsignedBigInteger('house_id');
 
             $table->foreign('house_id')

@@ -17,8 +17,8 @@ class CreateInvoicesTable extends Migration
             $table->id();
             $table->integer('num_invoice');
             //$table->date('date_invoice');
-            $table->timestamp('date_invoice')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->unsignedBigInteger('order_id');
+            //$table->timestamp('date_invoice')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->unsignedBigInteger('order_id')->unique();
 
             $table->foreign('order_id')
                 ->references('id')
