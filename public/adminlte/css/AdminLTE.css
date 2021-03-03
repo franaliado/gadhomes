@@ -857,7 +857,7 @@ body > .header .logo .icon {
   width: 0;
   position: absolute;
   pointer-events: none;
-  border-color: rgba(255, 255, 255, 0);
+  border-color: rgba(240, 237, 237, 0);
   border-bottom-color: #ffffff;
   border-width: 10px;
   margin-left: -10px;
