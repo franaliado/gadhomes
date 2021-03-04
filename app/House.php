@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class House extends Model
 {
+ 
+    protected $table = 'house';
+
+    protected $fillable = [ 'id', 'community_id', 'address', 'lot', 'state', '	withopu', 'start_date', 'subcontractor_id',
+	    		    'amount_assigned_subc'
+   			  ];
+
+
     //Relación Uno a Muchos
     public function orders(){
         return $this->hasMany('App\Order');
@@ -18,7 +26,7 @@ class House extends Model
 
     //Relación Uno a Muchos Inversa
     public function community(){
-        return $this->belongsTo('App\Community');
+        return $this->hasOne('App\Community', 'id', 'community_id');
     }
 
     public function subcontractor(){

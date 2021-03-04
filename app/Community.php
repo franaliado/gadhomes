@@ -6,8 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Community extends Model
 {
-    //
+
+    protected $table = 'community';
+
+     protected $fillable = [ 'id', 'name_community' ];
+
     public function houses(){
-        return $this->hasMany('App\House');
+        return $this->hasMany('App\House', 'community_id', 'id');
     }
 }
