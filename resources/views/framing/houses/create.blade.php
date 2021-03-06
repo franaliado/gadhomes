@@ -40,10 +40,12 @@
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
     
                         <div class="col-md-12">
-                            <select id="community" name="community" class="form-control" value="{{ old('community') }}">
+                            <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($communitys as $community)
-                                    <option value="{{$community->id}}"> {{ $community->name }} </option>
+                                    <option value="{{ old('community')}} {{$community->id}}) ? 'selected' : '' }} "> 
+                                         {{ $community->name }} 
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

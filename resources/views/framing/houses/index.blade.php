@@ -6,7 +6,7 @@
     <a href="{{ url('/houses/create') }}" class="btn btn-danger">Add House</a>
     <br/><br/>
     <table class="table table-light table-hover" border='0' >
-        <thead class="thead-light" bgcolor="#BFC9CA">
+        <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
                 <th>#</th>
                 <th>Community</th>
