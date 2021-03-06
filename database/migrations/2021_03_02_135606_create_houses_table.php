@@ -21,7 +21,7 @@ class CreateHousesTable extends Migration
             $table->string('address', 150);
             $table->integer('lot');
             $table->integer('state');
-            $table->boolean('withou-po')->default(1);
+            $table->boolean('withoutpo')->default(1);
             $table->date('start_date');
             //Datos del Subcontratista
             $table->unsignedBigInteger('subcontractor_id')->nullable();
@@ -29,7 +29,7 @@ class CreateHousesTable extends Migration
 
             $table->foreign('community_id')
                 ->references('id')
-                ->on('communities')
+                ->on('community')
                 ->onDelete('set null');
 
             $table->foreign('subcontractor_id')

@@ -2284,6 +2284,12 @@ Component: timeline
   margin: 5px auto 0 auto;
 }
 
+.form-box3 {
+  width: 960px;
+  margin: 2px auto 0 auto;
+}
+
+.form-box3 .header,
 .form-box2 .header,
 .form-box .header {
   -webkit-border-top-left-radius: 4px;
@@ -2307,6 +2313,8 @@ Component: timeline
   color: #fff;
 }
 
+.form-box3 .body,
+.form-box3 .footer,
 .form-box2 .body,
 .form-box2 .footer,
 .form-box .body,
@@ -2316,6 +2324,8 @@ Component: timeline
   color: #444;
 }
 
+.form-box3 .body > .form-group,
+.form-box3 .footer > .form-group,
 .form-box2 .body > .form-group,
 .form-box2 .footer > .form-group,
 .form-box .body > .form-group,
@@ -2323,6 +2333,8 @@ Component: timeline
   margin-top: 20px;
 }
 
+.form-box3 .body > .form-group > input,
+.form-box3 .footer > .form-group > input,
 .form-box2 .body > .form-group > input,
 .form-box2 .footer > .form-group > input,
 .form-box .body > .form-group > input,
@@ -2330,6 +2342,8 @@ Component: timeline
   border: #fff;
 }
 
+.form-box3 .body > .btn,
+.form-box3 .footer > .btn,
 .form-box2 .body > .btn,
 .form-box2 .footer > .btn,
 .form-box .body > .btn,
@@ -2337,6 +2351,7 @@ Component: timeline
   margin-bottom: 10px;
 }
 
+.form-box3 .footer,
 .form-box2 .footer,
 .form-box .footer {
   -webkit-border-top-left-radius: 0;
@@ -2353,6 +2368,7 @@ Component: timeline
   border-bottom-left-radius: 4px;
 }
 @media (max-width: 767px) {
+  .form-box3,
   .form-box2,
   .form-box {
     width: 90%;

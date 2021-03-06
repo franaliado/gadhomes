@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class House extends Model
 {
  
-    protected $table = 'house';
+    protected $table = 'houses';
 
-    protected $fillable = [ 'id', 'community_id', 'address', 'lot', 'state', '	withopu', 'start_date', 'subcontractor_id',
+    protected $fillable = [ 'id', 'community_id', 'address', 'lot', 'state', '	withoutpo', 'start_date', 'subcontractor_id',
 	    		    'amount_assigned_subc'
    			  ];
 
@@ -19,8 +19,8 @@ class House extends Model
         return $this->hasMany('App\Order');
     }
 
-    public function payment_subcontractors(){
-        return $this->hasMany('App\Payment_Subcontractor');
+    public function payments(){
+        return $this->hasMany('App\Payment');
     }
 
 
@@ -30,6 +30,6 @@ class House extends Model
     }
 
     public function subcontractor(){
-        return $this->belongsTo('App\Subcontractor');
+        return $this->hasOne('App\Subcontractor', 'id', 'subcontractor_id');
     }
 }

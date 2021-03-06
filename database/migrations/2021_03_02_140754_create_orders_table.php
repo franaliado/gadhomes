@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
 
             $table->integer('num_po');
             $table->string('description', 100);
-            $table->string('option', 100);
+            $table->string('option', 100)->nullable();
             $table->date('date_order');
             $table->decimal('qty_po', 8, 2);
             $table->decimal('unit_price', 8, 2);

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Framing;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\House;
-use App\Community;
 
-class HouseController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,14 +16,6 @@ class HouseController extends Controller
     public function index()
     {
         //
-        // $data['houses'] = House::paginate(10);
-
-	$houses = House::with(['community'])
-		       ->orderBy('address')
-		       ->paginate(10);
-
-        return view('framing.houses.index')->with(['houses' => $houses]);
-        
     }
 
     /**

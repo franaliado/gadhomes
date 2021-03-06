@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentSubcontractorsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreatePaymentSubcontractorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('payment_subcontractors', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->decimal('amount_delivery_subc', 8, 2);
-            $table->date('date_delivery_subc');
+            $table->decimal('amount_delivery', 8, 2);
+            $table->date('date_delivery');
             $table->unsignedBigInteger('house_id');
 
             $table->foreign('house_id')
@@ -35,6 +35,6 @@ class CreatePaymentSubcontractorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_subcontractors');
+        Schema::dropIfExists('payments');
     }
 }

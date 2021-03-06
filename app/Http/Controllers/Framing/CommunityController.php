@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Framing;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class SubcontractorController extends Controller
+class CommunityController extends Controller
 {
     /**
      * Display a listing of the resource.

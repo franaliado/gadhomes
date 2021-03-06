@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Framing;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class PaymentSubcontractorController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
