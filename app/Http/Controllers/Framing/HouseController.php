@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\HouseCreateRequest;
 use Illuminate\Support\Facades\Validator;
 
+use DB;
 use App\House;
 use App\Community;
 use App\Subcontractor;
@@ -37,33 +39,20 @@ class HouseController extends Controller
      */
     public function create()
     {
-        $communitys = Community::all();
-        $subcontractors = Subcontractor::all();
-        return view("framing.houses.create", compact('subcontractors'), compact('communitys'));
+        $communitys = Community::orderBy('name_community', 'ASC')->get();
+        $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+        return view("framing.houses.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
 
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'address' => ['required', 'string', 'max:150'],
-            'community_id' => ['required', 'integer'],
-            'lot' => ['required', 'integer', 'min:4'],
-            'state' => ['required'],
-            'start_date' => ['required'],
-            'subcontractor_id' => ['required', 'integer'],
-            'amount_assigned_subc' => ['required'],
-        ]);
-    }
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(HouseCreateRequest $request)
     {
-        $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {
@@ -73,8 +62,8 @@ class HouseController extends Controller
             'community_id' => $request->community,
             'lot' => $request->lot,
             'state' => $request->state,
-            'start_date' => $request->date("Y-m-d", strtotime(start_date)),
-            'withoutpo' => $request->withoutpo,
+            'start_date' => $request->start_date,
+            'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,
             'subcontractor_id' => $request->subcontractor,
             'amount_assigned_subc' => $request->amount_assigned_subc
           );
@@ -86,7 +75,7 @@ class HouseController extends Controller
   
         }catch (\Exception $e) {
           DB::rollback();
-          return view('houses.create')->with(['error' => $e->getMessage()]);
+	  return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
 

@@ -2,15 +2,30 @@
 
 @section('content')
 
-        @if(isset($error))
+        @if(session('error'))
         <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="alert alert-danger" role="alert">
-                <p>{{ $error }}</p>
+                <p>{{ session('error') }}</p>
             </div>
         </div>
         </div>
         @endif
+
+        @if(isset($error))
+        <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+	    <div class="alert alert-danger" role="alert">
+		<ul>
+		  @foreach($errors as $error)
+                    <li>{{ $error }}</li>
+		  @endforeach
+		</ul>
+            </div>
+        </div>
+        </div>
+        @endif
+
 
         <div class="form-box3" id="create-houses">
         <div class="header">Add New House</div>
@@ -43,8 +58,8 @@
                             <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($communitys as $community)
-                                    <option value="{{ old('community')}} {{$community->id}}) ? 'selected' : '' }} "> 
-                                         {{ $community->name }} 
+                                    <option value="{{ $community->id }}"> 
+                                         {{ $community->name_community }} 
                                     </option>
                                 @endforeach
                             </select>
@@ -54,11 +69,11 @@
                     <div class="form-group row col-md-4">
                         <label for="lot" class="col-md-6 col-form-label text-md-right">{{ __('Lot') }}</label>
                         <div class="col-md-12">
-                            <input id="lot" type="text" maxlength="4" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
+                            <input id="lot" type="number" maxlength="4" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
 
                             @error('lot')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong class="text-danger">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -94,7 +109,7 @@
                     <div class="form-group row col-md-4">
                         <br/>
                         <div class="form-check">
-                            <input id="withoutpo" name="withoutpo" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <input id="withoutpo" name="withoutpo" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Without PO
                             </label>
@@ -110,16 +125,17 @@
                             <select id="subcontractor" name="subcontractor" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($subcontractors as $subcontractor)
-                                    <option value="{{$subcontractor->id}}"> {{ $subcontractor->name }} </option>
+                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
                                 @endforeach
                             </select>
+
                         </div>
                     </div>
 
                     <div class="form-group row col-md-4">
                         <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
                         <div class="col-md-12">
-                            <input id="amount_assigned_subc" type="double" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc') }}" required autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
+                            <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc') }}" required autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
 
                             @error('amount_assigned_subc')
                                 <span class="invalid-feedback" role="alert">

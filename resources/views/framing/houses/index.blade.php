@@ -45,7 +45,7 @@
 
                 <tr>
                     <td>{{ $loop->iteration }}</td>      
-                    <td>{{ $house->community->name }}</td>
+                    <td>{{ $house->community->name_community }}</td>
                     <td>{{ $house->address }}</td>
                     <td align="center">{{ $house->lot }}</td>
                     <td align="center">{{ $state }}</td>
