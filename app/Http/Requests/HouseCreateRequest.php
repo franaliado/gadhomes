@@ -26,21 +26,11 @@ class HouseCreateRequest extends FormRequest
     {
         return [
             'address' => 'required|string|max:150',
+            'community' => 'required',
+            'lot' => 'required|integer',
+            'start_date' => 'required',
+            'subcontractor' => 'required',
+            'amount_assigned_subc' => 'required',
         ];
     }
-
-    public function messages(){
-      return [
-          'address.required' => 'El :attribute es obligatorio.',
-          'community_id.required' => 'El campo community es obligatorio',
-
-      ];
-    }
-
-    public function attributes(){
-      return [
-        'address' => 'nombre del producto',
-     ];
-    }
-
 }

@@ -26,7 +26,7 @@ class HouseController extends Controller
         // $data['houses'] = House::paginate(10);
 
 	$houses = House::with(['community', 'subcontractor'])
-		       ->orderBy('address')
+		       ->orderBy('id', 'DESC')
 		       ->paginate(10);
 
         return view('framing.houses.index')->with(['houses' => $houses]); 
@@ -39,7 +39,7 @@ class HouseController extends Controller
      */
     public function create()
     {
-        $communitys = Community::orderBy('name_community', 'ASC')->get();
+        $communitys = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
         return view("framing.houses.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
@@ -54,6 +54,8 @@ class HouseController extends Controller
     public function store(HouseCreateRequest $request)
     {
 
+       // dd($request->withoutpo);
+
         DB::beginTransaction();
         try {
   
@@ -61,7 +63,7 @@ class HouseController extends Controller
             'address' => $request->address,
             'community_id' => $request->community,
             'lot' => $request->lot,
-            'state' => $request->state,
+            'status' => $request->status,
             'start_date' => $request->start_date,
             'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,
             'subcontractor_id' => $request->subcontractor,
@@ -74,8 +76,8 @@ class HouseController extends Controller
           return redirect('/houses')->with(['success' => 'User successfully registered']);
   
         }catch (\Exception $e) {
-          DB::rollback();
-	  return redirect()->back()->with(['error' => $e->getMessage()]);
+            DB::rollback();
+	        return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
 
@@ -98,7 +100,11 @@ class HouseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $house = House::findOrFail($id);
+        
+        $communitys = Community::orderBy('name', 'ASC')->get();
+        $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+        return view("framing.houses.edit")->with(['house' => $house, 'subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
 
     /**
@@ -121,6 +127,7 @@ class HouseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        House::destroy($id);
+        return redirect ('houses');
     }
 }

@@ -59,7 +59,7 @@
                                 <option value="">---- Please Select ----</option>
                                 @foreach($communitys as $community)
                                     <option value="{{ $community->id }}"> 
-                                         {{ $community->name_community }} 
+                                         {{ $community->name }} 
                                     </option>
                                 @endforeach
                             </select>
@@ -69,7 +69,7 @@
                     <div class="form-group row col-md-4">
                         <label for="lot" class="col-md-6 col-form-label text-md-right">{{ __('Lot') }}</label>
                         <div class="col-md-12">
-                            <input id="lot" type="number" maxlength="4" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
+                            <input id="lot" type="number" min="1" max="99" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
 
                             @error('lot')
                                 <span class="invalid-feedback" role="alert">
@@ -82,10 +82,10 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="state" class="col-md-6 col-form-label text-md-right">{{ __('State') }}</label>
+                        <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
     
                         <div class="col-md-12">
-                            <select id="state" name="state" class="form-control">
+                            <select id="status" name="status" class="form-control">
                                 <option value="1">Started</option>
                                 <option value="2">Billed</option>
                                 <option value="3">Paid</option>
@@ -109,8 +109,8 @@
                     <div class="form-group row col-md-4">
                         <br/>
                         <div class="form-check">
-                            <input id="withoutpo" name="withoutpo" class="form-check-input" type="checkbox" value="1" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input id="withoutpo" name="withoutpo" class="icheck" type="checkbox" value="1">
+                            <label class="form-check-label" for="withoutpo">
                                 Without PO
                             </label>
                         </div>
