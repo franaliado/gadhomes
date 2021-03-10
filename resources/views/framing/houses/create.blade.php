@@ -28,7 +28,7 @@
 
 
         <div class="form-box3" id="create-houses">
-        <div class="header">Add New House</div>
+        <div class="header"><b>Add New House</b></div>
         <form method="POST" action="{{ url('/houses') }}">
             @csrf
 

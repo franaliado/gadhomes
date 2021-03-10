@@ -28,15 +28,14 @@
 
 
         <div class="form-box3" id="create-houses">
-        <div class="header">Edit House</div>
-        <form method="POST" action="{{ url('/houses') }}">
+        <div class="header"><b>Edit House</b></div>
+        <form method="POST" action="{{ url('/houses/' . $house->id) }}" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
 
             <div class="body bg-gray">
 
-                    <!-- Registros -->
-
-   
+                    <!-- Registros -->   
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
                         <label for="address" class="col-md-6 col-form-label text-md-right">{{ __('Address') }}</label>
@@ -57,7 +56,7 @@
                         <div class="col-md-12">
                             <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
                                 @foreach($communitys as $community)                               
-                                    <option value="{{ $community->id }}" {‌{ $community->id == $house->community_id  ? 'selected' : '' }}>
+                                    <option value="{{ $community->id }}" {{ $community->id == $house->community_id  ? 'selected' : '' }}>
                                          {{ $community->name }} 
                                     </option>
                                 @endforeach
@@ -85,9 +84,9 @@
     
                         <div class="col-md-12">
                             <select id="status" name="status" class="form-control">
-                                <option value="1">Started</option>
-                                <option value="2">Billed</option>
-                                <option value="3">Paid</option>
+                                <option value="1" {{ $house->status == 1  ? 'selected' : '' }}>Started</option>
+                                <option value="2" {{ $house->status == 2  ? 'selected' : '' }}>Billed</option>
+                                <option value="3" {{ $house->status == 3  ? 'selected' : '' }}>Paid</option>
                             </select>
                         </div>
                     </div>
@@ -108,7 +107,8 @@
                     <div class="form-group row col-md-4">
                         <br/>
                         <div class="form-check">
-                            <input id="withoutpo" name="withoutpo" class="icheck" type="checkbox" value="1">
+                            <input type="hidden" name="withoutpo" value="0"/>
+                            <input id="withoutpo" name="withoutpo" class="icheck" type="checkbox" value="1" {{ $house->withoutpo || old('withoutpo', 0) === 1 ?  'checked' : ''}}>
                             <label class="form-check-label" for="withoutpo">
                                 Without PO
                             </label>
@@ -124,7 +124,9 @@
                             <select id="subcontractor" name="subcontractor" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($subcontractors as $subcontractor)
-                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
+                                    <option value="{{ $subcontractor->id }}" {{ $subcontractor->id == $house->subcontractor_id  ? 'selected' : '' }}>
+                                        {{ $subcontractor->name }} 
+                                    </option>
                                 @endforeach
                             </select>
 

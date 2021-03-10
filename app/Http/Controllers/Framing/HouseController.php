@@ -54,8 +54,6 @@ class HouseController extends Controller
     public function store(HouseCreateRequest $request)
     {
 
-       // dd($request->withoutpo);
-
         DB::beginTransaction();
         try {
   
@@ -73,7 +71,7 @@ class HouseController extends Controller
           House::create($data);
   
           DB::commit();
-          return redirect('/houses')->with(['success' => 'User successfully registered']);
+          return redirect('/houses')->with(['success' => 'House successfully saved']);
   
         }catch (\Exception $e) {
             DB::rollback();
@@ -114,9 +112,30 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(HouseCreateRequest $request, $id)
     {
-        //
+
+      DB::beginTransaction();
+      try {
+
+        $house = House::find($id);
+        $house->address = $request->address;
+        $house->community_id = $request->community;
+        $house->lot = $request->lot;
+        $house->status = $request->status;
+        $house->start_date = $request->start_date;
+        $house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0;
+        $house->subcontractor_id = $request->subcontractor;
+        $house->amount_assigned_subc = $request->amount_assigned_subc;
+        $house->save();
+
+        DB::commit();
+        return redirect('/houses')->with(['success' => 'House edited successfully']);
+
+      }catch (\Exception $e) {
+          DB::rollback();
+          return redirect()->back()->with(['error' => $e->getMessage()]);
+      }
     }
 
     /**
