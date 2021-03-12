@@ -1047,26 +1047,6 @@ body > .header .logo .icon {
   border-radius: 0;
 }
 
-.redondo-edit{
-
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-
-  color: #ffffff;
-  background-color: rgb(149, 149, 248);
-}
-
-.redondo-delete{
-
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-
-  color: #ffffff;
-  background-color: red;
-}
-
 /* Checkbox and radio inputs */
 .checkbox,
 .radio {

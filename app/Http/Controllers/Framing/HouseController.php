@@ -20,11 +20,21 @@ class HouseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        // $data['houses'] = House::paginate(10);
 
+    $query = trim($request->get('search'));
+    /**
+    *if($request){
+
+    *    $houses=House::where('address', 'LIKE', '%'.$query.'%')
+    *        ->orderBy('address', 'ASC')
+    *        ->get();
+
+    *    return view('framing.houses.index')->with(['houses' => $houses, 'search' => $query]); 
+   * }
+    */
+ 
 	$houses = House::with(['community', 'subcontractor'])
 		       ->orderBy('id', 'DESC')
 		       ->paginate(10);
@@ -148,5 +158,13 @@ class HouseController extends Controller
     {
         House::destroy($id);
         return redirect ('houses');
+    }
+
+    public function search(Request $request){
+        return($request);
+        $search=$request->get('search');
+        $houses = House::where('address', 'like', '%'.$search.'%' )->get();
+        return view('index', ['houses'=>$houses]);
+        return view('framing.houses.search')->with(['houses' => $houses]); 
     }
 }

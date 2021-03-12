@@ -3,8 +3,29 @@
 @section('content')
     <h1>List of Houses</h1>
     <br/>
-    <a href="{{ url('/houses/create') }}" class="btn btn-danger">Add House</a>
+    <a href="{{ url('/houses/create') }}" class="btn btn-danger">
+        <i class="fa fa-plus"> Add House</i></a>
     <br/><br/>
+
+    <div class="col-md-4">
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" name="search" placeholder="Search">
+                <span class="input-group-addon" id="search">
+                    <i class="fas fa-search"></i>
+                </span>
+                <!--
+                <div class="input-group-addon">
+                    <button type="submit" class="btn btn-navbar">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                -->
+            </div>
+        </form>
+    </div>
+    <br><br>
+
     <table class="table table-light table-hover" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
@@ -16,8 +37,7 @@
                 <th style="text-align:center;vertical-align: middle">Start Date</th>
                 <th style="text-align:center;vertical-align: middle">Without PO<t/h>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
-                <th style="text-align:center;vertical-align: middle">Amount Assigned <Br> SubCont</th>
-                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -52,31 +72,32 @@
                     <td align="center">{{date("d-m-Y", strtotime($house->start_date))}}</td>
                     <td align="center">{{ $withoutpo }}</td>
                     <td align="left">{{ $house->subcontractor->name }}</td>
-                    <td align="right" class ="pr-5">{{ $house->amount_assigned_subc}}</td>
                     <td align='center'> 
                         <form method="GET" action="{{ url('/houses/'.$house->id. '/edit') }}">
                             @csrf
                             {{ method_field('EDIT')}}  
-                            <button type="submit" class="redondo-edit" title="Edit" alt="Edit")>E</button>                          
+                            <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                <i class="fa fa-pen"> </i>
+                            </button>                          
                         </form>
+                    </td>
+                    <td align='center'>
+                        <a href="{{ url('/orders/'.$house->id) }}"">
+
+                            <button type="button" class="btn btn-success btn-sm" title="PO" alt="PO">
+                                <i class="fa fa-clipboard-check"> </i>
+                            </button>                          
+                        </a>
                     </td>
                     <td align='center'>
                         <form method="post" action="{{ url('/houses/'.$house->id) }}">
                             @csrf
                             {{ method_field('DELETE')}}  
-                            <button type="submit" class="redondo-delete" onclick="return confirm('Do you want to delete this record?')" title="Delete" alt="Delete">X</button>                          
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this record?')" title="Delete" alt="Delete">
+                                <i class="fa fa-trash-alt"> </i>
+                            </button>                          
                         </form>
                     </td>
-                    <!--
-                        <img class = "icon" height="16" width="16" title="Edit" alt="Edit" src="adminlte/img/edit.png" >
-                        &nbsp;&nbsp;
-  
-                        <a title="Delete" href="{{ url('/houses/'.$house->id) }}" onclick="return confirm('Do you want to delete this record?')" class="dropdown-item">
-                            <img class = "icon" height="16" width="16" title="Delete" alt="Delete" src="adminlte/img/delete.png" >
-                        </a>
-
-                    </td>
-                    -->
                 </tr>                
             @endforeach
 

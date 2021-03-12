@@ -30,7 +30,6 @@ class HouseCreateRequest extends FormRequest
             'lot' => 'required|integer',
             'start_date' => 'required',
             'subcontractor' => 'required',
-            'amount_assigned_subc' => 'required',
         ];
     }
 }

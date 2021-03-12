@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use DB;
+use App\Order;
+
 class OrderController extends Controller
 {
     /**
@@ -13,9 +16,11 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $orders = Order::where('house_id', $id)->get()->first();
+        
+        return view('framing.orders.index')->with(['orders' => $orders]); 
     }
 
     /**

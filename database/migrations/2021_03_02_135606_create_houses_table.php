@@ -25,7 +25,7 @@ class CreateHousesTable extends Migration
             $table->date('start_date');
             //Datos del Subcontratista
             $table->unsignedBigInteger('subcontractor_id')->nullable();
-            $table->decimal('amount_assigned_subc', 8, 2)->default(0);
+            $table->decimal('amount_assigned_subc', 8, 2)->default(0)->nullable();
 
             $table->foreign('community_id')
                 ->references('id')

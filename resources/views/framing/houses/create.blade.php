@@ -69,7 +69,7 @@
                     <div class="form-group row col-md-4">
                         <label for="lot" class="col-md-6 col-form-label text-md-right">{{ __('Lot') }}</label>
                         <div class="col-md-12">
-                            <input id="lot" type="number" min="1" max="99" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
+                            <input id="lot" type="number" min="1" max="9999" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
 
                             @error('lot')
                                 <span class="invalid-feedback" role="alert">
@@ -135,7 +135,7 @@
                     <div class="form-group row col-md-4">
                         <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
                         <div class="col-md-12">
-                            <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc') }}" required autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
+                            <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc'), 0 }}" autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
 
                             @error('amount_assigned_subc')
                                 <span class="invalid-feedback" role="alert">
@@ -147,8 +147,12 @@
                 </div>
 
             <div class="footer">
-                <a href="{{ URL('/houses') }}" class="btn bg-red">Back</a>
-                <button type="submit" class="btn bg-red">Save</button>
+                <a href="{{ URL('/houses') }}" class="btn bg-red">
+                    <i class="fa fa-arrow-left"> Back</i>
+                </a>
+                <button type="submit" class="btn bg-red">
+                    <i class="fa fa-check-circle"> Save</i>
+                </button>
             </div>
         </form>
         </div>

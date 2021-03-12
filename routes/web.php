@@ -25,3 +25,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('users', 'UserController');
 
 Route::resource('houses', 'Framing\HouseController')->middleware('auth');
+
+Route::get('/orders/{id}', 'Framing\OrderController@index')->middleware('auth');
+
+Route::resource('orders', 'Framing\OrderController')->middleware('auth');
+
+
+Route::get('/search', 'HouseController@search');
