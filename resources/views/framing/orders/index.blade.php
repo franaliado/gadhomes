@@ -3,7 +3,7 @@
 @section('content')
     <h1>List of Purchase Orders</h1>
     <br/>
-    <a href="{{ url('/orders/create') }}" class="btn btn-danger">
+    <a href="{{ url('/orders/'.$house_id. '/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add PO</i></a>
     <br/><br/>
 
@@ -25,14 +25,13 @@
         </thead>
 
         <tbody>
-            @if($orders)
+ 
+            @if (count($orders) > 0)
                 @foreach ($orders as $order)
-            
                     <tr>
                         <td>{{ $loop->iteration }}</td>    
                         <td>{{ $order->num_po }}</td>  
                         <td align="center">{{ $order->description }}</td>
-                        <td align="center">{{ $order->lot }}</td>
                         <td align="center">{{ $order->option }}</td>
                         <td align="center">{{date("d-m-Y", strtotime($order->date_order))}}</td>
                         <td align="center">{{ $order->qty_po }}</td>
@@ -58,14 +57,15 @@
                                 </button>                          
                             </form>
                         </td>
-                    </tr>               
-                        
+                    </tr>              
                 @endforeach
             @else
-            <tr>
-                <td colspan="10" align="center">No Purchase Orders</td>
-            </tr>
-            @endif  
+                <tr>
+                    <td colspan="10" align="center">No Purchase Orders</td>
+                </tr>
+            @endif   
+       
+
 
         </tbody>
     </table>

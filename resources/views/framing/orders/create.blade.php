@@ -28,7 +28,7 @@
 
 
         <div class="form-box3" id="create-houses">
-        <div class="header"><b>Add New House</b></div>
+        <div class="header"><b>Add New Purchase Order</b></div>
         <form method="POST" action="{{ url('/houses') }}">
             @csrf
 
@@ -39,11 +39,11 @@
    
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="address" class="col-md-6 col-form-label text-md-right">{{ __('Address') }}</label>
+                        <label for="num_po" class="col-md-6 col-form-label text-md-right">{{ __('Num PO') }}</label>
                         <div class="col-md-12">
-                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus placeholder="Address">
+                            <input id="num_po" type="text" class="form-control @error('num_po') is-invalid @enderror" name="num_po" value="{{ old('num_po') }}" required autocomplete="num_po" autofocus placeholder="Num PO">
 
-                            @error('address')
+                            @error('num_po')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -52,53 +52,54 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
-    
+                        <label for="description" class="col-md-6 col-form-label text-md-right">{{ __('Num PO') }}</label>
                         <div class="col-md-12">
-                            <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
-                                <option value="">---- Please Select ----</option>
-                                @foreach($communitys as $community)
-                                    <option value="{{ $community->id }}"> 
-                                         {{ $community->name }} 
-                                    </option>
-                                @endforeach
-                            </select>
+                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus placeholder="Description">
+
+                            @error('description')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
+                </div>
 
+                <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="lot" class="col-md-6 col-form-label text-md-right">{{ __('Lot') }}</label>
+                        <label for="option" class="col-md-6 col-form-label text-md-right">{{ __('Option') }}</label>
                         <div class="col-md-12">
-                            <input id="lot" type="number" min="1" max="9999" class="form-control @error('lot') is-invalid @enderror" name="lot" value="{{ old('lot') }}" required autocomplete="lot" autofocus placeholder="Lot">
+                            <input id="option" type="number" min="1" max="9999" class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option') }}" required autocomplete="option" autofocus placeholder="Option">
 
-                            @error('lot')
+                            @error('option')
                                 <span class="invalid-feedback" role="alert">
                                     <strong class="text-danger">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
                     </div>
+
+                    <div class="form-group row col-md-4">
+                        <label for="date_order" class="col-md-6 col-form-label text-md-right">{{ __('Date Order') }}</label>
+                        <div class="col-md-12">
+                            <input id="date_order" type="date" class="form-control @error('date_order') is-invalid @enderror" name="date_order" value="{{ old('date_order') }}" required autocomplete="date_order" autofocus placeholder="Date Order">
+    
+                            @error('date_order')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
-    
+                        <label for="qty_po" class="col-md-12 col-form-label text-md-right">{{ __('Qty PO') }}</label>
                         <div class="col-md-12">
-                            <select id="status" name="status" class="form-control">
-                                <option value="1">Started</option>
-                                <option value="2">Billed</option>
-                                <option value="3">Paid</option>
-                            </select>
-                        </div>
-                    </div>
+                            <input id="qty_po" type="number" step="0.01" style="text-align:right;" class="form-control @error('qty_po') is-invalid @enderror" name="qty_po" value="{{ old('qty_po') }}" required autocomplete="qty_po" autofocus placeholder="0.00">
 
-                    <div class="form-group row col-md-4">
-                        <label for="start_date" class="col-md-6 col-form-label text-md-right">{{ __('Start Date') }}</label>
-                        <div class="col-md-12">
-                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date') }}" required autocomplete="start_date" autofocus placeholder="Start Date">
-
-                            @error('start_date')
+                            @error('qty_po')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -107,37 +108,39 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <br/>
-                        <div class="form-check">
-                            <input id="withoutpo" name="withoutpo" class="icheck" type="checkbox" value="1">
-                            <label class="form-check-label" for="withoutpo">
-                                Without PO
-                            </label>
+                        <label for="unit_price" class="col-md-12 col-form-label text-md-right">{{ __('Unit Price') }}</label>
+                        <div class="col-md-12">
+                            <input id="unit_price" type="number" step="0.01" style="text-align:right;" class="form-control @error('unit_price') is-invalid @enderror" name="unit_price" value="{{ old('unit_price') }}" required autocomplete="unit_price" autofocus placeholder="0.00">
+    
+                            @error('unit_price')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
-    
+                        <label for="name_Superint" class="col-md-6 col-form-label text-md-right">{{ __('Superintendent') }}</label>
                         <div class="col-md-12">
-                            <select id="subcontractor" name="subcontractor" class="form-control" required>
-                                <option value="">---- Please Select ----</option>
-                                @foreach($subcontractors as $subcontractor)
-                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
-                                @endforeach
-                            </select>
+                            <input id="name_Superint" type="text" class="form-control @error('name_Superint') is-invalid @enderror" name="name_Superint" value="{{ old('name_Superint') }}" required autocomplete="name_Superint" autofocus placeholder="Name Superint">
 
+                            @error('name_Superint')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
+                        <label for="phone_Superint" class="col-md-6 col-form-label text-md-right">{{ __('Phone Superint') }}</label>
                         <div class="col-md-12">
-                            <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc') }}" required autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
+                            <input id="phone_Superint" type="text" class="form-control @error('phone_Superint') is-invalid @enderror" name="phone_Superint" value="{{ old('phone_Superint') }}" required autocomplete="phone_Superint" autofocus placeholder="Phone Superint">
 
-                            @error('amount_assigned_subc')
+                            @error('phone_Superint')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

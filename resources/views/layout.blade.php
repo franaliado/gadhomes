@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link href="adminlte/img/logo-leon-ico.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="/images/logo-leon-ico.ico" rel="shortcut icon" type="image/x-icon" />
         <title>Gadhomes | Dashboard</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
@@ -33,7 +33,7 @@
         <header class="header">
             <a href="/home" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <img src="adminlte/img/logo-leon2.png" class="img-circle" alt="logo" width="40" height="40"/>
+                <img src="/images/logo-leon2.png" class="img-circle" alt="logo" width="40" height="40"/>
                 GADHOMES
             </a>
             <!-- Header Navbar: style can be found in header.less -->
@@ -53,7 +53,7 @@
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header bg-red">
-                                    <img src="adminlte/img/avatar0.png" class="img-circle" alt="User Image" />
+                                    <img src="/images/avatar0.png" class="img-circle" alt="User Image" />
                                     <p>
                                         {{ Auth::user()->name }} - {{ Auth::user()->position }}
                                     </p>

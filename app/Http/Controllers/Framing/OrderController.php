@@ -18,9 +18,9 @@ class OrderController extends Controller
      */
     public function index($id)
     {
-        $orders = Order::where('house_id', $id)->get()->first();
+        $orders = Order::where('house_id', $id)->get();
         
-        return view('framing.orders.index')->with(['orders' => $orders]); 
+        return view('framing.orders.index')->with(['house_id' => $id, 'orders' => $orders]); 
     }
 
     /**
@@ -28,9 +28,9 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        //
+        return view("framing.orders.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
 
     /**
