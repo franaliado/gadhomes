@@ -30,6 +30,8 @@ Route::get('/orders/{id}', 'Framing\OrderController@index')->middleware('auth');
 
 Route::get('/orders/{id}/create', 'Framing\OrderController@create')->middleware('auth');
 
+Route::get('/orders/{id}', 'Framing\OrderController@destroy')->middleware('auth');
+
 Route::resource('orders', 'Framing\OrderController')->middleware('auth');
 
 Route::get('/search', 'HouseController@search');
