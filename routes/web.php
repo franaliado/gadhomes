@@ -29,9 +29,11 @@ Route::resource('houses', 'Framing\HouseController')->middleware('auth');
 Route::get('/orders/{id}', 'Framing\OrderController@index')->middleware('auth');
 
 Route::get('/orders/{id}/create', 'Framing\OrderController@create')->middleware('auth');
-/*
-Route::get('/orders/{id}', 'Framing\OrderController@destroy')->middleware('auth');
-*/
+
+Route::post('/orders/{id}/store', 'Framing\OrderController@store')->middleware('auth');
+
+Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
+
 
 Route::resource('orders', 'Framing\OrderController')->middleware('auth');
 

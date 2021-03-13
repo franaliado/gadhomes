@@ -30,7 +30,7 @@ class OrderController extends Controller
      */
     public function create($id)
     {
-        return view("framing.orders.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
+        return view("framing.orders.create")->with(['house_id' => $id]);
     }
 
     /**
@@ -39,9 +39,34 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-        //
+
+       
+        DB::beginTransaction();
+        try {
+  
+          $data = array(
+            'num_po' => $request->num_po,
+            'description' => $request->description,
+            'option' => $request->option,
+            'date_order' => $request->date_order,
+            'qty_po' => $request->qty_po,
+            'unit_price' => $request->unit_price,
+            'name_Superint' => $request->name_Superint,
+            'phone_Superint' => $request->phone_Superint,
+            'house_id' => $request->id
+          );
+  
+          Order::create($data);
+  
+          DB::commit();
+          return redirect('/orders/'.$id)->with(['success' => 'House successfully saved']);
+  
+        }catch (\Exception $e) {
+            DB::rollback();
+	        return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -84,9 +109,10 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, $house_id)
     {
         Order::destroy($id);
-        return redirect ('orders');
+        $orders = Order::where('house_id', $house_id)->get();
+        return view('framing.orders.index')->with(['house_id' => $id, 'orders' => $orders]);
     }
 }
