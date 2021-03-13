@@ -47,7 +47,7 @@
                         <td align="center">{{ $order->phone_Superint }}</td>
 
                         <td align='center'> 
-                            <form method="GET" action="{{ url('/orders/'.$order->id. '/edit') }}">
+                            <form method="GET" action="{{ url('/orders/'.$order->id. '/'.$house_id.'/edit') }}">
                                 @csrf
                                 {{ method_field('EDIT')}}  
                                 <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>

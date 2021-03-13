@@ -61,7 +61,7 @@ class OrderController extends Controller
           Order::create($data);
   
           DB::commit();
-          return redirect('/orders/'.$id)->with(['success' => 'House successfully saved']);
+          return redirect('/orders/'.$id)->with(['success' => 'Order successfully saved']);
   
         }catch (\Exception $e) {
             DB::rollback();
@@ -86,9 +86,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $house_id)
     {
-        //
+        $order = Order::findOrFail($id);
+        
+        return view("framing.orders.edit")->with(['house_id' => $house_id, 'order' => $order]);
     }
 
     /**
@@ -100,7 +102,29 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return($request);
+
+        DB::beginTransaction();
+        try {
+  
+          $order = Order::find($id);
+          $order->num_po = $request->num_po;
+          $order->description = $request->description;
+          $order->option = $request->option;
+          $order->date_order = $request->date_order;
+          $order->qty_po = $request->qty_po;
+          $order->unit_price = $request->unit_price;
+          $order->name_Superint = $request->name_Superint;
+          $order->phone_Superint = $request->phone_Superint;
+          $order->save();
+  
+          DB::commit();
+          return redirect('/orders/'.$id)->with(['success' => 'Order edited successfully']);
+ 
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**

@@ -32,9 +32,12 @@ Route::get('/orders/{id}/create', 'Framing\OrderController@create')->middleware(
 
 Route::post('/orders/{id}/store', 'Framing\OrderController@store')->middleware('auth');
 
+Route::get('/orders/{id}/{house_id}/edit', 'Framing\OrderController@edit')->middleware('auth');
+
 Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
 
-
+/*
 Route::resource('orders', 'Framing\OrderController')->middleware('auth');
+*/
 
 Route::get('/search', 'HouseController@search');
