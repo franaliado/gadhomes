@@ -181,7 +181,6 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Purchase Orders</a></li>
                                 <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Invoices</a></li>
                             </ul>
                         </li>
