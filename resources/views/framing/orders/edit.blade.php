@@ -67,7 +67,7 @@
                     <div class="form-group row col-md-4">
                         <label for="option" class="col-md-6 col-form-label text-md-right">{{ __('Option') }}</label>
                         <div class="col-md-12">
-                            <input id="option" type="text" class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option', $order->option) }}" required autocomplete="option" autofocus placeholder="Option">
+                            <input id="option" type="text" class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option', $order->option) }}" autocomplete="option" autofocus placeholder="Option">
 
                             @error('option')
                                 <span class="invalid-feedback" role="alert">

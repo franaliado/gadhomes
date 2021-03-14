@@ -3,7 +3,7 @@
 @section('content')
     <h1>List of Purchase Orders</h1>
     <br/>
-    @if (count($orders) < 2)
+    @if (count($orders) < 8)
         <a href="{{ url('/orders/'.$house_id. '/create') }}" class="btn btn-danger">
             <i class="fa fa-plus"> Add PO </i>
         </a> 
