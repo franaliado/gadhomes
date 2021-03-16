@@ -75,7 +75,7 @@ class HouseController extends Controller
             'start_date' => $request->start_date,
             'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,
             'subcontractor_id' => $request->subcontractor,
-            'amount_assigned_subc' => $request->amount_assigned_subc
+            /**'amount_assigned_subc' => $request->amount_assigned_subc */
           );
   
           House::create($data);
@@ -136,7 +136,7 @@ class HouseController extends Controller
         $house->start_date = $request->start_date;
         $house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0;
         $house->subcontractor_id = $request->subcontractor;
-        $house->amount_assigned_subc = $request->amount_assigned_subc;
+        /**$house->amount_assigned_subc = $request->amount_assigned_subc;*/
         $house->save();
 
         DB::commit();

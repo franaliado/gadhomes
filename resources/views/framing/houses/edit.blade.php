@@ -134,10 +134,10 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
+            <!--            <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
                         <div class="col-md-12">
                             <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc', $house->amount_assigned_subc) }}" autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
-
+                        -->
                             @error('amount_assigned_subc')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

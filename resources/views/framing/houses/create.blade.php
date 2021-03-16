@@ -96,7 +96,7 @@
                     <div class="form-group row col-md-4">
                         <label for="start_date" class="col-md-6 col-form-label text-md-right">{{ __('Start Date') }}</label>
                         <div class="col-md-12">
-                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date') }}" required autocomplete="start_date" autofocus placeholder="Start Date">
+                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date') }}" required autocomplete="start_date" autofocus>
 
                             @error('start_date')
                                 <span class="invalid-feedback" role="alert">
@@ -133,10 +133,10 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
-                        <div class="col-md-12">
-                            <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc'), 0 }}" autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
-
+            <!--            <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
+            -->            <div class="col-md-12">
+            <!--                <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc'), 0 }}" autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
+            -->
                             @error('amount_assigned_subc')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

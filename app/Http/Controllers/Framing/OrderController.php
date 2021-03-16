@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use DB;
 use App\Order;
+use App\House;
 
 class OrderController extends Controller
 {
@@ -19,8 +20,9 @@ class OrderController extends Controller
     public function index($id)
     {
         $orders = Order::where('house_id', $id)->get();
+        $house = House::findOrFail($id);
         
-        return view('framing.orders.index')->with(['house_id' => $id, 'orders' => $orders]); 
+        return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
     }
 
     /**
@@ -102,7 +104,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return($request);
+       // return($request);
 
         DB::beginTransaction();
         try {
@@ -119,7 +121,11 @@ class OrderController extends Controller
           $order->save();
   
           DB::commit();
-          return redirect('/orders/'.$id)->with(['success' => 'Order edited successfully']);
+
+          $orders = Order::where('house_id', $request->house_id)->get();
+          $house = House::findOrFail($request->house_id);
+          
+          return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
  
         }catch (\Exception $e) {
             DB::rollback();
@@ -136,7 +142,10 @@ class OrderController extends Controller
     public function destroy($id, $house_id)
     {
         Order::destroy($id);
+
         $orders = Order::where('house_id', $house_id)->get();
-        return view('framing.orders.index')->with(['house_id' => $id, 'orders' => $orders]);
+        $house = House::findOrFail($house_id);
+        
+        return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
     }
 }

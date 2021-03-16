@@ -63,13 +63,27 @@
                         @php $withoutpo = "Yes"; @endphp
                 @endswitch
 
+                @switch (strlen($house->lot))
+                    @case(1)
+                        @php $lot = "000" . $house->lot; @endphp
+                        @break
+                    @case(2)
+                        @php $lot = "00" . $house->lot; @endphp
+                        @break
+                    @case(3)
+                        @php $lot = "0" . $house->lot; @endphp
+                        @break
+                    @default
+                        @php $lot = $house->lot; @endphp
+                @endswitch
+
                 <tr>
                     <td>{{ $loop->iteration }}</td>    
                     <td>{{ $house->address }}</td>  
                     <td align="center">{{ $house->community-> name }}</td>
-                    <td align="center">{{ $house->lot }}</td>
+                    <td align="center">{{ $lot }}</td>
                     <td align="center">{{ $status }}</td>
-                    <td align="center">{{date("d-m-Y", strtotime($house->start_date))}}</td>
+                    <td align="center">{{date("m-d-Y", strtotime($house->start_date))}}</td>
                     <td align="center">{{ $withoutpo }}</td>
                     <td align="left">{{ $house->subcontractor->name }}</td>
                     <td align='center'> 

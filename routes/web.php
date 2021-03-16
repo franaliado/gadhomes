@@ -24,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UserController');
 
+
 Route::resource('houses', 'Framing\HouseController')->middleware('auth');
 
 Route::get('/orders/{id}', 'Framing\OrderController@index')->middleware('auth');
@@ -34,10 +35,10 @@ Route::post('/orders/{id}/store', 'Framing\OrderController@store')->middleware('
 
 Route::get('/orders/{id}/{house_id}/edit', 'Framing\OrderController@edit')->middleware('auth');
 
+Route::post('/orders/{id}/{house_id}/update', 'Framing\OrderController@update')->middleware('auth');
+
 Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
 
-/*
-Route::resource('orders', 'Framing\OrderController')->middleware('auth');
-*/
+
 
 Route::get('/search', 'HouseController@search');
