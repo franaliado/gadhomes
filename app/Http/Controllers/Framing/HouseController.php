@@ -23,21 +23,13 @@ class HouseController extends Controller
     public function index(Request $request)
     {
 
-    $query = trim($request->get('search'));
-    /**
-    *if($request){
-
-    *    $houses=House::where('address', 'LIKE', '%'.$query.'%')
-    *        ->orderBy('address', 'ASC')
-    *        ->get();
-
-    *    return view('framing.houses.index')->with(['houses' => $houses, 'search' => $query]); 
-   * }
-    */
+        $query = trim($request->get('search'));
  
-	$houses = House::with(['community', 'subcontractor'])
-		       ->orderBy('id', 'DESC')
-		       ->paginate(10);
+        $houses = House::with(['community', 'subcontractor'])
+                ->where('address', 'LIKE', '%'.$query.'%')
+                ->orWhere('lot', 'LIKE', '%'.$query.'%')
+                ->orderBy('id', 'DESC')
+                ->paginate(10);
 
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }

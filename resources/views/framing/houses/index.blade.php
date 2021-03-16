@@ -7,21 +7,14 @@
         <i class="fa fa-plus"> Add House</i></a>
     <br/><br/>
 
+    
     <div class="col-md-4">
         <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" name="search" placeholder="Search">
-                <span class="input-group-addon" id="search">
-                    <i class="fas fa-search"></i>
-                </span>
-                <!--
-                <div class="input-group-addon">
-                    <button type="submit" class="btn btn-navbar">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                -->
-            </div>
+
+            <input class="float-right"  size="30" type="search" name="search" placeholder="Search">
+            <button type="submit" class="btn btn-navbar">
+                <i class="fas fa-search"></i>
+            </button>
         </form>
     </div>
     <br><br>
