@@ -42,7 +42,7 @@
                 <th style="text-align:center;vertical-align: middle">Unit Price<t/h>
                 <th style="text-align:center;vertical-align: middle">Superintendent</th>
                 <th style="text-align:center;vertical-align: middle">Phone Sup</th>
-                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -69,6 +69,9 @@
                                     <i class="fa fa-pen"> </i>
                                 </button>                          
                             </form>
+                        </td>
+                        <td>
+                            <a href="/invoice/{{ $order->idInvoice }}" class="btn btn-success" title="Invoice"><i class="fa fa-file-text" aria-hidden="true"></i></a>
                         </td>
                         <td align='center'>
                             <form method="post" action="{{ url('/orders/'.$order->id.'/'.$house->id) }}">
