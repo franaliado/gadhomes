@@ -39,6 +39,9 @@ Route::post('/orders/{id}/{house_id}/update', 'Framing\OrderController@update')-
 
 Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
 
+Route::get('/invoice/{id}', 'Framing\InvoiceController@index')->middleware('auth');
+Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
+
 
 
 Route::get('/search', 'HouseController@search');

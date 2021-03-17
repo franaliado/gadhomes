@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Order;
 use App\House;
+use App\Invoice;
 
 class OrderController extends Controller
 {
@@ -19,9 +20,9 @@ class OrderController extends Controller
      */
     public function index($id)
     {
-        $orders = Order::where('house_id', $id)->get();
+        $orders = Order::select('orders.*', 'invoices.id as idInvoice')->where('house_id', $id)->leftJoin('invoices', 'invoices.order_id', 'orders.id')->get();
         $house = House::findOrFail($id);
-        
+        //dd($orders->toArray());
         return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
     }
 
@@ -48,23 +49,32 @@ class OrderController extends Controller
         DB::beginTransaction();
         try {
   
-          $data = array(
-            'num_po' => $request->num_po,
-            'description' => $request->description,
-            'option' => $request->option,
-            'date_order' => $request->date_order,
-            'qty_po' => $request->qty_po,
-            'unit_price' => $request->unit_price,
-            'name_Superint' => $request->name_Superint,
-            'phone_Superint' => $request->phone_Superint,
-            'house_id' => $request->id
-          );
-  
-          Order::create($data);
-  
-          DB::commit();
-          return redirect('/orders/'.$id)->with(['success' => 'Order successfully saved']);
-  
+            $data = array(
+                'num_po' => $request->num_po,
+                'description' => $request->description,
+                'option' => $request->option,
+                'date_order' => $request->date_order,
+                'qty_po' => $request->qty_po,
+                'unit_price' => $request->unit_price,
+                'name_Superint' => $request->name_Superint,
+                'phone_Superint' => $request->phone_Superint,
+                'house_id' => $request->id
+            );
+
+            $PO = Order::create($data);  
+            DB::commit();
+
+            // Invoice
+            $data_invoice = array(
+                'num_invoice' => 3987,
+                'order_id' => $PO->id
+            );
+
+            $PO = Invoice::create($data_invoice);
+            DB::commit();
+            
+            return redirect('/orders/'.$id)->with(['success' => 'Order successfully saved']);
+
         }catch (\Exception $e) {
             DB::rollback();
 	        return redirect()->back()->with(['error' => $e->getMessage()]);
