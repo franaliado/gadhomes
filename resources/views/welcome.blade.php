@@ -19,7 +19,7 @@
         <![endif]-->
     </head>
     <body class="bg-black">
-        <h1  align="center">GADHOMES</h1>
+        <h1  align="center"><img src="/images/logo-leon2.png" class="img-circle" alt="logo" width="60" height="60"/>GADHOMES</h1>
         <div class="form-box" id="login-box">
             <div class="form-box" id="login-box">
                 <div class="header">Log In</div>

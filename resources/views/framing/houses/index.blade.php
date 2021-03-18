@@ -19,7 +19,7 @@
     </div>
     <br><br>
 
-    <table class="table table-light table-hover" border='1' >
+    <table id="houses-table" class="table table-striped table-bordered" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
                 <th>#</th>
@@ -112,3 +112,7 @@
     </table>
     {{ $houses -> links() }}
 @endsection
+
+
+
+

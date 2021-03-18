@@ -26,7 +26,6 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
-
     </head>
     <body class="skin-black">
         <!-- header logo: style can be found in header.less -->
@@ -181,7 +180,6 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Invoices</a></li>
                             </ul>
                         </li>
 
@@ -215,9 +213,6 @@
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
 
-        <!-- add new calendar event modal -->
-
-
         <!-- jQuery 2.0.2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- jQuery UI 1.10.3 -->
@@ -247,7 +242,7 @@
         <script src="/adminlte/js/AdminLTE/app.js" type="text/javascript"></script>
         
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-        <script src="/adminlte/js/AdminLTE/dashboard.js" type="text/javascript"></script>        
-
+        <script src="/adminlte/js/AdminLTE/dashboard.js" type="text/javascript"></script>  
+    
     </body>
 </html>
