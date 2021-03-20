@@ -27,7 +27,7 @@
         @endif
 
 
-        <div class="form-box3" id="create-houses">
+        <div class="form-box3" id="create-description">
         <div class="header"><b>Add New Description PO</b></div>
         <form method="POST" action="{{ url('/descriptionpo/'.$order_id.'/'.$house_id.'/store') }}">
             @csrf

@@ -52,7 +52,7 @@ Route::post('/descriptionpo/{id}/{order_id}/{house_id}/update', 'Framing\Descrip
 Route::delete('/descriptionpo/{id}/{order_id}/{house_id}', 'Framing\DescriptionController@destroy')->middleware('auth');
 
 
-Route::get('/invoice/{id}', 'Framing\InvoiceController@index')->middleware('auth');
+Route::get('/invoice/{id}/{house_id}', 'Framing\InvoiceController@index')->middleware('auth');
 Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
 
 

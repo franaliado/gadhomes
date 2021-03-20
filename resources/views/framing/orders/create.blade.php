@@ -27,7 +27,7 @@
         @endif
 
 
-        <div class="form-box3" id="create-houses">
+        <div class="form-box3" id="create-order">
         <div class="header"><b>Add New Purchase Order</b></div>
         <form method="POST" action="{{ url('/orders/'.$house_id. '/store') }}">
             @csrf

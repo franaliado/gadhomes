@@ -80,5 +80,9 @@
 			</div>
 		</div>
 	</div>
+	<a href="{{ URL('/orders/'.$house_id) }}" class="btn bg-red">
+		<i class="fa fa-arrow-left"> Back</i>
+	</a>
 </section>
+
 @endsection

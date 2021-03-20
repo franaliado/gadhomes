@@ -71,7 +71,7 @@
                         </td>
 
                         <td align='center'>
-                            <a href="/invoice/{{ $order->idInvoice }}">
+                            <a href="/invoice/{{ $order->idInvoice }}/{{$house->id}}">
                                 <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
                                     <i class="fa fa-file-text" aria-hidden="true"></i>
                                 </button> 
