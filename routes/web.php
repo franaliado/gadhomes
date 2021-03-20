@@ -39,6 +39,19 @@ Route::post('/orders/{id}/{house_id}/update', 'Framing\OrderController@update')-
 
 Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
 
+Route::get('/descriptionpo/{order_id}/{house_id}', 'Framing\DescriptionController@index')->middleware('auth');
+
+Route::get('/descriptionpo/{order_id}/{house_id}/create', 'Framing\DescriptionController@create')->middleware('auth');
+
+Route::post('/descriptionpo/{order_id}/{house_id}/store', 'Framing\DescriptionController@store')->middleware('auth');
+
+Route::get('/descriptionpo/{id}/{order_id}/{house_id}/edit', 'Framing\DescriptionController@edit')->middleware('auth');
+
+Route::post('/descriptionpo/{id}/{order_id}/{house_id}/update', 'Framing\DescriptionController@update')->middleware('auth');
+
+Route::delete('/descriptionpo/{id}/{order_id}/{house_id}', 'Framing\DescriptionController@destroy')->middleware('auth');
+
+
 Route::get('/invoice/{id}', 'Framing\InvoiceController@index')->middleware('auth');
 Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
 

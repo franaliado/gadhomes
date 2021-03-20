@@ -33,16 +33,12 @@
     <table class="table table-light table-hover" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
-                <th>#</th>
+                <th style="text-align:center;vertical-align: middle">#</th>
                 <th style="text-align:center;vertical-align: middle">Nº P.O.</th>
-                <th style="text-align:center;vertical-align: middle">Description</th>
-                <th style="text-align:center;vertical-align: middle">Option</th>
                 <th style="text-align:center;vertical-align: middle">Date P.O.</th>
-                <th style="text-align:center;vertical-align: middle">Qty P.O.</th>
-                <th style="text-align:center;vertical-align: middle">Unit Price<t/h>
                 <th style="text-align:center;vertical-align: middle">Superintendent</th>
                 <th style="text-align:center;vertical-align: middle">Phone Sup</th>
-                <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
+                <th colspan = "4" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -51,13 +47,9 @@
             @if (count($orders) > 0)
                 @foreach ($orders as $order)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>    
-                        <td>{{ $order->num_po }}</td>  
-                        <td align="left">{{ $order->description }}</td>
-                        <td align="center">{{ $order->option }}</td>
+                        <td align="center">{{ $loop->iteration }}</td>    
+                        <td align="center">{{ $order->num_po }}</td>  
                         <td align="center">{{date("m-d-Y", strtotime($order->date_order))}}</td>
-                        <td align="right">{{ $order->qty_po }}</td>
-                        <td align="right">{{ $order->unit_price }}</td>
                         <td align="center">{{ $order->name_Superint }}</td>
                         <td align="center">{{ $order->phone_Superint }}</td>
 
@@ -70,9 +62,22 @@
                                 </button>                          
                             </form>
                         </td>
-                        <td>
-                            <a href="/invoice/{{ $order->idInvoice }}" class="btn btn-success" title="Invoice"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+                        <td align='center'>
+                            <a href="{{ url('/descriptionpo/'.$order->id.'/'.$house->id) }}"">
+                                <button type="button" class="btn btn-success btn-sm" title="Descriptions" alt="Descriptions">
+                                    <i class="fa fa-clipboard-list"> </i>
+                                </button>                          
+                            </a>
                         </td>
+
+                        <td align='center'>
+                            <a href="/invoice/{{ $order->idInvoice }}">
+                                <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                </button> 
+                            </a>
+                        </td>
+
                         <td align='center'>
                             <form method="post" action="{{ url('/orders/'.$order->id.'/'.$house->id) }}">
                                 @csrf

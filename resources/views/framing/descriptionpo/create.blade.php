@@ -27,9 +27,9 @@
         @endif
 
 
-        <div class="form-box3" id="edit-order">
-        <div class="header"><b>Edit Purchase Order</b></div>
-        <form method="POST" action="{{ url('/orders/'.$order->id. '/'.$house_id.'/update') }}">
+        <div class="form-box3" id="create-houses">
+        <div class="header"><b>Add New Description PO</b></div>
+        <form method="POST" action="{{ url('/descriptionpo/'.$order_id.'/'.$house_id.'/store') }}">
             @csrf
 
             <div class="body bg-gray">
@@ -39,11 +39,11 @@
    
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="num_po" class="col-md-6 col-form-label text-md-right">{{ __('Num PO') }}</label>
+                        <label for="description" class="col-md-6 col-form-label text-md-right">{{ __('Description') }}</label>
                         <div class="col-md-12">
-                            <input id="num_po" type="number" min="1" max="99999999" class="form-control @error('num_po') is-invalid @enderror" name="num_po" value="{{ old('num_po', $order->num_po) }}" required autocomplete="num_po" autofocus placeholder="Num PO">
+                            <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}" required autocomplete="description" autofocus placeholder="Description">
 
-                            @error('num_po')
+                            @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -52,13 +52,13 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="date_order" class="col-md-6 col-form-label text-md-right">{{ __('Date Order') }}</label>
+                        <label for="option" class="col-md-6 col-form-label text-md-right">{{ __('Option') }}</label>
                         <div class="col-md-12">
-                            <input id="date_order" type="date" class="form-control @error('date_order') is-invalid @enderror" name="date_order" value="{{ old('date_order', $order->date_order) }}" required autocomplete="date_order" autofocus placeholder="Date Order">
-    
-                            @error('date_order')
+                            <input id="option" type="text" class="form-control @error('option') is-invalid @enderror" name="option" value="{{ old('option') }}" autocomplete="option" autofocus placeholder="Option">
+
+                            @error('option')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong class="text-danger">{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -67,11 +67,11 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="name_Superint" class="col-md-6 col-form-label text-md-right">{{ __('Superintendent') }}</label>
+                        <label for="qty_po" class="col-md-12 col-form-label text-md-right">{{ __('Qty PO') }}</label>
                         <div class="col-md-12">
-                            <input id="name_Superint" type="text" class="form-control @error('name_Superint') is-invalid @enderror" name="name_Superint" value="{{ old('name_Superint', $order->name_Superint) }}" required autocomplete="name_Superint" autofocus placeholder="Name Superint">
+                            <input id="qty_po" type="number" step="0.01" style="text-align:right;" class="form-control @error('qty_po') is-invalid @enderror" name="qty_po" value="{{ old('qty_po') }}" required autocomplete="qty_po" autofocus placeholder="0.00">
 
-                            @error('name_Superint')
+                            @error('qty_po')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -80,11 +80,11 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="phone_Superint" class="col-md-6 col-form-label text-md-right">{{ __('Phone Superint') }}</label>
+                        <label for="unit_price" class="col-md-12 col-form-label text-md-right">{{ __('Unit Price') }}</label>
                         <div class="col-md-12">
-                            <input id="phone_Superint" type="text" maxlength="15" class="form-control @error('phone_Superint') is-invalid @enderror" name="phone_Superint" value="{{ old('phone_Superint', $order->phone_Superint) }}" required autocomplete="phone_Superint" autofocus placeholder="Phone Superint">
-
-                            @error('phone_Superint')
+                            <input id="unit_price" type="number" step="0.01" style="text-align:right;" class="form-control @error('unit_price') is-invalid @enderror" name="unit_price" value="{{ old('unit_price') }}" required autocomplete="unit_price" autofocus placeholder="0.00">
+    
+                            @error('unit_price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -94,11 +94,11 @@
                 </div>
 
             <div class="footer">
-                <a href="{{ URL('/orders/'.$house_id) }}" class="btn bg-red">
+                <a href="{{ url('/descriptionpo/'.$order_id.'/'.$house_id) }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
                 </a>
                 <button type="submit" class="btn bg-red">
-                    <i class="fa fa-check-circle"> Edit</i>
+                    <i class="fa fa-check-circle"> Save</i>
                 </button>
             </div>
         </form>

@@ -51,11 +51,7 @@ class OrderController extends Controller
   
             $data = array(
                 'num_po' => $request->num_po,
-                'description' => $request->description,
-                'option' => $request->option,
                 'date_order' => $request->date_order,
-                'qty_po' => $request->qty_po,
-                'unit_price' => $request->unit_price,
                 'name_Superint' => $request->name_Superint,
                 'phone_Superint' => $request->phone_Superint,
                 'house_id' => $request->id
@@ -121,11 +117,7 @@ class OrderController extends Controller
   
           $order = Order::find($id);
           $order->num_po = $request->num_po;
-          $order->description = $request->description;
-          $order->option = $request->option;
           $order->date_order = $request->date_order;
-          $order->qty_po = $request->qty_po;
-          $order->unit_price = $request->unit_price;
           $order->name_Superint = $request->name_Superint;
           $order->phone_Superint = $request->phone_Superint;
           $order->save();
