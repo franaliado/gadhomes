@@ -60,9 +60,12 @@ class OrderController extends Controller
             $PO = Order::create($data);  
             DB::commit();
 
+            // Last invoice
+            $ince = Invoice::select('id')->orderBy('id', 'DESC')->first();
+            $num_invoice = $ince->id + 1;
             // Invoice
             $data_invoice = array(
-                'num_invoice' => 3987,
+                'num_invoice' => $num_invoice,
                 'order_id' => $PO->id
             );
 
