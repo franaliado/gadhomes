@@ -22,6 +22,7 @@ class InvoiceController extends Controller
         return view('framing.invoices.index')->with(['invoice' => $invoice]);
     }
     public function invoicePdf($id) {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
         $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
                     ->leftJoin('invoices', 'invoices.order_id', 'orders.id')
                     ->leftJoin('houses', 'houses.id', 'orders.house_id')
@@ -29,7 +30,8 @@ class InvoiceController extends Controller
                     ->where('invoices.id', $id)
                     ->first();
         //dd($invoice);
-        $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice]);
+        //return view('framing.pdf.invoice')->with(['invoice'=>$invoice, 'logo'=>$image]);
+        $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice, 'logo'=>$image]);
         return $pdf->download('archivo.pdf');
     }
 }
