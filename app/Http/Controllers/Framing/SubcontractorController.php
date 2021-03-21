@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
+use DB;
+use App\Subcontractor;
+
 class SubcontractorController extends Controller
 {
     /**
@@ -13,9 +16,14 @@ class SubcontractorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = trim($request->get('search'));
+
+        $subcontractors = Subcontractor::where('name', 'LIKE', '%'.$query.'%')
+        ->orderBy('name', 'ASC')
+        ->paginate(10);
+        return view('framing.subcontractors.index')->with(['subcontractors' => $subcontractors]);         //
     }
 
     /**
@@ -25,7 +33,7 @@ class SubcontractorController extends Controller
      */
     public function create()
     {
-        //
+        return view("framing.subcontractors.create");
     }
 
     /**
@@ -36,7 +44,25 @@ class SubcontractorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        DB::beginTransaction();
+        try {
+  
+          $data = array(
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+          );
+  
+          Subcontractor::create($data);
+  
+          DB::commit();
+          return redirect('/subcontractors')->with(['success' => 'Subcontractor successfully saved']);
+  
+        }catch (\Exception $e) {
+            DB::rollback();
+	        return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -58,7 +84,8 @@ class SubcontractorController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subcontractor = Subcontractor::findOrFail($id);
+        return view("framing.subcontractors.edit")->with(['subcontractor' => $subcontractor]);
     }
 
     /**
@@ -70,7 +97,22 @@ class SubcontractorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+  
+          $subcontractor = Subcontractor::find($id);
+          $subcontractor->name = $request->name;
+          $subcontractor->phone = $request->phone;
+          $subcontractor->email = $request->email;
+          $subcontractor->save();
+  
+          DB::commit();
+          return redirect('/subcontractors')->with(['success' => 'Subcontractor edited successfully']);
+  
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -81,6 +123,7 @@ class SubcontractorController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Subcontractor::destroy($id);
+        return redirect ('subcontractors');
     }
 }

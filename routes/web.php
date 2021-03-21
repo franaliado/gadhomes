@@ -53,8 +53,9 @@ Route::delete('/descriptionpo/{id}/{order_id}/{house_id}', 'Framing\DescriptionC
 
 
 Route::get('/invoice/{id}/{house_id}', 'Framing\InvoiceController@index')->middleware('auth');
+
 Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
 
-
+Route::resource('subcontractors', 'Framing\SubcontractorController')->middleware('auth');
 
 Route::get('/search', 'HouseController@search');

@@ -180,6 +180,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
+                                <li><a href="/subcontractors"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
                             </ul>
                         </li>
 
