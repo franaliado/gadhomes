@@ -1,6 +1,21 @@
 @extends('layout')
 
 @section('content')
+
+@switch (strlen($invoice->houseLot))
+@case(1)
+	@php $lot = "000" . $invoice->houseLot; @endphp
+	@break
+@case(2)
+	@php $lot = "00" . $invoice->houseLot; @endphp
+	@break
+@case(3)
+	@php $lot = "0" . $invoice->houseLot; @endphp
+	@break
+@default
+	@php $lot = $invoice->houseLot; @endphp
+@endswitch 
+
 <section class="invoice" style="padding: 20px;">
 	<div class="container-fluid">
 		<div class="row">
@@ -23,28 +38,28 @@
 					</tr>
 					<tr>
 						<td>
-							<p><strong>Vendor:</strong> 2962210857 & 2442210856</p>
-							<p><strong>Phone:</strong> (850)598-1758 - (850401-8477)</p>
-							<p><strong>Owner:</strong> Saul Francisco - Cristian Espinoza</p>
-							<p><strong>Email:</strong> gaditasflaming1@gmail.com</p>
-							<p><strong>Adress:</strong> 4137 Corbin Rd. Panama City FL. 32404</p>
+							<p><strong>Vendor: </strong> 2962210857 & 2442210856</p>
+							<p><strong>Phone: </strong> (850)598-1758 - (850401-8477)</p>
+							<p><strong>Owner: </strong> Saul Francisco - Cristian Espinoza</p>
+							<p><strong>Email: </strong> gaditasflaming1@gmail.com</p>
+							<p><strong>Address: </strong> 4137 Corbin Rd. Panama City FL. 32404</p>
 						</td>
 						<td>
-							<p><strong>Adress:</strong> D.R. Horton - Panama City <br>&emsp;&emsp;&emsp;:25366 Profit Drive Daphne Al. 36526</p>
-							<p><strong>Phone:</strong> (251) 447-0471</p>
-							<p><strong>Fax:</strong> (251) 447-0471</p>
+							<p><strong>Address: </strong> D.R. Horton - Panama City <br>&emsp;&emsp;&emsp;:25366 Profit Drive Daphne Al. 36526</p>
+							<p><strong>Phone: </strong> (251) 447-0471</p>
+							<p><strong>Fax: </strong> (251) 447-0471</p>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<p><strong>Super Intendent:</strong> {{ $invoice->name_Superint }}</p>
-							<p><strong>Phone:</strong> {{ $invoice->phone_Superint }}</p>
+							<p><strong>Super Intendent: </strong> {{ $invoice->name_Superint }}</p>
+							<p><strong>Phone: </strong> {{ $invoice->phone_Superint }}</p>
 						</td>
 						<td>
-							<p><strong>Community:</strong> {{ $invoice->communityName }}</p>
-							<p><strong>Adress:{{ $invoice->houseAddress }}</strong> </p>
-							<p><strong>PO:</strong> {{ $invoice->num_po }}</p>
-							<p><strong>Lot:</strong> {{ $invoice->houseLot }}</p>
+							<p><strong>Community: </strong> {{ $invoice->communityName }}</p>
+							<p><strong>Address: {{ $invoice->houseAddress }}</strong> </p>
+							<p><strong>PO: </strong> {{ $invoice->num_po }}</p>
+							<p><strong>Lot: </strong> {{ $lot }}</p>
 						</td>
 					</tr>
 				</table>
