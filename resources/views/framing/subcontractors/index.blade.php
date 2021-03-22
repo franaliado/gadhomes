@@ -26,7 +26,7 @@
                 <th style="text-align:left;vertical-align: middle">Name</th>
                 <th style="text-align:center;vertical-align: middle">Phone</th>
                 <th style="text-align:center;vertical-align: middle">Email</th>
-                <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
+                <th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -47,6 +47,7 @@
                             </button>                          
                         </form>
                     </td>
+                    <!--
                     <td align='center'>
                         <form method="post" action="{{ url('/subcontractors/'.$subcontractor->id) }}">
                             @csrf
@@ -56,6 +57,7 @@
                             </button>                          
                         </form>
                     </td>
+                    -->
                 </tr>                
             @endforeach
 

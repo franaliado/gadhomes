@@ -30,7 +30,7 @@
                 <th style="text-align:center;vertical-align: middle">Start Date</th>
                 <th style="text-align:center;vertical-align: middle">Without PO<t/h>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
-                <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
+                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -73,7 +73,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>    
                     <td>{{ $house->address }}</td>  
-                    <td align="center">{{ $house->community-> name }}</td>
+                    <td align="center">{{ $house->community->name }}</td>
                     <td align="center">{{ $lot }}</td>
                     <td align="center">{{ $status }}</td>
                     <td align="center">{{date("m-d-Y", strtotime($house->start_date))}}</td>
@@ -96,6 +96,7 @@
                             </button>                          
                         </a>
                     </td>
+                    <!--
                     <td align='center'>
                         <form method="post" action="{{ url('/houses/'.$house->id) }}">
                             @csrf
@@ -105,6 +106,7 @@
                             </button>                          
                         </form>
                     </td>
+                -->
                 </tr>                
             @endforeach
 

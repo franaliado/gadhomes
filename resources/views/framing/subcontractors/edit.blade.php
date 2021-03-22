@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="edit-subcontractor">
         <div class="header"><b>Edit Subcontractor</b></div>
-        <form method="POST" action="{{ url('/subcontractors/' . $subcontractor->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url('/subcontractors/'.$subcontractor->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
