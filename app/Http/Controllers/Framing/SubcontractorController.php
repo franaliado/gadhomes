@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Framing;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -11,6 +12,15 @@ use App\Subcontractor;
 
 class SubcontractorController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:50'],
+            'phone' => ['required', 'string', 'max:15'],
+            'email' => ['required', 'string', 'email', 'max:100'],
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,6 +54,8 @@ class SubcontractorController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {
@@ -97,6 +109,9 @@ class SubcontractorController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validator($request->all())->validate();
+
         DB::beginTransaction();
         try {
   

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Framing;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
 
@@ -14,6 +15,16 @@ use App\Invoice;
 
 class DescriptionController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'description' => ['required', 'string', 'max:100'],
+            'option' => ['string', 'max:100'],
+            'qty_po' => ['required'],
+            'unit_price' => ['required'],
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -47,6 +58,8 @@ class DescriptionController extends Controller
      */
     public function store(Request $request, $order_id, $house_id)
     {
+
+        $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {
@@ -107,7 +120,8 @@ class DescriptionController extends Controller
      */
     public function update(Request $request, $id, $order_id, $house_id)
     {
-       // return($request);
+
+        $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {

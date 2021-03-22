@@ -45,7 +45,7 @@ class UserController extends Controller
            'position' => ['required', 'string', 'max:50'],
            'role' => ['required', 'integer'],
            'phone' => ['required', 'string', 'max:15'],
-           'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+           'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
            'password' => ['required', 'string', 'min:8', 'confirmed'],
        ]);
    }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use DB;
 use App\Order;
@@ -13,6 +14,16 @@ use App\Invoice;
 
 class OrderController extends Controller
 {
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'num_po' => ['required', 'integer'],
+            'date_order' => ['required'],
+            'name_Superint' => ['required', 'string', 'max:50'],
+            'phone_Superint' => ['required', 'string', 'max:15'],
+        ]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -45,7 +56,8 @@ class OrderController extends Controller
     public function store(Request $request, $id)
     {
 
-       
+        $this->validator($request->all())->validate();
+
         DB::beginTransaction();
         try {
   
@@ -113,7 +125,8 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-       // return($request);
+
+    $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {
