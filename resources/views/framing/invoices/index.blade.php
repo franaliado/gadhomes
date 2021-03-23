@@ -77,18 +77,22 @@
 						<td>Unit Price</td>
 						<td>Extension</td>
 					</tr>
+					@php($total = 0)
+					@foreach($descriptions as $d)
+					@php($total += ($d->unit_price * $d->qty_po))
 					<tr>
 						<td>
-							<p class="pull-left">{{ $invoice->description }}</p>
-							<p class="pull-right">{{ $invoice->option }}</p>
+							<p class="pull-left">{{ $d->description }}</p>
+							<p class="pull-right">{{ $d->option }}</p>
 						</td>
-						<td>{{ $invoice->qty_po }}</td>
-						<td>{{ $invoice->unit_price }}</td>
-						<td>{{ number_format($invoice->unit_price * $invoice->qty_po, 2, ',', '.') }}</td>						
+						<td>{{ $d->qty_po }}</td>
+						<td>{{ $d->unit_price }}</td>
+						<td>{{ number_format($d->unit_price * $d->qty_po, 2, ',', '.') }}</td>						
 					</tr>
+					@endforeach
 					<tr>
 						<td colspan="4">
-							<p class="pull-right">Total&emsp;&emsp;&emsp;{{ number_format($invoice->unit_price * $invoice->qty_po, 2, ',', '.') }}</p>
+							<p class="pull-right">Total&emsp;&emsp;&emsp;{{ number_format($total, 2, ',', '.') }}</p>
 						</td>
 					</tr>
 				</table>
