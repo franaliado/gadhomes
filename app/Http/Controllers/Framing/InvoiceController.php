@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Invoice;
 use App\Order;
+use App\Descriptionpo;
 use PDF;
 
 class InvoiceController extends Controller
@@ -18,8 +19,13 @@ class InvoiceController extends Controller
                     ->leftJoin('community', 'community.id', 'houses.community_id')
                     ->where('invoices.id', $id)
                     ->first();
+        $descriptionpos = Descriptionpo::where('order_id', $invoice->id)
+                    ->orderBy('id', 'DESC')
+                    ->get();
+        //dd($descriptionpos->toArray());
         //dd($invoice->toArray());
-        return view('framing.invoices.index')->with(['invoice' => $invoice, 'house_id' => $house_id]);
+        
+        return view('framing.invoices.index')->with(['invoice' => $invoice, 'house_id' => $house_id, 'descriptions' => $descriptionpos]);
     }
     public function invoicePdf($id) {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
@@ -29,9 +35,12 @@ class InvoiceController extends Controller
                     ->leftJoin('community', 'community.id', 'houses.community_id')
                     ->where('invoices.id', $id)
                     ->first();
+        $descriptionpos = Descriptionpo::where('order_id', $invoice->id)
+                    ->orderBy('id', 'DESC')
+                    ->get();
         //dd($invoice);
         //return view('framing.pdf.invoice')->with(['invoice'=>$invoice, 'logo'=>$image]);
-        $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice, 'logo'=>$image]);
+        $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice, 'logo'=>$image, 'descriptions' => $descriptionpos]);
         return $pdf->download('archivo.pdf');
     }
 }
