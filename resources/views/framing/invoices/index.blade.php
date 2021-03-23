@@ -73,9 +73,9 @@
 							<p class="pull-left">Description</p>
 							<p class="pull-right">Option</p>
 						</td>
-						<td>QTY</td>
-						<td>Unit Price</td>
-						<td>Extension</td>
+						<td align="center">QTY</td>
+						<td align="center">Unit Price</td>
+						<td align="center">Extension</td>
 					</tr>
 					@php($total = 0)
 					@foreach($descriptions as $d)
@@ -85,14 +85,14 @@
 							<p class="pull-left">{{ $d->description }}</p>
 							<p class="pull-right">{{ $d->option }}</p>
 						</td>
-						<td>{{ $d->qty_po }}</td>
-						<td>{{ $d->unit_price }}</td>
-						<td>{{ number_format($d->unit_price * $d->qty_po, 2, ',', '.') }}</td>						
+						<td align="right">{{ $d->qty_po }}</td>
+						<td align="right">{{ $d->unit_price }}</td>
+						<td align="right">{{ number_format($d->unit_price * $d->qty_po, 2, '.', ',') }}</td>						
 					</tr>
 					@endforeach
 					<tr>
 						<td colspan="4">
-							<p class="pull-right">Total&emsp;&emsp;&emsp;{{ number_format($total, 2, ',', '.') }}</p>
+							<p class="pull-right">Total&emsp;&emsp;&emsp;{{ number_format($total, 2, '.', ',') }}</p>
 						</td>
 					</tr>
 				</table>

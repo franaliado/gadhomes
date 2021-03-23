@@ -103,9 +103,9 @@
 									</tr>
 								</table>
 							</td>
-							<td>QTY</td>
-							<td>Unit Price</td>
-							<td>Extension</td>
+							<td align="center">QTY</td>
+							<td align="center">Unit Price</td>
+							<td align="center">Extension</td>
 						</tr>
 						@php($total = 0)
 						@foreach($descriptions as $d)
@@ -119,14 +119,14 @@
 									</tr>
 								</table>
 							</td>
-							<td>{{ $d->qty_po }}</td>
-							<td>{{ $d->unit_price }}</td>
-							<td>{{ number_format($d->unit_price * $d->qty_po, 2, ',', '.') }}</td>						
+							<td align="right">{{ $d->qty_po }}</td>
+							<td align="right">{{ $d->unit_price }}</td>
+							<td align="right">{{ number_format($d->unit_price * $d->qty_po, 2, '.', ',') }}</td>						
 						</tr>
 						@endforeach
 						<tr>
 							<td colspan="4" style="text-align:right">
-								<p>Total&emsp;&emsp;&emsp;{{ number_format($total, 2, ',', '.') }}</p>
+								<p>Total&emsp;&emsp;&emsp;{{ number_format($total, 2, '.', ',') }}</p>
 							</td>
 						</tr>
 					</table>
