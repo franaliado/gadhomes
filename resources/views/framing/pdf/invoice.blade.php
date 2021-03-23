@@ -39,7 +39,7 @@
 	<section class="invoice" style="padding: 20px;">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">Date: {{ $invoice->date_order }}</div>
+				<div class="col-md-12">Date: {{ date("m-d-Y", strtotime($invoice->date_order)) }}</div>
 			</div>
 			<div class="row">
 				<table>
@@ -65,7 +65,7 @@
 						<tr>
 							<td>
 								<p><strong>Vendor:</strong> 2962210857 & 2442210856</p>
-								<p><strong>Phone:</strong> (850)598-1758 - (850401-8477)</p>
+								<p><strong>Phone:</strong> (850) 598-1758 - (850) 401-8477</p>
 								<p><strong>Owner:</strong> Saul Francisco - Cristian Espinoza</p>
 								<p><strong>Email:</strong> gaditasflaming1@gmail.com</p>
 								<p><strong>Adress:</strong> 4137 Corbin Rd. Panama City FL. 32404</p>
@@ -119,8 +119,8 @@
 									</tr>
 								</table>
 							</td>
-							<td align="right">{{ $d->qty_po }}</td>
-							<td align="right">{{ $d->unit_price }}</td>
+							<td align="right">{{ number_format($d->qty_po, 2, '.', ',') }}</td>
+							<td align="right">{{ number_format($d->unit_price, 2, '.', ',') }}</td>
 							<td align="right">{{ number_format($d->unit_price * $d->qty_po, 2, '.', ',') }}</td>						
 						</tr>
 						@endforeach
