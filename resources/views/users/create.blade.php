@@ -14,7 +14,7 @@
 
         <div class="form-box2" id="login-box">
             <div class="header">Register New Membership</div>
-            <form method="POST" action="{{ url('/users') }}">
+            <form method="POST" action="{{ url('/users/store') }}">
                 @csrf
 
                 <div class="body bg-gray">

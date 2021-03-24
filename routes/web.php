@@ -23,7 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UserController');
-
+Route::post('/users/store', 'UserController@store')->middleware('auth');
 
 Route::resource('houses', 'Framing\HouseController')->middleware('auth');
 
