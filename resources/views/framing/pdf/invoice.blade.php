@@ -83,10 +83,10 @@
 								<p><strong>Phone:</strong> (850) 598-1758 - (850) 401-8477</p>
 								<p><strong>Owner:</strong> Saul Francisco - Cristian Espinoza</p>
 								<p><strong>Email:</strong> gaditasflaming1@gmail.com</p>
-								<p><strong>Adress:</strong> 4137 Corbin Rd. Panama City FL. 32404</p>
+								<p><strong>Address:</strong> 4137 Corbin Rd. Panama City FL. 32404</p>
 							</td>
 							<td>
-								<p><strong>Adress:</strong> D.R. Horton - Panama City <br>&emsp;&emsp;&emsp;:25366 Profit Drive Daphne Al. 36526</p>
+								<p><strong>Address:</strong> D.R. Horton - Panama City <br>&emsp;&emsp;&emsp;:25366 Profit Drive Daphne Al. 36526</p>
 								<p><strong>Phone:</strong> (251) 447-0471</p>
 								<p><strong>Fax:</strong> (251) 447-0471</p>
 							</td>
@@ -98,7 +98,7 @@
 							</td>
 							<td>
 								<p><strong>Community:</strong> {{ $invoice->communityName }}</p>
-								<p><strong>Adress:{{ $invoice->houseAddress }}</strong> </p>
+								<p><strong>Address:{{ $invoice->houseAddress }}</strong> </p>
 								<p><strong>PO:</strong> {{ $invoice->num_po }}</p>
 								<p><strong>Lot:</strong> {{ $lot }}</p>
 							</td>
