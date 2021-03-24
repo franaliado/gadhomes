@@ -31,7 +31,7 @@
                         <td>{{ $loop->iteration }}</td>    
                         <td align="left">{{ $descriptionpo->description }}</td>
                         <td align="center">{{ $descriptionpo->option }}</td>
-                        <td align="right">{{ number_format($descriptionpo->qty_po, 3, '.', ',') }}</td>
+                        <td align="right">{{ number_format($descriptionpo->qty_po, 2, '.', ',') }}</td>
                         <td align="right">{{ number_format($descriptionpo->unit_price, 3, '.', ',') }}</td>
 
                         <td align='center'> 

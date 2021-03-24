@@ -20,7 +20,7 @@ class DescriptionController extends Controller
     {
         return Validator::make($data, [
             'description' => ['required', 'string', 'max:250'],
-            'option' => ['string', 'max:100'],
+            'option' => ['string', 'max:100', 'nullable'],
             'qty_po' => ['required'],
             'unit_price' => ['required'],
         ]);
