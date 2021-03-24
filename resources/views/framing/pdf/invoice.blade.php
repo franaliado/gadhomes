@@ -54,7 +54,7 @@
 	<section class="invoice" style="padding: 20px;">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-md-12">Date: {{ date("m-d-Y", strtotime($invoice->date_order)) }}</div>
+				<div class="col-md-12">Date: {{ date("m-d-Y", strtotime($invoice->created_at)) }}</div>
 			</div>
 			<div class="row">
 				<table>

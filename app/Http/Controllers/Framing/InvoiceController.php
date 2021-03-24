@@ -13,7 +13,7 @@ use PDF;
 class InvoiceController extends Controller
 {
     public function index($id, $house_id) {
-        $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
+        $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'invoices.created_at', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
                     ->leftJoin('invoices', 'invoices.order_id', 'orders.id')
                     ->leftJoin('houses', 'houses.id', 'orders.house_id')
                     ->leftJoin('community', 'community.id', 'houses.community_id')
@@ -29,7 +29,7 @@ class InvoiceController extends Controller
     }
     public function invoicePdf($id) {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
-        $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
+        $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'invoices.created_at', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
                     ->leftJoin('invoices', 'invoices.order_id', 'orders.id')
                     ->leftJoin('houses', 'houses.id', 'orders.house_id')
                     ->leftJoin('community', 'community.id', 'houses.community_id')
