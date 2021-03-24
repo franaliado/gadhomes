@@ -85,14 +85,14 @@
 							<p class="pull-left">{{ $d->description }}</p>
 							<p class="pull-right">{{ $d->option }}</p>
 						</td>
-						<td align="right">{{ number_format($d->qty_po, 2, '.', ',') }}</td>
-						<td align="right">{{ number_format($d->unit_price, 2, '.', ',') }}</td>
-						<td align="right">{{ number_format($d->unit_price * $d->qty_po, 2, '.', ',') }}</td>						
+						<td align="right">{{ number_format($d->qty_po, 3, '.', ',') }}</td>
+						<td align="right">{{ number_format($d->unit_price, 3, '.', ',') }}</td>
+						<td align="right">{{ number_format($d->unit_price * $d->qty_po, 3, '.', ',') }}</td>						
 					</tr>
 					@endforeach
 					<tr>
 						<td colspan="4">
-							<p class="pull-right">Total&emsp;&emsp;&emsp;$  {{ number_format($total, 2, '.', ',') }}</p>
+							<p class="pull-right">Total&emsp;&emsp;&emsp;$  {{ number_format($total, 3, '.', ',') }}</p>
 						</td>
 					</tr>
 				</table>
