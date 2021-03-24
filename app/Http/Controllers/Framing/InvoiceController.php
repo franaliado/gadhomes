@@ -41,6 +41,6 @@ class InvoiceController extends Controller
         //dd($invoice);
         //return view('framing.pdf.invoice')->with(['invoice'=>$invoice, 'logo'=>$image]);
         $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice, 'logo'=>$image, 'descriptions' => $descriptionpos]);
-        return $pdf->download('archivo.pdf');
+        return $pdf->download('invoice.pdf');
     }
 }
