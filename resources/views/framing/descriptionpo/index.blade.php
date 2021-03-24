@@ -31,8 +31,8 @@
                         <td>{{ $loop->iteration }}</td>    
                         <td align="left">{{ $descriptionpo->description }}</td>
                         <td align="center">{{ $descriptionpo->option }}</td>
-                        <td align="right">{{ $descriptionpo->qty_po }}</td>
-                        <td align="right">{{ $descriptionpo->unit_price }}</td>
+                        <td align="right">{{ number_format($descriptionpo->qty_po, 3, '.', ',') }}</td>
+                        <td align="right">{{ number_format($descriptionpo->unit_price, 3, '.', ',') }}</td>
 
                         <td align='center'> 
                             <form method="GET" action="{{ url('/descriptionpo/'.$descriptionpo->id.'/'.$orders->id.'/'.$house_id.'/edit') }}">
