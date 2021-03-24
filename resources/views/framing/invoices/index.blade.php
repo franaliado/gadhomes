@@ -92,7 +92,7 @@
 					@endforeach
 					<tr>
 						<td colspan="4">
-							<p class="pull-right">Total&emsp;&emsp;&emsp;{{ number_format($total, 2, '.', ',') }}</p>
+							<p class="pull-right">Total&emsp;&emsp;&emsp;$  {{ number_format($total, 2, '.', ',') }}</p>
 						</td>
 					</tr>
 				</table>
