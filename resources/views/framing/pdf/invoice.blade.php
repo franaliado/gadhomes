@@ -36,6 +36,21 @@
 	</style>
 </head>
 <body>
+
+	@switch (strlen($invoice->houseLot))
+	@case(1)
+		@php $lot = "000" . $invoice->houseLot; @endphp
+		@break
+	@case(2)
+		@php $lot = "00" . $invoice->houseLot; @endphp
+		@break
+	@case(3)
+		@php $lot = "0" . $invoice->houseLot; @endphp
+		@break
+	@default
+		@php $lot = $invoice->houseLot; @endphp
+	@endswitch 	
+
 	<section class="invoice" style="padding: 20px;">
 		<div class="container-fluid">
 			<div class="row">
@@ -85,7 +100,7 @@
 								<p><strong>Community:</strong> {{ $invoice->communityName }}</p>
 								<p><strong>Adress:{{ $invoice->houseAddress }}</strong> </p>
 								<p><strong>PO:</strong> {{ $invoice->num_po }}</p>
-								<p><strong>Lot:</strong> {{ $invoice->houseLot }}</p>
+								<p><strong>Lot:</strong> {{ $lot }}</p>
 							</td>
 						</tr>
 					</table>
