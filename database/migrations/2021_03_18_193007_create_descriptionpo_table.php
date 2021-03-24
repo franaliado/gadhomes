@@ -15,7 +15,7 @@ class CreateDescriptionPoTable extends Migration
     {
         Schema::create('descriptionpo', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 100);
+            $table->string('description', 250);
             $table->string('option', 100)->nullable();
             $table->decimal('qty_po', 8, 2);
             $table->decimal('unit_price', 8, 2);
