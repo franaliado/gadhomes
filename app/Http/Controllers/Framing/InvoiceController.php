@@ -20,7 +20,7 @@ class InvoiceController extends Controller
                     ->where('invoices.id', $id)
                     ->first();
         $descriptionpos = Descriptionpo::where('order_id', $invoice->id)
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('id', 'ASC')
                     ->get();
         //dd($descriptionpos->toArray());
         //dd($invoice->toArray());
@@ -36,7 +36,7 @@ class InvoiceController extends Controller
                     ->where('invoices.id', $id)
                     ->first();
         $descriptionpos = Descriptionpo::where('order_id', $invoice->id)
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('id', 'ASC')
                     ->get();
         //dd($invoice);
         //return view('framing.pdf.invoice')->with(['invoice'=>$invoice, 'logo'=>$image]);
