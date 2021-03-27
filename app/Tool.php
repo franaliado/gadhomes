@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Payment extends Model
+class Tool extends Model
 {
 
-    protected $table = 'payments';
+    protected $table = 'tools';
 
-    protected $fillable = ['id', 'amount', 'date', 'type', 'house_id'];
+    protected $fillable = ['id', 'description', 'amount', 'date', 'house_id'];
 
     //Relación Uno a Muchos Inversa
     public function house(){

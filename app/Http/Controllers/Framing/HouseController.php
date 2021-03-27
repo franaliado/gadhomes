@@ -29,7 +29,7 @@ class HouseController extends Controller
                 ->where('address', 'LIKE', '%'.$query.'%')
                 ->orWhere('lot', 'LIKE', '%'.$query.'%')
                 ->orderBy('id', 'DESC')
-                ->paginate(10);
+                ->paginate(20);
 
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }

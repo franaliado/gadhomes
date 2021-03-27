@@ -23,6 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('users', 'UserController');
+
 Route::post('/users/store', 'UserController@store')->middleware('auth');
 
 Route::resource('houses', 'Framing\HouseController')->middleware('auth');
@@ -57,5 +58,20 @@ Route::get('/invoice/{id}/{house_id}', 'Framing\InvoiceController@index')->middl
 Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
 
 Route::resource('subcontractors', 'Framing\SubcontractorController')->middleware('auth');
+
+Route::resource('subcontractor_amount', 'Framing\SubcontractorAmountController')->middleware('auth');
+
+Route::get('/additional/{house_id}', 'Framing\AdditionalController@index')->middleware('auth');
+
+Route::get('/additional/{house_id}/create', 'Framing\AdditionalController@create')->middleware('auth');
+
+Route::post('/additional/{house_id}/store', 'Framing\AdditionalController@store')->middleware('auth');
+
+Route::delete('/additional/{id}/{house_id}', 'Framing\AdditionalController@destroy')->middleware('auth');
+
+Route::get('/additional/{id}/{house_id}/edit', 'Framing\AdditionalController@edit')->middleware('auth');
+
+Route::post('/additional/{id}/{house_id}/update', 'Framing\AdditionalController@update')->middleware('auth');
+
 
 Route::get('/search', 'HouseController@search');

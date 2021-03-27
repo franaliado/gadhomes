@@ -175,12 +175,12 @@
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-table"></i> <span>GAD Framing INC</span>
+                                <i class="fa fa-home"></i> <span>GAD Framing INC</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
-                                <li><a href="/subcontractors"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
+                                <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
                             </ul>
                         </li>
 
