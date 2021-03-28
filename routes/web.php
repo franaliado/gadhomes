@@ -28,6 +28,8 @@ Route::post('/users/store', 'UserController@store')->middleware('auth');
 
 Route::resource('houses', 'Framing\HouseController')->middleware('auth');
 
+//Orders
+
 Route::get('/orders/{id}', 'Framing\OrderController@index')->middleware('auth');
 
 Route::get('/orders/{id}/create', 'Framing\OrderController@create')->middleware('auth');
@@ -39,6 +41,8 @@ Route::get('/orders/{id}/{house_id}/edit', 'Framing\OrderController@edit')->midd
 Route::post('/orders/{id}/{house_id}/update', 'Framing\OrderController@update')->middleware('auth');
 
 Route::delete('/orders/{id}/{house_id}', 'Framing\OrderController@destroy')->middleware('auth');
+
+//DescriptionPO
 
 Route::get('/descriptionpo/{order_id}/{house_id}', 'Framing\DescriptionController@index')->middleware('auth');
 
@@ -52,14 +56,19 @@ Route::post('/descriptionpo/{id}/{order_id}/{house_id}/update', 'Framing\Descrip
 
 Route::delete('/descriptionpo/{id}/{order_id}/{house_id}', 'Framing\DescriptionController@destroy')->middleware('auth');
 
+//Invoice
 
 Route::get('/invoice/{id}/{house_id}', 'Framing\InvoiceController@index')->middleware('auth');
 
 Route::get('/invoicePdf/{id}', 'Framing\InvoiceController@invoicePdf')->middleware('auth');
 
+//Subcontractors
+
 Route::resource('subcontractors', 'Framing\SubcontractorController')->middleware('auth');
 
 Route::resource('subcontractor_amount', 'Framing\SubcontractorAmountController')->middleware('auth');
+
+//Additional
 
 Route::get('/additional/{house_id}', 'Framing\AdditionalController@index')->middleware('auth');
 
@@ -72,6 +81,20 @@ Route::delete('/additional/{id}/{house_id}', 'Framing\AdditionalController@destr
 Route::get('/additional/{id}/{house_id}/edit', 'Framing\AdditionalController@edit')->middleware('auth');
 
 Route::post('/additional/{id}/{house_id}/update', 'Framing\AdditionalController@update')->middleware('auth');
+
+//Tools
+
+Route::get('/tools/{house_id}', 'Framing\ToolController@index')->middleware('auth');
+
+Route::get('/tools/{house_id}/create', 'Framing\ToolController@create')->middleware('auth');
+
+Route::post('/tools/{house_id}/store', 'Framing\ToolController@store')->middleware('auth');
+
+Route::delete('/tools/{id}/{house_id}', 'Framing\ToolController@destroy')->middleware('auth');
+
+Route::get('/tools/{id}/{house_id}/edit', 'Framing\ToolController@edit')->middleware('auth');
+
+Route::post('/tools/{id}/{house_id}/update', 'Framing\ToolController@update')->middleware('auth');
 
 
 Route::get('/search', 'HouseController@search');

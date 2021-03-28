@@ -18,7 +18,7 @@
     <table id="houses-table" class="table table-striped table-bordered" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
-                <th>#</th>
+                <th style="text-align:center;vertical-align: middle">#</th>
                 <th style="text-align:left;vertical-align: middle">Address</th>
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
@@ -70,7 +70,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="{{ url('/orders/'.$house->id) }}"">
+                        <a href="{{ url('/tools/'.$house->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Tools" alt="Tools">
                                 <i class="fa fa-comment-dollar"> </i>
@@ -78,7 +78,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="{{ url('/orders/'.$house->id) }}"">
+                        <a href="{{ url('/payments/'.$house->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Payments" alt="Payments">
                                 <i class="fa fa-funnel-dollar"> </i>
