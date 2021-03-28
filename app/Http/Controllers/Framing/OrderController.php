@@ -66,7 +66,7 @@ class OrderController extends Controller
                 'date_order' => $request->date_order,
                 'name_Superint' => $request->name_Superint,
                 'phone_Superint' => $request->phone_Superint,
-                'house_id' => $request->id
+                'house_id' => $id
             );
 
             $PO = Order::create($data);  

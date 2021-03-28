@@ -96,5 +96,19 @@ Route::get('/tools/{id}/{house_id}/edit', 'Framing\ToolController@edit')->middle
 
 Route::post('/tools/{id}/{house_id}/update', 'Framing\ToolController@update')->middleware('auth');
 
+//Payments
+
+Route::get('/payments/{house_id}', 'Framing\PaymentController@index')->middleware('auth');
+
+Route::get('/payments/{house_id}/create', 'Framing\PaymentController@create')->middleware('auth');
+
+Route::post('/payments/{house_id}/store', 'Framing\PaymentController@store')->middleware('auth');
+
+Route::delete('/payments/{id}/{house_id}', 'Framing\PaymentController@destroy')->middleware('auth');
+
+Route::get('/payments/{id}/{house_id}/edit', 'Framing\PaymentController@edit')->middleware('auth');
+
+Route::post('/payments/{id}/{house_id}/update', 'Framing\PaymentController@update')->middleware('auth');
+
 
 Route::get('/search', 'HouseController@search');

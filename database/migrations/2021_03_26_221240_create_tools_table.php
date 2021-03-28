@@ -24,6 +24,7 @@ class CreateToolsTable extends Migration
                     ->references('id')
                     ->on('houses')
                     ->onDelete('cascade');
+                    
             $table->timestamps();
         });
     }
