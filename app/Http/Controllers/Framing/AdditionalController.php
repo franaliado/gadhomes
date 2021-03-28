@@ -9,9 +9,30 @@ use Illuminate\Http\Request;
 
 use DB;
 use App\Additional;
+use App\Tool;
+use App\Payment;
+use App\House;
 
 class AdditionalController extends Controller
 {
+
+    protected function returnindex($house_id)
+    {
+
+        $house = House::findOrFail($house_id);
+       
+        $additional = Additional::where('house_id', $house_id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        $totaladittional = $additional->sum('amount');
+
+        $tool = Tool::where('house_id', $house_id)->sum('amount');
+        $payment = Payment::where('house_id', $house_id)->sum('amount');
+
+        $totalavailable = ($house->amount_assigned_subc + $totaladittional) - $tool - $payment;
+
+        return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totalavailable' => $totalavailable ]); 
+    }
 
     protected function validator(array $data)
     {
@@ -28,11 +49,7 @@ class AdditionalController extends Controller
      */
     public function index($house_id)
     {
-        $additional = Additional::where('house_id', $house_id)
-                ->orderBy('id', 'DESC')
-                ->get();
-
-        return view('framing.additional.index')->with(['house_id' => $house_id, 'additional' => $additional ]); 
+        return $this->returnindex($house_id);
     }
 
     /**
@@ -69,12 +86,8 @@ class AdditionalController extends Controller
   
           DB::commit();
 
-          $additional = Additional::where('house_id', $house_id)
-          ->orderBy('id', 'DESC')
-          ->get();
+          return $this->returnindex($house_id);
 
-          return view('framing.additional.index')->with(['house_id' => $house_id, 'additional' => $additional ]); 
-  
         }catch (\Exception $e) {
             DB::rollback();
 	        return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -127,12 +140,8 @@ class AdditionalController extends Controller
   
           DB::commit();
 
-          $additional = Additional::where('house_id', $house_id)
-          ->orderBy('id', 'DESC')
-          ->get();
+          return $this->returnindex($house_id);
 
-          return view('framing.additional.index')->with(['house_id' => $house_id, 'additional' => $additional ]); 
-  
         }catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -150,10 +159,6 @@ class AdditionalController extends Controller
 
         Additional::destroy($id);
 
-        $additional = Additional::where('house_id', $house_id)
-                ->orderBy('id', 'DESC')
-                ->get();
-
-        return view('framing.additional.index')->with(['house_id' => $house_id, 'additional' => $additional ]); 
+        return $this->returnindex($house_id); 
     }
 }

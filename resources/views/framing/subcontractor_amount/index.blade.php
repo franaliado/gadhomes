@@ -72,7 +72,7 @@
                     <td align='center'>
                         <a href="{{ url('/orders/'.$house->id) }}"">
 
-                            <button type="button" class="btn btn-success btn-sm" title="PO" alt="PO">
+                            <button type="button" class="btn btn-success btn-sm" title="Tools" alt="Tools">
                                 <i class="fa fa-comment-dollar"> </i>
                             </button>                          
                         </a>
@@ -80,7 +80,7 @@
                     <td align='center'>
                         <a href="{{ url('/orders/'.$house->id) }}"">
 
-                            <button type="button" class="btn btn-success btn-sm" title="PO" alt="PO">
+                            <button type="button" class="btn btn-success btn-sm" title="Payments" alt="Payments">
                                 <i class="fa fa-funnel-dollar"> </i>
                             </button>                          
                         </a>
@@ -88,7 +88,7 @@
                     <td align='center'>
                         <a href="{{ url('/orders/'.$house->id) }}"">
 
-                            <button type="button" class="btn btn-warning btn-sm" title="PO" alt="PO">
+                            <button type="button" class="btn btn-warning btn-sm" title="Resume" alt="Resume">
                                 <i class="fa fa-clipboard-check"> </i>
                             </button>                          
                         </a>

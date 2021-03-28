@@ -2,11 +2,32 @@
 
 @section('content')
 
-    <h1>List of Additional</h1>
-    <br/>
+@switch (strlen($house->lot))
+@case(1)
+    @php $lot = "000" . $house->lot; @endphp
+    @break
+@case(2)
+    @php $lot = "00" . $house->lot; @endphp
+    @break
+@case(3)
+    @php $lot = "0" . $house->lot; @endphp
+    @break
+@default
+    @php $lot = $house->lot; @endphp
+@endswitch
 
-    <a href="{{ url('/additional/'.$house_id.'/create') }}" class="btn btn-danger">
-        <i class="fa fa-plus"> Add Additional </i>
+
+    <h1>List of Additional</h1> 
+    <br> 
+    <b>{{ $house->address }} - {{ $lot }} - {{ $house->subcontractor->name }}</b>
+    <br>
+    Amount Assigned SubContractor:  {{ number_format($house->amount_assigned_subc, 2, '.', ',') }}
+    <br>
+    Total Amount Available: {{ number_format($totalavailable, 2, '.', ',') }}
+    <br><br>
+
+    <a href="{{ url('/additional/'.$house->id.'/create') }}" class="btn btn-danger">
+        <i class="fa fa-plus"> Add Additional</i>
     </a> 
     <br/><br/>
 
@@ -33,7 +54,7 @@
                         <td align="right">{{ number_format($additional->amount, 2, '.', ',') }}</td>
 
                         <td align='center'> 
-                            <form method="GET" action="{{ url('/additional/'.$additional->id.'/'.$house_id.'/edit') }}">
+                            <form method="GET" action="{{ url('/additional/'.$additional->id.'/'.$house->id.'/edit') }}">
                                 @csrf
                                 {{ method_field('EDIT')}}  
                                 <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
@@ -42,7 +63,7 @@
                             </form>
                         </td>
                         <td align='center'>
-                            <form method="post" action="{{ url('/additional/'.$additional->id.'/'.$house_id) }}">
+                            <form method="post" action="{{ url('/additional/'.$additional->id.'/'.$house->id) }}">
                                 @csrf
                                 {{ method_field('DELETE')}}  
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Additional?')" title="Delete" alt="Delete">
