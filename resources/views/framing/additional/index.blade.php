@@ -23,7 +23,11 @@
     <br>
     Amount Assigned SubContractor:  {{ number_format($house->amount_assigned_subc, 2, '.', ',') }}
     <br>
-    Total Amount Available: {{ number_format($totalavailable, 2, '.', ',') }}
+    @if ($totalavailable < 0)
+        Total Amount Available: <font color="red">{{ number_format($totalavailable, 2, '.', ',') }}</font>
+    @else
+        Total Amount Available: <font color="black">{{ number_format($totalavailable, 2, '.', ',') }}</font>
+    @endif
     <br><br>
 
     <a href="{{ url('/additional/'.$house->id.'/create') }}" class="btn btn-danger">
