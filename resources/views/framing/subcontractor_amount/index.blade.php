@@ -65,7 +65,7 @@
                         <a href="{{ url('/additional/'.$house->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Additional" alt="Additional">
-                                <i class="fa fa-coins"> </i>
+                                <i class="">Add </i>
                             </button>                          
                         </a>
                     </td>
@@ -73,7 +73,7 @@
                         <a href="{{ url('/tools/'.$house->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Tools" alt="Tools">
-                                <i class="fa fa-comment-dollar"> </i>
+                                <i class="">Tools</i>
                             </button>                          
                         </a>
                     </td>
@@ -81,7 +81,7 @@
                         <a href="{{ url('/payments/'.$house->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Payments" alt="Payments">
-                                <i class="fa fa-funnel-dollar"> </i>
+                                <i class="">Pay</i>
                             </button>                          
                         </a>
                     </td>
