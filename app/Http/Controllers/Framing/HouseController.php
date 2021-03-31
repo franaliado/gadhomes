@@ -25,11 +25,15 @@ class HouseController extends Controller
 
         $query = trim($request->get('search'));
  
-        $houses = House::with(['community', 'subcontractor'])
-                ->where('address', 'LIKE', '%'.$query.'%')
-                ->orWhere('lot', 'LIKE', '%'.$query.'%')
-                ->orderBy('id', 'DESC')
-                ->paginate(20);
+        $houses = House::select('houses.*', 'subcontractors.name as subcontractorName', 'community.name as communityName')                    
+            ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->leftJoin('community', 'community.id', 'houses.community_id')
+            ->where('houses.address', 'LIKE', '%'.$query.'%')
+            ->orWhere('houses.lot', 'LIKE', '%'.$query.'%')
+            ->orWhere('community.name', 'LIKE', '%'.$query.'%')
+            ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
+            ->orderBy('id', 'DESC')
+            ->paginate(20);
 
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }
