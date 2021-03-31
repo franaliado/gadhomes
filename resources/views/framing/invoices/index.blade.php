@@ -19,7 +19,7 @@
 <section class="invoice" style="padding: 20px;">
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-6">Date: {{ date("m-d-Y", strtotime($invoice->created_at)) }}</div>
+			<div class="col-md-6"><strong>Date: {{ date("m-d-Y", strtotime($invoice->created_at)) }}</strong></div>
 			<div class="col-md-6"><a href="/invoicePdf/{{ $invoice->idInvoice }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
 		</div>
 		<div class="row">

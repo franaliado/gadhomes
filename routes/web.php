@@ -110,5 +110,10 @@ Route::get('/payments/{id}/{house_id}/edit', 'Framing\PaymentController@edit')->
 
 Route::post('/payments/{id}/{house_id}/update', 'Framing\PaymentController@update')->middleware('auth');
 
+//Resume
 
-Route::get('/search', 'HouseController@search');
+Route::get('/resume/{house_id}', 'Framing\ResumeController@index')->middleware('auth');
+
+Route::get('/resumePdf/{house_id}', 'Framing\ResumeController@invoicePdf')->middleware('auth');
+
+//Route::get('/search', 'HouseController@search');

@@ -86,7 +86,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="{{ url('/orders/'.$house->id) }}"">
+                        <a href="/resume/{{$house->id}}">
 
                             <button type="button" class="btn btn-warning btn-sm" title="Resume" alt="Resume">
                                 <i class="fa fa-clipboard-check"> </i>

@@ -16,13 +16,6 @@
     @php $lot = $house->lot; @endphp
 @endswitch
 
-@if ($totalavailable < 0)
-<font color="red">Rojo</font>
-   
-@else
-    
-<font color="black">Negro</font>
-@endif
 
     <h1>List of Payments</h1> 
     <br> 

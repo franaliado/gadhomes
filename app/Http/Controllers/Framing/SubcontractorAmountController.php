@@ -20,10 +20,20 @@ class SubcontractorAmountController extends Controller
     public function index(Request $request)
     {
         $query = trim($request->get('search'));
- 
+/**
+ *       $houses = House::select('houses.*', 'subcontractors.name as subcontractorName', 'community.name as communityName')                    
+ *           ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+*            ->leftJoin('community', 'community.id', 'houses.community_id')
+*            ->where('address', 'LIKE', '%'.$query.'%')
+*            ->orWhere('lot', 'LIKE', '%'.$query.'%')
+*            ->orWhere('subcontractorName', 'LIKE', '%'.$query.'%')
+*            ->orderBy('id', 'DESC')
+*            ->paginate(20);
+*/ 
         $houses = House::with(['community', 'subcontractor'])
                 ->where('address', 'LIKE', '%'.$query.'%')
                 ->orWhere('lot', 'LIKE', '%'.$query.'%')
+ /**               ->orWhere('subcontractor.name', 'LIKE', '%'.$query.'%') */
                 ->orderBy('id', 'DESC')
                 ->paginate(20);
 
