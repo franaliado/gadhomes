@@ -44,7 +44,7 @@
     
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
@@ -57,7 +57,7 @@
         
                                 @error('date')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
@@ -70,7 +70,7 @@
     
                                 @error('amount')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>

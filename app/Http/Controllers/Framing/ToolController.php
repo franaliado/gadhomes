@@ -15,23 +15,6 @@ use App\House;
 
 class ToolController extends Controller
 {
-    protected function returnindex($house_id)
-    {
-
-        $house = House::findOrFail($house_id);
-       
-        $tools = Tool::where('house_id', $house_id)
-                ->orderBy('id', 'DESC')
-                ->get();
-        $totaltool = $tools->sum('amount');
-
-        $additional = Additional::where('house_id', $house_id)->sum('amount');
-        $payment = Payment::where('house_id', $house_id)->sum('amount');
-
-        $totalavailable = ($house->amount_assigned_subc + $additional) - $totaltool - $payment;
-
-        return view('framing.tools.index')->with(['house' => $house, 'tools' => $tools, 'totalavailable' => $totalavailable ]); 
-    }
 
     protected function validator(array $data)
     {
@@ -48,7 +31,19 @@ class ToolController extends Controller
      */
     public function index($house_id)
     {
-        return $this->returnindex($house_id);
+        $house = House::findOrFail($house_id);
+       
+        $tools = Tool::where('house_id', $house_id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        $totaltool = $tools->sum('amount');
+
+        $additional = Additional::where('house_id', $house_id)->sum('amount');
+        $payment = Payment::where('house_id', $house_id)->sum('amount');
+
+        $totalavailable = ($house->amount_assigned_subc + $additional) - $totaltool - $payment;
+
+        return view('framing.tools.index')->with(['house' => $house, 'tools' => $tools, 'totalavailable' => $totalavailable ]); 
     }
 
     /**
@@ -85,7 +80,7 @@ class ToolController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -139,7 +134,7 @@ class ToolController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully edit']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -158,6 +153,6 @@ class ToolController extends Controller
 
         Tool::destroy($id);
 
-        return $this->returnindex($house_id); 
+        return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully delete']);
     }
 }

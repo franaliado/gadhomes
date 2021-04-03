@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta  content = "width=device-width, initial-scale = 1.0, maximum-scale = 1.0, minimum-scale = 1.0, user-scalable = no" name = "viewport" >
         <link href="/images/logo-leon-ico.ico" rel="shortcut icon" type="image/x-icon" />
         <title>Gadhomes | Dashboard</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -26,8 +27,10 @@
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
 
-    </head>
-    <body class="skin-black">
+    </head>   
+
+    <body class="skin-black sidebar-mini sidebar-collapse sidebar-open" >
+
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="/home" class="logo">
@@ -35,9 +38,16 @@
                 <img src="/images/logo-leon2.png" class="img-circle" alt="logo" width="40" height="40"/>
                 GADHOMES
             </a>
+
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">
-
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
@@ -91,7 +101,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/users/create"><i class="fa fa-angle-double-right"></i> Users</a></li>
+                                <li><a href="/users"><i class="fa fa-angle-double-right"></i> Users</a></li>
                                 <li><a href="pages/charts/flot.html"><i class="fa fa-angle-double-right"></i> Flot</a></li>
                                 <li><a href="pages/charts/inline.html"><i class="fa fa-angle-double-right"></i> Inline charts</a></li>
                             </ul>
@@ -244,6 +254,6 @@
         
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="/adminlte/js/AdminLTE/dashboard.js" type="text/javascript"></script>  
-    
+
     </body>
 </html>

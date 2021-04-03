@@ -44,7 +44,7 @@
                        
                             @error('amount_assigned_subc')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>

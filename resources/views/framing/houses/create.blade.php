@@ -45,7 +45,7 @@
 
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
@@ -73,7 +73,7 @@
 
                             @error('lot')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong class="text-danger">{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
@@ -100,7 +100,7 @@
 
                             @error('start_date')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>

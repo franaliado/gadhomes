@@ -2,24 +2,40 @@
 
 @section('content')
 
-        @if(isset($error))
-          <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-              <div class="alert alert-danger" role="alert">
-                  <p>{{ $error }}</p>
-              </div>
+        @if(session('error'))
+        <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="alert alert-danger" role="alert">
+                <p>{{ session('error') }}</p>
             </div>
-          </div>
+        </div>
+        </div>
         @endif
 
-        <div class="form-box2" id="login-box">
-            <div class="header">Register New Membership</div>
-            <form method="POST" action="{{ url('/users/store') }}">
-                @csrf
+        @if(isset($error))
+        <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+	    <div class="alert alert-danger" role="alert">
+		<ul>
+		  @foreach($errors as $error)
+                    <li>{{ $error }}</li>
+		  @endforeach
+		</ul>
+            </div>
+        </div>
+        </div>
+        @endif
 
-                <div class="body bg-gray">
 
-                      <!-- Registros -->
+        <div class="form-box3" id="edit-users">
+        <div class="header"><b>Edit User</b></div>
+        <form method="POST" action="{{ url('/users/'.$user->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+
+            <div class="body bg-gray">
+
+                    <!-- Registros -->   
                     <div class="form-group row">
                         <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Full Name') }}</label>
                         <div class="col-md-12">
@@ -101,38 +117,18 @@
                             @enderror
                         </div>
                     </div>
+            </div>
+            
 
-                    <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                        <div class="col-md-12">
-                            <input id="password" type="password" maxlength="15" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Password">
-
-                            @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                    <font color="red"><strong>{{ $message }}</strong></font>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <label for="password-confirm" min='6' class="col-md-8 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                        <div class="col-md-12">
-                            <input id="password-confirm" type="password" maxlength="15" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Retype Password">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <a href="{{ URL('/users') }}" class="btn bg-red">
-                        <i class="fa fa-arrow-left"> Back</i>
-                    </a>
-                    <button type="submit" class="btn bg-red">
-                        <i class="fa fa-check-circle"> Save</i>
-                    </button>
-                </div>
-            </form>
+            <div class="footer">
+                <a href="{{ URL('/users') }}" class="btn bg-red">
+                    <i class="fa fa-arrow-left">  Back</i>
+                </a>
+                <button type="submit" class="btn bg-red">
+                    <i class="fa fa-check-circle">  Edit</i>
+                </button>
+            </div>
+        </form>
         </div>
+
 @endsection

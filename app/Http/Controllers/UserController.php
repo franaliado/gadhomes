@@ -16,9 +16,15 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = trim($request->get('search'));
+
+        $users = User::where('name', 'LIKE', '%'.$query.'%')
+        ->orWhere('username', 'LIKE', '%'.$query.'%')
+        ->orderBy('name', 'ASC')
+        ->paginate(10);
+        return view('users.index')->with(['users' => $users]);
     }
 
     /**
@@ -78,7 +84,7 @@ class UserController extends Controller
         // User::where('id', $request->id)->update($data);
 
         DB::commit();
-        return redirect('/home')->with(['success' => 'User successfully registered']);
+        return redirect('/users')->with(['success' => 'User successfully registered']);
 
       }catch (\Exception $e) {
         DB::rollback();

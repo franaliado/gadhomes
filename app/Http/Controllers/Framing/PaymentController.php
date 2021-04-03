@@ -15,23 +15,6 @@ use App\House;
 
 class PaymentController extends Controller
 {
-    protected function returnindex($house_id)
-    {
-
-        $house = House::findOrFail($house_id);
-       
-        $payments = Payment::where('house_id', $house_id)
-                ->orderBy('id', 'DESC')
-                ->get();
-        $totalpayment = $payments->sum('amount');
-
-        $additional = Additional::where('house_id', $house_id)->sum('amount');
-        $tool = Tool::where('house_id', $house_id)->sum('amount');
-
-        $totalavailable = ($house->amount_assigned_subc + $additional) - $tool - $totalpayment;
-
-        return view('framing.payments.index')->with(['house' => $house, 'payments' => $payments, 'totalavailable' => $totalavailable ]); 
-    }
 
     protected function validator(array $data)
     {
@@ -48,7 +31,19 @@ class PaymentController extends Controller
      */
     public function index($house_id)
     {
-        return $this->returnindex($house_id);
+        $house = House::findOrFail($house_id);
+       
+        $payments = Payment::where('house_id', $house_id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        $totalpayment = $payments->sum('amount');
+
+        $additional = Additional::where('house_id', $house_id)->sum('amount');
+        $tool = Tool::where('house_id', $house_id)->sum('amount');
+
+        $totalavailable = ($house->amount_assigned_subc + $additional) - $tool - $totalpayment;
+
+        return view('framing.payments.index')->with(['house' => $house, 'payments' => $payments, 'totalavailable' => $totalavailable ]); 
     }
 
     /**
@@ -85,7 +80,7 @@ class PaymentController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -139,7 +134,7 @@ class PaymentController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully edit']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -158,6 +153,6 @@ class PaymentController extends Controller
 
         Payment::destroy($id);
 
-        return $this->returnindex($house_id); 
+        return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully delete']);
     }
 }

@@ -45,7 +45,7 @@
 
                             @error('num_po')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
@@ -58,7 +58,7 @@
     
                             @error('date_order')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
@@ -73,7 +73,7 @@
 
                             @error('name_Superint')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
@@ -86,7 +86,7 @@
 
                             @error('phone_Superint')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>

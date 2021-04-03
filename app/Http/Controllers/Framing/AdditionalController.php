@@ -16,24 +16,6 @@ use App\House;
 class AdditionalController extends Controller
 {
 
-    protected function returnindex($house_id)
-    {
-
-        $house = House::findOrFail($house_id);
-       
-        $additional = Additional::where('house_id', $house_id)
-                ->orderBy('id', 'DESC')
-                ->get();
-        $totaladittional = $additional->sum('amount');
-
-        $tool = Tool::where('house_id', $house_id)->sum('amount');
-        $payment = Payment::where('house_id', $house_id)->sum('amount');
-
-        $totalavailable = ($house->amount_assigned_subc + $totaladittional) - $tool - $payment;
-
-        return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totalavailable' => $totalavailable ]); 
-    }
-
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -49,8 +31,20 @@ class AdditionalController extends Controller
      */
     public function index($house_id)
     {
-        return $this->returnindex($house_id);
-    }
+        $house = House::findOrFail($house_id);
+       
+        $additional = Additional::where('house_id', $house_id)
+                ->orderBy('id', 'DESC')
+                ->get();
+        $totaladittional = $additional->sum('amount');
+
+        $tool = Tool::where('house_id', $house_id)->sum('amount');
+        $payment = Payment::where('house_id', $house_id)->sum('amount');
+
+        $totalavailable = ($house->amount_assigned_subc + $totaladittional) - $tool - $payment;
+
+        return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totalavailable' => $totalavailable ]); 
+     }
 
     /**
      * Show the form for creating a new resource.
@@ -86,7 +80,7 @@ class AdditionalController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/additional/'.$house_id)->with(['success' => 'Additional successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -140,7 +134,7 @@ class AdditionalController extends Controller
   
           DB::commit();
 
-          return $this->returnindex($house_id);
+          return redirect('/additional/'.$house_id)->with(['success' => 'Additional successfully edit']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -159,6 +153,7 @@ class AdditionalController extends Controller
 
         Additional::destroy($id);
 
-        return $this->returnindex($house_id); 
+        return redirect('/additional/'.$house_id)->with(['success' => 'Additional successfully delete']);
+
     }
 }

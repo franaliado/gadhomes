@@ -44,7 +44,7 @@
     
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
@@ -57,7 +57,7 @@
     
                                 @error('option')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong class="text-danger">{{ $message }}</strong>
+                                        <font color="red"><strong class="text-danger">{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
@@ -72,7 +72,7 @@
     
                                 @error('qty_po')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
@@ -85,7 +85,7 @@
         
                                 @error('unit_price')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <font color="red"><strong>{{ $message }}</strong></font>
                                     </span>
                                 @enderror
                             </div>
