@@ -31,22 +31,22 @@
                         <p><a href="#">Please enter your User Name and Password</a></p>
             
                         <div class="form-group">
-                            <label for="user" class="col-md-4 col-form-label text-md-right">User Name:</label>
+                            <label for="user" class="col-md-6 col-form-label text-md-right">User Name:</label>
                             <input type="text" id="username" name="username" class="form-control @error('username') is-invalid @enderror" placeholder="User Name" required autocomplete="username" autofocus/>
             
                             @error('username')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password:</label>
+                            <label for="password" class="col-md-6 col-form-label text-md-right">Password:</label>
                             <input type="password" id="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required autocomplete="current-password"/>
             
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
                         </div>          
