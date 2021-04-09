@@ -9,8 +9,6 @@ use Illuminate\Http\Request;
 
 use DB;
 use App\Additional;
-use App\Tool;
-use App\Payment;
 use App\House;
 
 class AdditionalController extends Controller
@@ -38,12 +36,9 @@ class AdditionalController extends Controller
                 ->get();
         $totaladittional = $additional->sum('amount');
 
-        $tool = Tool::where('house_id', $house_id)->sum('amount');
-        $payment = Payment::where('house_id', $house_id)->sum('amount');
+        $totalavailable = ($house->amount_assigned_subc + $totaladittional);
 
-        $totalavailable = ($house->amount_assigned_subc + $totaladittional) - $tool - $payment;
-
-        return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totalavailable' => $totalavailable ]); 
+        return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totaladittional' => $totaladittional, 'totalavailable' => $totalavailable ]); 
      }
 
     /**

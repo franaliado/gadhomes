@@ -12,7 +12,7 @@ class Payment extends Model
     protected $fillable = ['id', 'amount', 'date', 'type', 'house_id'];
 
     //Relación Uno a Muchos Inversa
-    public function house(){
-        return $this->belongsTo('App\House');
+    public function subcontractor(){
+        return $this->hasOne('App\Subcontractor', 'id', 'subcontractor_id');
     }
 }

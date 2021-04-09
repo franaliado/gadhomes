@@ -24,7 +24,9 @@
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 <th style="text-align:center;vertical-align: middle">Amount Assigned <br> SubContractor</th>
-                <th colspan = "5" style="text-align:center;vertical-align: middle">Actions</th>
+                <th style="text-align:center;vertical-align: middle">Total Additional</th>
+                <th style="text-align:center;vertical-align: middle">Total</th>
+                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
@@ -52,6 +54,13 @@
                     <td align="center">{{ $lot }}</td>
                     <td align="left">{{ $house->subcontractor->name }}</td>
                     <td align="right">{{ number_format($house->amount_assigned_subc, 2, '.', ',') }}</td>
+                    @php $totaladditional = 0; @endphp
+                    @foreach ($house->additional as $additional)
+                        @php $totaladditional += $additional->amount; @endphp
+                    @endforeach
+                    <td align="right">{{ number_format($totaladditional, 2, '.', ',') }}</td>
+                    <td align="right">{{ number_format($totaladditional + $house->amount_assigned_subc, 2, '.', ',') }}</td>
+                   
                     <td align='center'> 
                         <form method="GET" action="{{ url('/subcontractor_amount/'.$house->id. '/edit') }}">
                             @csrf
@@ -69,6 +78,7 @@
                             </button>                          
                         </a>
                     </td>
+                <!--
                     <td align='center'>
                         <a href="{{ url('/tools/'.$house->id) }}"">
 
@@ -93,7 +103,7 @@
                             </button>                          
                         </a>
                     </td>
-
+                -->
                 </tr>                
             @endforeach
 

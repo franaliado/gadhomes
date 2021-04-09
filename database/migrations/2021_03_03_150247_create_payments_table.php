@@ -18,11 +18,11 @@ class CreatePaymentsTable extends Migration
             $table->decimal('amount', 8, 2);
             $table->date('date');
             $table->integer('type');
-            $table->unsignedBigInteger('house_id');
+            $table->unsignedBigInteger('subcontractor_id');
 
-            $table->foreign('house_id')
+            $table->foreign('subcontractor_id')
                     ->references('id')
-                    ->on('houses')
+                    ->on('subcontractors')
                     ->onDelete('cascade');
 
             $table->timestamps();

@@ -9,6 +9,7 @@ use DB;
 use App\House;
 use App\Community;
 use App\Subcontractor;
+use App\Additional;
 
 class SubcontractorAmountController extends Controller
 {
@@ -30,8 +31,8 @@ class SubcontractorAmountController extends Controller
             ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'DESC')
             ->paginate(20);
- 
 
+ 
         return view('framing.subcontractor_amount.index')->with(['houses' => $houses]); 
     }
 

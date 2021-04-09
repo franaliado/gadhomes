@@ -18,11 +18,11 @@ class CreateToolsTable extends Migration
             $table->string('description', 250);
             $table->decimal('amount', 8, 2);
             $table->date('date');
-            $table->unsignedBigInteger('house_id');
+            $table->unsignedBigInteger('subcontractor_id');
 
-            $table->foreign('house_id')
+            $table->foreign('subcontractor_id')
                     ->references('id')
-                    ->on('houses')
+                    ->on('subcontractors')
                     ->onDelete('cascade');
                     
             $table->timestamps();
