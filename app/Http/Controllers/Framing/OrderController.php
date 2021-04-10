@@ -60,7 +60,7 @@ class OrderController extends Controller
 
         DB::beginTransaction();
         try {
-  
+ 
             $data = array(
                 'num_po' => $request->num_po,
                 'date_order' => $request->date_order,
@@ -72,7 +72,7 @@ class OrderController extends Controller
             $PO = Order::create($data);  
             DB::commit();
 
-            // Last invoice
+             // Last invoice
             $ince = Invoice::select('num_invoice')->orderBy('id', 'DESC')->first();
             $num_invoice = $ince->num_invoice + 1;
             // Invoice

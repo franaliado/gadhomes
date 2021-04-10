@@ -86,31 +86,31 @@ Route::post('/additional/{id}/{house_id}/update', 'Framing\AdditionalController@
 
 //Tools
 
-Route::get('/tools/{house_id}', 'Framing\ToolController@index')->middleware('auth');
+Route::get('/tools/{subcontractor_id}', 'Framing\ToolController@index')->middleware('auth');
 
-Route::get('/tools/{house_id}/create', 'Framing\ToolController@create')->middleware('auth');
+Route::get('/tools/{subcontractor_id}/create', 'Framing\ToolController@create')->middleware('auth');
 
-Route::post('/tools/{house_id}/store', 'Framing\ToolController@store')->middleware('auth');
+Route::post('/tools/{subcontractor_id}/store', 'Framing\ToolController@store')->middleware('auth');
 
-Route::delete('/tools/{id}/{house_id}', 'Framing\ToolController@destroy')->middleware('auth');
+Route::delete('/tools/{id}/{subcontractor_id}', 'Framing\ToolController@destroy')->middleware('auth');
 
-Route::get('/tools/{id}/{house_id}/edit', 'Framing\ToolController@edit')->middleware('auth');
+Route::get('/tools/{id}/{subcontractor_id}/edit', 'Framing\ToolController@edit')->middleware('auth');
 
-Route::post('/tools/{id}/{house_id}/update', 'Framing\ToolController@update')->middleware('auth');
+Route::post('/tools/{id}/{subcontractor_id}/update', 'Framing\ToolController@update')->middleware('auth');
 
 //Payments
 
-Route::get('/payments/{house_id}', 'Framing\PaymentController@index')->middleware('auth');
+Route::get('/payments/{subcontractor_id}', 'Framing\PaymentController@index')->middleware('auth');
 
-Route::get('/payments/{house_id}/create', 'Framing\PaymentController@create')->middleware('auth');
+Route::get('/payments/{subcontractor_id}/create', 'Framing\PaymentController@create')->middleware('auth');
 
-Route::post('/payments/{house_id}/store', 'Framing\PaymentController@store')->middleware('auth');
+Route::post('/payments/{subcontractor_id}/store', 'Framing\PaymentController@store')->middleware('auth');
 
-Route::delete('/payments/{id}/{house_id}', 'Framing\PaymentController@destroy')->middleware('auth');
+Route::delete('/payments/{id}/{subcontractor_id}', 'Framing\PaymentController@destroy')->middleware('auth');
 
-Route::get('/payments/{id}/{house_id}/edit', 'Framing\PaymentController@edit')->middleware('auth');
+Route::get('/payments/{id}/{subcontractor_id}/edit', 'Framing\PaymentController@edit')->middleware('auth');
 
-Route::post('/payments/{id}/{house_id}/update', 'Framing\PaymentController@update')->middleware('auth');
+Route::post('/payments/{id}/{subcontractor_id}/update', 'Framing\PaymentController@update')->middleware('auth');
 
 //Resume
 

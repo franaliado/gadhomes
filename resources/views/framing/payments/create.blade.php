@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="create-payment">
         <div class="header"><b>Add New Payment</b></div>
-        <form method="POST" action="{{ url('/payments/'.$house_id.'/store') }}">
+        <form method="POST" action="{{ url('/payments/'.$subcontractor_id.'/store') }}">
             @csrf
 
             <div class="body bg-gray">
@@ -77,7 +77,7 @@
                 </div>
 
             <div class="footer">
-                <a href="{{ url('/payments/'.$house_id) }}" class="btn bg-red">
+                <a href="{{ url('/payments/'.$subcontractor_id) }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
                 </a>
                 <button type="submit" class="btn bg-red">

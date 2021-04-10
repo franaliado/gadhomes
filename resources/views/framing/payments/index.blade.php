@@ -2,35 +2,18 @@
 
 @section('content')
 
-@switch (strlen($house->lot))
-@case(1)
-    @php $lot = "000" . $house->lot; @endphp
-    @break
-@case(2)
-    @php $lot = "00" . $house->lot; @endphp
-    @break
-@case(3)
-    @php $lot = "0" . $house->lot; @endphp
-    @break
-@default
-    @php $lot = $house->lot; @endphp
-@endswitch
-
-
-    <h1>List of Payments</h1> 
+    <h1>List of Payments</h1>
+    
     <br> 
-    <b>{{ $house->address }} - {{ $lot }} - {{ $house->subcontractor->name }}</b>
+    <b>Subcontractor: {{ $subcontractor->name }}</b>
     <br>
-    Amount Assigned SubContractor:  {{ number_format($house->amount_assigned_subc, 2, '.', ',') }}
-    <br>
-    @if ($totalavailable < 0)
-        Total Amount Available: <font color="red">{{ number_format($totalavailable, 2, '.', ',') }}</font>
-    @else
-        Total Amount Available: <font color="black">{{ number_format($totalavailable, 2, '.', ',') }}</font>
-    @endif
-    <br><br>
 
-    <a href="{{ url('/payments/'.$house->id.'/create') }}" class="btn btn-danger">
+    Total Payments: {{ number_format($totalpayments, 2, '.', ',') }}</font>
+
+    <br><br>
+ 
+
+    <a href="{{ url('/payments/'.$subcontractor->id.'/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Payment</i>
     </a> 
     <br/><br/>
@@ -67,7 +50,7 @@
                         <td align="right">{{ number_format($payment->amount, 2, '.', ',') }}</td>
 
                         <td align='center'> 
-                            <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$house->id.'/edit') }}">
+                            <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/edit') }}">
                                 @csrf
                                 {{ method_field('EDIT')}}  
                                 <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
@@ -76,7 +59,7 @@
                             </form>
                         </td>
                         <td align='center'>
-                            <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$house->id) }}">
+                            <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id) }}">
                                 @csrf
                                 {{ method_field('DELETE')}}  
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Payment?')" title="Delete" alt="Delete">
@@ -94,7 +77,7 @@
        
         </tbody>
     </table>
-    <a href="{{ URL('/subcontractor_amount') }}" class="btn bg-red">
+    <a href="{{ URL('/subcontractors') }}" class="btn bg-red">
         <i class="fa fa-arrow-left"> Back</i>
     </a>
 @endsection

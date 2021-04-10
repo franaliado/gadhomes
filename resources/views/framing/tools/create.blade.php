@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="create-tool">
         <div class="header"><b>Add New Tool</b></div>
-        <form method="POST" action="{{ url('/tools/'.$house_id.'/store') }}">
+        <form method="POST" action="{{ url('/tools/'.$subcontractor_id.'/store') }}">
             @csrf
 
             <div class="body bg-gray">
@@ -79,7 +79,7 @@
                 </div>
 
             <div class="footer">
-                <a href="{{ url('/tools/'.$house_id) }}" class="btn bg-red">
+                <a href="{{ url('/tools/'.$subcontractor_id) }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
                 </a>
                 <button type="submit" class="btn bg-red">

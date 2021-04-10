@@ -4,15 +4,18 @@
     <h1>List of Houses with Subcontractors</h1>
     <br/>
     
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form class="form-inline ml-3">
-
+            <a href="{{ url('/subcontractors') }}" class="btn btn-danger">
+            <i class="fa fa-plus"> Add Subcontractor</i></a>
+            <br><br>
             <input class="float-right"  size="30" type="search" name="search" placeholder="Search">
             <button type="submit" class="btn btn-navbar">
                 <i class="fas fa-search"></i>
             </button>
         </form>
     </div>
+
     <br><br>
 
     <table id="houses-table" class="table table-striped table-bordered" border='1' >

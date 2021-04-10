@@ -9,7 +9,7 @@ class Payment extends Model
 
     protected $table = 'payments';
 
-    protected $fillable = ['id', 'amount', 'date', 'type', 'house_id'];
+    protected $fillable = ['id', 'amount', 'date', 'type', 'subcontractor_id'];
 
     //Relación Uno a Muchos Inversa
     public function subcontractor(){

@@ -11,7 +11,7 @@ use DB;
 use App\Additional;
 use App\Tool;
 use App\Payment;
-use App\House;
+use App\Subcontractor;
 
 class PaymentController extends Controller
 {
@@ -29,21 +29,16 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($house_id)
+    public function index($subcontractor_id)
     {
-        $house = House::findOrFail($house_id);
+        $subcontractor = Subcontractor::findOrFail($subcontractor_id);
        
-        $payments = Payment::where('house_id', $house_id)
+        $payments = Payment::where('subcontractor_id', $subcontractor_id)
                 ->orderBy('id', 'DESC')
                 ->get();
-        $totalpayment = $payments->sum('amount');
+        $totalpayments = $payments->sum('amount');
 
-        $additional = Additional::where('house_id', $house_id)->sum('amount');
-        $tool = Tool::where('house_id', $house_id)->sum('amount');
-
-        $totalavailable = ($house->amount_assigned_subc + $additional) - $tool - $totalpayment;
-
-        return view('framing.payments.index')->with(['house' => $house, 'payments' => $payments, 'totalavailable' => $totalavailable ]); 
+        return view('framing.payments.index')->with(['subcontractor' => $subcontractor, 'payments' => $payments, 'totalpayments' => $totalpayments ]); 
     }
 
     /**
@@ -51,9 +46,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($house_id)
+    public function create($subcontractor_id)
     {
-        return view("framing.payments.create")->with(['house_id' => $house_id]);
+        return view("framing.payments.create")->with(['subcontractor_id' => $subcontractor_id]);
     }
 
     /**
@@ -62,7 +57,7 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $house_id)
+    public function store(Request $request, $subcontractor_id)
     {
         $this->validator($request->all())->validate();
 
@@ -73,14 +68,14 @@ class PaymentController extends Controller
             'date' => $request->date,
             'amount' => $request->amount,
             'type' => $request->type,
-            'house_id' => $house_id
+            'subcontractor_id' => $subcontractor_id
           );
   
           Payment::create($data);
   
           DB::commit();
 
-          return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully saved']);
+          return redirect('/payments/'.$subcontractor_id)->with(['success' => 'Payment successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -105,11 +100,11 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, $house_id)
+    public function edit($id, $subcontractor_id)
     {
         $payment = Payment::findOrFail($id);
         
-        return view("framing.payments.edit")->with(['house_id' => $house_id, 'payment' => $payment]);
+        return view("framing.payments.edit")->with(['subcontractor_id' => $subcontractor_id, 'payment' => $payment]);
     }
 
     /**
@@ -119,7 +114,7 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $house_id)
+    public function update(Request $request, $id, $subcontractor_id)
     {
         $this->validator($request->all())->validate();
 
@@ -134,7 +129,7 @@ class PaymentController extends Controller
   
           DB::commit();
 
-          return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully edit']);
+          return redirect('/payments/'.$subcontractor_id)->with(['success' => 'Payment successfully edit']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -148,11 +143,11 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $house_id)
+    public function destroy($id, $subcontractor_id)
     {
 
         Payment::destroy($id);
 
-        return redirect('/payments/'.$house_id)->with(['success' => 'Payment successfully delete']);
+        return redirect('/payments/'.$subcontractor_id)->with(['success' => 'Payment successfully delete']);
     }
 }

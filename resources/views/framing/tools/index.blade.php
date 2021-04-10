@@ -2,35 +2,17 @@
 
 @section('content')
 
-@switch (strlen($house->lot))
-@case(1)
-    @php $lot = "000" . $house->lot; @endphp
-    @break
-@case(2)
-    @php $lot = "00" . $house->lot; @endphp
-    @break
-@case(3)
-    @php $lot = "0" . $house->lot; @endphp
-    @break
-@default
-    @php $lot = $house->lot; @endphp
-@endswitch
-
 
     <h1>List of Tools</h1> 
     <br> 
-    <b>{{ $house->address }} - {{ $lot }} - {{ $house->subcontractor->name }}</b>
+    <b>Subcontractor: {{ $subcontractor->name }}</b>
     <br>
-    Amount Assigned SubContractor:  {{ number_format($house->amount_assigned_subc, 2, '.', ',') }}
-    <br>
-    @if ($totalavailable < 0)
-        Total Amount Available: <font color="red">{{ number_format($totalavailable, 2, '.', ',') }}</font>
-    @else
-        Total Amount Available: <font color="black">{{ number_format($totalavailable, 2, '.', ',') }}</font>
-    @endif
+
+    Total Tools: {{ number_format($totaltools, 2, '.', ',') }}</font>
+
     <br><br>
 
-    <a href="{{ url('/tools/'.$house->id.'/create') }}" class="btn btn-danger">
+    <a href="{{ url('/tools/'.$subcontractor->id.'/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Tool</i>
     </a> 
     <br/><br/>
@@ -58,7 +40,7 @@
                         <td align="right">{{ number_format($tool->amount, 2, '.', ',') }}</td>
 
                         <td align='center'> 
-                            <form method="GET" action="{{ url('/tools/'.$tool->id.'/'.$house->id.'/edit') }}">
+                            <form method="GET" action="{{ url('/tools/'.$tool->id.'/'.$subcontractor->id.'/edit') }}">
                                 @csrf
                                 {{ method_field('EDIT')}}  
                                 <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
@@ -67,7 +49,7 @@
                             </form>
                         </td>
                         <td align='center'>
-                            <form method="post" action="{{ url('/tools/'.$tool->id.'/'.$house->id) }}">
+                            <form method="post" action="{{ url('/tools/'.$tool->id.'/'.$subcontractor->id) }}">
                                 @csrf
                                 {{ method_field('DELETE')}}  
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Tool?')" title="Delete" alt="Delete">
@@ -85,7 +67,7 @@
        
         </tbody>
     </table>
-    <a href="{{ URL('/subcontractor_amount') }}" class="btn bg-red">
+    <a href="{{ URL('/subcontractors') }}" class="btn bg-red">
         <i class="fa fa-arrow-left"> Back</i>
     </a>
 @endsection

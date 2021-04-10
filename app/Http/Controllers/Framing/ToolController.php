@@ -11,7 +11,7 @@ use DB;
 use App\Additional;
 use App\Tool;
 use App\Payment;
-use App\House;
+use App\Subcontractor;
 
 class ToolController extends Controller
 {
@@ -29,21 +29,21 @@ class ToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($house_id)
+    public function index($subcontractor_id)
     {
-        $house = House::findOrFail($house_id);
+        $subcontractor = Subcontractor::findOrFail($subcontractor_id);
        
-        $tools = Tool::where('house_id', $house_id)
+        $tools = Tool::where('subcontractor_id', $subcontractor_id)
                 ->orderBy('id', 'DESC')
                 ->get();
-        $totaltool = $tools->sum('amount');
+        $totaltools = $tools->sum('amount');
+/**
+*        $additional = Additional::where('house_id', $house_id)->sum('amount');
+*        $payment = Payment::where('subcontractor_id', $subcontractor_id)->sum('amount');
 
-        $additional = Additional::where('house_id', $house_id)->sum('amount');
-        $payment = Payment::where('house_id', $house_id)->sum('amount');
-
-        $totalavailable = ($house->amount_assigned_subc + $additional) - $totaltool - $payment;
-
-        return view('framing.tools.index')->with(['house' => $house, 'tools' => $tools, 'totalavailable' => $totalavailable ]); 
+*        $totalavailable = ($house->amount_assigned_subc + $additional) - $totaltool - $payment;
+*/
+        return view('framing.tools.index')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'totaltools' => $totaltools ]); 
     }
 
     /**
@@ -51,9 +51,9 @@ class ToolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($house_id)
+    public function create($subcontractor_id)
     {
-        return view("framing.tools.create")->with(['house_id' => $house_id]);
+        return view("framing.tools.create")->with(['subcontractor_id' => $subcontractor_id]);
     }
 
     /**
@@ -62,7 +62,7 @@ class ToolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $house_id)
+    public function store(Request $request, $subcontractor_id)
     {
         $this->validator($request->all())->validate();
 
@@ -73,14 +73,14 @@ class ToolController extends Controller
             'description' => $request->description,
             'date' => $request->date,
             'amount' => $request->amount,
-            'house_id' => $house_id
+            'subcontractor_id' => $subcontractor_id
           );
   
           Tool::create($data);
   
           DB::commit();
 
-          return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully saved']);
+          return redirect('/tools/'.$subcontractor_id)->with(['success' => 'Tools successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -105,11 +105,11 @@ class ToolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id, $house_id)
+    public function edit($id, $subcontractor_id)
     {
         $tool = Tool::findOrFail($id);
         
-        return view("framing.tools.edit")->with(['house_id' => $house_id, 'tool' => $tool]);
+        return view("framing.tools.edit")->with(['subcontractor_id' => $subcontractor_id, 'tool' => $tool]);
     }
 
     /**
@@ -119,7 +119,7 @@ class ToolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, $house_id)
+    public function update(Request $request, $id, $subcontractor_id)
     {
         $this->validator($request->all())->validate();
 
@@ -134,7 +134,7 @@ class ToolController extends Controller
   
           DB::commit();
 
-          return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully edit']);
+          return redirect('/tools/'.$subcontractor_id)->with(['success' => 'Tools successfully edit']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -148,11 +148,11 @@ class ToolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $house_id)
+    public function destroy($id, $subcontractor_id)
     {
 
         Tool::destroy($id);
 
-        return redirect('/tools/'.$house_id)->with(['success' => 'Tools successfully delete']);
+        return redirect('/tools/'.$subcontractor_id)->with(['success' => 'Tools successfully delete']);
     }
 }

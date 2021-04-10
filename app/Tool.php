@@ -9,7 +9,7 @@ class Tool extends Model
 
     protected $table = 'tools';
 
-    protected $fillable = ['id', 'description', 'amount', 'date', 'house_id'];
+    protected $fillable = ['id', 'description', 'amount', 'date', 'subcontractor_id'];
 
     //Relación Uno a Muchos Inversa
     public function subcontractor(){

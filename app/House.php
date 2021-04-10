@@ -19,14 +19,6 @@ class House extends Model
         return $this->hasMany('App\Order');
     }
 
-    public function payments(){
-        return $this->hasMany('App\Payment');
-    }
-
-    public function tools(){
-        return $this->hasMany('App\Tool');
-    }
-
     public function additional(){
         return $this->hasMany('App\Additional');
     }
