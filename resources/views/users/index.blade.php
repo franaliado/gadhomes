@@ -1,6 +1,17 @@
 @extends('layout')
 
 @section('content')
+
+    @if(session('success'))
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-success" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    </div>
+    </div>
+    @endif
+
     <h1>List of Users</h1>
     <br/>
     <a href="{{ url('/users/create') }}" class="btn btn-danger">
@@ -29,13 +40,13 @@
                 <th style="text-align:center;vertical-align: middle">Role</th>
                 <th style="text-align:center;vertical-align: middle">Phone</th>
                 <th style="text-align:center;vertical-align: middle">Email</th>
-                <!--<th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th> -->
+                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
 
         <tbody>
             @foreach ($users as $user)
-                @switch (strlen($user->role))
+                @switch ($user->role)
                 @case(1)
                     @php $role = "Administrator"; @endphp
                     @break
@@ -57,7 +68,7 @@
                     <td align="center">{{ $role }}</td>
                     <td align="center">{{ $user-> phone }}</td>
                     <td align="center">{{ $user-> email }}</td>
-                    <!--
+                    
                     <td align='center'> 
                         <form method="GET" action="{{ url('/users/'.$user->id. '/edit') }}">
                             @csrf
@@ -67,12 +78,21 @@
                             </button>                          
                         </form>
                     </td>
-                    
+                    <td align='center'> 
+                        <form method="GET" action="{{ url('/users/'.$user->id. '/reset') }}">
+                            @csrf
+                            {{ method_field('EDIT')}}  
+                            <button type="submit" class="btn btn-primary btn-sm" onclick="return confirm('Do you want to reset the Password for this User?')" title="Reset Password" alt="Reset Password")>
+                                <i class="fa fa-lock"> </i>
+                            </button>                          
+                        </form>
+                    </td>
+                    <!--    
                     <td align='center'>
                         <form method="post" action="{{ url('/users/'.$user->id) }}">
                             @csrf
                             {{ method_field('DELETE')}}  
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this subcontractor?')" title="Delete" alt="Delete">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this User?')" title="Delete" alt="Delete">
                                 <i class="fa fa-trash-alt"> </i>
                             </button>                          
                         </form>

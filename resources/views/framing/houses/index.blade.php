@@ -22,7 +22,7 @@
     <table id="houses-table" class="table table-striped table-bordered" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
-                <th>#</th>
+                <th style="text-align:center;vertical-align: middle">#</th>
                 <th style="text-align:left;vertical-align: middle">Address</th>
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
@@ -71,7 +71,7 @@
                 @endswitch
 
                 <tr>
-                    <td>{{ $loop->iteration }}</td>    
+                    <td align="center">{{ $loop->iteration }}</td>    
                     <td>{{ $house->address }}</td>  
                     <td align="center">{{ $house->community->name }}</td>
                     <td align="center">{{ $lot }}</td>

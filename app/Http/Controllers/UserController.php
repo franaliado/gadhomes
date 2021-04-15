@@ -56,6 +56,18 @@ class UserController extends Controller
        ]);
    }
 
+   protected function validatoredit(array $data)
+   {
+       return Validator::make($data, [
+           'name' => ['required', 'string', 'max:255'],
+           'username' => ['required', 'string', 'max:15'],
+           'position' => ['required', 'string', 'max:50'],
+           'role' => ['required', 'integer'],
+           'phone' => ['required', 'string', 'max:15'],
+           'email' => ['required', 'string', 'email', 'max:100'],
+       ]);
+   }
+
 
     /**
      * Store a newly created resource in storage.
@@ -111,7 +123,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view("users.edit")->with(['user' => $user]);
     }
 
     /**
@@ -123,9 +136,49 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validatoredit($request->all())->validate();
+
+        DB::beginTransaction();
+        try {
+
+          $user = User::find($id);
+          $user->name = $request->name;
+          $user->username = $request->username;
+          $user->position = $request->position;
+          $user->role = $request->role;
+          $user->phone = $request->phone;
+          $user->email = $request->email;
+          $user->save();
+  
+          DB::commit();
+          return redirect('/users')->with(['success' => 'User edited successfully']);
+  
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
+
+    public function reset($id)
+    {
+
+        DB::beginTransaction();
+        try {
+
+          $user = User::find($id);
+          $user->password = "$2y$10$.CbFRU7FP0S3.ozoY7mAIemmT.K81oXoaXRYTsvLLsYINFAz8EyHC";
+          $user->save();
+  
+          DB::commit();
+
+          return redirect('/users')->with(['success' => 'Password reset successfully']);
+  
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
