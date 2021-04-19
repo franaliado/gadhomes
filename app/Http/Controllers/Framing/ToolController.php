@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 use DB;
-use App\Additional;
 use App\Tool;
 use App\Payment;
 use App\Subcontractor;

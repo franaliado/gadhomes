@@ -89,7 +89,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="/resume/{{$subcontractor->id}}">
+                        <a href="/resume/{{$subcontractor->id}}/{{$total}}">
 
                             <button type="button" class="btn btn-warning btn-sm" title="Resume" alt="Resume">
                                 <i class="fa fa-clipboard-check"> </i>

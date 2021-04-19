@@ -5,31 +5,24 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\House;
-use App\Additional;
+use App\Subcontractor;
 use App\Tool;
 use App\Payment;
 use PDF;
 
 class ResumeController extends Controller
 {
-    public function index($house_id) {
-        $resume = House::select('subcontractors.name as subcontractorName', 'subcontractors.phone as subcontractorPhone', 'subcontractors.email as subcontractorEmail','community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot', 'houses.amount_assigned_subc as houseAmountAssigned')                    
-                    ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-                    ->leftJoin('community', 'community.id', 'houses.community_id')
-                    ->where('houses.id', $house_id)
+    public function index($subcontractor_id, $total) {
+        $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
-        $additional = Additional::where('house_id', $house_id)
+        $tools = Tool::where('subcontractor_id', $subcontractor_id)
                     ->orderBy('id', 'ASC')
                     ->get();
-        $tools = Tool::where('house_id', $house_id)
-                    ->orderBy('id', 'ASC')
-                    ->get();
-        $payments = Payment::where('house_id', $house_id)
+        $payments = Payment::where('subcontractor_id', $subcontractor_id)
                     ->orderBy('id', 'ASC')
                     ->get();
      
-        return view('framing.resume.index')->with(['resume' => $resume, 'additional' => $additional, 'tools' => $tools, 'payments' => $payments, 'house_id' => $house_id]);
+        return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'total' => $total]);
     }
     public function invoicePdf($id) {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
