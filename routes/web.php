@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('/users/store', 'UserController@store')->middleware('auth');
 
+Route::get('/users/password', 'UserController@password')->middleware('auth');
+
+Route::post('/users/passwordchange/{id}', 'UserController@passwordchange')->middleware('auth');
+
 Route::get('/users/{id}/reset', 'UserController@reset')->middleware('auth');
 
 Route::resource('users', 'UserController');

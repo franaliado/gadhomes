@@ -68,6 +68,12 @@ class UserController extends Controller
        ]);
    }
 
+   protected function validatorpass(array $data)
+   {
+       return Validator::make($data, [
+           'password' => ['required', 'string', 'min:8', 'confirmed'],
+       ]);
+   }
 
     /**
      * Store a newly created resource in storage.
@@ -188,5 +194,41 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function password()
+    {
+        return view("users.password");
+    }
+
+    public function passwordchange(Request $request, $id)
+    {
+        $this->validatorpass($request->all())->validate();
+
+        DB::beginTransaction();
+        try {
+            $user = User::find($id);
+            $oldpassword = $user->password;
+            $actualpassword = Hash::make($request->actualpassword); 
+            if (Hash::check($request->actualpassword, $user->password))
+            {
+                if (Hash::check($request->password, $user->password))
+                {
+                    return redirect('/users/password')->with(['error' => 'New password is the same as the old password']);
+                }else{
+                    $user->password = bcrypt($request->password);
+                    $user->save();
+                    DB::commit();
+                    return redirect('/users/password')->with(['success' => 'Password changed successfully']);
+                }
+            }else{
+                return redirect('/users/password')->with(['error' => 'Incorrect current password']);
+            }
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 }

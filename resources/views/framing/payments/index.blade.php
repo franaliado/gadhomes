@@ -2,22 +2,27 @@
 
 @section('content')
 
+    @if(session('success'))
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-success" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    </div>
+    </div>
+    @endif
+
     <h1>List of Payments</h1>
-    
     <br> 
     <b>Subcontractor: {{ $subcontractor->name }}</b>
     <br>
-
     Total Payments: {{ number_format($totalpayments, 2, '.', ',') }}</font>
-
     <br><br>
- 
 
     <a href="{{ url('/payments/'.$subcontractor->id.'/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Payment</i>
     </a> 
     <br/><br/>
-
 
     <table class="table table-light table-hover" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">

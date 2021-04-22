@@ -2,19 +2,29 @@
 
 @section('content')
 
-@switch (strlen($house->lot))
-@case(1)
-    @php $lot = "000" . $house->lot; @endphp
-    @break
-@case(2)
-    @php $lot = "00" . $house->lot; @endphp
-    @break
-@case(3)
-    @php $lot = "0" . $house->lot; @endphp
-    @break
-@default
-    @php $lot = $house->lot; @endphp
-@endswitch
+    @if(session('success'))
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-success" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    </div>
+    </div>
+    @endif
+
+    @switch (strlen($house->lot))
+    @case(1)
+        @php $lot = "000" . $house->lot; @endphp
+        @break
+    @case(2)
+        @php $lot = "00" . $house->lot; @endphp
+        @break
+    @case(3)
+        @php $lot = "0" . $house->lot; @endphp
+        @break
+    @default
+        @php $lot = $house->lot; @endphp
+    @endswitch
 
 
     <h1>List of Additional</h1> 

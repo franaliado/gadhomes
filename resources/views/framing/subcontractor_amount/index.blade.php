@@ -1,6 +1,17 @@
 @extends('layout')
 
 @section('content')
+
+    @if(session('success'))
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <div class="alert alert-success" role="alert">
+            <p>{{ session('success') }}</p>
+        </div>
+    </div>
+    </div>
+    @endif
+
     <h1>List of Houses with Subcontractors</h1>
     <br/>
     
@@ -15,7 +26,6 @@
             </button>
         </form>
     </div>
-
     <br><br>
 
     <table id="houses-table" class="table table-striped table-bordered" border='1' >

@@ -27,7 +27,7 @@
         @endif
 
 
-        <div class="form-box2" id="edit-users">
+        <div class="form-box2" id="edit-user">
         <div class="header"><b>Edit User</b></div>
         <form method="POST" action="{{ url('/users/'.$user->id) }}" enctype="multipart/form-data">
             @csrf

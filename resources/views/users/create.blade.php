@@ -12,7 +12,7 @@
           </div>
         @endif
 
-        <div class="form-box2" id="login-box">
+        <div class="form-box2" id="create-users">
             <div class="header">Register New Membership</div>
             <form method="POST" action="{{ url('/users/store') }}">
                 @csrf
