@@ -120,8 +120,8 @@ Route::post('/payments/{id}/{subcontractor_id}/update', 'Framing\PaymentControll
 
 //Resume
 
-Route::get('/resume/{subcontractor_id}/{total}', 'Framing\ResumeController@index')->middleware('auth');
+Route::get('/resume/{subcontractor_id}/{totalhouses}', 'Framing\ResumeController@index')->middleware('auth');
 
-Route::get('/resumePdf/{subcontractor_id}/{total}', 'Framing\ResumeController@invoicePdf')->middleware('auth');
+Route::get('/resumePdf/{subcontractor_id}/{totalhouses}', 'Framing\ResumeController@resumePdf')->middleware('auth');
 
 //Route::get('/search', 'HouseController@search');

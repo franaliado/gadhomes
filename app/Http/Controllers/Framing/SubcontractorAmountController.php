@@ -30,8 +30,7 @@ class SubcontractorAmountController extends Controller
             ->orWhere('community.name', 'LIKE', '%'.$query.'%')
             ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'DESC')
-            ->paginate(20);
-
+            ->get();
  
         return view('framing.subcontractor_amount.index')->with(['houses' => $houses]); 
     }

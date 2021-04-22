@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y") }}</strong></div>
-			<!--<div class="col-md-6"><a href="/resumePdf/{{ $resume->subcontractor_id }}/{{ $totalhouses }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div> -->
+			<div class="col-md-6"><a href="/resumePdf/{{ $resume->id }}/{{ $totalhouses }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
 		</div>
 		<div class="row">
 			<div class="col-md-11">

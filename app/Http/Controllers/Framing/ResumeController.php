@@ -24,20 +24,18 @@ class ResumeController extends Controller
      
         return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
     }
-    public function invoicePdf($id) {
+    public function resumePdf($subcontractor_id, $totalhouses) {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
-        $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'invoices.created_at', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
-                    ->leftJoin('invoices', 'invoices.order_id', 'orders.id')
-                    ->leftJoin('houses', 'houses.id', 'orders.house_id')
-                    ->leftJoin('community', 'community.id', 'houses.community_id')
-                    ->where('invoices.id', $id)
+        $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
-        $descriptionpos = Descriptionpo::where('order_id', $invoice->id)
+        $tools = Tool::where('subcontractor_id', $subcontractor_id)
                     ->orderBy('id', 'ASC')
                     ->get();
-        //dd($invoice);
-        //return view('framing.pdf.invoice')->with(['invoice'=>$invoice, 'logo'=>$image]);
-        $pdf = PDF::loadView('framing.pdf.invoice', ['invoice'=>$invoice, 'logo'=>$image, 'descriptions' => $descriptionpos]);
-        return $pdf->download('invoice.pdf');
+        $payments = Payment::where('subcontractor_id', $subcontractor_id)
+                    ->orderBy('id', 'ASC')
+                    ->get();
+
+        $pdf = PDF::loadView('framing.pdf.resume', ['resume'=>$resume, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
+        return $pdf->download('resume.pdf');
     }
 }
