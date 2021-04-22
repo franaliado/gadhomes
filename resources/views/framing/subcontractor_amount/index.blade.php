@@ -18,7 +18,7 @@
     <div class="col-md-8">
         <form class="form-inline ml-3">
             <a href="{{ url('/subcontractors') }}" class="btn btn-danger">
-            <i class="fa fa-plus"> Add Subcontractor</i></a>
+            <i class="fa fa-plus"> Add Subcontractor / Pay</i></a>
             <br><br>
             <input class="float-right"  size="30" type="search" name="search" placeholder="Search">
             <button type="submit" class="btn btn-navbar">
@@ -122,7 +122,6 @@
 
         </tbody>
     </table>
-    {{ $houses -> links() }}
 @endsection
 
 

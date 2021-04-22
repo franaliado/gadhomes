@@ -119,10 +119,8 @@
                 -->
                 </tr>                
             @endforeach
-
         </tbody>
     </table>
-    {{ $houses -> links() }}
 @endsection
 
 

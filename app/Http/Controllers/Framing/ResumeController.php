@@ -12,7 +12,7 @@ use PDF;
 
 class ResumeController extends Controller
 {
-    public function index($subcontractor_id, $total) {
+    public function index($subcontractor_id, $totalhouses) {
         $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
         $tools = Tool::where('subcontractor_id', $subcontractor_id)
@@ -22,7 +22,7 @@ class ResumeController extends Controller
                     ->orderBy('id', 'ASC')
                     ->get();
      
-        return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'total' => $total]);
+        return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
     }
     public function invoicePdf($id) {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));

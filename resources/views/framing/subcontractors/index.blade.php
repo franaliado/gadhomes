@@ -36,6 +36,7 @@
                 <th style="text-align:left;vertical-align: middle">Name</th>
                 <th style="text-align:center;vertical-align: middle">Phone</th>
                 <th style="text-align:center;vertical-align: middle">Email</th>
+                <th style="text-align:center;vertical-align: middle">Total Amount <br>Assigned</th>
                 <th style="text-align:center;vertical-align: middle">Total Amount <br>to Pay</th>
                 <th colspan = "4" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
@@ -71,6 +72,7 @@
 
                     @php $total = $totalhouses - $totaltools - $totalpayments; @endphp
 
+                    <td align="right">{{ number_format($totalhouses, 2, '.', ',') }}</td>
                     <td align="right">{{ number_format($total, 2, '.', ',') }}</td>
 
                     <td align='center'> 
@@ -99,7 +101,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="/resume/{{$subcontractor->id}}/{{$total}}">
+                        <a href="/resume/{{$subcontractor->id}}/{{$totalhouses}}">
 
                             <button type="button" class="btn btn-warning btn-sm" title="Resume" alt="Resume">
                                 <i class="fa fa-clipboard-check"> </i>

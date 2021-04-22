@@ -6,7 +6,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y") }}</strong></div>
-			<!--<div class="col-md-6"><a href="/resumePdf/{{ $resume->subcontractor_id }}/{{ $total }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div> -->
+			<!--<div class="col-md-6"><a href="/resumePdf/{{ $resume->subcontractor_id }}/{{ $totalhouses }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div> -->
 		</div>
 		<div class="row">
 			<div class="col-md-11">
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 
-		@php($totalgen = $total)
+		@php($totalgen = $totalhouses)
 		<div class="row">
 			<!-- Payments -->
 			<div class="col-md-6" style="float:left;">
@@ -109,7 +109,7 @@
 				<table class="table table-bordered">
 					<tr>
 						<td align="right">
-							<strong>TOTAL AMOUNT TO PAY:</strong>&emsp;&emsp;&emsp;$  {{ number_format($total, 2, '.', ',') }}
+							<strong>TOTAL AMOUNT TO PAY:</strong>&emsp;&emsp;&emsp;$  {{ number_format($totalhouses, 2, '.', ',') }}
 						</td>
 					</tr>
 					<tr>
@@ -131,7 +131,7 @@
 			</div>
 		</div>
 		<br>
-		<FONT SIZE=3>I received as: __________________________</font><br><br>
+		<FONT SIZE=3>I received: __________________________</font><br><br>
 			<FONT SIZE=3>Date: _________________________</font>
 		<br><br>
 	</div>
