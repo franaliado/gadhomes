@@ -18,6 +18,7 @@ class ExpenseController extends Controller
         return Validator::make($data, [
             'date' => 'required',
             'description' => ['string', 'max:250', 'nullable'],
+            'card' => ['required', 'sometimes'],
             'amount' => ['required'],
         ]);
     }
@@ -98,9 +99,11 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, $user_id)
     {
-        //
+        $expense = Expense::findOrFail($id);
+        
+        return view("framing.expenses.edit")->with(['expense' => $expense, 'user_id' => $user_id]);
     }
 
     /**
@@ -110,9 +113,30 @@ class ExpenseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $user_id)
     {
-        //
+        $this->validator($request->all())->validate();
+
+        DB::beginTransaction();
+        try {
+  
+          $expense = Expense::find($id);
+          $expense->type_expense = $request->type_expense;
+          $expense->date = $request->date;
+          $expense->description = $request->description;
+          $expense->type_pay = $request->type_pay;
+          $expense->card = $request->card;
+          $expense->amount = $request->amount;
+          $expense->save();
+  
+          DB::commit();
+
+          return redirect('/expenses/'.$user_id)->with(['success' => 'Expense successfully edit']);
+          
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**

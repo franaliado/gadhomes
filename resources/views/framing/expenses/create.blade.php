@@ -2,6 +2,8 @@
 
 @section('content')
 
+
+
         @if(session('error'))
         <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -26,7 +28,6 @@
         </div>
         @endif
 
-
         <div class="form-box3" id="create-expense">
         <div class="header"><b>Add New Expense</b></div>
         <form method="POST" action="{{ url('/expenses/'.$user_id.'/store') }}">
@@ -46,7 +47,7 @@
                                 <option value="1">Gas</option>
                                 <option value="2">Tools</option>
                                 <option value="3">Invoices</option>
-                                <option value="3">Others</option>
+                                <option value="4">Others</option>
                             </select>
                         </div>
                     </div>
@@ -83,7 +84,7 @@
                         <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Type Pay') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_pay" name="type_pay" class="form-control">
+                            <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
                                 <option value="1">Check</option>
                                 <option value="2">Cash</option>
                                 <option value="3">Card</option>
@@ -95,9 +96,12 @@
                         <label for="card" class="col-md-6 col-form-label text-md-right">{{ __('Card') }}</label>
     
                         <div class="col-md-12">
-                            <select id="card" name="card" class="form-control" disabled>
+                            <select id="card" name="card" class="form-control" disabled required>
+                                <option value="">---- Please Select ----</option>
                                 <option value="1">Personal`s Card</option>
-                                <option value="2">Saul`s Card</option>
+                                @if ($user_id <> 1)
+                                    <option value="2">Saul`s Card</option>
+                                @endif 
                                 <option value="3">GAD`s Card</option>
                             </select>
                         </div>
@@ -127,5 +131,17 @@
             </div>
         </form>
         </div>
+
+        <script>
+            function myFunction(selectObject) {
+                var value = selectObject.value;
+                if (value == "3") {
+                    $("#card").attr("disabled",false);
+                } else {
+                    $("#card").val("");
+                    $("#card").attr("disabled",true);
+                }
+            }
+        </script>
 
 @endsection

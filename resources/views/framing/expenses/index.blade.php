@@ -73,8 +73,11 @@
                     @case(2)
                         @php $card = "Saul`s Card"; @endphp
                         @break
-                    @default
+                    @case(3)
                         @php $card = "GAD`s Card"; @endphp
+                        @break
+                    @default
+                        @php $card = ""; @endphp
                     @endswitch
 
                     <tr>
