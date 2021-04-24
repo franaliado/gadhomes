@@ -64,7 +64,7 @@
 					@endforeach
 					@php($totalgen -= $totalpay)
 					<tr>
-						<td colspan="4">
+						<td colspan="3">
 							<p class="pull-right"><strong>Total Payments</strong>&emsp;&emsp;&emsp;$  {{ number_format($totalpay, 2, '.', ',') }}</p>
 						</td>
 					</tr>
@@ -78,8 +78,8 @@
 						<td align="center" colspan="3"><strong>TOOLS</strong></td>
 					</tr>
 					<tr>
-						<td align="left"><strong>Description</strong></td>
 						<td align="center"><strong>Date</strong></td>
+						<td align="center"><strong>Type</strong></td>
 						<td align="right"><strong>Amount</strong></td>
 					</tr>
 					@php($totaltool = 0)
@@ -93,7 +93,7 @@
 					@endforeach
 					@php($totalgen -= $totaltool)
 					<tr>
-						<td colspan="4">
+						<td colspan="3">
 							<p class="pull-right"><strong>Total Tools</strong>&emsp;&emsp;&emsp;$  {{ number_format($totaltool, 2, '.', ',') }}</p>
 						</td>
 					</tr>
