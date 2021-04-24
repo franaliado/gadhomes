@@ -190,6 +190,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
                                 <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
+                                <li><a href="/expenses/{{Auth::user()->id}}"><i class="fa fa-angle-double-right"></i> My Expenses</a></li>
                             </ul>
   
                         </li>

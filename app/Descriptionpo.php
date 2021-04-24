@@ -10,7 +10,7 @@ class Descriptionpo extends Model
 
      protected $fillable = [ 'id', 'description', 'option', 'qty_po', 'unit_price', 'order_id'];
 
-    //Relación Uno a Muchos Inversa
+    //Relación Uno a uno Inversa
     public function orders(){
         return $this->hasOne('App\Order', 'id', 'order_id');
     }

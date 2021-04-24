@@ -124,4 +124,18 @@ Route::get('/resume/{subcontractor_id}/{totalhouses}', 'Framing\ResumeController
 
 Route::get('/resumePdf/{subcontractor_id}/{totalhouses}', 'Framing\ResumeController@resumePdf')->middleware('auth');
 
-//Route::get('/search', 'HouseController@search');
+
+//Expenses
+
+Route::get('/expenses/{user_id}', 'Framing\ExpenseController@index')->middleware('auth');
+
+Route::get('/expenses/{user_id}/create', 'Framing\ExpenseController@create')->middleware('auth');
+
+Route::post('/expenses/{user_id}/store', 'Framing\ExpenseController@store')->middleware('auth');
+
+Route::delete('/expenses/{id}/{user_id}', 'Framing\ExpenseController@destroy')->middleware('auth');
+
+Route::get('/expenses/{id}/{user_id}/edit', 'Framing\ExpenseController@edit')->middleware('auth');
+
+Route::post('/expenses/{id}/{user_id}/update', 'Framing\ExpenseController@update')->middleware('auth');
+

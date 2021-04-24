@@ -73,13 +73,10 @@ class DescriptionController extends Controller
                 'order_id' => $order_id
             );
 
-            $PO = Descriptionpo::create($data);  
+            Descriptionpo::create($data);  
             DB::commit();
           
-
-            $orders = Order::findOrFail($order_id);
-            $descriptionpos = Descriptionpo::where('order_id', $orders->id)->get();
-            return view('framing.descriptionpo.index')->with(['orders' => $orders, 'house_id' => $house_id, 'descriptionpos' => $descriptionpos]); 
+            return redirect('/descriptionpo/'.$order_id.'/'.$house_id)->with(['success' => 'Description successfully saved']);
 
         }catch (\Exception $e) {
             DB::rollback();
@@ -135,10 +132,8 @@ class DescriptionController extends Controller
   
           DB::commit();
 
-          $orders = Order::findOrFail($order_id);
-          $descriptionpos = Descriptionpo::where('order_id', $orders->id)->get();
-          return view('framing.descriptionpo.index')->with(['orders' => $orders, 'house_id' => $house_id, 'descriptionpos' => $descriptionpos]); 
-
+          return redirect('/descriptionpo/'.$order_id.'/'.$house_id)->with(['success' => 'Description successfully edit']);
+          
         }catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -154,9 +149,6 @@ class DescriptionController extends Controller
     public function destroy($id, $order_id, $house_id)
     {
         Descriptionpo::destroy($id);
-
-        $orders = Order::findOrFail($order_id);
-        $descriptionpos = Descriptionpo::where('order_id', $orders->id)->get();
-        return view('framing.descriptionpo.index')->with(['orders' => $orders, 'house_id' => $house_id, 'descriptionpos' => $descriptionpos]);  
+        return redirect('/descriptionpo/'.$order_id.'/'.$house_id)->with(['success' => 'Description successfully delete']);
     }
 }

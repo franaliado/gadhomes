@@ -81,7 +81,7 @@ class OrderController extends Controller
                 'order_id' => $PO->id
             );
 
-            $PO = Invoice::create($data_invoice);
+            Invoice::create($data_invoice);
             DB::commit();
             
             return redirect('/orders/'.$id)->with(['success' => 'Order successfully saved']);
@@ -123,7 +123,7 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, $house_id)
     {
 
     $this->validator($request->all())->validate();
@@ -140,11 +140,8 @@ class OrderController extends Controller
   
           DB::commit();
 
-          $orders = Order::where('house_id', $request->house_id)->get();
-          $house = House::findOrFail($request->house_id);
-          
-          return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
- 
+          return redirect('/orders/'.$house_id)->with(['success' => 'Order successfully edit']);
+
         }catch (\Exception $e) {
             DB::rollback();
             return redirect()->back()->with(['error' => $e->getMessage()]);
