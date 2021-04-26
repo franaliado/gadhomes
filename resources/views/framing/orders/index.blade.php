@@ -105,8 +105,6 @@
                 </tr>
             @endif   
        
-
-
         </tbody>
     </table>
     <a href="{{ URL('/houses') }}" class="btn bg-red">

@@ -46,7 +46,7 @@
                         @php $type_expense = "Gas"; @endphp
                         @break
                     @case(2)
-                        @php $type_expense = "Tools"; @endphp
+                        @php $type_expense = "Tools-Materials"; @endphp
                         @break
                     @case(3)
                         @php $type_expense = "Invoices"; @endphp

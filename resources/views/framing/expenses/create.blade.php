@@ -45,7 +45,7 @@
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control">
                                 <option value="1">Gas</option>
-                                <option value="2">Tools</option>
+                                <option value="2">Tools-Materials</option>
                                 <option value="3">Invoices</option>
                                 <option value="4">Others</option>
                             </select>

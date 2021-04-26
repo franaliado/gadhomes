@@ -43,7 +43,7 @@
                             <div class="col-md-12">
                                 <select id="type_expense" name="type_expense" class="form-control">
                                     <option value="1" {{ $expense->type_expense == 1  ? 'selected' : '' }}>Gas</option>
-                                    <option value="2" {{ $expense->type_expense == 2  ? 'selected' : '' }}>Tools</option>
+                                    <option value="2" {{ $expense->type_expense == 2  ? 'selected' : '' }}>Tools-Materials</option>
                                     <option value="3" {{ $expense->type_expense == 3  ? 'selected' : '' }}>Invoices</option>
                                     <option value="4" {{ $expense->type_expense == 4  ? 'selected' : '' }}>Others</option>
                                 </select>
