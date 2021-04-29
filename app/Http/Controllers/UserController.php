@@ -65,6 +65,7 @@ class UserController extends Controller
            'role' => ['required', 'integer'],
            'phone' => ['required', 'string', 'max:15'],
            'email' => ['required', 'string', 'email', 'max:100'],
+           'active' => ['required', 'integer'],
        ]);
    }
 
@@ -154,6 +155,7 @@ class UserController extends Controller
           $user->role = $request->role;
           $user->phone = $request->phone;
           $user->email = $request->email;
+          $user->active = $request->active;
           $user->save();
   
           DB::commit();

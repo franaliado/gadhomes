@@ -117,6 +117,17 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('Active') }}</label>
+
+                        <div class="col-md-12">
+                            <select id="active" name="active" class="form-control">
+                                <option value="0" {{ $user->active == 0  ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ $user->active == 1  ? 'selected' : '' }}>Yes</option>
+                            </select>
+                        </div>
+                    </div>
             </div>
             
 

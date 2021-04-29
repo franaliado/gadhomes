@@ -40,6 +40,7 @@
                 <th style="text-align:center;vertical-align: middle">Role</th>
                 <th style="text-align:center;vertical-align: middle">Phone</th>
                 <th style="text-align:center;vertical-align: middle">Email</th>
+                <th style="text-align:center;vertical-align: middle">Active</th>
                 <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>
         </thead>
@@ -60,6 +61,14 @@
                     @php $role = "Vendor"; @endphp
                 @endswitch
 
+                @switch ($user->active)
+                @case(1)
+                    @php $active = "Yes"; @endphp
+                    @break
+                @default
+                    @php $active = "No"; @endphp
+                @endswitch
+
                 <tr>
                     <td>{{ $loop->iteration }}</td>    
                     <td>{{ $user-> name }}</td>  
@@ -68,6 +77,7 @@
                     <td align="center">{{ $role }}</td>
                     <td align="center">{{ $user-> phone }}</td>
                     <td align="center">{{ $user-> email }}</td>
+                    <td align="center">{{ $active }}</td>
                     
                     <td align='center'> 
                         <form method="GET" action="{{ url('/users/'.$user->id. '/edit') }}">
@@ -87,17 +97,6 @@
                             </button>                          
                         </form>
                     </td>
-                    <!--    
-                    <td align='center'>
-                        <form method="post" action="{{ url('/users/'.$user->id) }}">
-                            @csrf
-                            {{ method_field('DELETE')}}  
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this User?')" title="Delete" alt="Delete">
-                                <i class="fa fa-trash-alt"> </i>
-                            </button>                          
-                        </form>
-                    </td>
-                    -->
                 </tr>                
             @endforeach
 

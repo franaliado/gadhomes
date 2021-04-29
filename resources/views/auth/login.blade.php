@@ -26,7 +26,15 @@
             
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
-            
+                    @if(session('error'))
+                    <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="alert alert-danger" role="alert">
+                            <p>{{ session('error') }}</p>
+                        </div>
+                    </div>
+                    </div>
+                    @endif            
                     <div class="body bg-gray">
                         <p><a href="#">Please enter your User Name and Password</a></p>
             
