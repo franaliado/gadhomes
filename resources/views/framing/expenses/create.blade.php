@@ -40,14 +40,16 @@
    
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Type Expense') }}</label>
+                        <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Expenses') }}</label>
     
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control">
                                 <option value="1">Gas</option>
                                 <option value="2">Tools-Materials</option>
-                                <option value="3">Invoices</option>
-                                <option value="4">Others</option>
+                                <option value="3">Bills</option>
+                                <option value="4">Foods</option>
+                                <option value="5">Hotels</option>
+                                <option value="6">Others</option>
                             </select>
                         </div>
                     </div>
@@ -81,7 +83,7 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Type Pay') }}</label>
+                        <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Payment Type') }}</label>
     
                         <div class="col-md-12">
                             <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">

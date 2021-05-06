@@ -191,21 +191,20 @@
                                 <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
                                 <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
                                 <li><a href="/expenses/{{Auth::user()->id}}"><i class="fa fa-angle-double-right"></i> My Expenses</a></li>
+                                <li class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-angle-double-right"></i> <span>Reports</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expense Report</a></li>
+                                       
+                                    </ul>
+                                </li>
                             </ul>
   
                         </li>
 
-
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-table"></i> <span>Reports</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="pages/tables/simple.html"><i class="fa fa-angle-double-right"></i> Simple tables</a></li>
-                                <li><a href="pages/tables/data.html"><i class="fa fa-angle-double-right"></i> Data tables</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </section>
                 <!-- /.sidebar -->

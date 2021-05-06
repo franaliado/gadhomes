@@ -139,3 +139,6 @@ Route::get('/expenses/{id}/{user_id}/edit', 'Framing\ExpenseController@edit')->m
 
 Route::post('/expenses/{id}/{user_id}/update', 'Framing\ExpenseController@update')->middleware('auth');
 
+//Reports
+
+Route::get('/rep_expenses', 'Framing\ReportsController@rep_expenses')->middleware('auth');

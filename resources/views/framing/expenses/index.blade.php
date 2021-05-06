@@ -26,10 +26,10 @@
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
                 <th style="text-align:center;vertical-align: middle">#</th>
-                <th style="text-align:center;vertical-align: middle">Type Expense</th>
+                <th style="text-align:center;vertical-align: middle">Expenses</th>
                 <th style="text-align:center;vertical-align: middle">Date</th>
                 <th style="text-align:center;vertical-align: middle">Description</th>
-                <th style="text-align:center;vertical-align: middle">Type Pay</th>
+                <th style="text-align:center;vertical-align: middle">Payment Type</th>
                 <th style="text-align:center;vertical-align: middle">Card</th>
                 <th style="text-align:center;vertical-align: middle">Amount</th>
                 <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
@@ -49,7 +49,13 @@
                         @php $type_expense = "Tools-Materials"; @endphp
                         @break
                     @case(3)
-                        @php $type_expense = "Invoices"; @endphp
+                        @php $type_expense = "Bills"; @endphp
+                        @break
+                    @case(4)
+                        @php $type_expense = "Foods"; @endphp
+                        @break
+                    @case(5)
+                        @php $type_expense = "Hotels"; @endphp
                         @break
                     @default
                         @php $type_expense = "Others"; @endphp

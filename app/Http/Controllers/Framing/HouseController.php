@@ -30,6 +30,7 @@ class HouseController extends Controller
             ->leftJoin('community', 'community.id', 'houses.community_id')
             ->where('houses.address', 'LIKE', '%'.$query.'%')
             ->orWhere('houses.lot', 'LIKE', '%'.$query.'%')
+            ->orWhere('houses.status', 'LIKE', '%'.$query.'%')
             ->orWhere('community.name', 'LIKE', '%'.$query.'%')
             ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
             ->orderBy('id', 'DESC')

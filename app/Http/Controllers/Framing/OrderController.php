@@ -18,7 +18,7 @@ class OrderController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'num_po' => ['required', 'integer'],
+            'num_po' => ['required', 'integer', 'unique:orders'],
             'date_order' => ['required'],
             'name_Superint' => ['required', 'string', 'max:50'],
             'phone_Superint' => ['required', 'string', 'max:15'],
