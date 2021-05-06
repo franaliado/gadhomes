@@ -197,7 +197,7 @@
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
-                                        <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expense Report</a></li>
+                                        <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expenses Report</a></li>
                                        
                                     </ul>
                                 </li>
