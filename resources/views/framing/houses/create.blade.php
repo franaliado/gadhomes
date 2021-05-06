@@ -86,9 +86,9 @@
     
                         <div class="col-md-12">
                             <select id="status" name="status" class="form-control">
-                                <option value="1">Started</option>
-                                <option value="2">Billed</option>
-                                <option value="3">Paid</option>
+                                <option value="Started">Started</option>
+                                <option value="Billed">Billed</option>
+                                <option value="Paid">Paid</option>
                             </select>
                         </div>
                     </div>

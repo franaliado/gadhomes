@@ -84,9 +84,9 @@
     
                         <div class="col-md-12">
                             <select id="status" name="status" class="form-control">
-                                <option value="1" {{ $house->status == 1  ? 'selected' : '' }}>Started</option>
-                                <option value="2" {{ $house->status == 2  ? 'selected' : '' }}>Billed</option>
-                                <option value="3" {{ $house->status == 3  ? 'selected' : '' }}>Paid</option>
+                                <option value="Started" {{ $house->status == Started  ? 'selected' : '' }}>Started</option>
+                                <option value="Billed" {{ $house->status == Billed  ? 'selected' : '' }}>Billed</option>
+                                <option value="Paid" {{ $house->status == Paid  ? 'selected' : '' }}>Paid</option>
                             </select>
                         </div>
                     </div>

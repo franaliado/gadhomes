@@ -85,7 +85,7 @@
                     <td>{{ $house->address }}</td>  
                     <td align="center">{{ $house->community->name }}</td>
                     <td align="center">{{ $lot }}</td>
-                    <td align="center">{{ $status }}</td>
+                    <td align="center">{{ $house->status }}</td>
                     <td align="center">{{date("m-d-Y", strtotime($house->start_date))}}</td>
                     <td align="center">{{ $withoutpo }}</td>
                     <td align="left">{{ $house->subcontractor->name }}</td>
