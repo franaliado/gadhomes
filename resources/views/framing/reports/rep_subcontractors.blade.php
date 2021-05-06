@@ -27,8 +27,8 @@
         @endif
 
 
-        <div class="form-box3" id="report-expenses">
-        <div class="header"><b>Report of Expenses</b></div>
+        <div class="form-box3" id="report-subcontractors">
+        <div class="header"><b>Report of Subcontractors</b></div>
         <form method="POST" action="{{ url('/houses') }}">
             @csrf
 
@@ -39,50 +39,19 @@
    
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="user" class="col-md-6 col-form-label text-md-right">{{ __('User') }}</label>
+                        <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
     
                         <div class="col-md-12">
-                            <select id="user" name="user" class="form-control" required>
+                            <select id="subcontractor" name="subcontractor" class="form-control" required>
                                 <option value="0">All</option>
-                                @foreach($users as $user)
-                                    <option value="{{ $user->id }}" "{{ old('user') == $user->id ? 'selected': "" }}"> {{ $user->name }} </option>
+                                @foreach($subcontractors as $subcontractor)
+                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
                                 @endforeach
                             </select>
 
                         </div>
-                    </div>  
-
-                    <div class="form-group row col-md-4">
-                        <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Expenses') }}</label>
-    
-                        <div class="col-md-12">
-                            <select id="type_expense" name="type_expense" class="form-control">
-                                <option value="0">All</option>
-                                <option value="1">Gas</option>
-                                <option value="2">Tools-Materials</option>
-                                <option value="3">Bills</option>
-                                <option value="4">Foods</option>
-                                <option value="5">Hotels</option>
-                                <option value="6">Others</option>
-                            </select>
-                        </div>
-                    </div>  
-                    
-                    <div class="form-group row col-md-4">
-                        <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Payment Type') }}</label>
-    
-                        <div class="col-md-12">
-                            <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
-                                <option value="0">All</option>
-                                <option value="1">Check</option>
-                                <option value="2">Cash</option>
-                                <option value="3">Card</option>
-                            </select>
-                        </div>
                     </div>
-                </div>
 
-                <div class="row g-3">
                     <div class="form-group row col-md-4">
                         <label for="date_from" class="col-md-6 col-form-label text-md-right">{{ __('From') }}</label>
                         <div class="col-md-12">
@@ -107,7 +76,8 @@
                                 </span>
                             @enderror
                         </div>
-                    </div>
+                    </div> 
+                    
                 </div>
 
             <div class="footer">
@@ -120,5 +90,18 @@
             </div>
         </form>
         </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#date_from').datepicker();
+        });
+        ");
+        
+        $objResponse->addScript("
+        $(document).ready(function() {
+            $('#date_until').datepicker();
+        });
+        ");
+    </script>
 
 @endsection

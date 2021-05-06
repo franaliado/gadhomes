@@ -41,58 +41,13 @@
             @if (count($expenses) > 0)
                 @foreach ($expenses as $expense)
 
-                    @switch ($expense->type_expense)
-                    @case(1)
-                        @php $type_expense = "Gas"; @endphp
-                        @break
-                    @case(2)
-                        @php $type_expense = "Tools-Materials"; @endphp
-                        @break
-                    @case(3)
-                        @php $type_expense = "Bills"; @endphp
-                        @break
-                    @case(4)
-                        @php $type_expense = "Foods"; @endphp
-                        @break
-                    @case(5)
-                        @php $type_expense = "Hotels"; @endphp
-                        @break
-                    @default
-                        @php $type_expense = "Others"; @endphp
-                    @endswitch
-
-                    @switch ($expense->type_pay)
-                    @case(1)
-                        @php $type_pay = "Check"; @endphp
-                        @break
-                    @case(2)
-                        @php $type_pay = "Cash"; @endphp
-                        @break
-                    @default
-                        @php $type_pay = "Card"; @endphp
-                    @endswitch
-
-                    @switch ($expense->card)
-                    @case(1)
-                        @php $card = "Personal`s Card"; @endphp
-                        @break
-                    @case(2)
-                        @php $card = "Saul`s Card"; @endphp
-                        @break
-                    @case(3)
-                        @php $card = "GAD`s Card"; @endphp
-                        @break
-                    @default
-                        @php $card = ""; @endphp
-                    @endswitch
-
-                    <tr>
+                     <tr>
                         <td align="center">{{ $loop->iteration }}</td>  
-                        <td align="center">{{ $type_expense }}</td>
+                        <td align="center">{{ $expense->type_expense }}</td>
                         <td align="center">{{date("m-d-Y", strtotime($expense->date))}}</td>
                         <td align="left">{{ $expense->description }}</td>
-                        <td align="center">{{ $type_pay }}</td>
-                        <td align="center">{{ $card }}</td>
+                        <td align="center">{{ $expense->type_pay }}</td>
+                        <td align="center">{{ $expense->card }}</td>
                         <td align="right">{{ number_format($expense->amount, 2, '.', ',') }}</td>
 
                         <td align='center'> 

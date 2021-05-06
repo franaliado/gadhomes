@@ -197,8 +197,9 @@
                                         <i class="fa fa-angle-left pull-right"></i>
                                     </a>
                                     <ul class="treeview-menu">
+                                        <li><a href="/rep_houses"><i class="fa fa-angle-double-right"></i> Houses Report</a></li>
+                                        <li><a href="/rep_subcontractors"><i class="fa fa-angle-double-right"></i> Subcontractors Report</a></li>
                                         <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expenses Report</a></li>
-                                       
                                     </ul>
                                 </li>
                             </ul>

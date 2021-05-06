@@ -42,12 +42,12 @@
         
                             <div class="col-md-12">
                                 <select id="type_expense" name="type_expense" class="form-control">
-                                    <option value="1" {{ $expense->type_expense == 1  ? 'selected' : '' }}>Gas</option>
-                                    <option value="2" {{ $expense->type_expense == 2  ? 'selected' : '' }}>Tools-Materials</option>
-                                    <option value="3" {{ $expense->type_expense == 3  ? 'selected' : '' }}>Bills</option>
-                                    <option value="4" {{ $expense->type_expense == 4  ? 'selected' : '' }}>Foods</option>
-                                    <option value="3" {{ $expense->type_expense == 5  ? 'selected' : '' }}>Hotels</option>
-                                    <option value="4" {{ $expense->type_expense == 6  ? 'selected' : '' }}>Others</option>
+                                    <option value="Gas" {{ $expense->type_expense == "Gas"  ? 'selected' : '' }}>Gas</option>
+                                    <option value="Tools-Materials" {{ $expense->type_expense == "Tools-Materials"  ? 'selected' : '' }}>Tools-Materials</option>
+                                    <option value="Bills" {{ $expense->type_expense == "Bills"  ? 'selected' : '' }}>Bills</option>
+                                    <option value="Foods" {{ $expense->type_expense == "Foods"  ? 'selected' : '' }}>Foods</option>
+                                    <option value="Hotels" {{ $expense->type_expense == "Hotels"  ? 'selected' : '' }}>Hotels</option>
+                                    <option value="Others" {{ $expense->type_expense == "Others"  ? 'selected' : '' }}>Others</option>
                                 </select>
                             </div>
                         </div>
@@ -85,9 +85,9 @@
         
                             <div class="col-md-12">
                                 <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
-                                    <option value="1" {{ $expense->type_pay == 1  ? 'selected' : '' }}>Check</option>
-                                    <option value="2" {{ $expense->type_pay == 2  ? 'selected' : '' }}>Cash</option>
-                                    <option value="3" {{ $expense->type_pay == 3  ? 'selected' : '' }}>Card</option>
+                                    <option value="Check" {{ $expense->type_pay == "Check"  ? 'selected' : '' }}>Check</option>
+                                    <option value="Cash" {{ $expense->type_pay == "Cash"  ? 'selected' : '' }}>Cash</option>
+                                    <option value="Card" {{ $expense->type_pay == "Card"  ? 'selected' : '' }}>Card</option>
                                 </select>
                             </div>
                         </div>
@@ -98,11 +98,11 @@
                             <div class="col-md-12">
                                 <select id="card" name="card" class="form-control" disabled required>
                                     <option value="">---- Please Select ----</option>
-                                    <option value="1" {{ $expense->card == 1  ? 'selected' : '' }}>Personal`s Card</option>
+                                    <option value="Personal`s Card" {{ $expense->card == "Personal`s Card"  ? 'selected' : '' }}>Personal`s Card</option>
                                     @if ($user_id <> 1)
-                                        <option value="2" {{ $expense->card == 2  ? 'selected' : '' }}>Saul`s Card</option>
+                                        <option value="Saul`s Card" {{ $expense->card == "Saul`s Card"  ? 'selected' : '' }}>Saul`s Card</option>
                                     @endif 
-                                    <option value="3" {{ $expense->card == 3  ? 'selected' : '' }}>GAD`s Card</option>
+                                    <option value="GAD`s Card" {{ $expense->card == "GAD`s Card"  ? 'selected' : '' }}>GAD`s Card</option>
                                 </select>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
         <script>
             function myFunction(selectObject) {
                 var value = selectObject.value;
-                if (value == "3") {
+                if (value == "Card") {
                     $("#card").attr("disabled",false);
                 } else {
                     $("#card").val("");
@@ -145,7 +145,7 @@
 
             function Verificar_Card() {
                 var select = document.getElementById("type_pay");
-                if (select.value == "3"){
+                if (select.value == "Card"){
                     $("#card").attr("disabled",false);
                 }
             }

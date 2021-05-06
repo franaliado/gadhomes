@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\User;
-use App\Order;
-use App\Descriptionpo;
+use App\Community;
+use App\Subcontractor;
 use PDF;
 
 
@@ -18,6 +18,19 @@ class ReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function rep_houses()
+    {
+        $communitys = Community::orderBy('name', 'ASC')->get();
+        $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+        return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
+    }
+
+    public function rep_subcontractors()
+    {
+        $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+        return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors]);
+    }
+
     public function rep_expenses()
     {
         $users = User::orderBy('name', 'ASC')->get();

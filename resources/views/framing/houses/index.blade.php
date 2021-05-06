@@ -47,17 +47,6 @@
         <tbody>
             @foreach ($houses as $house)
 
-                @switch ($house->status)
-                    @case(1)
-                        @php $status = "Started"; @endphp
-                        @break
-                    @case(2)
-                        @php $status = "Billed"; @endphp
-                        @break
-                    @default
-                        @php $status = "Paid"; @endphp
-                @endswitch
-
                 @switch ($house->withoutpo)
                     @case(0)
                         @php $withoutpo = "No"; @endphp

@@ -44,12 +44,12 @@
     
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control">
-                                <option value="1">Gas</option>
-                                <option value="2">Tools-Materials</option>
-                                <option value="3">Bills</option>
-                                <option value="4">Foods</option>
-                                <option value="5">Hotels</option>
-                                <option value="6">Others</option>
+                                <option value="Gas">Gas</option>
+                                <option value="Tools-Materials">Tools-Materials</option>
+                                <option value="Bills">Bills</option>
+                                <option value="Foods">Foods</option>
+                                <option value="Hotels">Hotels</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
                     </div>
@@ -87,9 +87,9 @@
     
                         <div class="col-md-12">
                             <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
-                                <option value="1">Check</option>
-                                <option value="2">Cash</option>
-                                <option value="3">Card</option>
+                                <option value="Check">Check</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
                             </select>
                         </div>
                     </div>
@@ -100,11 +100,11 @@
                         <div class="col-md-12">
                             <select id="card" name="card" class="form-control" disabled required>
                                 <option value="">---- Please Select ----</option>
-                                <option value="1">Personal`s Card</option>
+                                <option value="Personal`s Card">Personal`s Card</option>
                                 @if ($user_id <> 1)
-                                    <option value="2">Saul`s Card</option>
+                                    <option value="Saul`s Card">Saul`s Card</option>
                                 @endif 
-                                <option value="3">GAD`s Card</option>
+                                <option value="GAD`s Card">GAD`s Card</option>
                             </select>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
         <script>
             function myFunction(selectObject) {
                 var value = selectObject.value;
-                if (value == "3") {
+                if (value == "Card") {
                     $("#card").attr("disabled",false);
                 } else {
                     $("#card").val("");

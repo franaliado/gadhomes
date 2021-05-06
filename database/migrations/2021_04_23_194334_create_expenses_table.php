@@ -15,11 +15,11 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->id();
-            $table->integer('type_expense');
+            $table->string('type_expense', 20);
             $table->date('date');
             $table->string('description', 250)->nullable();
-            $table->integer('type_pay');
-            $table->integer('card')->nullable();
+            $table->string('type_pay', 5);
+            $table->string('card', 15)->nullable();
             $table->decimal('amount', 8, 2);
             $table->unsignedBigInteger('user_id');
 
