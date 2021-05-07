@@ -72,7 +72,6 @@ class HouseController extends Controller
             'start_date' => $request->start_date,
             'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,
             'subcontractor_id' => $request->subcontractor,
-            /**'amount_assigned_subc' => $request->amount_assigned_subc */
           );
   
           House::create($data);
@@ -121,38 +120,44 @@ class HouseController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $this->validate($request, [
-            'address' => 'required|string|max:150',
-            'community' => 'unique:houses,community_id,NULL,id,lot,' . $request->lot,
-            'lot' => 'required|integer',
-            'start_date' => 'required',
-            'subcontractor' => 'required',
-        ],[
-            'community.unique' => 'This house already exists'
-        ]);
-
-      DB::beginTransaction();
-      try {
-
+        $community = Community::find($request->community);
         $house = House::find($id);
-        $house->address = $request->address;
-        $house->community_id = $request->community;
-        $house->lot = $request->lot;
-        $house->status = $request->status;
-        $house->start_date = $request->start_date;
-        $house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0;
-        $house->subcontractor_id = $request->subcontractor;
-        /**$house->amount_assigned_subc = $request->amount_assigned_subc;*/
-        $house->save();
+        if ($house->community_id == $request->community and $house->lot == $request->lot){
+            $this->validate($request, [
+                'address' => 'required|string|max:150',
+                'lot' => 'required|integer',
+                'start_date' => 'required',
+                'subcontractor' => 'required',
+            ]);
+        }else{
+            $this->validate($request, [
+                'address' => 'required|string|max:150',
+                'community' => 'unique:houses,community_id,NULL,id,lot,' . $request->lot,
+                'lot' => 'required|integer',
+                'start_date' => 'required',
+                'subcontractor' => 'required',
+            ],[
+                'community.unique' => 'The house located in the ' . $community->name . ' community and lot '. $request->lot .' already exists'
+            ]);
+        }
+        DB::beginTransaction();
+        try {
+            $house->address = $request->address;
+            $house->community_id = $request->community;
+            $house->lot = $request->lot;
+            $house->status = $request->status;
+            $house->start_date = $request->start_date;
+            $house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0;
+            $house->subcontractor_id = $request->subcontractor;
+            $house->save();
 
-        DB::commit();
-        return redirect('/houses')->with(['success' => 'House edited successfully']);
+            DB::commit();
+            return redirect('/houses')->with(['success' => 'House edited successfully']);
 
-      }catch (\Exception $e) {
-          DB::rollback();
-          return redirect()->back()->with(['error' => $e->getMessage()]);
-      }
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
