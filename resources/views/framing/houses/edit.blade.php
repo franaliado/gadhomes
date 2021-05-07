@@ -2,30 +2,19 @@
 
 @section('content')
 
-        @if(session('error'))
+        @if($errors->any())
         <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="alert alert-danger" role="alert">
-                <p>{{ session('error') }}</p>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
-        </div>
         @endif
-
-        @if(isset($error))
-        <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-	    <div class="alert alert-danger" role="alert">
-		<ul>
-		  @foreach($errors as $error)
-                    <li>{{ $error }}</li>
-		  @endforeach
-		</ul>
-            </div>
-        </div>
-        </div>
-        @endif
-
 
         <div class="form-box3" id="edit-houses">
         <div class="header"><b>Edit House</b></div>

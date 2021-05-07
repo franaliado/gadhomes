@@ -2,30 +2,19 @@
 
 @section('content')
 
-        @if(session('error'))
+        @if($errors->any())
         <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="alert alert-danger" role="alert">
-                <p>{{ session('error') }}</p>
+            <div class="col-md-10 col-md-offset-1">
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                    @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                    @endforeach
+                    </ul>
+                </div>
             </div>
         </div>
-        </div>
         @endif
-
-        @if(isset($error))
-        <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-	    <div class="alert alert-danger" role="alert">
-		<ul>
-		  @foreach($errors as $error)
-                    <li>{{ $error }}</li>
-		  @endforeach
-		</ul>
-            </div>
-        </div>
-        </div>
-        @endif
-
 
         <div class="form-box3" id="create-houses">
         <div class="header"><b>Add New House</b></div>
@@ -55,10 +44,10 @@
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
     
                         <div class="col-md-12">
-                            <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
+                            <select id="community" name="community" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($communitys as $community)
-                                    <option value="{{ $community->id }}"> 
+                                    <option value="{{ $community->id }}" {{ old('community') == $community->id ? 'selected' : '' }}> 
                                          {{ $community->name }} 
                                     </option>
                                 @endforeach
@@ -125,25 +114,13 @@
                             <select id="subcontractor" name="subcontractor" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($subcontractors as $subcontractor)
-                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
+                                    <option value="{{ $subcontractor->id }}" {{ old('subcontractor') == $subcontractor->id ? 'selected': '' }}> {{ $subcontractor->name }} </option>
                                 @endforeach
                             </select>
 
                         </div>
                     </div>
 
-                    <div class="form-group row col-md-4">
-            <!--            <label for="amount_assigned_subc" class="col-md-12 col-form-label text-md-right">{{ __('Amount Assigned SubContractor') }}</label>
-            -->            <div class="col-md-12">
-            <!--                <input id="amount_assigned_subc" type="number" step="0.01" style="text-align:right;" class="form-control @error('amount_assigned_subc') is-invalid @enderror" name="amount_assigned_subc" value="{{ old('amount_assigned_subc'), 0 }}" autocomplete="amount_assigned_subc" autofocus placeholder="0.00">
-            -->
-                            @error('amount_assigned_subc')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
                 </div>
 
             <div class="footer">
