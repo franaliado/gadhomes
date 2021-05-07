@@ -16,9 +16,9 @@ class SubcontractorController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:50'],
-            'phone' => ['required', 'string', 'max:15'],
-            'email' => ['required', 'string', 'email', 'max:100'],
+            'name' => ['required', 'string', 'max:50', 'unique:subcontractors'],
+            'phone' => ['required', 'string', 'max:15', 'unique:subcontractors'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:subcontractors'],
         ]);
     }
     /**

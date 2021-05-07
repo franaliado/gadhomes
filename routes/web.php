@@ -146,3 +146,4 @@ Route::get('/rep_houses', 'Framing\ReportsController@rep_houses')->middleware('a
 Route::get('/rep_subcontractors', 'Framing\ReportsController@rep_subcontractors')->middleware('auth');
 
 Route::get('/rep_expenses', 'Framing\ReportsController@rep_expenses')->middleware('auth');
+Route::post('/rep_expenses/report', 'Framing\ReportsController@rep_expenses_report')->middleware('auth');

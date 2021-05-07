@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="report-expenses">
         <div class="header"><b>Report of Expenses</b></div>
-        <form method="POST" action="{{ url('/houses') }}">
+        <form method="POST" action="{{ url('/rep_expenses/report') }}">
             @csrf
 
             <div class="body bg-gray">
@@ -58,12 +58,12 @@
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control">
                                 <option value="0">All</option>
-                                <option value="1">Gas</option>
-                                <option value="2">Tools-Materials</option>
-                                <option value="3">Bills</option>
-                                <option value="4">Foods</option>
-                                <option value="5">Hotels</option>
-                                <option value="6">Others</option>
+                                <option value="Gas">Gas</option>
+                                <option value="Tools-Materials">Tools-Materials</option>
+                                <option value="Bills">Bills</option>
+                                <option value="Foods">Foods</option>
+                                <option value="Hotels">Hotels</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
                     </div>  
@@ -74,9 +74,9 @@
                         <div class="col-md-12">
                             <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
                                 <option value="0">All</option>
-                                <option value="1">Check</option>
-                                <option value="2">Cash</option>
-                                <option value="3">Card</option>
+                                <option value="Check">Check</option>
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
                             </select>
                         </div>
                     </div>
@@ -84,11 +84,11 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="date_from" class="col-md-6 col-form-label text-md-right">{{ __('From') }}</label>
+                        <label for="FromDate" class="col-md-6 col-form-label text-md-right">{{ __('From') }}</label>
                         <div class="col-md-12">
-                            <input id="date_from" type="date" max="date_until" class="form-control @error('date_from') is-invalid @enderror" name="date_from" value="{{ old('date_from') }}" required autocomplete="date_from" autofocus>
+                            <input id="FromDate" type="date" class="form-control @error('FromDate') is-invalid @enderror" name="FromDate" value="{{ old('FromDate') }}"  autocomplete="FromDate" autofocus>
 
-                            @error('date_from')
+                            @error('FromDate')
                                 <span class="invalid-feedback" role="alert">
                                     <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
@@ -97,11 +97,11 @@
                     </div>
 
                     <div class="form-group row col-md-4">
-                        <label for="date_until" class="col-md-6 col-form-label text-md-right">{{ __('Until') }}</label>
+                        <label for="ToDate" class="col-md-6 col-form-label text-md-right">{{ __('To') }}</label>
                         <div class="col-md-12">
-                            <input id="date_until" type="date" class="form-control @error('date_until') is-invalid @enderror" name="date_until" value="{{ old('date_until') }}" required autocomplete="date_until" autofocus>
+                            <input id="ToDate" type="date" class="form-control @error('ToDate') is-invalid @enderror" name="ToDate" value="{{ old('ToDate') }}"  autocomplete="ToDate" autofocus>
 
-                            @error('date_until')
+                            @error('ToDate')
                                 <span class="invalid-feedback" role="alert">
                                     <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
@@ -120,5 +120,11 @@
             </div>
         </form>
         </div>
+<script>
+    $('.FromDate').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+});
 
+</script>
 @endsection
