@@ -126,7 +126,12 @@ class OrderController extends Controller
     public function update(Request $request, $id, $house_id)
     {
 
-    $this->validator($request->all())->validate();
+        $this->validate($request, [
+            'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
+            'date_order' => ['required'],
+            'name_Superint' => ['required', 'string', 'max:50'],
+            'phone_Superint' => ['required', 'string', 'max:15'],
+        ]);
 
         DB::beginTransaction();
         try {

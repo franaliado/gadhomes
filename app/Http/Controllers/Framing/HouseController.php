@@ -119,8 +119,18 @@ class HouseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(HouseCreateRequest $request, $id)
+    public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'address' => 'required|string|max:150',
+            'community' => 'unique:houses,community_id,NULL,id,lot,' . $request->lot,
+            'lot' => 'required|integer',
+            'start_date' => 'required',
+            'subcontractor' => 'required',
+        ],[
+            'community.unique' => 'This house already exists'
+        ]);
 
       DB::beginTransaction();
       try {

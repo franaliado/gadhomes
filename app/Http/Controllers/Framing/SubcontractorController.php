@@ -16,7 +16,7 @@ class SubcontractorController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:50', 'unique:subcontractors'],
+            'name' => ['required', 'string', 'max:50', 'unique:subcontractors,name,'],
             'phone' => ['required', 'string', 'max:15', 'unique:subcontractors'],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:subcontractors'],
         ]);
@@ -110,7 +110,11 @@ class SubcontractorController extends Controller
     public function update(Request $request, $id)
     {
 
-        $this->validator($request->all())->validate();
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:50', 'unique:subcontractors,name,'. $id],
+            'phone' => ['required', 'string', 'max:15', 'unique:subcontractors,phone,' . $id],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:subcontractors,email,'. $id],
+        ]);
 
         DB::beginTransaction();
         try {

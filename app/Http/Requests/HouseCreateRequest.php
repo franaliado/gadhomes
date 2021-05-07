@@ -26,6 +26,7 @@ class HouseCreateRequest extends FormRequest
     public function rules()
     {
         $lot = Request::input('lot');
+        $id = Request::input('id');
         return [
             'address' => 'required|string|max:150',
             'community' => 'unique:houses,community_id,NULL,id,lot,' . $lot,

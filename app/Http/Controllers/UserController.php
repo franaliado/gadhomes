@@ -56,19 +56,6 @@ class UserController extends Controller
        ]);
    }
 
-   protected function validatoredit(array $data)
-   {
-       return Validator::make($data, [
-           'name' => ['required', 'string', 'max:255'],
-           'username' => ['required', 'string', 'max:15'],
-           'position' => ['required', 'string', 'max:50'],
-           'role' => ['required', 'integer'],
-           'phone' => ['required', 'string', 'max:15'],
-           'email' => ['required', 'string', 'email', 'max:100'],
-           'active' => ['required', 'integer'],
-       ]);
-   }
-
    protected function validatorpass(array $data)
    {
        return Validator::make($data, [
@@ -143,7 +130,15 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validatoredit($request->all())->validate();
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:15'],
+            'position' => ['required', 'string', 'max:50'],
+            'role' => ['required', 'integer'],
+            'phone' => ['required', 'string', 'max:15'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users,email,' . $id],
+            'active' => ['required', 'integer'],
+        ]);
 
         DB::beginTransaction();
         try {
