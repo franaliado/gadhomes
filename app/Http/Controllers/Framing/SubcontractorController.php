@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Subcontractor;
@@ -33,6 +34,8 @@ class SubcontractorController extends Controller
         $subcontractors = Subcontractor::where('name', 'LIKE', '%'.$query.'%')
         ->orderBy('name', 'ASC')
         ->paginate(10);
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.subcontractors.index')->with(['subcontractors' => $subcontractors]);         //
     }
 

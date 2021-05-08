@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Tool;
@@ -36,12 +37,8 @@ class ToolController extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
         $totaltools = $tools->sum('amount');
-/**
-*        $additional = Additional::where('house_id', $house_id)->sum('amount');
-*        $payment = Payment::where('subcontractor_id', $subcontractor_id)->sum('amount');
 
-*        $totalavailable = ($house->amount_assigned_subc + $additional) - $totaltool - $payment;
-*/
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.tools.index')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'totaltools' => $totaltools ]); 
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Expense;

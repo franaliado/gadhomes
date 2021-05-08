@@ -101,7 +101,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/users"><i class="fa fa-angle-double-right"></i> Users</a></li>
+                                @if (Auth::user()->role == 1)
+                                    <li><a href="/users"><i class="fa fa-angle-double-right"></i> Users</a></li>
+                                @endif
                                 <li><a href="/users/password"><i class="fa fa-angle-double-right"></i> Change My Password</a></li>
                             </ul>
                         </li>
@@ -188,20 +190,26 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
-                                <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
-                                <li><a href="/expenses/{{Auth::user()->id}}"><i class="fa fa-angle-double-right"></i> My Expenses</a></li>
-                                <li class="treeview">
-                                    <a href="#">
-                                        <i class="fa fa-angle-double-right"></i> <span>Reports</span>
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li><a href="/rep_houses"><i class="fa fa-angle-double-right"></i> Houses Report</a></li>
-                                        <li><a href="/rep_subcontractors"><i class="fa fa-angle-double-right"></i> Subcontractors Report</a></li>
-                                        <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expenses Report</a></li>
-                                    </ul>
-                                </li>
+                                @if (Auth::user()->role == 1)
+                                    <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
+                                    <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
+                                @endif
+                                @if (Auth::user()->role == 1 or Auth::user()->role == 2)
+                                    <li><a href="/expenses/{{Auth::user()->id}}"><i class="fa fa-angle-double-right"></i> My Expenses</a></li>
+                                @endif
+                                @if (Auth::user()->role == 1)
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-angle-double-right"></i> <span>Reports</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu">
+                                            <li><a href="/rep_houses"><i class="fa fa-angle-double-right"></i> Houses Report</a></li>
+                                            <li><a href="/rep_subcontractors"><i class="fa fa-angle-double-right"></i> Subcontractors Report</a></li>
+                                            <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expenses Report</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
                             </ul>
   
                         </li>

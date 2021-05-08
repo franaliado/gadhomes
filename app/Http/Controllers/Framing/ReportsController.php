@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Auth;
 
 use App\User;
 use App\Community;
@@ -23,16 +24,20 @@ class ReportsController extends Controller
     {
         $communitys = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
 
     public function rep_subcontractors()
     {
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors]);
     }
 
-        protected function validator_date(array $data)
+    protected function validator_date(array $data)
     {
         return Validator::make($data, [
             'FromDate' => 'before_or_equal:ToDate',
@@ -43,6 +48,8 @@ class ReportsController extends Controller
     public function rep_expenses()
     {
         $users = User::orderBy('name', 'ASC')->get();
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_expenses')->with(['users' => $users]);
     }
 

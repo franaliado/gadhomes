@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Auth;
+
 use Illuminate\Support\Facades\Validator;
 
 use DB;
@@ -33,7 +35,8 @@ class OrderController extends Controller
     {
         $orders = Order::select('orders.*', 'invoices.id as idInvoice')->where('house_id', $id)->leftJoin('invoices', 'invoices.order_id', 'orders.id')->get();
         $house = House::findOrFail($id);
-        //dd($orders->toArray());
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
     }
 

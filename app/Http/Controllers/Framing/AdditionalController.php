@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Additional;
@@ -38,6 +39,7 @@ class AdditionalController extends Controller
 
         $totalavailable = ($house->amount_assigned_subc + $totaladittional);
 
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totaladittional' => $totaladittional, 'totalavailable' => $totalavailable ]); 
      }
 

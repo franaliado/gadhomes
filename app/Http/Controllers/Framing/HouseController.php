@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\HouseCreateRequest;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 use DB;
 use App\House;
@@ -36,6 +37,7 @@ class HouseController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }
 

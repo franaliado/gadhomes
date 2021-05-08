@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Framing;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Auth;
 
 class CommunityController extends Controller
 {

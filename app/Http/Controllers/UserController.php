@@ -7,6 +7,8 @@ use App\User;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Auth;
+
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -24,6 +26,8 @@ class UserController extends Controller
         ->orWhere('username', 'LIKE', '%'.$query.'%')
         ->orderBy('name', 'ASC')
         ->paginate(10);
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('users.index')->with(['users' => $users]);
     }
 

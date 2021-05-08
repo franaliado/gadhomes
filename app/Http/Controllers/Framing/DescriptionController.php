@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Descriptionpo;
@@ -37,6 +38,7 @@ class DescriptionController extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
 
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.descriptionpo.index')->with(['house_id' => $house_id, 'orders' => $orders, 'descriptionpos' => $descriptionpos]); 
     }
 

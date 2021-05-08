@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Http\Request;
+use Auth;
 
 use DB;
 use App\Tool;
@@ -37,6 +38,7 @@ class PaymentController extends Controller
                 ->get();
         $totalpayments = $payments->sum('amount');
 
+        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.payments.index')->with(['subcontractor' => $subcontractor, 'payments' => $payments, 'totalpayments' => $totalpayments ]); 
     }
 
