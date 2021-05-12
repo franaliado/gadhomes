@@ -122,6 +122,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="footer">
                 <a href="{{ url('/expenses/'.$user_id) }}" class="btn bg-red">
@@ -132,6 +133,7 @@
                 </button>
             </div>
         </form>
+        </div>
         </div>
 
         <script>

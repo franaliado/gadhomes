@@ -77,6 +77,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
             <div class="footer">
                 <a href="{{ url('/tools/'.$subcontractor_id) }}" class="btn bg-red">
@@ -87,6 +88,7 @@
                 </button>
             </div>
         </form>
+        </div>
         </div>
 
 @endsection

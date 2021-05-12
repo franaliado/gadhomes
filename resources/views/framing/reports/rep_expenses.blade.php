@@ -109,7 +109,8 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            
             <div class="footer">
                 <a href="{{ URL('/home') }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
@@ -120,6 +121,8 @@
             </div>
         </form>
         </div>
+        </div>
+
 <script>
     $('.FromDate').datepicker({
     format: 'mm/dd/yyyy',

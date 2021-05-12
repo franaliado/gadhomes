@@ -120,8 +120,8 @@
 
                         </div>
                     </div>
-
                 </div>
+            </div>
 
             <div class="footer">
                 <a href="{{ URL('/houses') }}" class="btn bg-red">
@@ -133,5 +133,5 @@
             </div>
         </form>
         </div>
-
+        </div>
 @endsection

@@ -50,7 +50,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
             <div class="footer">
@@ -62,6 +61,7 @@
                 </button>
             </div>
         </form>
+        </div>
         </div>
 
 @endsection

@@ -38,7 +38,7 @@
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Status</th>
                 <th style="text-align:center;vertical-align: middle">Start Date</th>
-                <th style="text-align:center;vertical-align: middle">Without PO<t/h>
+                <th style="text-align:center;vertical-align: middle">Without PO</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
             </tr>

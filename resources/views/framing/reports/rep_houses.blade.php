@@ -29,44 +29,34 @@
 
         <div class="form-box3" id="report-houses">
         <div class="header"><b>Report of Houses</b></div>
-        <form method="POST" action="{{ url('/houses') }}">
+        <form method="GET" action="{{ url('/rep_houses_options') }}">
             @csrf
 
             <div class="body bg-gray">
 
                     <!-- Registros -->
 
-   
-                <div class="row g-3">
-                    <div class="form-group row col-md-4">
-                        <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
-    
-                        <div class="col-md-12">
-                            <select id="community" name="community" class="form-control" value="{{ old('community') }}" required>
-                                <option value="0">All</option>
-                                @foreach($communitys as $community)
-                                    <option value="{{ $community->id }}"> 
-                                         {{ $community->name }} 
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row col-md-4">
-                        <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
-    
-                        <div class="col-md-12">
-                            <select id="subcontractor" name="subcontractor" class="form-control" required>
-                                <option value="0">All</option>
-                                @foreach($subcontractors as $subcontractor)
-                                    <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
-                                @endforeach
-                            </select>
-
-                        </div>
-                    </div>
-                </div>
+                <br>
+                <table align="center">
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="1" checked>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            Order by Communities
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="2">
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Order by Subcontrators
+                            </label>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+            </div>
 
             <div class="footer">
                 <a href="{{ URL('/home') }}" class="btn bg-red">
@@ -78,18 +68,6 @@
             </div>
         </form>
         </div>
-
-    <script>
-        $(document).ready(function() {
-            $('#date_from').datepicker();
-        });
-        ");
-        
-        $objResponse->addScript("
-        $(document).ready(function() {
-            $('#date_until').datepicker();
-        });
-        ");
-    </script>
+        </div>
 
 @endsection

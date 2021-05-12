@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+            </div>
 
             <div class="footer">
                 <a href="{{ URL('/subcontractors') }}" class="btn bg-red">
@@ -89,6 +89,7 @@
                 </button>
             </div>
         </form>
+        </div>
         </div>
 
 @endsection

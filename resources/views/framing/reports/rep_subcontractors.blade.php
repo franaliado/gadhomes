@@ -77,8 +77,8 @@
                             @enderror
                         </div>
                     </div> 
-                    
                 </div>
+            </div>
 
             <div class="footer">
                 <a href="{{ URL('/home') }}" class="btn bg-red">
@@ -89,6 +89,7 @@
                 </button>
             </div>
         </form>
+        </div>
         </div>
 
     <script>

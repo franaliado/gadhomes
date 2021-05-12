@@ -22,11 +22,7 @@ class SubcontractorController extends Controller
             'email' => ['required', 'string', 'email', 'max:100', 'unique:subcontractors'],
         ]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
         $query = trim($request->get('search'));

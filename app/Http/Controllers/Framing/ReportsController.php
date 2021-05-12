@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Auth;
 
 use App\User;
+use App\House;
 use App\Community;
 use App\Subcontractor;
 use PDF;
@@ -16,9 +17,7 @@ use PDF;
 class ReportsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * HOUSES.
      */
     public function rep_houses()
     {
@@ -28,7 +27,55 @@ class ReportsController extends Controller
         if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
+  
 
+    public function rep_houses_options(Request $request) 
+    {
+
+        if ($request->rephouses == '1'){
+            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+            ->orderBy('community.name', 'ASC')
+            ->get();
+
+            if (Auth::user()->role != 1){ return redirect('/home'); }
+            return view('framing.reports.rep_houses_com')->with(['houses' => $houses]);
+
+        }else{
+            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->orderBy('subcontractors.name', 'ASC')
+            ->get();  
+            
+            if (Auth::user()->role != 1){ return redirect('/home'); }
+            return view('framing.reports.rep_houses_subc')->with(['houses' => $houses]);
+        }
+
+    }
+    
+    public function rep_houses_options_PDF($option) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        if ($option == '1'){
+            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+                ->orderBy('community.name', 'ASC')
+                ->get();
+
+            $pdf = PDF::loadView('framing.pdf.rep_houses_com', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $namepdf = 'Rep_Houses_Communities';
+        }else{
+            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->orderBy('subcontractors.name', 'ASC')
+            ->get();
+
+            $pdf = PDF::loadView('framing.pdf.rep_houses_subc', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $namepdf = 'Rep_Houses_Subcontractors';
+        }
+        return $pdf->download($namepdf.'.pdf');
+    }
+
+
+    /**
+     * SUBCONTRACTORS.
+     */
     public function rep_subcontractors()
     {
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
@@ -37,6 +84,10 @@ class ReportsController extends Controller
         return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors]);
     }
 
+
+    /**
+     * EXPENSES.
+     */
     protected function validator_date(array $data)
     {
         return Validator::make($data, [
@@ -65,69 +116,4 @@ class ReportsController extends Controller
         return view('framing.reports.rep_expenses')->with(['users' => $users]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
