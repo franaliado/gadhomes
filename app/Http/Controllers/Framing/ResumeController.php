@@ -37,7 +37,7 @@ class ResumeController extends Controller
                     ->orderBy('id', 'ASC')
                     ->get();
 
-        $pdf = PDF::loadView('framing.pdf.resume', ['resume'=>$resume, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
+        $pdf = PDF::loadView('framing.pdf.resume_pdf', ['resume'=>$resume, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
         return $pdf->download('resume.pdf');
     }
 }

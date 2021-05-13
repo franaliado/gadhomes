@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="report-expenses">
         <div class="header"><b>Report of Expenses</b></div>
-        <form method="POST" action="{{ url('/rep_expenses/report') }}">
+        <form method="POST" action="{{ url('/report_expenses') }}">
             @csrf
 
             <div class="body bg-gray">

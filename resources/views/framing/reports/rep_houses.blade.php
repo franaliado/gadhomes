@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="report-houses">
         <div class="header"><b>Report of Houses</b></div>
-        <form method="GET" action="{{ url('/rep_houses_options') }}">
+        <form method="GET" action="{{ url('/report_houses_options') }}">
             @csrf
 
             <div class="body bg-gray">

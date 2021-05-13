@@ -11,6 +11,7 @@ use App\User;
 use App\House;
 use App\Community;
 use App\Subcontractor;
+use App\Expense;
 use PDF;
 
 
@@ -29,7 +30,7 @@ class ReportsController extends Controller
     }
   
 
-    public function rep_houses_options(Request $request) 
+    public function report_houses_options(Request $request) 
     {
 
         if ($request->rephouses == '1'){
@@ -38,7 +39,7 @@ class ReportsController extends Controller
             ->get();
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.rep_houses_com')->with(['houses' => $houses]);
+            return view('framing.reports.report_houses_com')->with(['houses' => $houses]);
 
         }else{
             $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
@@ -46,9 +47,8 @@ class ReportsController extends Controller
             ->get();  
             
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.rep_houses_subc')->with(['houses' => $houses]);
+            return view('framing.reports.report_houses_subc')->with(['houses' => $houses]);
         }
-
     }
     
     public function rep_houses_options_PDF($option) 
@@ -59,14 +59,14 @@ class ReportsController extends Controller
                 ->orderBy('community.name', 'ASC')
                 ->get();
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_com', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Communities';
         }else{
             $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
             ->orderBy('subcontractors.name', 'ASC')
             ->get();
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_subc', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Subcontractors';
         }
         return $pdf->download($namepdf.'.pdf');
@@ -92,7 +92,6 @@ class ReportsController extends Controller
     {
         return Validator::make($data, [
             'FromDate' => 'before_or_equal:ToDate',
-            'ToDate' => 'after_or_equal:FromDate',
         ]);
     }
 
@@ -104,16 +103,59 @@ class ReportsController extends Controller
         return view('framing.reports.rep_expenses')->with(['users' => $users]);
     }
 
-    public function rep_expenses_report(Request $request)
+    public function report_expenses(Request $request)
     {
         if ($request->FromDate <>  Null or $request->ToDate <>  Null){
             $this->validator_date($request->all())->validate();
-           
         }
-        return("Si");
 
-        $users = User::orderBy('name', 'ASC')->get();
-        return view('framing.reports.rep_expenses')->with(['users' => $users]);
+        $query = Expense::select('expenses.*');
+                if ($request->user <> 0){ 
+                    $query->where('user_id', $request->user);
+                }
+                if ($request->type_expense <> "0"){ 
+                    $query->where('type_expense', $request->type_expense);
+                }
+                if ($request->type_pay <> "0"){ 
+                    $query->where('type_pay', $request->type_pay);
+                }
+                if ($request->FromDate <> Null){ 
+                    $query->whereBetween('date', [$request->FromDate, $request->ToDate]);
+                    $FromDate = $request->FromDate;
+                    $ToDate = $request->ToDate;
+                }else{
+                    $FromDate = "Null";
+                    $ToDate = "Null";
+                }
+        $expenses = $query->get();
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        return view('framing.reports.report_expenses')->with(['expenses' => $expenses, 'users' => $request->user, 'type_expense' => $request->type_expense, 'type_pay' => $request->type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+    }
+
+
+    public function rep_expenses_PDF($users, $type_expense, $type_pay, $FromDate, $ToDate) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $query = Expense::select('expenses.*');
+                if ($users <> 0){ 
+                    $query->where('user_id', $users);
+                }
+                if ($type_expense <> "0"){ 
+                    $query->where('type_expense', $type_expense);
+                }
+                if ($type_pay <> "0"){ 
+                    $query->where('type_pay', $type_pay);
+                }
+                if ($FromDate <> "Null"){ 
+                    $query->whereBetween('date', [$FromDate, $ToDate]);
+                }
+        $expenses = $query->get();
+
+        $pdf = PDF::loadView('framing.pdf.rep_expenses_pdf', ['expenses'=>$expenses, 'logo'=>$image])->setPaper("letter", "portrait");
+        $namepdf = 'Rep_Expenses';
+
+        return $pdf->download($namepdf.'.pdf');
     }
 
 }
