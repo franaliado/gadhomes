@@ -115,6 +115,9 @@
                 <a href="{{ URL('/home') }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
                 </a>
+                <button type="reset" class="btn bg-red" >
+                    <i class="fa fa-refresh"> Reset</i>
+                </button>
                 <button type="submit" class="btn bg-red">
                     <i class="fa fa-print"> Report</i>
                 </button>
