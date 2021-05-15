@@ -15,7 +15,7 @@
 		<div class="row">
 			<div class="col-md-11">
 				<h1 align="center">GAD FRAMING INC.</h1>
-				<h3 align="center">REPORT OF EXPENSES {{$type_expense}}</h3>
+				<h3 align="center">REPORT OF EXPENSES</h3>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>

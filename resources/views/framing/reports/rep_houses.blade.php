@@ -37,20 +37,32 @@
                     <!-- Registros -->
 
                 <br>
-                <table align="center">
+                <table align="center" border="0" cellpadding="10" >
                     <tr>
-                        <td>
+                        <td width="250px">
                             <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="1" checked>
                             <label class="form-check-label" for="flexRadioDefault1">
                             Order by Communities
                             </label>
+                        </td>
+                        <td rowspan="2">
+                            <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
+    
+                            <div class="col-md-12">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="0">All</option>
+                                    <option value="Started">Started</option>
+                                    <option value="Billed">Billed</option>
+                                    <option value="Paid">Paid</option>
+                                </select>
+                            </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="2">
                             <label class="form-check-label" for="flexRadioDefault2">
-                            Order by Subcontrators
+                            Order by Subcontractors
                             </label>
                         </td>
                     </tr>

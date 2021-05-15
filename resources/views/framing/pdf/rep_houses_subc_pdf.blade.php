@@ -43,7 +43,7 @@
 		<tr>
 			<td>
 				<h1>GAD FRAMING INC.</h1>
-				<h3>REPORT OF HOUSES SUBCONTRACTORS</h3>
+				<h3>REPORT OF HOUSES FOR SUBCONTRACTORS</h3>
 			</td>
 			<td>
 				<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>

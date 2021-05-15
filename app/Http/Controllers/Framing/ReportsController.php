@@ -32,39 +32,50 @@ class ReportsController extends Controller
 
     public function report_houses_options(Request $request) 
     {
-
         if ($request->rephouses == '1'){
-            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
-            ->orderBy('community.name', 'ASC')
-            ->get();
+            $query = House::leftJoin('community', 'community.id', 'houses.community_id')
+                ->orderBy('community.name', 'ASC');
+            if ($request->status <> "0"){ 
+                $query->where('status', $request->status);
+            }
+            $houses = $query->get();
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_com')->with(['houses' => $houses]);
+            return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status]);
 
         }else{
-            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-            ->orderBy('subcontractors.name', 'ASC')
-            ->get();  
-            
+            $query = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->orderBy('subcontractors.name', 'ASC');
+            if ($request->status <> "0"){ 
+                $query->where('status', $request->status);
+            }                      
+            $houses = $query->get();
+
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_subc')->with(['houses' => $houses]);
+            return view('framing.reports.report_houses_subc')->with(['houses' => $houses, 'status' => $request->status]);
         }
     }
     
-    public function rep_houses_options_PDF($option) 
+    public function rep_houses_options_PDF($option, $status) 
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
         if ($option == '1'){
-            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
-                ->orderBy('community.name', 'ASC')
-                ->get();
+            $query = House::leftJoin('community', 'community.id', 'houses.community_id')
+                ->orderBy('community.name', 'ASC');
+            if ($status <> "0"){ 
+                $query->where('status', $status);
+            }
+            $houses = $query->get();
 
             $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Communities';
         }else{
-            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-            ->orderBy('subcontractors.name', 'ASC')
-            ->get();
+            $query = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->orderBy('subcontractors.name', 'ASC');
+            if ($status <> "0"){ 
+                $query->where('status', $status);
+            }
+            $houses = $query->get();
 
             $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Subcontractors';

@@ -10,12 +10,12 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y") }}</strong></div>
-			<div class="col-md-6"><a href="/rep_houses_options_PDF/2" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
+			<div class="col-md-6"><a href="/rep_houses_options_PDF/2/{{$status}}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
 		</div>
 		<div class="row">
 			<div class="col-md-11">
 				<h1 align="center">GAD FRAMING INC.</h1>
-				<h3 align="center">REPORT OF HOUSES</h3>
+				<h3 align="center">REPORT OF HOUSES FOR SUBCONTRACTORS</h3>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>
