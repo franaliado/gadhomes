@@ -32,10 +32,10 @@
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
                 <th style="text-align:center;vertical-align: middle">#</th>
+                <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 <th style="text-align:left;vertical-align: middle">Address</th>
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
-                <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 <th style="text-align:center;vertical-align: middle">Amount Assigned <br> SubContractor</th>
                 <th style="text-align:center;vertical-align: middle">Total Additional</th>
                 <th style="text-align:center;vertical-align: middle">Total</th>
@@ -61,11 +61,11 @@
                 @endswitch
 
                 <tr>
-                    <td>{{ $loop->iteration }}</td>    
+                    <td>{{ $loop->iteration }}</td>  
+                    <td align="left">{{ $house->subcontractor->name }}</td>  
                     <td>{{ $house->address }}</td>  
                     <td align="center">{{ $house->community->name }}</td>
                     <td align="center">{{ $lot }}</td>
-                    <td align="left">{{ $house->subcontractor->name }}</td>
                     <td align="right">{{ number_format($house->amount_assigned_subc, 2, '.', ',') }}</td>
                     @php $totaladditional = 0; @endphp
                     @foreach ($house->additional as $additional)

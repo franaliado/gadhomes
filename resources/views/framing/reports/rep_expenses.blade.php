@@ -35,14 +35,13 @@
             <div class="body bg-gray">
 
                     <!-- Registros -->
-
    
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
                         <label for="user" class="col-md-6 col-form-label text-md-right">{{ __('User') }}</label>
     
                         <div class="col-md-12">
-                            <select id="user" name="user" class="form-control" required>
+                            <select id="user" name="user" class="form-control" onchange="FunctionUser(this)">
                                 <option value="0">All</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}" "{{ old('user') == $user->id ? 'selected': "" }}"> {{ $user->name }} </option>
@@ -56,7 +55,7 @@
                         <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Expenses') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_expense" name="type_expense" class="form-control">
+                            <select id="type_expense" name="type_expense" class="form-control" onchange="FunctionExp(this)">
                                 <option value="0">All</option>
                                 <option value="Gas">Gas</option>
                                 <option value="Tools-Materials">Tools-Materials</option>
@@ -72,7 +71,7 @@
                         <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Payment Type') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_pay" name="type_pay" class="form-control" onchange="myFunction(this)">
+                            <select id="type_pay" name="type_pay" class="form-control" onchange="FunctionPay(this)">
                                 <option value="0">All</option>
                                 <option value="Check">Check</option>
                                 <option value="Cash">Cash</option>
@@ -126,11 +125,46 @@
         </div>
         </div>
 
-<script>
-    $('.FromDate').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-});
+        <script>
+            function FunctionUser(selectObject) {
+                var value = selectObject.value;
+                if (value == 0) {
+                    $("#type_expense").attr("disabled",false);
+                    $("#type_pay").attr("disabled",false);
+                } else {
+                    $("#type_expense").attr("disabled",true);
+                    $("#type_pay").attr("disabled",true);
+                    $("#type_expense").val("0");
+                    $("#type_pay").val("0");
+                }
+            }
 
-</script>
+            function FunctionExp(selectObject) {
+                var value = selectObject.value;
+                if (value == 0) {
+                    $("#user").attr("disabled",false);
+                    $("#type_pay").attr("disabled",false);
+                } else {
+                    $("#user").attr("disabled",true);
+                    $("#type_pay").attr("disabled",true);
+                    $("#user").val("0");
+                    $("#type_pay").val("0");
+                }
+            }
+
+            function FunctionPay(selectObject) {
+                var value = selectObject.value;
+                if (value == 0) {
+                    $("#user").attr("disabled",false);
+                    $("#type_expense").attr("disabled",false);
+                    
+                } else {
+                    $("#user").attr("disabled",true);
+                    $("#type_expense").attr("disabled",true);
+                    $("#user").val("0");
+                    $("#type_expense").val("0");
+                }
+            }
+        </script>
+
 @endsection

@@ -33,26 +33,37 @@ class ReportsController extends Controller
     public function report_houses_options(Request $request) 
     {
         if ($request->rephouses == '1'){
-            $query = House::leftJoin('community', 'community.id', 'houses.community_id')
-                ->orderBy('community.name', 'ASC');
-            if ($request->status <> "0"){ 
-                $query->where('status', $request->status);
-            }
-            $houses = $query->get();
+            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+                ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->orderBy('subcontractors.name', 'ASC')
+                ->where('community_id', $request->community)
+                ->where('status', $request->status)
+                ->get();
+
+            $community = Community::find($request->community);
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status]);
+            return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community->name]);
 
         }else{
-            $query = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-                ->orderBy('subcontractors.name', 'ASC');
-            if ($request->status <> "0"){ 
-                $query->where('status', $request->status);
-            }                      
-            $houses = $query->get();
+            $community = House::groupBy('id')
+                ->get();
+
+            dd($community);
+
+            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->leftJoin('community', 'community.id', 'houses.community_id')
+                ->orderBy('community.name', 'ASC')
+                ->where('subcontractor_id', $request->subcontractor)
+                ->where('status', $request->status)
+                ->get();
+                //return("Yes");
+
+            $subcontractor = Subcontractor::find($request->subcontractor);
+
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_subc')->with(['houses' => $houses, 'status' => $request->status]);
+            return view('framing.reports.report_houses_subc')->with(['houses' => $houses, 'status' => $request->status, 'subcontractor' => $subcontractor->name, 'community' => $community]);
         }
     }
     
@@ -120,6 +131,10 @@ class ReportsController extends Controller
             $this->validator_date($request->all())->validate();
         }
 
+        if($request->user == ""){$request->user = 0;}
+        if($request->type_expense == ""){$request->type_expense = 0;}
+        if($request->type_pay == ""){$request->type_pay = 0;}
+
         $query = Expense::select('expenses.*');
                 if ($request->user <> 0){ 
                     $query->where('user_id', $request->user);
@@ -140,14 +155,18 @@ class ReportsController extends Controller
                 }
         $expenses = $query->get();
 
+        $user = User::find($request->user);
+
+ 
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.report_expenses')->with(['expenses' => $expenses, 'users' => $request->user, 'type_expense' => $request->type_expense, 'type_pay' => $request->type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+        return view('framing.reports.report_expenses')->with(['expenses' => $expenses, 'user' => $user, 'users' => $request->user, 'type_expense' => $request->type_expense, 'type_pay' => $request->type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
     }
 
 
     public function rep_expenses_PDF($users, $type_expense, $type_pay, $FromDate, $ToDate) 
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        
         $query = Expense::select('expenses.*');
                 if ($users <> 0){ 
                     $query->where('user_id', $users);
@@ -163,7 +182,9 @@ class ReportsController extends Controller
                 }
         $expenses = $query->get();
 
-        $pdf = PDF::loadView('framing.pdf.rep_expenses_pdf', ['expenses'=>$expenses, 'logo'=>$image])->setPaper("letter", "portrait");
+        $user = User::find($users);
+                //return($user->name);
+        $pdf = PDF::loadView('framing.pdf.rep_expenses_pdf', ['expenses'=>$expenses, 'logo'=>$image, 'user' => $user, 'users' => $users, 'type_expense' => $type_expense, 'type_pay' => $type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
         $namepdf = 'Rep_Expenses';
 
         return $pdf->download($namepdf.'.pdf');

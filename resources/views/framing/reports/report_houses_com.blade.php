@@ -14,8 +14,10 @@
 		</div>
 		<div class="row">
 			<div class="col-md-11">
-				<h1 align="center">GAD FRAMING INC.</h1>
-				<h3 align="center">REPORT OF HOUSES FOR COMMUNITIES</h3>
+				<h1 align="left">GAD FRAMING INC.</h1>
+				<h3 align="center">Report of Houses</h3>
+				<h4 align="center">Status: {{$status}}</h4>
+				<h4 align="left">Community: {{$community}}</h4>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>
@@ -26,11 +28,9 @@
 					<thead class="thead-light" bgcolor="red" style="color:white">
 						<tr>
 							<th style="text-align:center;vertical-align: middle">#</th>
-							<th style="text-align:center;vertical-align: middle">Community</th>
-							<th style="text-align:center;vertical-align: middle">Lot</th>
 							<th style="text-align:center;vertical-align: middle">Address</th>
+							<th style="text-align:center;vertical-align: middle">Lot</th>
 							<th style="text-align:center;vertical-align: middle">Start Date</th>
-							<th style="text-align:center;vertical-align: middle">Status</th>
 							<th style="text-align:center;vertical-align: middle">Without PO<t/h>
 							<th style="text-align:center;vertical-align: middle">Subcontractor</th>
 						</tr>
@@ -63,12 +63,9 @@
 			
 							<tr>
 								<td align="center">{{ $loop->iteration }}</td>    
-
-								<td align="center">{{ $house->community->name }}</td>
-								<td align="center">{{ $lot }}</td>
 								<td align="left">{{ $house->address }}</td>  
+								<td align="center">{{ $lot }}</td>
 								<td align="center">{{date("m-d-Y", strtotime($house->start_date))}}</td>
-								<td align="center">{{ $house->status }}</td>
 								<td align="center">{{ $withoutpo }}</td>
 								<td align="left">{{ $house->subcontractor->name }}</td>
 							</tr>                

@@ -43,7 +43,8 @@
 		<tr>
 			<td>
 				<h1>GAD FRAMING INC.</h1>
-				<h3>REPORT OF HOUSES FOR SUBCONTRACTORS</h3>
+				<h3>Report of Houses</h3>
+				<h4>Community: {{$houses->community->name}}</h4>
 			</td>
 			<td>
 				<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
@@ -57,7 +58,7 @@
   <div id="content">
 	<table id="houses-table" class="table" border='1' >
 		<thead class="thead-light">
-			<tr style="font-size: 12px; font-weight: bold; color: white" bgcolor="red" >
+			<tr style="font-size: 12px; font-weight: bold; color: black" bgcolor="D5DBDB" >
 				<td style="text-align:center;vertical-align: middle">#</td>
 				<td style="text-align:center;vertical-align: middle">Subcontractor</td>
 				<td style="text-align:center;vertical-align: middle">Community</td>

@@ -30,7 +30,7 @@ class SubcontractorAmountController extends Controller
             ->orWhere('houses.lot', 'LIKE', '%'.$query.'%')
             ->orWhere('community.name', 'LIKE', '%'.$query.'%')
             ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
-            ->orderBy('id', 'DESC')
+            ->orderBy('subcontractors.name', 'ASC')
             ->get();
  
         if (Auth::user()->role != 1){ return redirect('/home'); }
