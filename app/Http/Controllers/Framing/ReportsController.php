@@ -43,7 +43,7 @@ class ReportsController extends Controller
             $community = Community::find($request->community);
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community->name]);
+            return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community]);
 
         }else{
             $community = House::groupBy('id')
@@ -67,18 +67,20 @@ class ReportsController extends Controller
         }
     }
     
-    public function rep_houses_options_PDF($option, $status) 
+    public function rep_houses_options_PDF($option, $status, $community_id) 
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
         if ($option == '1'){
-            $query = House::leftJoin('community', 'community.id', 'houses.community_id')
-                ->orderBy('community.name', 'ASC');
-            if ($status <> "0"){ 
-                $query->where('status', $status);
-            }
-            $houses = $query->get();
+            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+                ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->orderBy('subcontractors.name', 'ASC')
+                ->where('community_id', $community_id)
+                ->where('status', $status)
+                ->get();
+          
+            $community = Community::find($community_id);
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community' => $community])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Communities';
         }else{
             $query = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
@@ -88,7 +90,7 @@ class ReportsController extends Controller
             }
             $houses = $query->get();
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image])->setPaper("letter", "portrait");
+            $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image,])->setPaper("letter", "portrait");
             $namepdf = 'Rep_Houses_Subcontractors';
         }
         return $pdf->download($namepdf.'.pdf');
@@ -183,7 +185,7 @@ class ReportsController extends Controller
         $expenses = $query->get();
 
         $user = User::find($users);
-                //return($user->name);
+
         $pdf = PDF::loadView('framing.pdf.rep_expenses_pdf', ['expenses'=>$expenses, 'logo'=>$image, 'user' => $user, 'users' => $users, 'type_expense' => $type_expense, 'type_pay' => $type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
         $namepdf = 'Rep_Expenses';
 

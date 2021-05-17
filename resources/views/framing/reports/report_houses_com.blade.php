@@ -10,14 +10,14 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y") }}</strong></div>
-			<div class="col-md-6"><a href="/rep_houses_options_PDF/1/{{$status}}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
+			<div class="col-md-6"><a href="/rep_houses_options_PDF/1/{{$status}}/{{$community->id}}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
 		</div>
 		<div class="row">
 			<div class="col-md-11">
-				<h1 align="left">GAD FRAMING INC.</h1>
+				<h1 align="left">GAD FRAMING INC.</h1> 
 				<h3 align="center">Report of Houses</h3>
 				<h4 align="center">Status: {{$status}}</h4>
-				<h4 align="left">Community: {{$community}}</h4>
+				<h4 align="left">Community: {{$community->name}}</h4>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>

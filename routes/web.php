@@ -145,7 +145,7 @@ Route::get('/rep_houses', 'Framing\ReportsController@rep_houses')->middleware('a
 
 Route::get('/report_houses_options', 'Framing\ReportsController@report_houses_options')->middleware('auth');
 
-Route::get('/rep_houses_options_PDF/{option}/{status}', 'Framing\ReportsController@rep_houses_options_PDF')->middleware('auth');
+Route::get('/rep_houses_options_PDF/{option}/{status}/{community}', 'Framing\ReportsController@rep_houses_options_PDF')->middleware('auth');
 
 Route::get('/rep_subcontractors', 'Framing\ReportsController@rep_subcontractors')->middleware('auth');
 
