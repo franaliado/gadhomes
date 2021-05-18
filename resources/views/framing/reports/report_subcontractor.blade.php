@@ -3,6 +3,9 @@
 @section('content')
 
 <section class="resume" style="padding: 20px;">
+	<a href="{{ URL('/rep_subcontractors') }}" class="btn bg-red">
+		<i class="fa fa-arrow-left"> Back</i>
+	</a>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y") }}</strong></div>
@@ -154,9 +157,6 @@
 			</div>
 		</div>
 	</div>
-	<a href="{{ URL('/rep_subcontractors') }}" class="btn bg-red">
-		<i class="fa fa-arrow-left"> Back</i>
-	</a>
 </section>
 
 @endsection

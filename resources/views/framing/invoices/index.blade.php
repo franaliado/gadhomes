@@ -17,6 +17,9 @@
 @endswitch 
 
 <section class="invoice" style="padding: 20px;">
+	<a href="{{ URL('/orders/'.$house_id) }}" class="btn bg-red">
+		<i class="fa fa-arrow-left"> Back</i>
+	</a>
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6"><strong>Date: {{ date("m-d-Y", strtotime($invoice->created_at)) }}</strong></div>
@@ -99,9 +102,6 @@
 			</div>
 		</div>
 	</div>
-	<a href="{{ URL('/orders/'.$house_id) }}" class="btn bg-red">
-		<i class="fa fa-arrow-left"> Back</i>
-	</a>
 </section>
 
 @endsection
