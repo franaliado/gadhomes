@@ -11,6 +11,8 @@ use App\User;
 use App\House;
 use App\Community;
 use App\Subcontractor;
+use App\Tool;
+use App\Payment;
 use App\Expense;
 use PDF;
 
@@ -22,17 +24,17 @@ class ReportsController extends Controller
      */
     public function rep_houses()
     {
-        $communitys = Community::orderBy('name', 'ASC')->get();
+        $community = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
 
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
+        return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'community' => $community]);
     }
   
 
     public function report_houses_options(Request $request) 
     {
-        if ($request->rephouses == '1'){
+        if ($request->community){
             $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
                 ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
                 ->orderBy('subcontractors.name', 'ASC')
@@ -46,55 +48,56 @@ class ReportsController extends Controller
             return view('framing.reports.report_houses_com')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community]);
 
         }else{
-            $community = House::groupBy('id')
-                ->get();
-
-            dd($community);
-
             $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
                 ->leftJoin('community', 'community.id', 'houses.community_id')
                 ->orderBy('community.name', 'ASC')
                 ->where('subcontractor_id', $request->subcontractor)
                 ->where('status', $request->status)
                 ->get();
-                //return("Yes");
-
+            
             $subcontractor = Subcontractor::find($request->subcontractor);
 
-
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_houses_subc')->with(['houses' => $houses, 'status' => $request->status, 'subcontractor' => $subcontractor->name, 'community' => $community]);
+            return view('framing.reports.report_houses_subc')->with(['houses' => $houses, 'status' => $request->status, 'subcontractor' => $subcontractor]);
         }
     }
     
-    public function rep_houses_options_PDF($option, $status, $community_id) 
+    public function rep_houses_com_PDF($status, $community_id) 
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
-        if ($option == '1'){
-            $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
-                ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-                ->orderBy('subcontractors.name', 'ASC')
-                ->where('community_id', $community_id)
-                ->where('status', $status)
-                ->get();
-          
-            $community = Community::find($community_id);
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community' => $community])->setPaper("letter", "portrait");
-            $namepdf = 'Rep_Houses_Communities';
-        }else{
-            $query = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-                ->orderBy('subcontractors.name', 'ASC');
-            if ($status <> "0"){ 
-                $query->where('status', $status);
-            }
-            $houses = $query->get();
+        $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+            ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->orderBy('subcontractors.name', 'ASC')
+            ->where('community_id', $community_id)
+            ->where('status', $status)
+            ->get();
+        
+        $community = Community::find($community_id);
 
-            $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image,])->setPaper("letter", "portrait");
-            $namepdf = 'Rep_Houses_Subcontractors';
-        }
+        $pdf = PDF::loadView('framing.pdf.rep_houses_com_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community' => $community])->setPaper("letter", "portrait");
+        $namepdf = 'Rep_Houses_Communities';
         return $pdf->download($namepdf.'.pdf');
     }
+
+    public function rep_houses_subc_PDF($status, $subcontractor_id) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+
+        $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+            ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->orderBy('subcontractors.name', 'ASC')
+            ->where('subcontractor_id', $subcontractor_id)
+            ->where('status', $status)
+            ->get();
+        
+        $subcontractor = Subcontractor::find($subcontractor_id);
+
+        $pdf = PDF::loadView('framing.pdf.rep_houses_subc_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'subcontractor' => $subcontractor])->setPaper("letter", "portrait");
+        $namepdf = 'Rep_Houses_Subcontractors';
+        return $pdf->download($namepdf.'.pdf');
+    }
+
 
 
     /**
@@ -104,8 +107,81 @@ class ReportsController extends Controller
     {
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
 
+        $community = Community::orderBy('name', 'ASC')->get();
+
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors]);
+        return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors, 'community' => $community]);
+    }
+
+
+    public function report_subcontractors(Request $request) 
+    {
+        if ($request->FromDate <>  Null or $request->ToDate <>  Null){
+            $this->validator_date($request->all())->validate();
+        }
+
+        $FromDate = $request->FromDate;
+        $ToDate = $request->ToDate;
+ 
+        if ($request->subcontractor){
+
+            $subcontractor = Subcontractor::where('id', $request->subcontractor)
+                ->first();
+
+            $tools = Tool::where('subcontractor_id', $request->subcontractor)
+                ->whereBetween('date', [$request->FromDate, $request->ToDate])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+            $payments = Payment::where('subcontractor_id', $request->subcontractor)
+                ->whereBetween('date', [$request->FromDate, $request->ToDate])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+            if (Auth::user()->role != 1){ return redirect('/home'); }
+            return view('framing.reports.report_subcontractor')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+        }else{
+return($request);
+            $houses = Houses::where('id', $request->subcontractor)
+                ->first();
+
+            $tools = Tool::where('subcontractor_id', $request->subcontractor)
+                ->whereBetween('date', [$request->FromDate, $request->ToDate])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+            $payments = Payment::where('subcontractor_id', $request->subcontractor)
+                ->whereBetween('date', [$request->FromDate, $request->ToDate])
+                ->orderBy('date', 'ASC')
+                ->get();
+
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        return view('framing.reports.report_subcontractor')->with(['houses' => $houses, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+        }
+    }
+
+    public function rep_subcontractor_subc_PDF($subcontractor_id, $FromDate, $ToDate) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        
+        $namepdf = "";
+        $subcontractor = Subcontractor::where('id', $subcontractor_id)
+            ->first();
+
+        $tools = Tool::where('subcontractor_id', $subcontractor_id)
+            ->whereBetween('date', [$FromDate, $ToDate])
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        $payments = Payment::where('subcontractor_id', $subcontractor_id)
+            ->whereBetween('date', [$FromDate, $ToDate])
+            ->orderBy('date', 'ASC')
+            ->get();
+
+        $pdf = PDF::loadView('framing.pdf.rep_subcontractor_subc_pdf', ['subcontractor'=>$subcontractor, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
+        $namepdf = 'Rep_Subcontractor';
+
+        return $pdf->download($namepdf.'.pdf');
     }
 
 
@@ -169,15 +245,19 @@ class ReportsController extends Controller
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
         
+        $namepdf = "";
         $query = Expense::select('expenses.*');
                 if ($users <> 0){ 
                     $query->where('user_id', $users);
+                    $namepdf = "-user";
                 }
                 if ($type_expense <> "0"){ 
                     $query->where('type_expense', $type_expense);
+                    $namepdf = "-type_expense";
                 }
                 if ($type_pay <> "0"){ 
                     $query->where('type_pay', $type_pay);
+                    $namepdf = "-type_pay";
                 }
                 if ($FromDate <> "Null"){ 
                     $query->whereBetween('date', [$FromDate, $ToDate]);
@@ -187,7 +267,7 @@ class ReportsController extends Controller
         $user = User::find($users);
 
         $pdf = PDF::loadView('framing.pdf.rep_expenses_pdf', ['expenses'=>$expenses, 'logo'=>$image, 'user' => $user, 'users' => $users, 'type_expense' => $type_expense, 'type_pay' => $type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
-        $namepdf = 'Rep_Expenses';
+        $namepdf = 'Rep_Expenses'.$namepdf;
 
         return $pdf->download($namepdf.'.pdf');
     }

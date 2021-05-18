@@ -50,15 +50,10 @@
                         </div>
                     </td>
                     <td width="250px">
-                        <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="1" checked @change="myFunction(this)">
-                        <label class="form-check-label" for="flexRadioDefault1">
-                        Order by Communities
-                        </label>
-
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
-                        <select id="community" name="community" class="form-control" required>
+                        <select id="community" name="community" class="form-control" required onchange="MyFunctionCom(this)">
                             <option value="">---- Please Select ----</option>
-                            @foreach($communitys as $community)
+                            @foreach($community as $community)
                                 <option value="{{ $community->id }}" {{ old('community') == $community->id ? 'selected' : '' }}> 
                                         {{ $community->name }} 
                                 </option>
@@ -68,13 +63,8 @@
                 </tr>
                 <tr>
                     <td>
-                        <input class="form-check-input" type="radio" name="rephouses" id="rephouses" value="2" onclick="myFunction(this)">
-                        <label class="form-check-label" for="flexRadioDefault2">
-                        Order by Subcontractors
-                        </label>
-
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
-                        <select id="subcontractor" name="subcontractor" class="form-control" required>
+                        <select id="subcontractor" name="subcontractor" class="form-control" required onchange="MyFunctionSub(this)">
                             <option value="">---- Please Select ----</option>
                             @foreach($subcontractors as $subcontractor)
                                 <option value="{{ $subcontractor->id }}" {{ old('subcontractor') == $subcontractor->id ? 'selected' : '' }}> 
@@ -101,32 +91,25 @@
     </div>
 
     <script>
-        function myFunction(selectObject) {
-            alert("Entro");
+        function MyFunctionSub(selectObject) {
             var value = selectObject.value;
-            if (value == "1") {
+            if (value == 0) {
                 $("#community").attr("disabled",false);
-                $("#subcontractor").attr("disabled",true);
-                $("#subcontractor").val("");
             } else {
                 $("#community").attr("disabled",true);
-                $("#subcontractor").attr("disabled",false);
                 $("#community").val("");
             }
         }
 
-
-        $(document).ready(function(){
-            alert("Entro 2");
-            $('input[type=radio][name=rephouses]').change(function() {
-                if (this.value == 1) {
-                    alert("Select Male");
-                }else if (this.value == 2) {
-                    alert("Select Female");
-                }
-            });
-      
-        });
+        function MyFunctionCom(selectObject) {
+            var value = selectObject.value;
+            if (value == 0) {
+                $("#subcontractor").attr("disabled",false);
+            } else {
+                $("#subcontractor").attr("disabled",true);
+                $("#subcontractor").val("");
+            }
+        }
     </script>
 
 @endsection

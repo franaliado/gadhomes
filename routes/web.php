@@ -145,9 +145,15 @@ Route::get('/rep_houses', 'Framing\ReportsController@rep_houses')->middleware('a
 
 Route::get('/report_houses_options', 'Framing\ReportsController@report_houses_options')->middleware('auth');
 
-Route::get('/rep_houses_options_PDF/{option}/{status}/{community}', 'Framing\ReportsController@rep_houses_options_PDF')->middleware('auth');
+Route::get('/rep_houses_com_PDF/{status}/{community}', 'Framing\ReportsController@rep_houses_com_PDF')->middleware('auth');
+
+Route::get('/rep_houses_subc_PDF/{status}/{subcontractor}', 'Framing\ReportsController@rep_houses_subc_PDF')->middleware('auth');
 
 Route::get('/rep_subcontractors', 'Framing\ReportsController@rep_subcontractors')->middleware('auth');
+
+Route::get('/report_subcontractors', 'Framing\ReportsController@report_subcontractors')->middleware('auth');
+
+Route::get('/rep_subcontractor_subc_PDF/{subcontractor}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_subcontractor_subc_PDF')->middleware('auth');
 
 Route::get('/rep_expenses', 'Framing\ReportsController@rep_expenses')->middleware('auth');
 

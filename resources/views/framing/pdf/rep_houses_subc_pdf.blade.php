@@ -42,9 +42,12 @@
 		</tr>
 		<tr>
 			<td>
-				<h1>GAD FRAMING INC.</h1>
-				<h3>Report of Houses</h3>
-				<h4>Community: {{$houses->community->name}}</h4>
+				<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
+				<FONT SIZE=4><b>REPORT OF HOUSES</b></font><br><br>
+				<FONT SIZE=2>
+				Status: {{$status}}<br>
+				Subcontractor: {{$subcontractor->name}}
+				</font>			
 			</td>
 			<td>
 				<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
@@ -60,7 +63,6 @@
 		<thead class="thead-light">
 			<tr style="font-size: 12px; font-weight: bold; color: black" bgcolor="D5DBDB" >
 				<td style="text-align:center;vertical-align: middle">#</td>
-				<td style="text-align:center;vertical-align: middle">Subcontractor</td>
 				<td style="text-align:center;vertical-align: middle">Community</td>
 				<td style="text-align:center;vertical-align: middle">Lot</td>
 				<th style="text-align:center;vertical-align: middle">Address</td>
@@ -97,7 +99,6 @@
 
 				<tr style="font-size: 12px;">
 					<td align="center">{{ $loop->iteration }}</td>    
-					<td align="left">{{ $house->subcontractor->name }}</td>
 					<td align="center">{{ $house->community->name }}</td>
 					<td align="center">{{ $lot }}</td>
 					<td align="left">{{ $house->address }}</td>  

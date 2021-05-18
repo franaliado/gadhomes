@@ -17,10 +17,10 @@ class ResumeController extends Controller
         $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
         $tools = Tool::where('subcontractor_id', $subcontractor_id)
-                    ->orderBy('id', 'ASC')
+                    ->orderBy('date', 'ASC')
                     ->get();
         $payments = Payment::where('subcontractor_id', $subcontractor_id)
-                    ->orderBy('id', 'ASC')
+                    ->orderBy('date', 'ASC')
                     ->get();
      
         if (Auth::user()->role != 1){ return redirect('/home'); }
@@ -31,10 +31,10 @@ class ResumeController extends Controller
         $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
         $tools = Tool::where('subcontractor_id', $subcontractor_id)
-                    ->orderBy('id', 'ASC')
+                    ->orderBy('date', 'ASC')
                     ->get();
         $payments = Payment::where('subcontractor_id', $subcontractor_id)
-                    ->orderBy('id', 'ASC')
+                    ->orderBy('date', 'ASC')
                     ->get();
 
         $pdf = PDF::loadView('framing.pdf.resume_pdf', ['resume'=>$resume, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
