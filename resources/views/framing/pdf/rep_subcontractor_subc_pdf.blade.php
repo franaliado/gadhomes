@@ -45,7 +45,9 @@
 			<table width="100%">
 				<tr>
 					<td>
-						<h1>GAD FRAMING INC.</h1>
+						<br>
+						<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
+						<FONT SIZE=4><b>Report of Subcontractors</b></font><br><br>
 					</td>
 					<td align="right">
 						<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Auth;
 
+use DB;
 use App\User;
 use App\House;
 use App\Community;
@@ -15,7 +16,7 @@ use App\Tool;
 use App\Payment;
 use App\Expense;
 use PDF;
-
+use PhpParser\Node\Stmt\Return_;
 
 class ReportsController extends Controller
 {
@@ -139,26 +140,24 @@ class ReportsController extends Controller
                 ->get();
 
             if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_subcontractor')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+            return view('framing.reports.report_subcontractor_subc')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
         }else{
-return($request);
-            $houses = Houses::where('id', $request->subcontractor)
+            $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+                ->where('community_id', $request->community)
+                ->select('community_id', 'subcontractor_id',
+                    DB::raw('SUM(amount_assigned_subc) as Total')
+                )
+                ->groupBy('subcontractor_id', 'community_id')
+                ->get();
+            
+            $community = Community::where('id', $request->community)
                 ->first();
 
-            $tools = Tool::where('subcontractor_id', $request->subcontractor)
-                ->whereBetween('date', [$request->FromDate, $request->ToDate])
-                ->orderBy('date', 'ASC')
-                ->get();
-
-            $payments = Payment::where('subcontractor_id', $request->subcontractor)
-                ->whereBetween('date', [$request->FromDate, $request->ToDate])
-                ->orderBy('date', 'ASC')
-                ->get();
-
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.report_subcontractor')->with(['houses' => $houses, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+        return view('framing.reports.report_subcontractor_com')->with(['houses' => $houses, 'community' => $community, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
         }
     }
+
 
     public function rep_subcontractor_subc_PDF($subcontractor_id, $FromDate, $ToDate) 
     {
@@ -180,6 +179,28 @@ return($request);
 
         $pdf = PDF::loadView('framing.pdf.rep_subcontractor_subc_pdf', ['subcontractor'=>$subcontractor, 'logo'=>$image, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
         $namepdf = 'Rep_Subcontractor';
+
+        return $pdf->download($namepdf.'.pdf');
+    }
+
+
+    public function rep_subcontractor_com_PDF($community_id, $FromDate, $ToDate) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        
+        $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+            ->where('community_id', $community_id)
+            ->select('community_id', 'subcontractor_id',
+                DB::raw('SUM(amount_assigned_subc) as Total')
+            )
+            ->groupBy('subcontractor_id', 'community_id')
+            ->get();
+        
+        $community = Community::where('id', $community_id)
+            ->first();
+
+        $pdf = PDF::loadView('framing.pdf.rep_subcontractor_com_pdf', ['houses'=>$houses, 'logo'=>$image, 'community' => $community, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
+        $namepdf = 'Rep_Subc_for_Community';
 
         return $pdf->download($namepdf.'.pdf');
     }

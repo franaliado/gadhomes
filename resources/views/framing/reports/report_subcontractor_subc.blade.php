@@ -14,6 +14,7 @@
 		<div class="row">
 			<div class="col-md-11">
 				<h1 align="center">GAD FRAMING INC.</h1>
+				<h2 align="center">Report of Subcontractors</h2>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>

@@ -155,6 +155,8 @@ Route::get('/report_subcontractors', 'Framing\ReportsController@report_subcontra
 
 Route::get('/rep_subcontractor_subc_PDF/{subcontractor}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_subcontractor_subc_PDF')->middleware('auth');
 
+Route::get('/rep_subcontractor_com_PDF/{community}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_subcontractor_com_PDF')->middleware('auth');
+
 Route::get('/rep_expenses', 'Framing\ReportsController@rep_expenses')->middleware('auth');
 
 Route::post('/report_expenses', 'Framing\ReportsController@report_expenses')->middleware('auth');
