@@ -115,6 +115,17 @@ class ReportsController extends Controller
     }
 
 
+    public function get_communities(Request $request){
+        if($request->ajax()){
+            $communitys = House::where('status','=',$request->status)->get();
+            foreach($communitys as $community){
+                $communityArray[$communitys->id]= $communitys->id;
+            }
+            return response()->json($communityArray);
+        }
+     }
+    
+
     public function report_subcontractors(Request $request) 
     {
         if ($request->FromDate <>  Null or $request->ToDate <>  Null){

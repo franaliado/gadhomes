@@ -43,6 +43,7 @@
                         <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
                         <div class="col-md-12">
                             <select id="status" name="status" class="form-control">
+                                <option value="">---- Please Select ----</option>
                                 <option value="Started">Started</option>
                                 <option value="Billed">Billed</option>
                                 <option value="Paid">Paid</option>
@@ -53,11 +54,7 @@
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
                         <select id="community" name="community" class="form-control" required onchange="MyFunctionCom(this)">
                             <option value="">---- Please Select ----</option>
-                            @foreach($community as $community)
-                                <option value="{{ $community->id }}" {{ old('community') == $community->id ? 'selected' : '' }}> 
-                                        {{ $community->name }} 
-                                </option>
-                            @endforeach
+
                         </select>
                     </td>
                 </tr>
@@ -91,25 +88,19 @@
     </div>
 
     <script>
-        function MyFunctionSub(selectObject) {
-            var value = selectObject.value;
-            if (value == 0) {
-                $("#community").attr("disabled",false);
-            } else {
-                $("#community").attr("disabled",true);
-                $("#community").val("");
-            }
-        }
-
-        function MyFunctionCom(selectObject) {
-            var value = selectObject.value;
-            if (value == 0) {
-                $("#subcontractor").attr("disabled",false);
-            } else {
-                $("#subcontractor").attr("disabled",true);
-                $("#subcontractor").val("");
-            }
-        }
-    </script>
+        $(document).ready(function(){
+            $("#status").on('change', (function(event){
+                var status=$(this).val();
+                if($.trim(status) != ''){
+                    $.get('community', {status: status}, function(community){
+                        $('#community').empty();
+                        $.each(community, function(index, value){
+                            $('#community').append("<option value='"+ index + "'>"+ value +"</option>");
+                        });
+                    });
+                }
+            });
+        });
+    </script> 
 
 @endsection

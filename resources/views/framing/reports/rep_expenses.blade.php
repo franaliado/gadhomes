@@ -83,7 +83,7 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="FromDate" class="col-md-6 col-form-label text-md-right">{{ __('From2') }}</label>
+                        <label for="FromDate" class="col-md-6 col-form-label text-md-right">{{ __('From') }}</label>
                         <div class="col-md-12">
                             <input id="FromDate" type="date" class="form-control @error('FromDate') is-invalid @enderror" name="FromDate" value="{{ old('FromDate') }}"  autocomplete="FromDate" autofocus>
 
