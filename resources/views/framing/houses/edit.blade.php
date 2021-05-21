@@ -29,7 +29,7 @@
                     <div class="form-group row col-md-4">
                         <label for="address" class="col-md-6 col-form-label text-md-right">{{ __('Address') }}</label>
                         <div class="col-md-12">
-                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address', $house->address) }}" required autocomplete="address" autofocus placeholder="Address">
+                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address', $house->address) }}" autocomplete="address" autofocus placeholder="Address">
 
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -73,7 +73,7 @@
     
                         <div class="col-md-12">
                             <select id="status" name="status" class="form-control">
-                                <option value="Started" {{ $house->status == "Started"  ? 'selected' : '' }}>Started</option>
+                                <option value="Pending" {{ $house->status == "Pending"  ? 'selected' : '' }}>Pending</option>
                                 <option value="Billed" {{ $house->status == "Billed"  ? 'selected' : '' }}>Billed</option>
                                 <option value="Paid" {{ $house->status == "Paid"  ? 'selected' : '' }}>Paid</option>
                             </select>
@@ -83,7 +83,7 @@
                     <div class="form-group row col-md-4">
                         <label for="start_date" class="col-md-6 col-form-label text-md-right">{{ __('Start Date') }}</label>
                         <div class="col-md-12">
-                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date', $house->start_date) }}" required autocomplete="start_date" autofocus placeholder="Start Date">
+                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date', $house->start_date) }}" autocomplete="start_date" autofocus placeholder="Start Date">
 
                             @error('start_date')
                                 <span class="invalid-feedback" role="alert">
@@ -110,7 +110,7 @@
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
     
                         <div class="col-md-12">
-                            <select id="subcontractor" name="subcontractor" class="form-control" required>
+                            <select id="subcontractor" name="subcontractor" class="form-control">
                                 <option value="">---- Please Select ----</option>
                                 @foreach($subcontractors as $subcontractor)
                                     <option value="{{ $subcontractor->id }}" {{ $subcontractor->id == $house->subcontractor_id  ? 'selected' : '' }}>

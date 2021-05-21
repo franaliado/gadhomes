@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-
+ 
     @if(session('success'))
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -12,14 +12,14 @@
     </div>
     @endif
 
-    <h1>List of Payments</h1>
+    <h1>List of Payments  - Payer: {{ Auth::user()->name }}</h1>
     <br> 
     <b>Subcontractor: {{ $subcontractor->name }}</b>
     <br>
     Total Payments: {{ number_format($totalpayments, 2, '.', ',') }}</font>
     <br><br>
 
-    <a href="{{ url('/payments/'.$subcontractor->id.'/create') }}" class="btn btn-danger">
+    <a href="{{ url('/payments/'.$subcontractor->id.'/'.$user_id.'/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Payment</i>
     </a> 
     <br/><br/>
@@ -55,7 +55,7 @@
                         <td align="right">{{ number_format($payment->amount, 2, '.', ',') }}</td>
 
                         <td align='center'> 
-                            <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/edit') }}">
+                            <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id.'/edit') }}">
                                 @csrf
                                 {{ method_field('EDIT')}}  
                                 <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
@@ -64,7 +64,7 @@
                             </form>
                         </td>
                         <td align='center'>
-                            <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id) }}">
+                            <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id) }}">
                                 @csrf
                                 {{ method_field('DELETE')}}  
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Payment?')" title="Delete" alt="Delete">

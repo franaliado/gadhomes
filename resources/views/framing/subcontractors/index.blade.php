@@ -93,7 +93,7 @@
                         </a>
                     </td>
                     <td align='center'>
-                        <a href="{{ url('/payments/'.$subcontractor->id) }}"">
+                        <a href="{{ url('/payments/'.$subcontractor->id.'/'.Auth::user()->id) }}"">
 
                             <button type="button" class="btn btn-success btn-sm" title="Payments" alt="Payments">
                                 <i class="">Pay</i>

@@ -22,7 +22,7 @@ class ExpenseController extends Controller
             'card' => ['required', 'sometimes'],
             'amount' => ['required'],
         ]);
-    }
+    } 
     /**
      * Display a listing of the resource.
      *

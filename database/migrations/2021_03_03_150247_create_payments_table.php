@@ -19,10 +19,16 @@ class CreatePaymentsTable extends Migration
             $table->date('date');
             $table->integer('type');
             $table->unsignedBigInteger('subcontractor_id');
+            $table->unsignedBigInteger('user_id');
 
             $table->foreign('subcontractor_id')
                     ->references('id')
                     ->on('subcontractors')
+                    ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                    ->references('id')
+                    ->on('users')
                     ->onDelete('cascade');
 
             $table->timestamps();

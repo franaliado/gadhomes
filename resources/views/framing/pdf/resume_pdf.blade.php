@@ -74,11 +74,12 @@
 				<tr>
 					<td width="50%" valign="top">
 						<!-- Payments -->
-						<table class="table" style="font-size: 10pt" width="100%">
+						<table class="table" style="font-size: 9pt" width="100%">
 							<tr>
-								<td align="center" colspan="3"><strong>PAYMENTS</strong></td>
+								<td align="center" colspan="4"><strong>PAYMENTS</strong></td>
 							</tr>
 							<tr>
+								<td align="center"><strong>Payer</strong></td>
 								<td align="center"><strong>Date</strong></td>
 								<td align="center"><strong>Type</strong></td>
 								<td align="right"><strong>Amount</strong></td>
@@ -96,14 +97,15 @@
 								@endswitch
 		
 								<tr>
-									<td align="center">{{date("m-d-Y", strtotime($payment->date))}}</td>
+									<td align="center">{{$payment->users->name}}</td>
+									<td align="center" NOWRAP>{{date("m-d-Y", strtotime($payment->date))}}</td>
 									<td align="center">{{ $type }}</td>
 									<td align="right">{{ number_format($payment->amount, 2, '.', ',') }}</td>						
 								</tr>
 							@endforeach
 							@php($totalgen -= $totalpay)
 							<tr>
-								<td colspan="3" align="right">
+								<td colspan="4" align="right">
 									<strong>Total Payments</strong>&emsp;&emsp;&emsp;$  {{ number_format($totalpay, 2, '.', ',') }}
 								</td>
 							</tr>
@@ -112,7 +114,7 @@
 					
 					<td width="50%" valign="top">
 						<!-- Tools -->
-						<table class="table" style="font-size: 10pt" width="100%">
+						<table class="table" style="font-size: 9pt" width="100%">
 							<tr>
 								<td align="center" colspan="3"><strong>TOOLS</strong></td>
 							</tr>
@@ -126,7 +128,7 @@
 								@php($totaltool += ($tool->amount))
 								<tr>
 									<td align="left">{{ $tool->description }}</td>
-									<td align="center">{{date("m-d-Y", strtotime($tool->date))}}</td>
+									<td align="center" NOWRAP>{{date("m-d-Y", strtotime($tool->date))}}</td>
 									<td align="right">{{ number_format($tool->amount, 2, '.', ',') }}</td>						
 								</tr>
 							@endforeach
@@ -146,7 +148,7 @@
 						<!-- Totals -->
 						<table class="table" width="100%">
 							<tr>
-								<td align="right" style="font-size: 10pt">
+								<td align="right" style="font-size: 9pt">
 									<strong>TOTAL AMOUNT TO PAY:</strong>&emsp;&emsp;&emsp;$  {{ number_format($totalhouses, 2, '.', ',') }}
 								</td>
 							</tr>

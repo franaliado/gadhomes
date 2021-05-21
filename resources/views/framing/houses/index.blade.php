@@ -69,6 +69,12 @@
                         @php $lot = $house->lot; @endphp
                 @endswitch
 
+                @if ($house->subcontractor)
+                    @php $SubcontractorName = $house->subcontractor->name; @endphp
+                @else
+                    @php $SubcontractorName = ""; @endphp
+                @endif
+               
                 <tr>
                     <td align="center">{{ $loop->iteration }}</td>    
                     <td>{{ $house->address }}</td>  
@@ -77,7 +83,7 @@
                     <td align="center">{{ $house->status }}</td>
                     <td align="center">{{date("m-d-Y", strtotime($house->start_date))}}</td>
                     <td align="center">{{ $withoutpo }}</td>
-                    <td align="left">{{ $house->subcontractor->name }}</td>
+                    <td align="left">{{ $SubcontractorName }}</td>
                     <td align='center'> 
                         <form method="GET" action="{{ url('/houses/'.$house->id. '/edit') }}">
                             @csrf

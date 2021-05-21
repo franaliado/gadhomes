@@ -17,12 +17,12 @@ class CreateHousesTable extends Migration
     {
         Schema::create('houses', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('community_id')->nullable();
-            $table->string('address', 150);
+            $table->unsignedBigInteger('community_id');
+            $table->string('address', 150)->nullable();
             $table->integer('lot');
             $table->string('status', 7);
             $table->boolean('withoutpo')->default(0);
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             //Datos del Subcontratista
             $table->unsignedBigInteger('subcontractor_id')->nullable();
             $table->decimal('amount_assigned_subc', 8, 2)->default(0)->nullable();

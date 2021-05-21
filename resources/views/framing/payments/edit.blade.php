@@ -29,7 +29,7 @@
 
         <div class="form-box3" id="edit-payment">
         <div class="header"><b>Edit Payment</b></div>
-        <form method="POST" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor_id.'/update') }}">
+        <form method="POST" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor_id.'/'.$user_id.'/update') }}">
             @csrf
 
             <div class="body bg-gray">
@@ -77,7 +77,7 @@
             </div>
 
             <div class="footer">
-                <a href="{{ url('/payments/'.$subcontractor_id) }}" class="btn bg-red">
+                <a href="{{ url('/payments/'.$subcontractor_id.'/'.$user_id) }}" class="btn bg-red">
                     <i class="fa fa-arrow-left"> Back</i>
                 </a>
                 <button type="submit" class="btn bg-red">

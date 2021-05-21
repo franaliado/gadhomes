@@ -28,11 +28,10 @@ class HouseCreateRequest extends FormRequest
         $lot = Request::input('lot');
         $id = Request::input('id');
         return [
-            'address' => 'required|string|max:150',
+            'address' => ['string', 'max:150', 'nullable'],
             'community' => 'unique:houses,community_id,NULL,id,lot,' . $lot,
             'lot' => 'required|integer',
-            'start_date' => 'required',
-            'subcontractor' => 'required',
+            'status' => 'required',
         ];
     }
 

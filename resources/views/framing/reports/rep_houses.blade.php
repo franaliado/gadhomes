@@ -37,16 +37,18 @@
                 <!-- Registros -->
 
             <br>
-            <table align="center" border="0" cellpadding="10" >
+            <table align="center" border="0" cellpadding="5" >
                 <tr>
-                    <td rowspan="2">
+                    <td rowspan="2" align="center">
                         <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
                         <div class="col-md-12">
-                            <select id="status" name="status" class="form-control">
+                            <select id="status" name="status" class="form-control" style="width:250px">
                                 <option value="">---- Please Select ----</option>
-                                <option value="Started">Started</option>
+                                <option value="Pending">Pending</option>
                                 <option value="Billed">Billed</option>
                                 <option value="Paid">Paid</option>
+                                <option value="Paid PO1">Paid PO1</option>
+                                <option value="Paid PO2">Paid PO2</option>
                             </select>
                         </div>
                     </td>
