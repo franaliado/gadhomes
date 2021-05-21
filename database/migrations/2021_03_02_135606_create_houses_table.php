@@ -20,7 +20,7 @@ class CreateHousesTable extends Migration
             $table->unsignedBigInteger('community_id');
             $table->string('address', 150)->nullable();
             $table->integer('lot');
-            $table->string('status', 7);
+            $table->string('status', 8);
             $table->boolean('withoutpo')->default(0);
             $table->date('start_date')->nullable();
             //Datos del Subcontratista

@@ -126,18 +126,16 @@ class HouseController extends Controller
         $house = House::find($id);
         if ($house->community_id == $request->community and $house->lot == $request->lot){
             $this->validate($request, [
-                'address' => 'required|string|max:150',
+                'address' => ['string', 'max:150', 'nullable'],
                 'lot' => 'required|integer',
-                'start_date' => 'required',
-                'subcontractor' => 'required',
+                'status' => 'required',
             ]);
         }else{
             $this->validate($request, [
-                'address' => 'required|string|max:150',
+                'address' => ['string', 'max:150', 'nullable'],
                 'community' => 'unique:houses,community_id,NULL,id,lot,' . $request->lot,
                 'lot' => 'required|integer',
-                'start_date' => 'required',
-                'subcontractor' => 'required',
+                'status' => 'required',
             ],[
                 'community.unique' => 'The house located in the ' . $community->name . ' community and lot '. $request->lot .' already exists'
             ]);

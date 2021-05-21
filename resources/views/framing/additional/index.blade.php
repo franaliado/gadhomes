@@ -26,21 +26,10 @@
         @php $lot = $house->lot; @endphp
     @endswitch
 
-    @if ($house->address)
-        @php $address = "Address: ". $house->address . " - "; @endphp
-    @else
-        @php $address = ""; @endphp
-    @endif
-
-    @if ($house->subcontractor)
-        @php $SubcontractorName = " - Subcontractor: ".$house->subcontractor->name; @endphp
-    @else
-        @php $SubcontractorName = ""; @endphp
-    @endif
 
     <h1>List of Additional</h1> 
     <br> 
-    <b>{{ $address }} Lot: {{ $lot }} {{ $SubcontractorName }}</b>
+    <b>Community: {{ $house->community->name }} - Lot: {{ $lot }}</b>
     <br>
     Amount Assigned SubContractor:  {{ number_format($house->amount_assigned_subc, 2, '.', ',') }}
     <br>
