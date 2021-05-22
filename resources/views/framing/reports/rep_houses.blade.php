@@ -2,6 +2,22 @@
 
 @section('content')
 
+<script>
+    $(document).ready(function(){
+        $("#status").on('change', (function(event){
+            var status=$(this).val();
+            if($.trim(status) != ''){
+                $.get('community', {status: status}, function(community){
+                    $('#community').empty();
+                    $.each(community, function(index, value){
+                        $('#community').append("<option value='"+ index + "'>"+ value +"</option>");
+                    });
+                });
+            }
+        });
+    });
+</script> 
+
     @if(session('error'))
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -89,20 +105,6 @@
     </div>
     </div>
 
-    <script>
-        $(document).ready(function(){
-            $("#status").on('change', (function(event){
-                var status=$(this).val();
-                if($.trim(status) != ''){
-                    $.get('community', {status: status}, function(community){
-                        $('#community').empty();
-                        $.each(community, function(index, value){
-                            $('#community').append("<option value='"+ index + "'>"+ value +"</option>");
-                        });
-                    });
-                }
-            });
-        });
-    </script> 
+
 
 @endsection
