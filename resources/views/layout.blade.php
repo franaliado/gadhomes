@@ -60,11 +60,24 @@
                                 <span>{{ Auth::user()->name }}<i class="caret"></i></span>
                             </a>
                             <ul class="dropdown-menu">
+                                @switch ( Auth::user()->role)
+                                @case(1)
+                                    @php $role = "Administrator"; @endphp
+                                    @break
+                                @case(2)
+                                    @php $role = "Superintendent"; @endphp
+                                    @break
+                                @case(3)
+                                    @php $role = "Assistant"; @endphp
+                                    @break
+                                @default
+                                    @php $role = "Vendor"; @endphp
+                                @endswitch
                                 <!-- User image -->
                                 <li class="user-header bg-red">
                                     <img src="/images/avatar0.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{ Auth::user()->name }} - {{ Auth::user()->position }}
+                                        {{ Auth::user()->name }} - {{ $role }}
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -83,7 +96,7 @@
                 </div>
             </nav>
         </header>
-
+ 
         <!-- M E N U -->
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <!-- Left side column. contains the logo and sidebar -->
