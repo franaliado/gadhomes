@@ -22,10 +22,11 @@
 				<h1 align="left">GAD FRAMING INC.</h1>
 				<h3 align="center">REPORT OF EXPENSES</h3>
 				<h4 align="center">
-					@if($users <> 0) User: {{$user->name}} @endif
-					@if($type_expense <> "0") Type Expense: {{$type_expense}} @endif
-					@if($type_pay <> "0") Type Payment: {{$type_pay}} @endif
-					@if($FromDate <> "Null") - From: {{$FromDate}}  To: {{$ToDate}}@endif
+					<b>User:</b> {{$user->name}} -
+					<b>Type Expense:</b> {{$type_expense}} -
+					<b>Type Payment:</b> {{$type_pay}}
+					<br>
+					@if($FromDate <> "Null") <b>From:</b> {{date("m-d-Y", strtotime($FromDate))}}  <b>To:</b> {{date("m-d-Y", strtotime($ToDate))}}@endif
 				</h4>
 			</div>
 			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>

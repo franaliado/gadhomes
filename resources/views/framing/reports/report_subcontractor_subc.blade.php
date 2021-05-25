@@ -64,9 +64,10 @@
 			<div class="col-md-6" style="float:left;">
 				<table class="table table-bordered">
 					<tr>
-						<td align="center" colspan="3"><strong>PAYMENTS</strong></td>
+						<td align="center" colspan="4"><strong>PAYMENTS</strong></td>
 					</tr>
 					<tr>
+						<td align="center"><strong>Payer</strong></td>
 						<td align="center"><strong>Date</strong></td>
 						<td align="center"><strong>Type</strong></td>
 						<td align="right"><strong>Amount</strong></td>
@@ -84,6 +85,7 @@
 						@endswitch
 
 						<tr>
+							<td align="center">{{ $payment->users->name }}</td>
 							<td align="center">{{date("m-d-Y", strtotime($payment->date))}}</td>
 							<td align="center">{{ $type }}</td>
 							<td align="right">{{ number_format($payment->amount, 2, '.', ',') }}</td>						
@@ -91,7 +93,7 @@
 					@endforeach
 					@php($totalgen -= $totalpay)
 					<tr>
-						<td colspan="3">
+						<td colspan="4">
 							<p class="pull-right"><strong>Total Payments</strong>&emsp;&emsp;&emsp;$  {{ number_format($totalpay, 2, '.', ',') }}</p>
 						</td>
 					</tr>

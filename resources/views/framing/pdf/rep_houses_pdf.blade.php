@@ -41,8 +41,9 @@
 				<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
 				<FONT SIZE=4><b>REPORT OF HOUSES</b></font><br><br>
 				<FONT SIZE=2>
-				Status: {{$status}}<br>
-				Community: {{$community->name}}
+						<b>Status:</b> {{$status}} -
+						<b>Community:</b> {{$community->name}} -
+						<b>Subcontractor:</b> {{$subcontractor->name}}</h4>
 				</font>			
 			</td>
 			<td>
@@ -62,8 +63,7 @@
 				<td style="text-align:center;vertical-align: middle">Address</td>
 				<td style="text-align:center;vertical-align: middle">Lot</td>
 				<td style="text-align:center;vertical-align: middle">Start Date</td>
-				<td style="text-align:center;vertical-align: middle">Without<br>PO</td>
-				<td style="text-align:center;vertical-align: middle">Subcontractor</td>
+				<td style="text-align:center;vertical-align: middle">Without PO</td>
 			</tr>
 		</thead>
 	
@@ -98,7 +98,6 @@
 					<td align="center">{{ $lot }}</td>
 					<td align="center" NOWRAP>{{date("m-d-Y", strtotime($house->start_date))}}</td>
 					<td align="center">{{ $withoutpo }}</td>
-					<td align="left">{{ $house->subcontractor->name }}</td>
 				</tr>                
 			@endforeach
 		</tbody>

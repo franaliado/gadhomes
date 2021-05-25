@@ -95,7 +95,7 @@
                         <label for="user" class="col-md-6 col-form-label text-md-right">{{ __('User') }}</label>
     
                         <div class="col-md-12">
-                            <select id="user" name="user" class="form-control">
+                            <select id="user" name="user" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}" "{{ old('user') == $user->id ? 'selected': "" }}"> {{ $user->name }} </option>
@@ -109,7 +109,7 @@
                         <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Expenses') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_expense" name="type_expense" class="form-control">
+                            <select id="type_expense" name="type_expense" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                             </select>
                         </div>
@@ -119,7 +119,7 @@
                         <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Payment Type') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_pay" name="type_pay" class="form-control">
+                            <select id="type_pay" name="type_pay" class="form-control" required>
                                 <option value="">---- Please Select ----</option>
                             </select>
                         </div>

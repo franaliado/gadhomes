@@ -85,7 +85,7 @@
 
     <div class="form-box3" id="report-houses">
     <div class="header"><b>Report of Houses</b></div>
-    <form method="GET" action="{{ url('/report_houses_options') }}">
+    <form method="GET" action="{{ url('/report_houses') }}">
         @csrf
 
         <div class="body bg-gray">
@@ -93,38 +93,39 @@
                 <!-- Registros -->
 
             <br>
-            <table align="center" border="0" cellpadding="5" >
-                <tr>
-                    <td rowspan="2" align="center">
-                        <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
-                        <div class="col-md-12">
-                            <select id="status" name="status" class="form-control" style="width:250px">
-                                <option value="">---- Please Select ----</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Billed">Billed</option>
-                                <option value="Paid">Paid</option>
-                                <option value="Paid PO1">Paid PO1</option>
-                                <option value="Paid PO2">Paid PO2</option>
-                            </select>
-                        </div>
-                    </td>
-                    <td width="250px">
+            <div class="row g-3">
+                <div class="form-group row col-md-4">
+                    <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
+                    <div class="col-md-12">
+                        <select id="status" name="status" class="form-control" style="width:250px" required>
+                            <option value="">---- Please Select ----</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Billed">Billed</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Paid PO1">Paid PO1</option>
+                            <option value="Paid PO2">Paid PO2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row col-md-4">
+                    <div class="col-md-12">
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
                         <select id="community" name="community" class="form-control" required>
                             <option value="">---- Please Select ----</option>
                         </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    </div>
+                </div>
+
+                <div class="form-group row col-md-4">
+                    <div class="col-md-12">
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
                         <select id="subcontractor" name="subcontractor" class="form-control" required>
                             <option value="">---- Please Select ----</option>
                         </select>
-                    </td>
-                </tr>
-            </table>
-            <br>
+                    </div>
+                </div>
+            </div>   
         </div>
 
         <div class="footer">
@@ -138,7 +139,5 @@
     </form>
     </div>
     </div>
-
-
 
 @endsection
