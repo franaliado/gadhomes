@@ -4,17 +4,57 @@
 
 <script>
     $(document).ready(function(){
+        var communitys = @json($communitys);
+        var subcontractors = @json($subcontractors);
+        var houses = @json($houses);
+
+
         $("#status").on('change', (function(event){
             var status=$(this).val();
             if($.trim(status) != ''){
-                $.get('community', {status: status}, function(community){
-                    $('#community').empty();
-                    $.each(community, function(index, value){
-                        $('#community').append("<option value='"+ index + "'>"+ value +"</option>");
-                    });
+                $('#community').empty();
+                $('#community').append("<option value=''>---- Please Select ----</option>");
+                $('#subcontractor').empty();
+                $('#subcontractor').append("<option value=''>---- Please Select ----</option>");
+                var comunidades = [];
+                $.each(houses, function(index, value){
+                    if(value.status==status) {
+                        if(!comunidades.includes(value.community_id)) {
+                            comunidades.push(value.community_id);
+                        }
+                    }
+                });
+                $.each(comunidades, function(i, v) {
+                    let c = communitys.find(function(e, index) {if(e.id == v)return e;});
+                    $('#community').append("<option value='"+ v + "'>"+ c.name +"</option>");
                 });
             }
-        });
+        }));
+
+        $("#community").on('change', (function(event){
+            var comm=$(this).val();
+            if($.trim(comm) != ''){
+                $('#subcontractor').empty();
+                $('#subcontractor').append("<option value=''>---- Please Select ----</option>");
+                var subcontratores = [];
+                $.each(houses, function(index, value){
+                    if(value.status==$('#status').val()) {
+                        let c = communitys.find(function(e, index) {if(e.id == $("#community").val())return e;});
+                        if(value.community_id==c.id) {
+                            if(!subcontratores.includes(value.subcontractor_id)) {
+                                subcontratores.push(value.subcontractor_id);
+                            }
+                        }
+                    }
+                });
+
+
+                $.each(subcontratores, function(i, v) {
+                    let s = subcontractors.find(function(e, index) {if(e.id == v)return e;});
+                    $('#subcontractor').append("<option value='"+ v + "'>"+ s.name +"</option>");
+                });
+            }
+        }));
     });
 </script> 
 
@@ -70,22 +110,16 @@
                     </td>
                     <td width="250px">
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
-                        <select id="community" name="community" class="form-control" required onchange="MyFunctionCom(this)">
+                        <select id="community" name="community" class="form-control" required>
                             <option value="">---- Please Select ----</option>
-
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
-                        <select id="subcontractor" name="subcontractor" class="form-control" required onchange="MyFunctionSub(this)">
+                        <select id="subcontractor" name="subcontractor" class="form-control" required>
                             <option value="">---- Please Select ----</option>
-                            @foreach($subcontractors as $subcontractor)
-                                <option value="{{ $subcontractor->id }}" {{ old('subcontractor') == $subcontractor->id ? 'selected' : '' }}> 
-                                        {{ $subcontractor->name }} 
-                                </option>
-                            @endforeach
                         </select>
                     </td>
                 </tr>

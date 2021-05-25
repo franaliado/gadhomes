@@ -1,7 +1,61 @@
 @extends('layout')
 
 @section('content')
+    <script>
+        $(function() {
+            var users = @json($users);
+            var expenses = @json($expenses);
 
+            var listExp = [];
+            var listPay = [];
+
+            $("#user").on('change', function() {
+                let val = $(this).val();
+                listExp = [];
+                $('#type_expense').empty();
+                $('#type_expense').append("<option value=''>---- Please Select ----</option>");
+                listPay = [];
+                $('#type_pay').empty();
+                $('#type_pay').append("<option value=''>---- Please Select ----</option>");
+                $.each(expenses, function(index, value){
+                    if(value.user_id==val) {
+                        if(!listExp.includes(value.type_expense)) {
+                            listExp.push(value.type_expense);
+                        }
+                    }
+                });
+                $.each(listExp, function(i, v) {
+                    $('#type_expense').append("<option value='"+ v + "'>"+ v +"</option>");
+                });
+            });
+
+            $("#type_expense").on('change', function() {
+                let val = $(this).val();
+                listPay = [];
+                $('#type_pay').empty();
+                $('#type_pay').append("<option value=''>---- Please Select ----</option>");
+
+                $.each(expenses, function(index, value){
+                    if(value.user_id==$("#user").val()) {
+                        if(value.type_expense == val) {
+                            if(!listPay.includes(value.type_pay)) {
+                                listPay.push(value.type_pay);
+                            }
+                        }
+                    }
+                });
+                $.each(listPay, function(i, v) {
+                    $('#type_pay').append("<option value='"+ v + "'>"+ v +"</option>");
+                });
+
+            });
+
+        });
+
+        var actualizarLista = function() {
+
+        }
+    </script>
         @if(session('error'))
         <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -41,8 +95,8 @@
                         <label for="user" class="col-md-6 col-form-label text-md-right">{{ __('User') }}</label>
     
                         <div class="col-md-12">
-                            <select id="user" name="user" class="form-control" onchange="FunctionUser(this)">
-                                <option value="0">All</option>
+                            <select id="user" name="user" class="form-control">
+                                <option value="">---- Please Select ----</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}" "{{ old('user') == $user->id ? 'selected': "" }}"> {{ $user->name }} </option>
                                 @endforeach
@@ -55,14 +109,8 @@
                         <label for="type_expense" class="col-md-6 col-form-label text-md-right">{{ __('Expenses') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_expense" name="type_expense" class="form-control" onchange="FunctionExp(this)">
-                                <option value="0">All</option>
-                                <option value="Gas">Gas</option>
-                                <option value="Tools-Materials">Tools-Materials</option>
-                                <option value="Bills">Bills</option>
-                                <option value="Foods">Foods</option>
-                                <option value="Hotels">Hotels</option>
-                                <option value="Others">Others</option>
+                            <select id="type_expense" name="type_expense" class="form-control">
+                                <option value="">---- Please Select ----</option>
                             </select>
                         </div>
                     </div>  
@@ -71,11 +119,8 @@
                         <label for="type_pay" class="col-md-6 col-form-label text-md-right">{{ __('Payment Type') }}</label>
     
                         <div class="col-md-12">
-                            <select id="type_pay" name="type_pay" class="form-control" onchange="FunctionPay(this)">
-                                <option value="0">All</option>
-                                <option value="Check">Check</option>
-                                <option value="Cash">Cash</option>
-                                <option value="Card">Card</option>
+                            <select id="type_pay" name="type_pay" class="form-control">
+                                <option value="">---- Please Select ----</option>
                             </select>
                         </div>
                     </div>
@@ -126,7 +171,7 @@
         </div>
 
         <script>
-            function FunctionUser(selectObject) {
+            /*function FunctionUser(selectObject) {
                 var value = selectObject.value;
                 if (value == 0) {
                     $("#type_expense").attr("disabled",false);
@@ -164,7 +209,7 @@
                     $("#user").val("0");
                     $("#type_expense").val("0");
                 }
-            }
+            }*/
         </script>
 
 @endsection
