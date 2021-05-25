@@ -25,11 +25,12 @@ class ReportsController extends Controller
      */
     public function rep_houses()
     {
-        $community = Community::orderBy('name', 'ASC')->get();
+        $communitys = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
+        $houses = House::all();
 
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'community' => $community]);
+        return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys, 'houses' => $houses]);
     }
   
 
@@ -230,9 +231,10 @@ class ReportsController extends Controller
     public function rep_expenses()
     {
         $users = User::orderBy('name', 'ASC')->get();
+        $expenses = Expense::all();
 
         if (Auth::user()->role != 1){ return redirect('/home'); }
-        return view('framing.reports.rep_expenses')->with(['users' => $users]);
+        return view('framing.reports.rep_expenses')->with(['users' => $users, 'expenses' => $expenses]);
     }
 
     public function report_expenses(Request $request)
