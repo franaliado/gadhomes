@@ -14,9 +14,11 @@
 
     <h1>List of Subcontractors</h1>
     <br/>
-    <a href="{{ url('/subcontractors/create') }}" class="btn btn-danger">
-        <i class="fa fa-plus"> Add New Subcontractor</i></a>
-    <br/><br/>
+    @if (Auth::user()->role == 1)
+        <a href="{{ url('/subcontractors/create') }}" class="btn btn-danger">
+            <i class="fa fa-plus"> Add New Subcontractor</i></a>
+        <br/><br/>
+    @endif
   
     <div class="col-md-4">
         <form class="form-inline ml-3">
@@ -75,15 +77,17 @@
                     <td align="right">{{ number_format($totalhouses, 2, '.', ',') }}</td>
                     <td align="right">{{ number_format($total, 2, '.', ',') }}</td>
 
-                    <td align='center'> 
-                        <form method="GET" action="{{ url('/subcontractors/'.$subcontractor->id. '/edit') }}">
-                            @csrf
-                            {{ method_field('EDIT')}}  
-                            <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
-                                <i class="fa fa-pen"> </i>
-                            </button>                          
-                        </form>
-                    </td>
+                    @if (Auth::user()->role == 1)
+                        <td align='center'> 
+                            <form method="GET" action="{{ url('/subcontractors/'.$subcontractor->id. '/edit') }}">
+                                @csrf
+                                {{ method_field('EDIT')}}  
+                                <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                    <i class="fa fa-pen"> </i>
+                                </button>                          
+                            </form>
+                        </td>
+                    @endif
                     <td align='center'>
                         <a href="{{ url('/tools/'.$subcontractor->id) }}"">
 

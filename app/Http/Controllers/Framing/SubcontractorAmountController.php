@@ -33,50 +33,13 @@ class SubcontractorAmountController extends Controller
             ->orderBy('subcontractors.name', 'ASC')
             ->get();
  
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.subcontractor_amount.index')->with(['houses' => $houses]); 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $house = House::findOrFail($id);
         
         return view("framing.subcontractor_amount.edit")->with(['house' => $house]);

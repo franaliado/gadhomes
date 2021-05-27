@@ -31,7 +31,6 @@ class SubcontractorController extends Controller
         ->orderBy('name', 'ASC')
         ->paginate(10);
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.subcontractors.index')->with(['subcontractors' => $subcontractors]);         //
     }
 
@@ -42,6 +41,8 @@ class SubcontractorController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         return view("framing.subcontractors.create");
     }
 
@@ -95,6 +96,8 @@ class SubcontractorController extends Controller
      */
     public function edit($id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $subcontractor = Subcontractor::findOrFail($id);
         return view("framing.subcontractors.edit")->with(['subcontractor' => $subcontractor]);
     }
@@ -141,6 +144,8 @@ class SubcontractorController extends Controller
      */
     public function destroy($id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
         Subcontractor::destroy($id);
         return redirect ('subcontractors');
     }

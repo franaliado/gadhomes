@@ -80,15 +80,17 @@
                     <td align="right">{{ number_format($totaladditional, 2, '.', ',') }}</td>
                     <td align="right">{{ number_format($totaladditional + $house->amount_assigned_subc, 2, '.', ',') }}</td>
                    
-                    <td align='center'> 
-                        <form method="GET" action="{{ url('/subcontractor_amount/'.$house->id. '/edit') }}">
-                            @csrf
-                            {{ method_field('EDIT')}}  
-                            <button type="submit" class="btn btn-primary btn-sm" title="Edit  Amount Assigned" alt="Edit")>
-                                <i class="fa fa-pen"> </i>
-                            </button>                          
-                        </form>
-                    </td>
+                    @if (Auth::user()->role == 1)
+                        <td align='center'> 
+                            <form method="GET" action="{{ url('/subcontractor_amount/'.$house->id. '/edit') }}">
+                                @csrf
+                                {{ method_field('EDIT')}}  
+                                <button type="submit" class="btn btn-primary btn-sm" title="Edit  Amount Assigned" alt="Edit")>
+                                    <i class="fa fa-pen"> </i>
+                                </button>                          
+                            </form>
+                        </td>
+                    @endif
                     <td align='center'>
                         <a href="{{ url('/additional/'.$house->id) }}"">
 

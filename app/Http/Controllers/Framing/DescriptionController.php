@@ -38,7 +38,6 @@ class DescriptionController extends Controller
                 ->orderBy('id', 'DESC')
                 ->get();
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.descriptionpo.index')->with(['house_id' => $house_id, 'orders' => $orders, 'descriptionpos' => $descriptionpos]); 
     }
 
@@ -49,6 +48,8 @@ class DescriptionController extends Controller
      */
     public function create($order_id, $house_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
         return view("framing.descriptionpo.create")->with(['order_id' => $order_id, 'house_id' => $house_id]);
     }
 
@@ -105,6 +106,8 @@ class DescriptionController extends Controller
      */
     public function edit($id, $order_id, $house_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
         $descriptionpo = Descriptionpo::findOrFail($id);
         
         return view("framing.descriptionpo.edit")->with(['descriptionpo' =>  $descriptionpo, 'order_id' => $order_id, 'house_id' => $house_id]);

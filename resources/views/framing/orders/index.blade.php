@@ -29,9 +29,11 @@
     <h1>List of Purchase Orders <br> {{ $house->address }} - {{ $lot }}</h1>
     <br/>
     @if (count($orders) < 8)
-        <a href="{{ url('/orders/'.$house->id. '/create') }}" class="btn btn-danger">
-            <i class="fa fa-plus"> Add PO </i>
-        </a> 
+        @if (Auth::user()->role == 1)
+            <a href="{{ url('/orders/'.$house->id. '/create') }}" class="btn btn-danger">
+                <i class="fa fa-plus"> Add PO </i>
+            </a> 
+        @endif
     @else
         <a class="btn btn-secondary">
             <i class="fa fa-plus"> Add PO </i>
@@ -48,7 +50,11 @@
                 <th style="text-align:center;vertical-align: middle">Date P.O.</th>
                 <th style="text-align:center;vertical-align: middle">Superintendent</th>
                 <th style="text-align:center;vertical-align: middle">Phone Sup</th>
-                <th colspan = "4" style="text-align:center;vertical-align: middle">Actions</th>
+                @if (Auth::user()->role == 1)
+                    <th colspan = "4" style="text-align:center;vertical-align: middle">Actions</th>
+                @else
+                    <th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th>
+                @endif
             </tr>
         </thead>
 
@@ -63,15 +69,18 @@
                         <td align="center">{{ $order->name_Superint }}</td>
                         <td align="center">{{ $order->phone_Superint }}</td>
 
-                        <td align='center'> 
-                            <form method="GET" action="{{ url('/orders/'.$order->id. '/'.$house->id.'/edit') }}">
-                                @csrf
-                                {{ method_field('EDIT')}}  
-                                <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
-                                    <i class="fa fa-pen"> </i>
-                                </button>                          
-                            </form>
-                        </td>
+                        @if (Auth::user()->role == 1)
+                            <td align='center'> 
+                                <form method="GET" action="{{ url('/orders/'.$order->id. '/'.$house->id.'/edit') }}">
+                                    @csrf
+                                    {{ method_field('EDIT')}}  
+                                    <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                        <i class="fa fa-pen"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                        @endif
+                        
                         <td align='center'>
                             <a href="{{ url('/descriptionpo/'.$order->id.'/'.$house->id) }}"">
                                 <button type="button" class="btn btn-success btn-sm" title="Descriptions" alt="Descriptions">
@@ -80,23 +89,25 @@
                             </a>
                         </td>
 
-                        <td align='center'>
-                            <a href="/invoice/{{ $order->idInvoice }}/{{$house->id}}">
-                                <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
-                                    <i class="fa fa-file-text" aria-hidden="true"></i>
-                                </button> 
-                            </a>
-                        </td>
+                        @if (Auth::user()->role == 1)
+                            <td align='center'>
+                                <a href="/invoice/{{ $order->idInvoice }}/{{$house->id}}">
+                                    <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
+                                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                                    </button> 
+                                </a>
+                            </td>
 
-                        <td align='center'>
-                            <form method="post" action="{{ url('/orders/'.$order->id.'/'.$house->id) }}">
-                                @csrf
-                                {{ method_field('DELETE')}}  
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this PO?')" title="Delete" alt="Delete">
-                                    <i class="fa fa-trash-alt"> </i>
-                                </button>                          
-                            </form>
-                        </td>
+                            <td align='center'>
+                                <form method="post" action="{{ url('/orders/'.$order->id.'/'.$house->id) }}">
+                                    @csrf
+                                    {{ method_field('DELETE')}}  
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this PO?')" title="Delete" alt="Delete">
+                                        <i class="fa fa-trash-alt"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                        @endif
                     </tr>              
                 @endforeach
             @else

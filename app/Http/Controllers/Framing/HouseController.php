@@ -37,7 +37,6 @@ class HouseController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }
 
@@ -48,6 +47,8 @@ class HouseController extends Controller
      */
     public function create()
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $communitys = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
         return view("framing.houses.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);
@@ -106,6 +107,8 @@ class HouseController extends Controller
      */
     public function edit($id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $house = House::findOrFail($id);
         
         $communitys = Community::orderBy('name', 'ASC')->get();

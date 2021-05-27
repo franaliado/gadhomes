@@ -176,14 +176,9 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                @if (Auth::user()->role == 1)
                                     <li><a href="/houses"><i class="fa fa-angle-double-right"></i> Houses</a></li>
                                     <li><a href="/subcontractor_amount"><i class="fa fa-angle-double-right"></i> Subcontractors</a></li>
-                                @endif
-                                @if (Auth::user()->role == 1 or Auth::user()->role == 2)
                                     <li><a href="/expenses/{{Auth::user()->id}}"><i class="fa fa-angle-double-right"></i> My Expenses</a></li>
-                                @endif
-                                @if (Auth::user()->role == 1)
                                     <li class="treeview">
                                         <a href="#">
                                             <i class="fa fa-angle-double-right"></i> <span>Reports</span>
@@ -195,11 +190,8 @@
                                             <li><a href="/rep_expenses"><i class="fa fa-angle-double-right"></i> Expenses Report</a></li>
                                         </ul>
                                     </li>
-                                @endif
                             </ul>
-  
                         </li>
-
                     </ul>
                 </section>
                 <!-- /.sidebar -->

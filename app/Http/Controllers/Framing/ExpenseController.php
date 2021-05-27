@@ -30,7 +30,6 @@ class ExpenseController extends Controller
      */
     public function index($user_id)
     {
-   
         $expenses = Expense::where('user_id', $user_id)
                 ->orderBy('id', 'DESC')
                 ->get();
@@ -102,6 +101,8 @@ class ExpenseController extends Controller
      */
     public function edit($id, $user_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $expense = Expense::findOrFail($id);
         
         return view("framing.expenses.edit")->with(['expense' => $expense, 'user_id' => $user_id]);
@@ -148,6 +149,8 @@ class ExpenseController extends Controller
      */
     public function destroy($id, $user_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
         Expense::destroy($id);
         return redirect('/expenses/'.$user_id)->with(['success' => 'Expense successfully delete']);
     }

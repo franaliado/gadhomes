@@ -36,7 +36,6 @@ class OrderController extends Controller
         $orders = Order::select('orders.*', 'invoices.id as idInvoice')->where('house_id', $id)->leftJoin('invoices', 'invoices.order_id', 'orders.id')->get();
         $house = House::findOrFail($id);
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.orders.index')->with(['house' => $house, 'orders' => $orders]); 
     }
 
@@ -47,6 +46,8 @@ class OrderController extends Controller
      */
     public function create($id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         return view("framing.orders.create")->with(['house_id' => $id]);
     }
 
@@ -114,6 +115,8 @@ class OrderController extends Controller
      */
     public function edit($id, $house_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $order = Order::findOrFail($id);
         
         return view("framing.orders.edit")->with(['house_id' => $house_id, 'order' => $order]);
@@ -164,6 +167,8 @@ class OrderController extends Controller
      */
     public function destroy($id, $house_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
         Order::destroy($id);
 
         $orders = Order::where('house_id', $house_id)->get();

@@ -14,9 +14,11 @@
 
     <h1>List of Houses</h1>
     <br/>
-    <a href="{{ url('/houses/create') }}" class="btn btn-danger">
-        <i class="fa fa-plus"> Add House</i></a>
-    <br/><br/>
+    @if (Auth::user()->role == 1)
+        <a href="{{ url('/houses/create') }}" class="btn btn-danger">
+            <i class="fa fa-plus"> Add House</i></a>
+            <br/><br/>
+    @endif
 
     <div class="col-md-4">
         <form class="form-inline ml-3">
@@ -40,7 +42,11 @@
                 <th style="text-align:center;vertical-align: middle">Start Date</th>
                 <th style="text-align:center;vertical-align: middle">Without PO</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
-                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                @if (Auth::user()->role == 1)
+                    <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>                   
+                @else
+                    <th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th>           
+                @endif
             </tr>
         </thead>
 
@@ -90,15 +96,17 @@
                     <td align="center">{{$start_date}}</td>
                     <td align="center">{{ $withoutpo }}</td>
                     <td align="left">{{ $SubcontractorName }}</td>
-                    <td align='center'> 
-                        <form method="GET" action="{{ url('/houses/'.$house->id. '/edit') }}">
-                            @csrf
-                            {{ method_field('EDIT')}}  
-                            <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
-                                <i class="fa fa-pen"> </i>
-                            </button>                          
-                        </form>
-                    </td>
+                    @if (Auth::user()->role == 1)
+                        <td align='center'> 
+                            <form method="GET" action="{{ url('/houses/'.$house->id. '/edit') }}">
+                                @csrf
+                                {{ method_field('EDIT')}}  
+                                <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                    <i class="fa fa-pen"> </i>
+                                </button>                          
+                            </form>
+                        </td>
+                    @endif
                     <td align='center'>
                         <a href="{{ url('/orders/'.$house->id) }}"">
 
@@ -107,17 +115,6 @@
                             </button>                          
                         </a>
                     </td>
-                    <!--
-                    <td align='center'>
-                        <form method="post" action="{{ url('/houses/'.$house->id) }}">
-                            @csrf
-                            {{ method_field('DELETE')}}  
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this record?')" title="Delete" alt="Delete">
-                                <i class="fa fa-trash-alt"> </i>
-                            </button>                          
-                        </form>
-                    </td>
-                -->
                 </tr>                
             @endforeach
         </tbody>

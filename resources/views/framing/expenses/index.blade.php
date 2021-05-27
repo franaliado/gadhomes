@@ -21,6 +21,7 @@
     </a> 
     <br/><br/>
 
+
     <table class="table table-light table-hover" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">
             <tr>
@@ -31,7 +32,9 @@
                 <th style="text-align:center;vertical-align: middle">Payment Type</th>
                 <th style="text-align:center;vertical-align: middle">Card</th>
                 <th style="text-align:center;vertical-align: middle">Amount</th>
-                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                @if (Auth::user()->role == 1)
+                    <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                @endif
             </tr>
         </thead>
 
@@ -49,24 +52,26 @@
                         <td align="center">{{ $expense->card }}</td>
                         <td align="right">{{ number_format($expense->amount, 2, '.', ',') }}</td>
 
-                        <td align='center'> 
-                            <form method="GET" action="{{ url('/expenses/'.$expense->id.'/'.$user_id.'/edit') }}">
-                                @csrf
-                                {{ method_field('EDIT')}}  
-                                <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
-                                    <i class="fa fa-pen"> </i>
-                                </button>                          
-                            </form>
-                        </td>
-                        <td align='center'>
-                            <form method="post" action="{{ url('/expenses/'.$expense->id.'/'.$user_id) }}">
-                                @csrf
-                                {{ method_field('DELETE')}}  
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Expense?')" title="Delete" alt="Delete">
-                                    <i class="fa fa-trash-alt"> </i>
-                                </button>                          
-                            </form>
-                        </td>
+                        @if (Auth::user()->role == 1)
+                            <td align='center'> 
+                                <form method="GET" action="{{ url('/expenses/'.$expense->id.'/'.$user_id.'/edit') }}">
+                                    @csrf
+                                    {{ method_field('EDIT')}}  
+                                    <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                        <i class="fa fa-pen"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                            <td align='center'>
+                                <form method="post" action="{{ url('/expenses/'.$expense->id.'/'.$user_id) }}">
+                                    @csrf
+                                    {{ method_field('DELETE')}}  
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Expense?')" title="Delete" alt="Delete">
+                                        <i class="fa fa-trash-alt"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                        @endif
                     </tr>              
                 @endforeach
             @else
