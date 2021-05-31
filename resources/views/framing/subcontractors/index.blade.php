@@ -128,7 +128,6 @@
 
         </tbody>
     </table>
-    {{ $subcontractors -> links() }}
     <br>
     <a href="{{ URL('/subcontractor_amount') }}" class="btn bg-red">
         <i class="fa fa-arrow-left"> Back</i>

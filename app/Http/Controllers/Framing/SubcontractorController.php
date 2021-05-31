@@ -29,7 +29,7 @@ class SubcontractorController extends Controller
 
         $subcontractors = Subcontractor::where('name', 'LIKE', '%'.$query.'%')
         ->orderBy('name', 'ASC')
-        ->paginate(10);
+        ->get();
 
         return view('framing.subcontractors.index')->with(['subcontractors' => $subcontractors]);         //
     }
