@@ -34,7 +34,8 @@ class HouseController extends Controller
             ->orWhere('houses.status', 'LIKE', '%'.$query.'%')
             ->orWhere('community.name', 'LIKE', '%'.$query.'%')
             ->orWhere('subcontractors.name', 'LIKE', '%'.$query.'%')
-            ->orderBy('id', 'DESC')
+            ->orderBy('community.name', 'ASC')
+            ->orderBy('houses.lot', 'ASC')
             ->get();
 
         return view('framing.houses.index')->with(['houses' => $houses]); 
