@@ -9,7 +9,7 @@ class Order extends Model
 
     protected $table = 'orders';
 
-    protected $fillable = [ 'id', 'num_po', 'date_order', 'name_Superint', 'phone_Superint', 'house_id'
+    protected $fillable = [ 'id', 'num_po', 'date_order', 'type_PO', 'name_Superint', 'phone_Superint', 'paid', 'house_id'
    			  ];
 
     //Relación Uno a Muchos Inversa

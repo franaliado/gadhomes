@@ -76,8 +76,6 @@
                                 <option value="Pending" {{ $house->status == "Pending"  ? 'selected' : '' }}>Pending</option>
                                 <option value="Billed" {{ $house->status == "Billed"  ? 'selected' : '' }}>Billed</option>
                                 <option value="Paid" {{ $house->status == "Paid"  ? 'selected' : '' }}>Paid</option>
-                                <option value="Paid PO1" {{ $house->status == "Paid PO1"  ? 'selected' : '' }}>Paid PO1</option>
-                                <option value="Paid PO2" {{ $house->status == "Paid PO2"  ? 'selected' : '' }}>Paid PO2</option>
                             </select>
                         </div>
                     </div>

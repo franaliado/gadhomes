@@ -21,8 +21,7 @@ class CreateHousesTable extends Migration
             $table->string('address', 150)->nullable();
             $table->integer('lot');
             $table->string('status', 8);
-            $table->boolean('withoutpo')->default(0);
-            $table->date('start_date')->nullable();
+            $table->string('paid_out', 100)->nullable();
             //Datos del Subcontratista
             $table->unsignedBigInteger('subcontractor_id')->nullable();
             $table->decimal('amount_assigned_subc', 8, 2)->default(0)->nullable();

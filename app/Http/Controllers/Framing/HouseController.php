@@ -72,12 +72,12 @@ class HouseController extends Controller
             'address' => $request->address,
             'community_id' => $request->community,
             'lot' => $request->lot,
-            'status' => $request->status,
-            'start_date' => $request->start_date,
-            'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,
+            'status' => 'Pending',
+            /**'withoutpo' => ($request->withoutpo) ? intval($request->withoutpo) : 0,*/
             'subcontractor_id' => $request->subcontractor,
           );
   
+   
           House::create($data);
   
           DB::commit();
@@ -126,32 +126,31 @@ class HouseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //Validaciones
         $community = Community::find($request->community);
         $house = House::find($id);
         if ($house->community_id == $request->community and $house->lot == $request->lot){
             $this->validate($request, [
                 'address' => ['string', 'max:150', 'nullable'],
                 'lot' => 'required|integer',
-                'status' => 'required',
             ]);
         }else{
             $this->validate($request, [
                 'address' => ['string', 'max:150', 'nullable'],
                 'community' => 'unique:houses,community_id,NULL,id,lot,' . $request->lot,
                 'lot' => 'required|integer',
-                'status' => 'required',
             ],[
                 'community.unique' => 'The house located in the ' . $community->name . ' community and lot '. $request->lot .' already exists'
             ]);
         }
+        //
+
         DB::beginTransaction();
         try {
             $house->address = $request->address;
             $house->community_id = $request->community;
             $house->lot = $request->lot;
-            $house->status = $request->status;
-            $house->start_date = $request->start_date;
-            $house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0;
+            /**$house->withoutpo = ($request->withoutpo) ? intval($request->withoutpo) : 0; */
             $house->subcontractor_id = $request->subcontractor;
             $house->save();
 

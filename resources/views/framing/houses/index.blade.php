@@ -39,8 +39,7 @@
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Status</th>
-                <th style="text-align:center;vertical-align: middle">Start Date</th>
-                <th style="text-align:center;vertical-align: middle">Without PO</th>
+                <th style="text-align:center;vertical-align: middle;width:100px">Paid Out</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 @if (Auth::user()->role == 1)
                     <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>                   
@@ -52,14 +51,6 @@
 
         <tbody>
             @foreach ($houses as $house)
-
-                @switch ($house->withoutpo)
-                    @case(0)
-                        @php $withoutpo = "No"; @endphp
-                        @break
-                    @default
-                        @php $withoutpo = "Yes"; @endphp
-                @endswitch
 
                 @switch (strlen($house->lot))
                     @case(1)
@@ -80,21 +71,14 @@
                 @else
                     @php $SubcontractorName = ""; @endphp
                 @endif
-
-                @if ($house->start_date == Null)
-                    @php $start_date = ""; @endphp 
-                @else
-                    @php $start_date = date("m-d-Y", strtotime($house->start_date)); @endphp
-                @endif
-               
+            
                 <tr>
                     <td align="center">{{ $loop->iteration }}</td>    
                     <td>{{ $house->address }}</td>  
                     <td align="center">{{ $house->community->name }}</td>
                     <td align="center">{{ $lot }}</td>
                     <td align="center">{{ $house->status }}</td>
-                    <td align="center">{{$start_date}}</td>
-                    <td align="center">{{ $withoutpo }}</td>
+                    <td align="center">{{$house->paid_out}}</td>
                     <td align="left">{{ $SubcontractorName }}</td>
                     @if (Auth::user()->role == 1)
                         <td align='center'> 

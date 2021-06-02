@@ -63,6 +63,19 @@
                             @enderror
                         </div>
                     </div>
+
+                    <div class="form-group row col-md-4">
+                        <label for="type_PO" class="col-md-6 col-form-label text-md-right">{{ __('Type PO') }}</label>
+                        <div class="col-md-12">
+                            <input id="type_PO" type="text" maxlength="2" class="form-control @error('type_PO') is-invalid @enderror" name="type_PO" value="{{ old('type_PO', $order->type_PO) }}" required autocomplete="type_PO" autofocus placeholder="Type PO" onkeyup="this.value = this.value.toUpperCase();">
+
+                            @error('type_PO')
+                                <span class="invalid-feedback" role="alert">
+                                    <font color="red"><strong>{{ $message }}</strong></font>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row g-3">
@@ -89,6 +102,17 @@
                                     <font color="red"><strong>{{ $message }}</strong></font>
                                 </span>
                             @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-md-4">
+                        <br/>
+                        <div class="form-check">
+                            <input type="hidden" name="paid" value="0"/>
+                            <input id="paid" name="paid" class="icheck" type="checkbox" value="1" {{ $order->paid || old('paid', 0) === 1 ?  'checked' : ''}}>
+                            <label class="form-check-label" for="withoutpo">
+                                $
+                            </label>
                         </div>
                     </div>
                 </div>

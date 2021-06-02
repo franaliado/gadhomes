@@ -24,8 +24,10 @@ class OrderController extends Controller
             'date_order' => ['required'],
             'name_Superint' => ['required', 'string', 'max:50'],
             'phone_Superint' => ['required', 'string', 'max:15'],
+            'type_PO' => ['required', 'string', 'max:2'],
         ]);
     }
+    
     /**
      * Display a listing of the resource.
      *
@@ -59,8 +61,17 @@ class OrderController extends Controller
      */
     public function store(Request $request, $id)
     {
+        //Validacion
+        $this->validate($request, [
+            'num_po' => ['required', 'integer', 'unique:orders'],
+            'date_order' => ['required'],
+            'name_Superint' => ['required', 'string', 'max:50'],
+            'phone_Superint' => ['required', 'string', 'max:15'],
+            'type_PO' => 'unique:orders,type_PO,NULL,id,house_id,' . $id,
+        ],[
+            'type_PO.unique' => 'The type of PO already exists'
+        ]);
 
-        $this->validator($request->all())->validate();
 
         DB::beginTransaction();
         try {
@@ -70,6 +81,8 @@ class OrderController extends Controller
                 'date_order' => $request->date_order,
                 'name_Superint' => $request->name_Superint,
                 'phone_Superint' => $request->phone_Superint,
+                'type_PO' => $request->type_PO,
+                'paid' => "0",
                 'house_id' => $id
             );
 
@@ -87,7 +100,32 @@ class OrderController extends Controller
 
             Invoice::create($data_invoice);
             DB::commit();
-            
+
+            //Modificar Status de Houses
+            $house = House::find($id);
+            if($house->status == "Pending"){
+                $house->status = "Billed";
+                $house->save();
+            }
+
+            // Editar Paid Out en Houses
+            $orders=Order::where('house_id', $id)
+                ->where('paid', 1)
+                ->get();
+
+            $text_paid_out = "";
+            foreach($orders as $order){
+                if($text_paid_out == ""){ $coma = ""; }else{ $coma = ", "; }
+                $text_paid_out .= $coma.$order->type_PO;
+            }
+                
+            $house = House::find($id);
+            $house->paid_out = $text_paid_out;
+            $house->save();
+
+            DB::commit();
+            //
+           
             return redirect('/orders/'.$id)->with(['success' => 'Order successfully saved']);
 
         }catch (\Exception $e) {
@@ -96,23 +134,7 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id, $house_id)
     {
         if (Auth::user()->role != 1){ return redirect('/home'); }
@@ -122,34 +144,77 @@ class OrderController extends Controller
         return view("framing.orders.edit")->with(['house_id' => $house_id, 'order' => $order]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id, $house_id)
     {
-
-        $this->validate($request, [
-            'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
-            'date_order' => ['required'],
-            'name_Superint' => ['required', 'string', 'max:50'],
-            'phone_Superint' => ['required', 'string', 'max:15'],
-        ]);
+        //Validaciones
+        $order = Order::find($id);
+        if ($order->house_id == $house_id and $order->type_PO == $request->type_PO){
+            $this->validate($request, [
+                'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
+                'date_order' => ['required'],
+                'name_Superint' => ['required', 'string', 'max:50'],
+                'phone_Superint' => ['required', 'string', 'max:15'],
+            ]);
+        }else{
+            $this->validate($request, [
+                'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
+                'date_order' => ['required'],
+                'name_Superint' => ['required', 'string', 'max:50'],
+                'phone_Superint' => ['required', 'string', 'max:15'],
+                'type_PO' => 'unique:orders,type_PO,NULL,id,house_id,' . $house_id,
+            ],[
+                'type_PO.unique' => 'The type of PO already exists'
+            ]);
+        }
+        //
 
         DB::beginTransaction();
         try {
   
-          $order = Order::find($id);
-          $order->num_po = $request->num_po;
-          $order->date_order = $request->date_order;
-          $order->name_Superint = $request->name_Superint;
-          $order->phone_Superint = $request->phone_Superint;
-          $order->save();
-  
-          DB::commit();
+            $order = Order::find($id);
+            $order->num_po = $request->num_po;
+            $order->date_order = $request->date_order;
+            $order->name_Superint = $request->name_Superint;
+            $order->phone_Superint = $request->phone_Superint;
+            $order->type_PO = $request->type_PO;
+            $order->paid = ($request->paid) ? intval($request->paid) : 0; 
+            $order->save();
+    
+            DB::commit();
+
+
+            // Editar Paid Out en Houses
+            $orders=Order::where('house_id', $house_id)
+            ->get();
+
+            $text_paid_out = "";
+            $paid_all = "1";
+            foreach($orders as $order){
+                if($order->paid == 1){
+                    if($text_paid_out == ""){ $coma = ""; }else{ $coma = ", "; }
+                    $text_paid_out .= $coma.$order->type_PO;
+                }else{
+                    $paid_all ="0";
+                }
+            }
+              
+            if($paid_all == "1"){$text_paid_out = "All";}
+
+            $house = House::find($house_id);
+            $house->paid_out = $text_paid_out;
+            if($request->paid == 1){
+                $house->status = "Paid";              
+            }
+            $house->save();
+
+            DB::commit();
+            //
+
+
+
+
+
 
           return redirect('/orders/'.$house_id)->with(['success' => 'Order successfully edit']);
 

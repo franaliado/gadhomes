@@ -30,8 +30,7 @@ class HouseCreateRequest extends FormRequest
         return [
             'address' => ['string', 'max:150', 'nullable'],
             'community' => 'unique:houses,community_id,NULL,id,lot,' . $lot,
-            'lot' => 'required|integer',
-            'status' => 'required',
+            'lot' => 'required|integer'
         ];
     }
 

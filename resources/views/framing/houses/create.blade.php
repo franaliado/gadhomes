@@ -71,45 +71,6 @@
 
                 <div class="row g-3">
                     <div class="form-group row col-md-4">
-                        <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
-    
-                        <div class="col-md-12">
-                            <select id="status" name="status" class="form-control">
-                                <option value="Pending">Pending</option>
-                                <option value="Billed">Billed</option>
-                                <option value="Paid">Paid</option>
-                                <option value="Paid PO1">Paid PO1</option>
-                                <option value="Paid PO2">Paid PO2</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group row col-md-4">
-                        <label for="start_date" class="col-md-6 col-form-label text-md-right">{{ __('Start Date') }}</label>
-                        <div class="col-md-12">
-                            <input id="start_date" type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" value="{{ old('start_date') }}" autocomplete="start_date" autofocus>
-
-                            @error('start_date')
-                                <span class="invalid-feedback" role="alert">
-                                    <font color="red"><strong>{{ $message }}</strong></font>
-                                </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row col-md-4">
-                        <br/>
-                        <div class="form-check">
-                            <input id="withoutpo" name="withoutpo" class="icheck" type="checkbox" value="1">
-                            <label class="form-check-label" for="withoutpo">
-                                Without PO
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row g-3">
-                    <div class="form-group row col-md-4">
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
     
                         <div class="col-md-12">
@@ -119,7 +80,6 @@
                                     <option value="{{ $subcontractor->id }}" {{ old('subcontractor') == $subcontractor->id ? 'selected': '' }}> {{ $subcontractor->name }} </option>
                                 @endforeach
                             </select>
-
                         </div>
                     </div>
                 </div>

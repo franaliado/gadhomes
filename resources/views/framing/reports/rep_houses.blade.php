@@ -102,8 +102,6 @@
                             <option value="Pending">Pending</option>
                             <option value="Billed">Billed</option>
                             <option value="Paid">Paid</option>
-                            <option value="Paid PO1">Paid PO1</option>
-                            <option value="Paid PO2">Paid PO2</option>
                         </select>
                     </div>
                 </div>

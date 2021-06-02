@@ -26,9 +26,9 @@
         @php $lot = $house->lot; @endphp
     @endswitch
 
-    <h1>List of Purchase Orders <br> {{ $house->address }} - {{ $lot }}</h1>
+    <h1>List of Purchase Orders <br> {{ $house->community->name }} - {{ $lot }}</h1>
     <br/>
-    @if (count($orders) < 8)
+    @if (count($orders) < 50)
         @if (Auth::user()->role == 1)
             <a href="{{ url('/orders/'.$house->id. '/create') }}" class="btn btn-danger">
                 <i class="fa fa-plus"> Add PO </i>
@@ -48,10 +48,12 @@
                 <th style="text-align:center;vertical-align: middle">#</th>
                 <th style="text-align:center;vertical-align: middle">Nº P.O.</th>
                 <th style="text-align:center;vertical-align: middle">Date P.O.</th>
+                <th style="text-align:center;vertical-align: middle">Type P.O.</th>
                 <th style="text-align:center;vertical-align: middle">Superintendent</th>
                 <th style="text-align:center;vertical-align: middle">Phone Sup</th>
+                <th style="text-align:center;vertical-align: middle">$</th>
                 @if (Auth::user()->role == 1)
-                    <th colspan = "4" style="text-align:center;vertical-align: middle">Actions</th>
+                    <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
                 @else
                     <th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th>
                 @endif
@@ -66,8 +68,14 @@
                         <td align="center">{{ $loop->iteration }}</td>    
                         <td align="center">{{ $order->num_po }}</td>  
                         <td align="center">{{date("m-d-Y", strtotime($order->date_order))}}</td>
+                        <td align="center">{{ $order->type_PO }}</td>
                         <td align="center">{{ $order->name_Superint }}</td>
                         <td align="center">{{ $order->phone_Superint }}</td>
+                        @if ($order->paid == 1)
+                            <td align="center"><i class='fa fa-check' aria-hidden='true'></td>
+                        @else
+                            <td align="center"></td>
+                        @endif
 
                         @if (Auth::user()->role == 1)
                             <td align='center'> 
@@ -96,16 +104,6 @@
                                         <i class="fa fa-file-text" aria-hidden="true"></i>
                                     </button> 
                                 </a>
-                            </td>
-
-                            <td align='center'>
-                                <form method="post" action="{{ url('/orders/'.$order->id.'/'.$house->id) }}">
-                                    @csrf
-                                    {{ method_field('DELETE')}}  
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this PO?')" title="Delete" alt="Delete">
-                                        <i class="fa fa-trash-alt"> </i>
-                                    </button>                          
-                                </form>
                             </td>
                         @endif
                     </tr>              
