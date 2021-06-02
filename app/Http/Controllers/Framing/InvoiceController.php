@@ -25,7 +25,7 @@ class InvoiceController extends Controller
                     ->get();
         //dd($descriptionpos->toArray());
         //dd($invoice->toArray());
-        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         return view('framing.invoices.index')->with(['invoice' => $invoice, 'house_id' => $house_id, 'descriptions' => $descriptionpos]);
     }
     public function invoicePdf($id) {

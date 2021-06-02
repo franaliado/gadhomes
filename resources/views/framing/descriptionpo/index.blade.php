@@ -14,11 +14,11 @@
 
     <h1>Descriptions of Purchase Order Nº {{ $orders->num_po }}</h1>
     <br/>
-    @if (Auth::user()->role == 1)
+
         <a href="{{ url('/descriptionpo/'.$orders->id.'/'.$house_id.'/create') }}" class="btn btn-danger">
             <i class="fa fa-plus"> Add Description </i>
         </a> 
-    @endif
+
     <br/><br/>
 
 

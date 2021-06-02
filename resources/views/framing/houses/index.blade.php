@@ -14,11 +14,11 @@
 
     <h1>List of Houses</h1>
     <br/>
-    @if (Auth::user()->role == 1)
-        <a href="{{ url('/houses/create') }}" class="btn btn-danger">
-            <i class="fa fa-plus"> Add House</i></a>
-            <br/><br/>
-    @endif
+
+    <a href="{{ url('/houses/create') }}" class="btn btn-danger">
+        <i class="fa fa-plus"> Add House</i></a>
+        <br/><br/>
+
 
     <div class="col-md-4">
         <form class="form-inline ml-3">
@@ -39,7 +39,7 @@
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Status</th>
-                <th style="text-align:center;vertical-align: middle;width:100px">Paid Out</th>
+                <th style="text-align:center;vertical-align: middle;width:120px">Paid Out</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 @if (Auth::user()->role == 1)
                     <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>                   

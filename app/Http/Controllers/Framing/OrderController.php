@@ -48,9 +48,7 @@ class OrderController extends Controller
      */
     public function create($id)
     {
-        if (Auth::user()->role != 1){ return redirect('/home'); }
-
-        return view("framing.orders.create")->with(['house_id' => $id]);
+         return view("framing.orders.create")->with(['house_id' => $id]);
     }
 
     /**

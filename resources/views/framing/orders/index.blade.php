@@ -29,11 +29,11 @@
     <h1>List of Purchase Orders <br> {{ $house->community->name }} - {{ $lot }}</h1>
     <br/>
     @if (count($orders) < 50)
-        @if (Auth::user()->role == 1)
-            <a href="{{ url('/orders/'.$house->id. '/create') }}" class="btn btn-danger">
-                <i class="fa fa-plus"> Add PO </i>
-            </a> 
-        @endif
+
+        <a href="{{ url('/orders/'.$house->id. '/create') }}" class="btn btn-danger">
+            <i class="fa fa-plus"> Add PO </i>
+        </a> 
+
     @else
         <a class="btn btn-secondary">
             <i class="fa fa-plus"> Add PO </i>
@@ -55,7 +55,7 @@
                 @if (Auth::user()->role == 1)
                     <th colspan = "3" style="text-align:center;vertical-align: middle">Actions</th>
                 @else
-                    <th colspan = "1" style="text-align:center;vertical-align: middle">Actions</th>
+                    <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
                 @endif
             </tr>
         </thead>
@@ -97,15 +97,14 @@
                             </a>
                         </td>
 
-                        @if (Auth::user()->role == 1)
-                            <td align='center'>
-                                <a href="/invoice/{{ $order->idInvoice }}/{{$house->id}}">
-                                    <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
-                                        <i class="fa fa-file-text" aria-hidden="true"></i>
-                                    </button> 
-                                </a>
-                            </td>
-                        @endif
+                        <td align='center'>
+                            <a href="/invoice/{{ $order->idInvoice }}/{{$house->id}}">
+                                <button type="button" class="btn btn-warning btn-sm" title="Invoice" alt="Invoice">
+                                    <i class="fa fa-file-text" aria-hidden="true"></i>
+                                </button> 
+                            </a>
+                        </td>
+                     
                     </tr>              
                 @endforeach
             @else

@@ -14,11 +14,11 @@
 
     <h1>List of Subcontractors</h1>
     <br/>
-    @if (Auth::user()->role == 1)
-        <a href="{{ url('/subcontractors/create') }}" class="btn btn-danger">
-            <i class="fa fa-plus"> Add New Subcontractor</i></a>
-        <br/><br/>
-    @endif
+
+    <a href="{{ url('/subcontractors/create') }}" class="btn btn-danger">
+        <i class="fa fa-plus"> Add New Subcontractor</i></a>
+    <br/><br/>
+
   
     <div class="col-md-4">
         <form class="form-inline ml-3">

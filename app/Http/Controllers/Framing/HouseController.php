@@ -48,8 +48,6 @@ class HouseController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->role != 1){ return redirect('/home'); }
-
         $communitys = Community::orderBy('name', 'ASC')->get();
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
         return view("framing.houses.create")->with(['subcontractors' => $subcontractors , 'communitys' => $communitys]);

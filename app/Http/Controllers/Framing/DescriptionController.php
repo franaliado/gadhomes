@@ -47,9 +47,7 @@ class DescriptionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($order_id, $house_id)
-    {
-        if (Auth::user()->role != 1){ return redirect('/home'); }
-        
+    {      
         return view("framing.descriptionpo.create")->with(['order_id' => $order_id, 'house_id' => $house_id]);
     }
 

@@ -41,8 +41,6 @@ class SubcontractorController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->role != 1){ return redirect('/home'); }
-
         return view("framing.subcontractors.create");
     }
 
