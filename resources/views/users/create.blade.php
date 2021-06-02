@@ -66,10 +66,10 @@
 
                         <div class="col-md-12">
                             <select id="role" name="role" class="form-control">
-                                <option value="1">Administrator</option>
-                                <option value="2">Superintendent</option>
-                                <option value="3">Assistant</option>
-                                <option value="4">Vendor</option>
+                                <option value="1">Level 1</option>
+                                <option value="2">Level 2</option>
+                                <option value="3">Level 3</option>
+                                <option value="4">Level 4</option>
                             </select>
                         </div>
                     </div>

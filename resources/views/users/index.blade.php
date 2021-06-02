@@ -49,16 +49,16 @@
             @foreach ($users as $user)
                 @switch ($user->role)
                 @case(1)
-                    @php $role = "Administrator"; @endphp
+                    @php $role = "Level 1"; @endphp
                     @break
                 @case(2)
-                    @php $role = "Superintendent"; @endphp
+                    @php $role = "Level 2"; @endphp
                     @break
                 @case(3)
-                    @php $role = "Assistant"; @endphp
+                    @php $role = "Level 3"; @endphp
                     @break
                 @default
-                    @php $role = "Vendor"; @endphp
+                    @php $role = "Level 4"; @endphp
                 @endswitch
 
                 @switch ($user->active)

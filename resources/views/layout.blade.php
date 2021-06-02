@@ -63,22 +63,22 @@
                             <ul class="dropdown-menu">
                                 @switch ( Auth::user()->role)
                                 @case(1)
-                                    @php $role = "Administrator"; @endphp
+                                    @php $role = "Level 1"; @endphp
                                     @break
                                 @case(2)
-                                    @php $role = "Superintendent"; @endphp
+                                    @php $role = "Level 2"; @endphp
                                     @break
                                 @case(3)
-                                    @php $role = "Assistant"; @endphp
+                                    @php $role = "Level 3"; @endphp
                                     @break
                                 @default
-                                    @php $role = "Vendor"; @endphp
+                                    @php $role = "Level 4"; @endphp
                                 @endswitch
                                 <!-- User image -->
                                 <li class="user-header bg-red">
                                     <img src="/images/avatar0.png" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{ Auth::user()->name }} - {{ $role }}
+                                        {{ Auth::user()->name }} - {{ $role }}<br>{{ Auth::user()->position }}
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->

@@ -82,10 +82,10 @@
 
                         <div class="col-md-12">
                             <select id="role" name="role" class="form-control">
-                                <option value="1" {{ $user->role == 1  ? 'selected' : '' }}>Administrator</option>
-                                <option value="2" {{ $user->role == 2  ? 'selected' : '' }}>Superintendent</option>
-                                <option value="3" {{ $user->role == 3  ? 'selected' : '' }}>Assistant</option>
-                                <option value="4" {{ $user->role == 4  ? 'selected' : '' }}>Vendor</option>
+                                <option value="1" {{ $user->role == 1  ? 'selected' : '' }}>Level 1</option>
+                                <option value="2" {{ $user->role == 2  ? 'selected' : '' }}>Level 2</option>
+                                <option value="3" {{ $user->role == 3  ? 'selected' : '' }}>Level 3</option>
+                                <option value="4" {{ $user->role == 4  ? 'selected' : '' }}>Level 4</option>
                             </select>
                         </div>
                     </div>
