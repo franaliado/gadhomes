@@ -31,7 +31,9 @@
                 <th style="text-align:center;vertical-align: middle">Date</th>
                 <th style="text-align:center;vertical-align: middle">Type</th>
                 <th style="text-align:center;vertical-align: middle">Amount</th>
-                <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                @if (Auth::user()->role == 1)
+                    <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>
+                @endif
             </tr>
         </thead>
 
@@ -54,24 +56,26 @@
                         <td align="center">{{ $type }}</td>
                         <td align="right">{{ number_format($payment->amount, 2, '.', ',') }}</td>
 
-                        <td align='center'> 
-                            <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id.'/edit') }}">
-                                @csrf
-                                {{ method_field('EDIT')}}  
-                                <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
-                                    <i class="fa fa-pen"> </i>
-                                </button>                          
-                            </form>
-                        </td>
-                        <td align='center'>
-                            <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id) }}">
-                                @csrf
-                                {{ method_field('DELETE')}}  
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Payment?')" title="Delete" alt="Delete">
-                                    <i class="fa fa-trash-alt"> </i>
-                                </button>                          
-                            </form>
-                        </td>
+                        @if (Auth::user()->role == 1)
+                            <td align='center'> 
+                                <form method="GET" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id.'/edit') }}">
+                                    @csrf
+                                    {{ method_field('EDIT')}}  
+                                    <button type="submit" class="btn btn-primary btn-sm" title="Edit" alt="Edit")>
+                                        <i class="fa fa-pen"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                            <td align='center'>
+                                <form method="post" action="{{ url('/payments/'.$payment->id.'/'.$subcontractor->id.'/'.$user_id) }}">
+                                    @csrf
+                                    {{ method_field('DELETE')}}  
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you want to delete this Payment?')" title="Delete" alt="Delete">
+                                        <i class="fa fa-trash-alt"> </i>
+                                    </button>                          
+                                </form>
+                            </td>
+                        @endif
                     </tr>              
                 @endforeach
             @else

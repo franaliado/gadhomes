@@ -24,11 +24,8 @@ class ToolController extends Controller
             'amount' => ['required'],
         ]);
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index($subcontractor_id)
     {
         $subcontractor = Subcontractor::findOrFail($subcontractor_id);
@@ -38,7 +35,6 @@ class ToolController extends Controller
                 ->get();
         $totaltools = $tools->sum('amount');
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.tools.index')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'totaltools' => $totaltools ]); 
     }
 
@@ -52,12 +48,8 @@ class ToolController extends Controller
         return view("framing.tools.create")->with(['subcontractor_id' => $subcontractor_id]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function store(Request $request, $subcontractor_id)
     {
         $this->validator($request->all())->validate();
@@ -84,25 +76,11 @@ class ToolController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit($id, $subcontractor_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+
         $tool = Tool::findOrFail($id);
         
         return view("framing.tools.edit")->with(['subcontractor_id' => $subcontractor_id, 'tool' => $tool]);
@@ -138,14 +116,10 @@ class ToolController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id, $subcontractor_id)
     {
+        if (Auth::user()->role != 1){ return redirect('/home'); }
 
         Tool::destroy($id);
 

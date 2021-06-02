@@ -39,7 +39,6 @@ class AdditionalController extends Controller
 
         $totalavailable = ($house->amount_assigned_subc + $totaladittional);
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.additional.index')->with(['house' => $house, 'additional' => $additional, 'totaladittional' => $totaladittional, 'totalavailable' => $totalavailable ]); 
      }
 

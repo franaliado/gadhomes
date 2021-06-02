@@ -29,7 +29,6 @@ class ReportsController extends Controller
         $subcontractors = Subcontractor::orderBy('name', 'ASC')->get();
         $houses = House::all();
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_houses')->with(['subcontractors' => $subcontractors , 'communitys' => $communitys, 'houses' => $houses]);
     }
   
@@ -47,7 +46,6 @@ class ReportsController extends Controller
         $community = Community::find($request->community);
         $subcontractor = Subcontractor::find($request->subcontractor);
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.report_houses')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community, 'subcontractor' => $subcontractor]);
     }
     
@@ -82,20 +80,9 @@ class ReportsController extends Controller
 
         $community = Community::orderBy('name', 'ASC')->get();
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_subcontractors')->with(['subcontractors' => $subcontractors, 'community' => $community]);
     }
 
-
-    public function get_communities(Request $request){
-        if($request->ajax()){
-            $communitys = House::where('status','=',$request->status)->get();
-            foreach($communitys as $community){
-                $communityArray[$communitys->id]= $communitys->id;
-            }
-            return response()->json($communityArray);
-        }
-     }
     
 
     public function report_subcontractors(Request $request) 
@@ -122,8 +109,7 @@ class ReportsController extends Controller
                 ->orderBy('date', 'ASC')
                 ->get();
 
-            if (Auth::user()->role != 1){ return redirect('/home'); }
-            return view('framing.reports.report_subcontractor_subc')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+                return view('framing.reports.report_subcontractor_subc')->with(['subcontractor' => $subcontractor, 'tools' => $tools, 'payments' => $payments, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
         }else{
 
             $community = Community::where('id', $request->community)
@@ -137,9 +123,6 @@ class ReportsController extends Controller
                 ->groupBy('subcontractor_id', 'community_id')
                 ->get();
             
-
-
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.report_subcontractor_com')->with(['houses' => $houses, 'community' => $community, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
         }
     }
@@ -207,7 +190,6 @@ class ReportsController extends Controller
         $users = User::orderBy('name', 'ASC')->get();
         $expenses = Expense::all();
 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.rep_expenses')->with(['users' => $users, 'expenses' => $expenses]);
     }
 
@@ -243,8 +225,6 @@ class ReportsController extends Controller
 
         $user = User::find($request->user);
 
- 
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.reports.report_expenses')->with(['expenses' => $expenses, 'user' => $user, 'users' => $request->user, 'type_expense' => $request->type_expense, 'type_pay' => $request->type_pay, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
     }
 

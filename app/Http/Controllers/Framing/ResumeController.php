@@ -23,7 +23,6 @@ class ResumeController extends Controller
                     ->orderBy('date', 'ASC')
                     ->get();
      
-        if (Auth::user()->role != 1){ return redirect('/home'); }
         return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
     }
     public function resumePdf($subcontractor_id, $totalhouses) {
