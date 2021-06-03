@@ -24,7 +24,7 @@ class OrderController extends Controller
             'date_order' => ['required'],
             'name_Superint' => ['required', 'string', 'max:50'],
             'phone_Superint' => ['required', 'string', 'max:15'],
-            'type_PO' => ['required', 'string', 'max:2'],
+            'type_PO' => ['required', 'string', 'max:3'],
         ]);
     }
     

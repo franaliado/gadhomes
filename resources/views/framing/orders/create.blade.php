@@ -67,7 +67,7 @@
                     <div class="form-group row col-md-4">
                         <label for="type_PO" class="col-md-6 col-form-label text-md-right">{{ __('Type PO') }}</label>
                         <div class="col-md-12">
-                            <input id="type_PO" type="text" maxlength="2" class="form-control @error('type_PO') is-invalid @enderror" name="type_PO" value="{{ old('type_PO') }}" required autocomplete="type_PO" autofocus placeholder="Type PO" onkeyup="this.value = this.value.toUpperCase();">
+                            <input id="type_PO" type="text" maxlength="3" class="form-control @error('type_PO') is-invalid @enderror" name="type_PO" value="{{ old('type_PO') }}" required autocomplete="type_PO" autofocus placeholder="Type PO" onkeyup="this.value = this.value.toUpperCase();">
 
                             @error('type_PO')
                                 <span class="invalid-feedback" role="alert">

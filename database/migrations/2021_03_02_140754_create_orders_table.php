@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->integer('num_po', 15)->unique(););
             $table->date('date_order');
-            $table->string('type_PO', 2);
+            $table->string('type_PO', 3);
             $table->string('name_Superint', 50);
             $table->string('phone_Superint', 15);
             $table->boolean('paid')->default(0);
