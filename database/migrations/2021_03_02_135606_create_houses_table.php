@@ -22,6 +22,7 @@ class CreateHousesTable extends Migration
             $table->integer('lot');
             $table->string('status', 8);
             $table->string('paid_out', 100)->nullable();
+            $table->boolean('paid_all')->default(0);
             //Datos del Subcontratista
             $table->unsignedBigInteger('subcontractor_id')->nullable();
             $table->decimal('amount_assigned_subc', 8, 2)->default(0)->nullable();

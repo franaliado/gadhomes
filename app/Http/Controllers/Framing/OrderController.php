@@ -61,12 +61,13 @@ class OrderController extends Controller
     {
         //Validacion
         $this->validate($request, [
-            'num_po' => ['required', 'integer', 'unique:orders'],
+            'num_po' => 'unique:orders,num_PO,NULL,id,house_id,' . $id,
             'date_order' => ['required'],
             'name_Superint' => ['required', 'string', 'max:50'],
             'phone_Superint' => ['required', 'string', 'max:15'],
             'type_PO' => 'unique:orders,type_PO,NULL,id,house_id,' . $id,
         ],[
+            'num_po.unique' => 'The number of PO already exists in this house',
             'type_PO.unique' => 'The type of PO already exists'
         ]);
 
@@ -119,6 +120,7 @@ class OrderController extends Controller
                 
             $house = House::find($id);
             $house->paid_out = $text_paid_out;
+            $house->paid_all = 0;
             $house->save();
 
             DB::commit();
@@ -149,19 +151,19 @@ class OrderController extends Controller
         $order = Order::find($id);
         if ($order->house_id == $house_id and $order->type_PO == $request->type_PO){
             $this->validate($request, [
-                'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
                 'date_order' => ['required'],
                 'name_Superint' => ['required', 'string', 'max:50'],
                 'phone_Superint' => ['required', 'string', 'max:15'],
             ]);
         }else{
             $this->validate($request, [
-                'num_po' => ['required', 'integer', 'unique:orders,num_po,'. $id],
+                'num_po' => 'unique:orders,num_PO,NULL,id,house_id,' . $house_id,
                 'date_order' => ['required'],
                 'name_Superint' => ['required', 'string', 'max:50'],
                 'phone_Superint' => ['required', 'string', 'max:15'],
                 'type_PO' => 'unique:orders,type_PO,NULL,id,house_id,' . $house_id,
             ],[
+                'num_po.unique' => 'The number of PO already exists in this house',
                 'type_PO.unique' => 'The type of PO already exists'
             ]);
         }
@@ -197,10 +199,14 @@ class OrderController extends Controller
                 }
             }
               
-            if($paid_all == "1"){$text_paid_out = "All";}
 
             $house = House::find($house_id);
             $house->paid_out = $text_paid_out;
+            if($paid_all == "1"){
+                $house->paid_all = 1;
+            }else{
+                $house->paid_all = 0;
+            }
             if($request->paid == 1){
                 $house->status = "Paid";              
             }

@@ -15,7 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('num_po', 15)->unique(););
+            $table->integer('num_po', 15);
             $table->date('date_order');
             $table->string('type_PO', 3);
             $table->string('name_Superint', 50);

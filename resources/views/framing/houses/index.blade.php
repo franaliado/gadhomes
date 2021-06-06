@@ -40,6 +40,7 @@
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Status</th>
                 <th style="text-align:center;vertical-align: middle;width:120px">Paid Out</th>
+                <th style="text-align:center;vertical-align: middle">Paid All</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 @if (Auth::user()->role == 1)
                     <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>                   
@@ -79,6 +80,11 @@
                     <td align="center">{{ $lot }}</td>
                     <td align="center">{{ $house->status }}</td>
                     <td align="center">{{$house->paid_out}}</td>
+                    @if ($house->paid_all == 1)
+                        <td align="center"><i class='fa fa-check' aria-hidden='true'></td>
+                    @else
+                        <td align="center"></td>
+                    @endif
                     <td align="left">{{ $SubcontractorName }}</td>
                     @if (Auth::user()->role == 1)
                         <td align='center'> 
