@@ -39,8 +39,8 @@
                 <th style="text-align:center;vertical-align: middle">Community</th>
                 <th style="text-align:center;vertical-align: middle">Lot</th>
                 <th style="text-align:center;vertical-align: middle">Status</th>
-                <th style="text-align:center;vertical-align: middle;width:120px">Paid Out</th>
-                <th style="text-align:center;vertical-align: middle">Paid All</th>
+                <th style="text-align:center;vertical-align: middle;width:130px">Paid Out</th>
+                <th style="text-align:center;vertical-align: middle;width:30px">All</th>
                 <th style="text-align:center;vertical-align: middle">Subcontractor</th>
                 @if (Auth::user()->role == 1)
                     <th colspan = "2" style="text-align:center;vertical-align: middle">Actions</th>                   
