@@ -7,71 +7,81 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 
+use DB;
+use App\Community;
+
 class CommunityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        //$query = trim($request->get('search'));
+
+        $community = Community::select('community.id', 'community.name')
+        ->orderBy('community.name', 'ASC')
+        ->get();
+
+        //if (Auth::user()->role != 1){ return redirect('/home'); }
+        return view('framing.community.index')->with(['community' => $community]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
-        //
+        return view("framing.community.create");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        DB::beginTransaction();
+        try {
+  
+          $data = array(
+            'name' => $request->name,
+          );
+  
+          Community::create($data);
+  
+          DB::commit();
+
+          return redirect('/community')->with(['success' => 'Community successfully saved']);
+
+        }catch (\Exception $e) {
+            DB::rollback();
+	        return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
-        //
+        if (Auth::user()->role != 1){ return redirect('/home'); }
+        
+        $community = Community::findOrFail($id);
+        return view("framing.community.edit")->with(['community' => $community]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+
+        DB::beginTransaction();
+        try {
+  
+          $community = Community::find($id);
+          $community->name = $request->name;
+          $community->save();
+  
+          DB::commit();
+
+          return redirect('/community')->with(['success' => 'Community successfully edit']);
+
+        }catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**

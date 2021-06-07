@@ -152,8 +152,6 @@ Route::get('/rep_houses_PDF/{status}/{community}/{subcontractor}', 'Framing\Repo
 //Reports Subcontractors
 Route::get('/rep_subcontractors', 'Framing\ReportsController@rep_subcontractors')->middleware('auth');
 
-Route::get('/community', 'Framing\ReportsController@get_communities')->middleware('auth');
-
 Route::get('/report_subcontractors', 'Framing\ReportsController@report_subcontractors')->middleware('auth');
 
 Route::get('/rep_subcontractor_subc_PDF/{subcontractor}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_subcontractor_subc_PDF')->middleware('auth');
@@ -167,3 +165,14 @@ Route::get('/rep_expenses', 'Framing\ReportsController@rep_expenses')->middlewar
 Route::post('/report_expenses', 'Framing\ReportsController@report_expenses')->middleware('auth');
 
 Route::get('/rep_expenses_PDF/{users}/{type_expense}/{type_pay}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_expenses_PDF')->middleware('auth');
+
+//Reports Community
+Route::get('/community', 'Framing\CommunityController@index')->middleware('auth');
+
+Route::get('/community/create', 'Framing\CommunityController@create')->middleware('auth');
+
+Route::post('/community/store', 'Framing\CommunityController@store')->middleware('auth');
+
+Route::get('/community/{community_id}/edit', 'Framing\CommunityController@edit')->middleware('auth');
+
+Route::post('/community/{community_id}/update', 'Framing\CommunityController@update')->middleware('auth');
