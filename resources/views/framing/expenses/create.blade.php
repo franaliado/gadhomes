@@ -43,10 +43,12 @@
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control">
                                 <option value="Gas">Gas</option>
-                                <option value="Tools-Materials">Tools-Materials</option>
+                                <option value="Tools & Materials">Tools & Materials</option>
+                                <option value="Foods & Drinks">Foods & Drinks</option>
                                 <option value="Bills">Bills</option>
-                                <option value="Foods">Foods</option>
                                 <option value="Hotels">Hotels</option>
+                                <option value="Vehicles">Vehicles</option>
+                                <option value="Machinery">Machinery</option>
                                 <option value="Others">Others</option>
                             </select>
                         </div>

@@ -43,10 +43,12 @@
                             <div class="col-md-12">
                                 <select id="type_expense" name="type_expense" class="form-control">
                                     <option value="Gas" {{ $expense->type_expense == "Gas"  ? 'selected' : '' }}>Gas</option>
-                                    <option value="Tools-Materials" {{ $expense->type_expense == "Tools-Materials"  ? 'selected' : '' }}>Tools-Materials</option>
+                                    <option value="Tools & Materials" {{ $expense->type_expense == "Tools & Materials"  ? 'selected' : '' }}>Tools & Materials</option>
+                                    <option value="Foods & Drinks" {{ $expense->type_expense == "Foods & Drinks"  ? 'selected' : '' }}>Foods & Drinks</option>
                                     <option value="Bills" {{ $expense->type_expense == "Bills"  ? 'selected' : '' }}>Bills</option>
-                                    <option value="Foods" {{ $expense->type_expense == "Foods"  ? 'selected' : '' }}>Foods</option>
                                     <option value="Hotels" {{ $expense->type_expense == "Hotels"  ? 'selected' : '' }}>Hotels</option>
+                                    <option value="Vehicles" {{ $expense->type_expense == "Vehicles"  ? 'selected' : '' }}>Vehicles</option>
+                                    <option value="Machinery" {{ $expense->type_expense == "Machinery"  ? 'selected' : '' }}>Machinery</option>
                                     <option value="Others" {{ $expense->type_expense == "Others"  ? 'selected' : '' }}>Others</option>
                                 </select>
                             </div>

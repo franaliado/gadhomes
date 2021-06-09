@@ -9,7 +9,7 @@ class House extends Model
  
     protected $table = 'houses';
 
-    protected $fillable = [ 'id', 'address', 'community_id',  'lot', 'status', 'paid_out', 
+    protected $fillable = [ 'id', 'address', 'community_id',  'lot', 'status', 'paid_out', 'paid_all',
                     'subcontractor_id', 'amount_assigned_subc'
    			  ];
 
