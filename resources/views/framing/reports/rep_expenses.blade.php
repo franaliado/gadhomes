@@ -13,10 +13,10 @@
                 let val = $(this).val();
                 listExp = [];
                 $('#type_expense').empty();
-                $('#type_expense').append("<option value=''>---- Please Select ----</option>");
+                $('#type_expense').append("<option value='0'>All</option>");
                 listPay = [];
                 $('#type_pay').empty();
-                $('#type_pay').append("<option value=''>---- Please Select ----</option>");
+                $('#type_pay').append("<option value='0'>All</option>");
                 $.each(expenses, function(index, value){
                     if(value.user_id==val) {
                         if(!listExp.includes(value.type_expense)) {
@@ -33,7 +33,7 @@
                 let val = $(this).val();
                 listPay = [];
                 $('#type_pay').empty();
-                $('#type_pay').append("<option value=''>---- Please Select ----</option>");
+                $('#type_pay').append("<option value='0'>All</option>");
 
                 $.each(expenses, function(index, value){
                     if(value.user_id==$("#user").val()) {
@@ -56,6 +56,7 @@
 
         }
     </script>
+
         @if(session('error'))
         <div class="row">
         <div class="col-md-10 col-md-offset-1">
@@ -96,7 +97,7 @@
     
                         <div class="col-md-12">
                             <select id="user" name="user" class="form-control" required>
-                                <option value="">---- Please Select ----</option>
+                                <option value="0" selected>All</option>
                                 @foreach($users as $user)
                                     <option value="{{ $user->id }}" "{{ old('user') == $user->id ? 'selected': "" }}"> {{ $user->name }} </option>
                                 @endforeach
@@ -110,7 +111,7 @@
     
                         <div class="col-md-12">
                             <select id="type_expense" name="type_expense" class="form-control" required>
-                                <option value="">---- Please Select ----</option>
+                                <option value="0" selected>All</option>
                             </select>
                         </div>
                     </div>  
@@ -120,7 +121,7 @@
     
                         <div class="col-md-12">
                             <select id="type_pay" name="type_pay" class="form-control" required>
-                                <option value="">---- Please Select ----</option>
+                                <option value="0" selected>All</option>
                             </select>
                         </div>
                     </div>
@@ -130,7 +131,7 @@
                     <div class="form-group row col-md-4">
                         <label for="FromDate" class="col-md-6 col-form-label text-md-right">{{ __('From') }}</label>
                         <div class="col-md-12">
-                            <input id="FromDate" type="date" class="form-control @error('FromDate') is-invalid @enderror" name="FromDate" value="{{ old('FromDate') }}"  autocomplete="FromDate" autofocus>
+                            <input id="FromDate" type="date" class="form-control @error('FromDate') is-invalid @enderror" name="FromDate" value="{{ old('FromDate') }}"  required autocomplete="FromDate" autofocus>
 
                             @error('FromDate')
                                 <span class="invalid-feedback" role="alert">
@@ -143,7 +144,7 @@
                     <div class="form-group row col-md-4">
                         <label for="ToDate" class="col-md-6 col-form-label text-md-right">{{ __('To') }}</label>
                         <div class="col-md-12">
-                            <input id="ToDate" type="date" class="form-control @error('ToDate') is-invalid @enderror" name="ToDate" value="{{ old('ToDate') }}"  autocomplete="ToDate" autofocus>
+                            <input id="ToDate" type="date" class="form-control @error('ToDate') is-invalid @enderror" name="ToDate" value="{{ old('ToDate') }}" required autocomplete="ToDate" autofocus>
 
                             @error('ToDate')
                                 <span class="invalid-feedback" role="alert">
@@ -169,47 +170,5 @@
         </form>
         </div>
         </div>
-
-        <script>
-            /*function FunctionUser(selectObject) {
-                var value = selectObject.value;
-                if (value == 0) {
-                    $("#type_expense").attr("disabled",false);
-                    $("#type_pay").attr("disabled",false);
-                } else {
-                    $("#type_expense").attr("disabled",true);
-                    $("#type_pay").attr("disabled",true);
-                    $("#type_expense").val("0");
-                    $("#type_pay").val("0");
-                }
-            }
-
-            function FunctionExp(selectObject) {
-                var value = selectObject.value;
-                if (value == 0) {
-                    $("#user").attr("disabled",false);
-                    $("#type_pay").attr("disabled",false);
-                } else {
-                    $("#user").attr("disabled",true);
-                    $("#type_pay").attr("disabled",true);
-                    $("#user").val("0");
-                    $("#type_pay").val("0");
-                }
-            }
-
-            function FunctionPay(selectObject) {
-                var value = selectObject.value;
-                if (value == 0) {
-                    $("#user").attr("disabled",false);
-                    $("#type_expense").attr("disabled",false);
-                    
-                } else {
-                    $("#user").attr("disabled",true);
-                    $("#type_expense").attr("disabled",true);
-                    $("#user").val("0");
-                    $("#type_expense").val("0");
-                }
-            }*/
-        </script>
 
 @endsection

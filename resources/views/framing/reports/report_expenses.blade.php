@@ -4,7 +4,7 @@
 
 
 <section class="rep_houses" style="padding: 20px;">
-	<a href="{{ URL('/rep_expenses') }}" class="btn bg-red">
+	<a href="javascript:history.back()" class="btn bg-red"> 
 		<i class="fa fa-arrow-left"> Back</i>
 	</a>
 	<div class="container-fluid">
@@ -22,10 +22,16 @@
 				<h1 align="left">GAD FRAMING INC.</h1>
 				<h3 align="center">REPORT OF EXPENSES</h3>
 				<h4 align="center">
-					<b>User:</b> {{$user->name}} -
-					<b>Type Expense:</b> {{$type_expense}} -
-					<b>Type Payment:</b> {{$type_pay}}
-					<br>
+					@if($users <> 0)
+						<b>User:</b> {{$user->name}}
+					@endif
+					@if($type_expense <> "0")
+							- <b>Type Expense:</b> {{$type_expense}}
+					@endif
+					@if($type_pay <> "0")
+						- <b>Type Payment:</b> {{$type_pay}}
+					@endif
+					@if($users <> 0)<br>@endif
 					@if($FromDate <> "Null") <b>From:</b> {{date("m-d-Y", strtotime($FromDate))}}  <b>To:</b> {{date("m-d-Y", strtotime($ToDate))}}@endif
 				</h4>
 			</div>
@@ -57,7 +63,9 @@
 					</thead>
 			
 					<tbody>
-						@foreach ($expenses as $expense)			
+						@php($total = 0)
+						@foreach ($expenses as $expense)
+							@php ($total += ($expense->amount))			
 							<tr>
 								<td align="center">{{ $loop->iteration }}</td> 
 								@if ($users == "0") 
@@ -77,6 +85,11 @@
 								<td align="right">{{ number_format($expense->amount, 2, '.', ',') }}</td>
 							</tr>                
 						@endforeach
+						<tr>
+							<td colspan = "8" style="text-align:right;vertical-align: middle;font-size:16px;">
+								<b>Total:</b> &nbsp;&nbsp; {{ number_format($total, 2, '.', ',') }}
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

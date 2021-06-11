@@ -41,9 +41,16 @@
 				<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
 				<FONT SIZE=4><b>REPORT OF EXPENSES</b></font><br><br>
 				<FONT SIZE=2>
-					<b>User: </b>{{$user->name}} - 
-					<b>Type Expense: </b>{{$type_expense}} -
-					<b>Type Payment: </b>{{$type_pay}} <br>
+					@if($users <> 0)
+						<b>User:</b> {{$user->name}}
+					@endif
+					@if($type_expense <> "0")
+							- <b>Type Expense:</b> {{$type_expense}}
+					@endif
+					@if($type_pay <> "0")
+						- <b>Type Payment:</b> {{$type_pay}}
+					@endif
+					@if($users <> 0)<br>@endif
 					@if($FromDate <> "Null") 
 						<b>From: </b>{{date("m-d-Y", strtotime($FromDate))}} 
 						<b>To: </b>{{date("m-d-Y", strtotime($ToDate))}}
@@ -65,27 +72,57 @@
 		<thead class="thead-light">
 			<tr style="font-size: 12px; font-weight: bold; color: black" bgcolor="D5DBDB" >
 				<td style="text-align:center;vertical-align: middle">#</td>
+				@if ($users == "0") 
+				<td style="text-align:center;vertical-align: middle">User</td>
+				@endif	
+				@if ($type_expense == "0")
+					<td style="text-align:center;vertical-align: middle">Expenses</td>
+				@endif
 				<td style="text-align:center;vertical-align: middle">Date</td>
 				<td style="text-align:center;vertical-align: middle">Description</td>
-				@if ($type_pay == "Card")					
+				@if ($type_pay == "0")  
+					<td style="text-align:center;vertical-align: middle">Payment Type</td>
+				@endif
+				@if ($type_pay == "Card" or $type_pay == "0")
 					<td style="text-align:center;vertical-align: middle">Card</td>
-				@endif	
+				@endif
 				<td style="text-align:center;vertical-align: middle">Amount</td>
-			</tr>
+				</tr>
 		</thead>
 	
 		<tbody>
-			@foreach ($expenses as $expense)			
+			@php($total = 0)
+			@php ($cols = 4)
+			@foreach ($expenses as $expense)
+				@php ($total += ($expense->amount))				
 				<tr style="font-size: 12px;">
 					<td align="center">{{ $loop->iteration }}</td> 
+					@if ($users == "0") 
+						<td align="center">{{ $expense->users->name }}</td>
+						@php ($cols = $cols + 1)
+					@endif
+					@if ($type_expense == "0")  
+						<td align="center">{{ $expense->type_expense }}</td>
+						@php ($cols = $cols + 1)
+					@endif
 					<td align="center" NOWRAP>{{date("m-d-Y", strtotime($expense->date))}}</td>
-					<td align="left">{{ $expense->description }}</td>  
-					@if ($type_pay == "Card")	
+					<td align="left">{{ $expense->description }}</td> 
+					@if ($type_pay == "0")  
+						<td align="center">{{ $expense->type_pay }}</td>
+						@php ($cols = $cols + 1)
+					@endif
+					@if ($type_pay == "Card" or $type_pay == "0")
 						<td align="center">{{ $expense->card }}</td>
-					@endif	
+						@php ($cols = $cols + 1)
+					@endif
 					<td align="right">{{ number_format($expense->amount, 2, '.', ',') }}</td>
 				</tr>                
 			@endforeach
+			<tr>
+				<td colspan = "{{$cols}}" style="text-align:right;vertical-align: middle;font-size:16px;">
+					<b>Total:</b> &nbsp;&nbsp; {{ number_format($total, 2, '.', ',') }}
+				</td>
+			</tr>
 		</tbody>
 	</table>
   </div>

@@ -199,10 +199,6 @@ class ReportsController extends Controller
             $this->validator_date($request->all())->validate();
         }
 
-        if($request->user == ""){$request->user = 0;}
-        if($request->type_expense == ""){$request->type_expense = 0;}
-        if($request->type_pay == ""){$request->type_pay = 0;}
-
         $query = Expense::select('expenses.*');
                 if ($request->user <> 0){ 
                     $query->where('user_id', $request->user);
