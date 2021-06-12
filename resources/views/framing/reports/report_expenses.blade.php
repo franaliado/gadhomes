@@ -4,7 +4,7 @@
 
 
 <section class="rep_houses" style="padding: 20px;">
-	<a href="javascript:history.back()" class="btn bg-red"> 
+	<a href="{{ URL('/rep_expenses') }}" class="btn bg-red">
 		<i class="fa fa-arrow-left"> Back</i>
 	</a>
 	<div class="container-fluid">

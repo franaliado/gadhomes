@@ -23,6 +23,9 @@
 	.pull-right {
 		float: right;
 	}
+
+	body { font-family: DejaVu Sans, sans-serif; }
+
     @page { margin: 180px 50px; }
     #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 150px; }
     #footer { position: fixed; left: 0px; bottom: -250px; right: 0px; height: 130px; text-align: center; }
@@ -38,12 +41,19 @@
 		</tr>
 		<tr>
 			<td>
-				<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
-				<FONT SIZE=4><b>REPORT OF HOUSES</b></font><br><br>
+				<FONT SIZE=4><b>GAD FRAMING INC.</b></font><br><br>
+				<FONT SIZE=3><b>REPORT OF HOUSES</b></font><br><br>
 				<FONT SIZE=2>
-						<b>Status:</b> {{$status}} -
-						<b>Community:</b> {{$community->name}} -
-						<b>Subcontractor:</b> {{$subcontractor->name}}</h4>
+
+					@if($status <> "0")
+						<b>Status:</b> {{$status}}
+					@endif
+					@if($community_id <> 0)
+						- <b>Community:</b> {{$community->name}}
+					@endif
+					@if($subcontractor_id <> 0)
+						<br><b>Subcontractor:</b> {{$subcontractor->name}}
+					@endif
 				</font>			
 			</td>
 			<td>
@@ -59,24 +69,27 @@
 	<table id="houses-table" class="table" border='1' >
 		<thead class="thead-light">
 			<tr style="font-size: 12px; font-weight: bold; color: black" bgcolor="#D5DBDB" >
-				<td style="text-align:center;vertical-align: middle">#</th>
+				<td style="text-align:center;vertical-align: middle">#</td>
+				@if ($status == "0") 
+					<td style="text-align:center;vertical-align: middle">Status</td>
+				@endif	
+				@if ($community_id == "0")
+					<td style="text-align:center;vertical-align: middle">Community</td>
+				@endif	
 				<td style="text-align:center;vertical-align: middle">Address</td>
 				<td style="text-align:center;vertical-align: middle">Lot</td>
-				<td style="text-align:center;vertical-align: middle">Start Date</td>
-				<td style="text-align:center;vertical-align: middle">Without PO</td>
+				@if ($subcontractor_id == "0")
+					<td style="text-align:center;vertical-align: middle">Subcontractor</td>
+				@endif	
+				@if ($status == "0" or $status == "Paid") 
+					<td style="text-align:center;vertical-align: middle">Paid Out</td>
+					<td style="text-align:center;vertical-align: middle">All</td>
+				@endif
 			</tr>
 		</thead>
 	
 		<tbody>
 			@foreach ($houses as $house)
-
-				@switch ($house->withoutpo)
-					@case(0)
-						@php $withoutpo = "No"; @endphp
-						@break
-					@default
-						@php $withoutpo = "Yes"; @endphp
-				@endswitch
 
 				@switch (strlen($house->lot))
 					@case(1)
@@ -93,11 +106,26 @@
 				@endswitch
 
 				<tr style="font-size: 12px;">
-					<td align="center">{{ $loop->iteration }}</td>    
+					<td align="center">{{ $loop->iteration }}</td> 
+					@if ($status == "0") 
+						<td align="center">{{ $house->status }}</td>  
+					@endif
+					@if ($community_id == "0")
+						<td align="center">{{ $house->community->name }}</td>
+					@endif
 					<td align="left">{{ $house->address }}</td>  
 					<td align="center">{{ $lot }}</td>
-					<td align="center" NOWRAP>{{date("m-d-Y", strtotime($house->start_date))}}</td>
-					<td align="center">{{ $withoutpo }}</td>
+					@if ($subcontractor_id == "0")
+						<td align="center">{{ $house->subcontractorName }}</td>
+					@endif 
+					@if ($status == "0" or $status == "Paid")  
+						<td align="center">{{ $house->paid_out }}</td> 
+						@if ($house->paid_all == 1)
+							<td align="center"><b><span>&#x2714;</span></b></td>
+						@else
+							<td align="center"></td>
+						@endif  
+					@endif
 				</tr>                
 			@endforeach
 		</tbody>

@@ -13,9 +13,9 @@
             var status=$(this).val();
             if($.trim(status) != ''){
                 $('#community').empty();
-                $('#community').append("<option value=''>---- Please Select ----</option>");
+                $('#community').append("<option value='0'>All</option>");
                 $('#subcontractor').empty();
-                $('#subcontractor').append("<option value=''>---- Please Select ----</option>");
+                $('#subcontractor').append("<option value='0'>All</option>");
                 var comunidades = [];
                 $.each(houses, function(index, value){
                     if(value.status==status) {
@@ -35,7 +35,7 @@
             var comm=$(this).val();
             if($.trim(comm) != ''){
                 $('#subcontractor').empty();
-                $('#subcontractor').append("<option value=''>---- Please Select ----</option>");
+                $('#subcontractor').append("<option value='0'>All</option>");
                 var subcontratores = [];
                 $.each(houses, function(index, value){
                     if(value.status==$('#status').val()) {
@@ -98,7 +98,7 @@
                     <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
                     <div class="col-md-12">
                         <select id="status" name="status" class="form-control" style="width:250px" required>
-                            <option value="">---- Please Select ----</option>
+                            <option value="0">All</option>
                             <option value="Pending">Pending</option>
                             <option value="Billed">Billed</option>
                             <option value="Paid">Paid</option>
@@ -110,7 +110,7 @@
                     <div class="col-md-12">
                         <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
                         <select id="community" name="community" class="form-control" required>
-                            <option value="">---- Please Select ----</option>
+                            <option value="0">All</option>
                         </select>
                     </div>
                 </div>
@@ -119,7 +119,7 @@
                     <div class="col-md-12">
                         <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
                         <select id="subcontractor" name="subcontractor" class="form-control" required>
-                            <option value="">---- Please Select ----</option>
+                            <option value="0">All</option>
                         </select>
                     </div>
                 </div>

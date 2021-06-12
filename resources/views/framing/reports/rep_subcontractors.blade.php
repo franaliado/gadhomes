@@ -43,7 +43,7 @@
     
                         <div class="col-md-12">
                             <select id="subcontractor" name="subcontractor" class="form-control" required onchange="MyFunctionSub(this)">
-                                <option value="">---- Please Select ----</option>
+                                <option value="0">---- Please Select ----</option>
                                 @foreach($subcontractors as $subcontractor)
                                     <option value="{{ $subcontractor->id }}" "{{ old('subcontractor') == $subcontractor->id ? 'selected': "" }}"> {{ $subcontractor->name }} </option>
                                 @endforeach
@@ -84,7 +84,7 @@
 
                         <div class="col-md-12">
                             <select id="community" name="community" class="form-control" required onchange="MyFunctionCom(this)">
-                                <option value="">---- Please Select ----</option>
+                                <option value="0">---- Please Select ----</option>
                                 @foreach($community as $community)
                                     <option value="{{ $community->id }}" {{ old('community') == $community->id ? 'selected' : '' }}> 
                                             {{ $community->name }} 

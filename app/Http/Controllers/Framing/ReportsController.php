@@ -35,37 +35,57 @@ class ReportsController extends Controller
 
     public function report_houses(Request $request) 
     {
-        $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
+        $query = House::select('houses.*', 'subcontractors.name as subcontractorName')
             ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-            ->orderBy('subcontractors.name', 'ASC')
-            ->where('subcontractor_id', $request->subcontractor)
-            ->where('community_id', $request->community)
-            ->where('status', $request->status)
-            ->get();
+            ->leftJoin('community', 'community.id', 'houses.community_id')
+            ->orderBy('community.name', 'ASC')
+            ->orderBy('houses.lot', 'ASC');
+            if ($request->status <> "0"){ 
+                $query->where('status', $request->status);
+            }
+            if ($request->community <> "0"){ 
+                $query->where('community_id', $request->community);
+            }
+            if ($request->subcontractor <> "0"){ 
+                $query->where('subcontractor_id', $request->subcontractor);
+            }
+            $houses = $query->get();
 
         $community = Community::find($request->community);
         $subcontractor = Subcontractor::find($request->subcontractor);
 
-        return view('framing.reports.report_houses')->with(['houses' => $houses, 'status' => $request->status, 'community' => $community, 'subcontractor' => $subcontractor]);
+        return view('framing.reports.report_houses')->with(['houses' => $houses, 'status' => $request->status, 'community_id' => $request->community, 'community' => $community, 'subcontractor_id' => $request->subcontractor, 'subcontractor' => $subcontractor]);
     }
     
     public function rep_houses_PDF($status, $community_id, $subcontractor_id) 
     {
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
 
-        $houses = House::leftJoin('community', 'community.id', 'houses.community_id')
-            ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
-            ->orderBy('subcontractors.name', 'ASC')
-            ->where('subcontractor_id', $subcontractor_id)
-            ->where('community_id', $community_id)
-            ->where('status', $status)
-            ->get();
+        $namepdf = "";
+        $query = House::select('houses.*', 'subcontractors.name as subcontractorName')
+        ->leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
+        ->leftJoin('community', 'community.id', 'houses.community_id')
+        ->orderBy('community.name', 'ASC')
+        ->orderBy('houses.lot', 'ASC');
+        if ($status <> "0"){ 
+            $query->where('status', $status);
+            $namepdf = "-status";
+        }
+        if ($community_id <> "0"){ 
+            $query->where('community_id', $community_id);
+            $namepdf .= "-community";
+        }
+        if ($subcontractor_id <> "0"){ 
+            $query->where('subcontractor_id', $subcontractor_id);
+            $namepdf .= "-subcontractor";
+        }
+        $houses = $query->get();
         
         $community = Community::find($community_id);
         $subcontractor = Subcontractor::find($subcontractor_id);
 
-        $pdf = PDF::loadView('framing.pdf.rep_houses_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community' => $community, 'subcontractor' => $subcontractor])->setPaper("letter", "portrait");
-        $namepdf = 'Rep_Houses_Communities';
+        $pdf = PDF::loadView('framing.pdf.rep_houses_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community_id' => $community_id, 'community' => $community, 'subcontractor_id' => $subcontractor_id, 'subcontractor' => $subcontractor])->setPaper("letter", "portrait");
+        $namepdf = 'Houses'.$namepdf;
         return $pdf->download($namepdf.'.pdf');
     }
 
@@ -200,24 +220,24 @@ class ReportsController extends Controller
         }
 
         $query = Expense::select('expenses.*');
-                if ($request->user <> 0){ 
-                    $query->where('user_id', $request->user);
-                }
-                if ($request->type_expense <> "0"){ 
-                    $query->where('type_expense', $request->type_expense);
-                }
-                if ($request->type_pay <> "0"){ 
-                    $query->where('type_pay', $request->type_pay);
-                }
-                if ($request->FromDate <> Null){ 
-                    $query->whereBetween('date', [$request->FromDate, $request->ToDate]);
-                    $FromDate = $request->FromDate;
-                    $ToDate = $request->ToDate;
-                }else{
-                    $FromDate = "Null";
-                    $ToDate = "Null";
-                }
-        $expenses = $query->get();
+            if ($request->user <> 0){ 
+                $query->where('user_id', $request->user);
+            }
+            if ($request->type_expense <> "0"){ 
+                $query->where('type_expense', $request->type_expense);
+            }
+            if ($request->type_pay <> "0"){ 
+                $query->where('type_pay', $request->type_pay);
+            }
+            if ($request->FromDate <> Null){ 
+                $query->whereBetween('date', [$request->FromDate, $request->ToDate]);
+                $FromDate = $request->FromDate;
+                $ToDate = $request->ToDate;
+            }else{
+                $FromDate = "Null";
+                $ToDate = "Null";
+            }
+            $expenses = $query->get();
 
         $user = User::find($request->user);
 
@@ -231,22 +251,22 @@ class ReportsController extends Controller
         
         $namepdf = "";
         $query = Expense::select('expenses.*');
-                if ($users <> 0){ 
-                    $query->where('user_id', $users);
-                    $namepdf = "-user";
-                }
-                if ($type_expense <> "0"){ 
-                    $query->where('type_expense', $type_expense);
-                    $namepdf = "-type_expense";
-                }
-                if ($type_pay <> "0"){ 
-                    $query->where('type_pay', $type_pay);
-                    $namepdf = "-type_pay";
-                }
-                if ($FromDate <> "Null"){ 
-                    $query->whereBetween('date', [$FromDate, $ToDate]);
-                }
-        $expenses = $query->get();
+            if ($users <> 0){ 
+                $query->where('user_id', $users);
+                $namepdf = "-user";
+            }
+            if ($type_expense <> "0"){ 
+                $query->where('type_expense', $type_expense);
+                $namepdf .= "-type_expense";
+            }
+            if ($type_pay <> "0"){ 
+                $query->where('type_pay', $type_pay);
+                $namepdf .= "-type_pay";
+            }
+            if ($FromDate <> "Null"){ 
+                $query->whereBetween('date', [$FromDate, $ToDate]);
+            }
+            $expenses = $query->get();
 
         $user = User::find($users);
 
