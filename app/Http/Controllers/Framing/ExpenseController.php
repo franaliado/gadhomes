@@ -31,7 +31,7 @@ class ExpenseController extends Controller
     public function index($user_id)
     {
         $expenses = Expense::where('user_id', $user_id)
-                ->orderBy('id', 'DESC')
+                ->orderBy('date', 'ASC')
                 ->get();
 
         return view('framing.expenses.index')->with(['expenses' => $expenses, 'user_id' => $user_id]); 

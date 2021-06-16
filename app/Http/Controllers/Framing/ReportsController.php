@@ -219,7 +219,8 @@ class ReportsController extends Controller
             $this->validator_date($request->all())->validate();
         }
 
-        $query = Expense::select('expenses.*');
+        $query = Expense::select('expenses.*')
+            ->orderBy('date', 'ASC');
             if ($request->user <> 0){ 
                 $query->where('user_id', $request->user);
             }
@@ -250,7 +251,8 @@ class ReportsController extends Controller
         $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
         
         $namepdf = "";
-        $query = Expense::select('expenses.*');
+        $query = Expense::select('expenses.*')
+            ->orderBy('date', 'ASC');
             if ($users <> 0){ 
                 $query->where('user_id', $users);
                 $namepdf = "-user";

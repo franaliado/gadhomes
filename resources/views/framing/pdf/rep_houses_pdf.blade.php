@@ -31,6 +31,7 @@
     #footer { position: fixed; left: 0px; bottom: -250px; right: 0px; height: 130px; text-align: center; }
     #footer .page:after { content: counter(page); }
   </style>
+  
 <body>
   <div id="header">
 	<table id="houses-table"  border='0' >

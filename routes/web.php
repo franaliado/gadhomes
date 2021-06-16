@@ -145,8 +145,7 @@ Route::get('/rep_houses', 'Framing\ReportsController@rep_houses')->middleware('a
 
 Route::get('/report_houses', 'Framing\ReportsController@report_houses')->middleware('auth');
 
-Route::get('/rep_houses_PDF/{status}/{community}/{subcontractor}', 'Framing\ReportsController@rep_houses_PDF')->middleware('auth');
-
+Route::get('/rep_houses_PDF/{status}/{community_id}/{subcontractor_id}', 'Framing\ReportsController@rep_houses_PDF')->middleware('auth');
 
 
 //Reports Subcontractors
@@ -166,7 +165,8 @@ Route::post('/report_expenses', 'Framing\ReportsController@report_expenses')->mi
 
 Route::get('/rep_expenses_PDF/{users}/{type_expense}/{type_pay}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_expenses_PDF')->middleware('auth');
 
-//Reports Community
+
+//Community
 Route::get('/community', 'Framing\CommunityController@index')->middleware('auth');
 
 Route::get('/community/create', 'Framing\CommunityController@create')->middleware('auth');

@@ -16,11 +16,7 @@ use App\Subcontractor;
 
 class HouseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index(Request $request)
     {
 
@@ -44,11 +40,7 @@ class HouseController extends Controller
         return view('framing.houses.index')->with(['houses' => $houses]); 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function create()
     {
         $communitys = Community::orderBy('name', 'ASC')->get();
@@ -57,12 +49,6 @@ class HouseController extends Controller
     }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(HouseCreateRequest $request)
     {
 
@@ -90,23 +76,7 @@ class HouseController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function edit($id)
     {
         if (Auth::user()->role != 1){ return redirect('/home'); }
@@ -118,13 +88,7 @@ class HouseController extends Controller
         return view("framing.houses.edit")->with(['house' => $house, 'subcontractors' => $subcontractors , 'communitys' => $communitys]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         //Validaciones
@@ -164,23 +128,11 @@ class HouseController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         House::destroy($id);
         return redirect ('houses');
     }
 
-    public function search(Request $request){
-        return($request);
-        $search=$request->get('search');
-        $houses = House::where('address', 'like', '%'.$search.'%' )->get();
-        return view('index', ['houses'=>$houses]);
-        return view('framing.houses.search')->with(['houses' => $houses]); 
-    }
 }
