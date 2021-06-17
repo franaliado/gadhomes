@@ -49,6 +49,7 @@
                                 <option value="Hotels">Hotels</option>
                                 <option value="Vehicles">Vehicles</option>
                                 <option value="Machinery">Machinery</option>
+                                <option value="Office Equipment and Supplies">Office Equipment and Supplies</option>
                                 <option value="Others">Others</option>
                             </select>
                         </div>
