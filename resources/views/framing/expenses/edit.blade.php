@@ -49,7 +49,7 @@
                                     <option value="Hotels" {{ $expense->type_expense == "Hotels"  ? 'selected' : '' }}>Hotels</option>
                                     <option value="Vehicles" {{ $expense->type_expense == "Vehicles"  ? 'selected' : '' }}>Vehicles</option>
                                     <option value="Machinery" {{ $expense->type_expense == "Machinery"  ? 'selected' : '' }}>Machinery</option>
-                                    <option value="Office Equipment & Supplies" {{ $expense->type_expense == "Office Equipment & Supplies"  ? 'selected' : '' }}>Office Equipment & Supplies</option>
+                                    <option value="Office Supplies & Equipment" {{ $expense->type_expense == "Office Supplies & Equipment"  ? 'selected' : '' }}>Office Supplies & Equipment</option>
                                     <option value="Others" {{ $expense->type_expense == "Others"  ? 'selected' : '' }}>Others</option>
                                 </select>
                             </div>
