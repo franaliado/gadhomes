@@ -26,7 +26,7 @@ class ResumeController extends Controller
         return view('framing.resume.index')->with(['resume' => $resume, 'tools' => $tools, 'payments' => $payments, 'totalhouses' => $totalhouses]);
     }
     public function resumePdf($subcontractor_id, $totalhouses) {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
         $resume = Subcontractor::where('id', $subcontractor_id)
                     ->first();
         $tools = Tool::where('subcontractor_id', $subcontractor_id)

@@ -45,15 +45,13 @@
 				<table width="100%">
 					<tr>
 						<td>
-							<h1>GAD FRAMING INC.</h1>
+							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
 							<h3>PAYMENT SUMMARY</h3>
-						</td>
-						<td align="right">
-							<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
 						</td>
 					</tr>
 				</table>
 			</div>
+			<br>
 			<div class="row">
 				<div>
 					<table class="table" width="100%" CELLPADDING="10">

@@ -60,11 +60,8 @@
 				<table>
 					<tr>
 						<td>
-							<h1>GAD FRAMING INC.</h1>
+							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
 							<h3>INVOICE: {{ $invoice->num_invoice }}</h3>
-						</td>
-						<td>
-							<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
 						</td>
 					</tr>
 				</table>

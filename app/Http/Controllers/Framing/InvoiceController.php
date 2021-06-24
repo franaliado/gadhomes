@@ -29,7 +29,7 @@ class InvoiceController extends Controller
         return view('framing.invoices.index')->with(['invoice' => $invoice, 'house_id' => $house_id, 'descriptions' => $descriptionpos]);
     }
     public function invoicePdf($id) {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
         $invoice = Order::select('orders.*', 'invoices.id as idInvoice', 'invoices.num_invoice', 'invoices.created_at', 'community.name as communityName', 'houses.address as houseAddress', 'houses.lot as houseLot')                    
                     ->leftJoin('invoices', 'invoices.order_id', 'orders.id')
                     ->leftJoin('houses', 'houses.id', 'orders.house_id')

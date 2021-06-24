@@ -27,7 +27,7 @@
 	body { font-family: DejaVu Sans, sans-serif; }
 
     @page { margin: 180px 50px; }
-    #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 150px; }
+    #header { position: fixed; left: 0px; top: -150px; right: 0px; height: 150px; }
     #footer { position: fixed; left: 0px; bottom: -250px; right: 0px; height: 130px; text-align: center; }
     #footer .page:after { content: counter(page); }
   </style>
@@ -41,9 +41,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<FONT SIZE=4><b>GAD FRAMING INC.</b></font><br><br>
-				<FONT SIZE=3><b>REPORT OF HOUSES</b></font><br><br>
+			<td style="text-align:center;vertical-align: middle">
+				<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
+				<br><FONT SIZE=3><b>REPORT OF HOUSES</b></font><br><br>
 				<FONT SIZE=2>
 
 					@if($status <> "0")
@@ -56,9 +56,6 @@
 						<br><b>Subcontractor:</b> {{$subcontractor->name}}
 					@endif
 				</font>			
-			</td>
-			<td>
-				<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
 			</td>
 		</tr>
 	</table>

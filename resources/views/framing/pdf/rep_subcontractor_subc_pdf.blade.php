@@ -42,21 +42,19 @@
 			<div>Date: {{ date("m-d-Y") }}</div>
 		</div>
 		<div class="row">
-			<table width="100%">
+			<table width="100%" border ="0">
 				<tr>
-					<td>
+					<td style="text-align:center;vertical-align: middle">
 						<br>
-						<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
-						<FONT SIZE=4><b>Report of Subcontractors</b></font><br><br>
-					</td>
-					<td align="right">
-						<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
+						<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="150px" height="70px"/>
+						<br><FONT SIZE=4><b>Report of Subcontractors</b></font><br><br>
 					</td>
 				</tr>
 			</table>
 		</div>
+		<br>
 		<div class="row">
-			<table class="" align="center" width="60%">
+			<table class="" align="center" width="60%" border ="0">
 				<thead class="thead-light">
 					<tr align="center" style="font-size: 12px; font-weight: bold; color: black" bgcolor="#D5DBDB">
 						<td>

@@ -13,11 +13,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-11">
-				<h1 align="center">GAD FRAMING INC.</h1>
+				<div class="col-md-1"><img src="/images/logos/GAD_Logo6.png" class="pull-left" width="450%" height="450%"></div>
 				<h3 align="center">PAYMENT SUMMARY</h3>
 			</div>
-			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table table-bordered">

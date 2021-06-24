@@ -24,7 +24,7 @@
 		float: right;
 	}
     @page { margin: 180px 50px; }
-    #header { position: fixed; left: 0px; top: -180px; right: 0px; height: 150px; }
+    #header { position: fixed; left: 0px; top: -150px; right: 0px; height: 150px; }
     #footer { position: fixed; left: 0px; bottom: -250px; right: 0px; height: 130px; text-align: center; }
     #footer .page:after { content: counter(page); }
   </style>
@@ -37,9 +37,9 @@
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
-				<FONT SIZE=4><b>REPORT OF EXPENSES</b></font><br><br>
+			<td style="text-align:center;vertical-align: middle">
+				<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
+				<br><FONT SIZE=4><b>REPORT OF EXPENSES</b></font><br><br>
 				<FONT SIZE=2>
 					@if($users <> 0)
 						<b>User:</b> {{$user->name}}
@@ -57,34 +57,36 @@
 					@endif
 				</font>
 			</td>
-			<td>
-				<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
-			</td>
 		</tr>
 	</table>
-	<br>
    </div>
+
   <div id="footer">
     <p class="page">Page </p>
   </div>
   <div id="content">
 	<table id="houses-table" class="table" border='1' >
 		<thead class="thead-light">
+			@php ($cols = 4)
 			<tr style="font-size: 12px; font-weight: bold; color: black" bgcolor="D5DBDB" >
 				<td style="text-align:center;vertical-align: middle">#</td>
 				@if ($users == "0") 
-				<td style="text-align:center;vertical-align: middle">User</td>
+					<td style="text-align:center;vertical-align: middle">User</td>
+					@php ($cols = $cols + 1)
 				@endif	
 				@if ($type_expense == "0")
 					<td style="text-align:center;vertical-align: middle">Expenses</td>
+					@php ($cols = $cols + 1)
 				@endif
 				<td style="text-align:center;vertical-align: middle">Date</td>
 				<td style="text-align:center;vertical-align: middle">Description</td>
 				@if ($type_pay == "0")  
 					<td style="text-align:center;vertical-align: middle">Payment Type</td>
+					@php ($cols = $cols + 1)
 				@endif
 				@if ($type_pay == "Card" or $type_pay == "0")
 					<td style="text-align:center;vertical-align: middle">Card</td>
+					@php ($cols = $cols + 1)
 				@endif
 				<td style="text-align:center;vertical-align: middle">Amount</td>
 				</tr>
@@ -92,35 +94,30 @@
 	
 		<tbody>
 			@php($total = 0)
-			@php ($cols = 4)
 			@foreach ($expenses as $expense)
 				@php ($total += ($expense->amount))				
 				<tr style="font-size: 12px;">
 					<td align="center">{{ $loop->iteration }}</td> 
 					@if ($users == "0") 
 						<td align="center">{{ $expense->users->name }}</td>
-						@php ($cols = $cols + 1)
 					@endif
 					@if ($type_expense == "0")  
 						<td align="center">{{ $expense->type_expense }}</td>
-						@php ($cols = $cols + 1)
 					@endif
 					<td align="center" NOWRAP>{{date("m-d-Y", strtotime($expense->date))}}</td>
 					<td align="left">{{ $expense->description }}</td> 
 					@if ($type_pay == "0")  
 						<td align="center">{{ $expense->type_pay }}</td>
-						@php ($cols = $cols + 1)
 					@endif
 					@if ($type_pay == "Card" or $type_pay == "0")
 						<td align="center">{{ $expense->card }}</td>
-						@php ($cols = $cols + 1)
 					@endif
 					<td align="right">{{ number_format($expense->amount, 2, '.', ',') }}</td>
 				</tr>                
 			@endforeach
 			<tr>
 				<td colspan = "{{$cols}}" style="text-align:right;vertical-align: middle;font-size:16px;">
-					<b>Total:</b> &nbsp;&nbsp; {{ number_format($total, 2, '.', ',') }}
+					<b>Total:</b> &nbsp;&nbsp; {{ number_format($total, 2, '.', ',') }}{{$cols}}
 				</td>
 			</tr>
 		</tbody>

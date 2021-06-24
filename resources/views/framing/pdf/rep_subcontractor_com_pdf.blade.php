@@ -44,17 +44,15 @@
 		<div class="row">
 			<table width="100%">
 				<tr>
-					<td>
+					<td style="text-align:center;vertical-align: middle">
 						<br>
-						<FONT SIZE=5><b>GAD FRAMING INC.</b></font><br><br>
-						<FONT SIZE=4><b>Report of Subcontractors for Communities</b></font><br><br>
-					</td>
-					<td align="right">
-						<img src="data:image/png;base64,{{ $logo }}" class="pull-right"/>
+						<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="150px" height="70px"/>
+						<br><FONT SIZE=4><b>Report of Subcontractors <br>for Communities</b></font><br><br>
 					</td>
 				</tr>
 			</table>
 		</div>
+		
 		<div class="row">
 			<table class="" align="center" width="60%">
 				<thead class="thead-light">
@@ -100,23 +98,34 @@
 				@foreach ($houses as $house)
 					@php $total = 0; @endphp
 					@php $totalpayments = 0; @endphp
-					@foreach ($house->subcontractor->payments as $payments)
-						@if ($payments->date >= $FromDate and $payments->date <= $ToDate)
-							@php $totalpayments += $payments->amount; @endphp
-						@endif
-					@endforeach
+					@if($house->subcontractor <> Null)
+						@foreach ($house->subcontractor->payments as $payments)
+							@if ($payments->date >= $FromDate and $payments->date <= $ToDate)
+								@php $totalpayments += $payments->amount; @endphp
+							@endif
+						@endforeach
+					@endif
 
 					@php $totaltools = 0; @endphp
-					@foreach ($house->subcontractor->tools as $tools)
-						@if ($tools->date >= $FromDate and $tools->date <= $ToDate)
-							@php $totaltools += $tools->amount; @endphp
-						@endif
-					@endforeach
+					@if($house->subcontractor <> Null)
+						@foreach ($house->subcontractor->tools as $tools)
+							@if ($tools->date >= $FromDate and $tools->date <= $ToDate)
+								@php $totaltools += $tools->amount; @endphp
+							@endif
+						@endforeach
+					@endif
 
 					@php $total = $house->Total - $totalpayments - $totaltools; @endphp
+
+					@if($house->subcontractor <> Null)
+						@php $subcontractorName = $house->subcontractor->name; @endphp
+					@else
+						@php $subcontractorName = ""; @endphp
+					@endif
+
 					<tr style="font-size: 12px;">
 						<td align="center">{{ $loop->iteration }}</td>    
-						<td align="left">{{ $house->subcontractor->name }}</td>  
+						<td align="left">{{ $subcontractorName }}</td>  
 						<td align="right">{{ number_format($house->Total, 2, '.', ',') }}</td>
 						<td align="right">{{ number_format($totaltools, 2, '.', ',') }}</td>
 						<td align="right">{{ number_format($totalpayments, 2, '.', ',') }}</td>

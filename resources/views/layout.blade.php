@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta  content = "width=device-width, initial-scale = 1.0, maximum-scale = 1.0, minimum-scale = 1.0, user-scalable = no" name = "viewport" >
-        <link href="/images/logo-leon-ico.ico" rel="shortcut icon" type="image/x-icon" />
+        <link href="/images/IconoLeon.ico" rel="shortcut icon" type="image/x-icon" />
         <title>Gadhomes | Dashboard</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <!-- bootstrap 3.0.2 -->
@@ -36,8 +36,8 @@
         <header class="header">
             <a href="/home" class="logo">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <img src="/images/logo-leon2.png" class="img-circle" alt="logo" width="40" height="40"/>
-                GADHOMES
+                <img src="/images/logos/GAD_LogoLeon.png" alt="logo" width="35" height="40"/>
+                    <FONT FACE="arial" SIZE=5>GADHomes</font>
             </a>
 
             <!-- Header Navbar: style can be found in header.less -->

@@ -27,10 +27,9 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<h1>GAD FRAMING INC.</h1>
+				<div class="col-md-1"><img src="/images/logos/GAD_Logo6.png" class="pull-left" width="450%" height="450%"></div>
 				<h3>INVOICE: {{ $invoice->num_invoice }}</h3>
 			</div>
-			<div class="col-md-4"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">

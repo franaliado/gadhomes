@@ -91,6 +91,7 @@
                                 <option value="Check">Check</option>
                                 <option value="Cash">Cash</option>
                                 <option value="Card">Card</option>
+                                <option value="Bank">Bank</option>
                             </select>
                         </div>
                     </div>

@@ -91,6 +91,7 @@
                                     <option value="Check" {{ $expense->type_pay == "Check"  ? 'selected' : '' }}>Check</option>
                                     <option value="Cash" {{ $expense->type_pay == "Cash"  ? 'selected' : '' }}>Cash</option>
                                     <option value="Card" {{ $expense->type_pay == "Card"  ? 'selected' : '' }}>Card</option>
+                                    <option value="Bank" {{ $expense->type_pay == "Bank"  ? 'selected' : '' }}>Bank</option>
                                 </select>
                             </div>
                         </div>

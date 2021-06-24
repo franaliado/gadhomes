@@ -59,7 +59,7 @@ class ReportsController extends Controller
     
     public function rep_houses_PDF($status, $community_id, $subcontractor_id) 
     {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
 
         $namepdf = "";
         $query = House::select('houses.*', 'subcontractors.name as subcontractorName')
@@ -150,7 +150,7 @@ class ReportsController extends Controller
 
     public function rep_subcontractor_subc_PDF($subcontractor_id, $FromDate, $ToDate) 
     {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
         
         $namepdf = "";
         $subcontractor = Subcontractor::where('id', $subcontractor_id)
@@ -175,7 +175,7 @@ class ReportsController extends Controller
 
     public function rep_subcontractor_com_PDF($community_id, $FromDate, $ToDate) 
     {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
         
         $houses = House::leftJoin('subcontractors', 'subcontractors.id', 'houses.subcontractor_id')
             ->where('community_id', $community_id)
@@ -248,7 +248,7 @@ class ReportsController extends Controller
 
     public function rep_expenses_PDF($users, $type_expense, $type_pay, $FromDate, $ToDate) 
     {
-        $image = base64_encode(file_get_contents(public_path('/images/logo_invoice.jpg')));
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
         
         $namepdf = "";
         $query = Expense::select('expenses.*')

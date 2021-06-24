@@ -19,7 +19,7 @@
 		@endif
 		<div class="row">
 			<div class="col-md-11">
-				<h1 align="left">GAD FRAMING INC.</h1>
+				<div class="col-md-1"><img src="/images/logos/GAD_Logo6.png" class="pull-left" width="450%" height="450%"></div>
 				<h3 align="center">REPORT OF EXPENSES</h3>
 				<h4 align="center">
 					@if($users <> 0)
@@ -35,9 +35,8 @@
 					@if($FromDate <> "Null") <b>From:</b> {{date("m-d-Y", strtotime($FromDate))}}  <b>To:</b> {{date("m-d-Y", strtotime($ToDate))}}@endif
 				</h4>
 			</div>
-			<div class="col-md-1"><img src="/images/logo_invoice.jpg" class="pull-right"></div>
 		</div>
-
+		<br>
 		<div class="row">
 			<div class="col-md-12">
 				<table id="houses-table" style="magin-top:500px" class="table table-striped table-bordered" border='1' >
