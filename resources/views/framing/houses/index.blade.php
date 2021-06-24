@@ -13,12 +13,12 @@
     @endif
 
     <h1>List of Houses</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
     <br/>
 
     <a href="{{ url('/houses/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add House</i></a>
         <br/><br/>
-
 
     <div class="col-md-4">
         <form class="form-inline ml-3">

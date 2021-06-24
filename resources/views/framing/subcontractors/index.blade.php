@@ -13,6 +13,7 @@
     @endif
 
     <h1>List of Subcontractors</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
     <br/>
 
     <a href="{{ url('/subcontractors/create') }}" class="btn btn-danger">

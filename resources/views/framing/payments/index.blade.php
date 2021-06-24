@@ -13,6 +13,7 @@
     @endif
 
     <h1>List of Payments  - Payer: {{ Auth::user()->name }}</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
     <br> 
     <b>Subcontractor: {{ $subcontractor->name }}</b>
     <br>

@@ -12,13 +12,14 @@
     </div>
     @endif
 
-    <h1>List of Communities</h1> 
-    <br>
+    <h1>List of Communities</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
+    <br><br>
 
     <a href="{{ url('/community/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Community</i>
     </a> 
-    <br/><br/>
+    <br><br><br>
 
     <table class="table table-light table-hover" border='1' >
         <thead class="thead-light" bgcolor="red" style="color:white">

@@ -13,13 +13,14 @@
     @endif
 
 
-    <h1>List of Expenses - {{ Auth::user()->name }}</h1> 
-    <br> 
+    <h1>List of Expenses - {{ Auth::user()->name }}</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
+    <br><br>
 
     <a href="{{ url('/expenses/'.$user_id.'/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add Expense</i>
     </a> 
-    <br/><br/>
+    <br><br><br>
 
 
     <table class="table table-light table-hover" border='1' >

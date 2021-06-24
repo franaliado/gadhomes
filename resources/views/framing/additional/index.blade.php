@@ -27,7 +27,8 @@
     @endswitch
 
 
-    <h1>List of Additional</h1> 
+    <h1>List of Additional</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%"> 
     <br> 
     <b>Community: {{ $house->community->name }} - Lot: {{ $lot }}</b>
     <br>

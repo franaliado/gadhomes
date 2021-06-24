@@ -13,6 +13,7 @@
     @endif
 
     <h1>List of Houses with Subcontractors</h1>
+    <img src="/images/logos/GAD_Logo6.png" class="pull-right" width="20%" height="20%">
     <br/>
     
     <div class="col-md-8">
