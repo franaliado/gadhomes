@@ -18,7 +18,7 @@
 
     <a href="{{ url('/houses/create') }}" class="btn btn-danger">
         <i class="fa fa-plus"> Add House</i></a>
-        <br/><br/>
+    <br/><br/>
 
     <div class="col-md-4">
         <form class="form-inline ml-3">

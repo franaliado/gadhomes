@@ -19,7 +19,7 @@
         <![endif]-->
     </head>
     <body class="bg-black">
-        <h1  align="center">GADHOMES</h1>
+        <h1 align="center"><img src="/images/logos/GAD_Logo7.png" alt="logo" width="200" height="100"/></h1>
         <div class="form-box" id="login-box">
             <div class="form-box" id="login-box">
                 <div class="header">Sign In</div>

@@ -10,6 +10,7 @@ use Auth;
 use DB;
 use App\User;
 use App\House;
+use App\Order;
 use App\Community;
 use App\Subcontractor;
 use App\Tool;
@@ -86,6 +87,76 @@ class ReportsController extends Controller
 
         $pdf = PDF::loadView('framing.pdf.rep_houses_pdf', ['houses'=>$houses, 'logo'=>$image, 'status' => $status, 'community_id' => $community_id, 'community' => $community, 'subcontractor_id' => $subcontractor_id, 'subcontractor' => $subcontractor])->setPaper("letter", "portrait");
         $namepdf = 'Houses'.$namepdf;
+        return $pdf->download($namepdf.'.pdf');
+    }
+
+
+
+    /**
+     * PURCHASE ORDERS.
+     */
+    public function rep_po()
+    {
+        return view('framing.reports.rep_po');
+    }
+  
+
+    public function report_po(Request $request) 
+    {
+        if ($request->FromDate <>  Null or $request->ToDate <>  Null){
+            $this->validator_date($request->all())->validate();
+        }
+
+        $FromDate = $request->FromDate;
+        $ToDate = $request->ToDate;
+        if ($request->paid == "No"){
+            $paid = 0;
+        }else{
+            $paid = 1;
+        }
+ 
+        $query = Order::select('orders.*')
+            ->orderBy('date_order', 'ASC')
+            ->where('paid', $paid);
+            if ($request->FromDate <> Null){ 
+                $query->whereBetween('date_order', [$request->FromDate, $request->ToDate]);
+                $FromDate = $request->FromDate;
+                $ToDate = $request->ToDate;
+            }else{
+                $FromDate = "Null";
+                $ToDate = "Null";
+            }
+            $orders = $query->get();
+
+            return view('framing.reports.report_po')->with(['orders' => $orders, 'paid' => $request->paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+    }
+
+
+    public function rep_po_PDF($paid, $FromDate, $ToDate) 
+    {
+        $image = base64_encode(file_get_contents(public_path('/images/logos/GAD_Logo6.png')));
+        
+        $namepdf = "";
+
+        if ($paid == "No"){
+            $paid2 = 0;
+            $namepdf = "-Unpaid";
+        }else{
+            $paid2 = 1;
+            $namepdf = "-Paid";
+        }       
+
+        $query = Order::select('orders.*')
+            ->orderBy('date_order', 'ASC')
+            ->where('paid', $paid2);
+            if ($FromDate <> "Null"){ 
+                $query->whereBetween('date_order', [$FromDate, $ToDate]);
+            }
+            $orders = $query->get();
+
+        $pdf = PDF::loadView('framing.pdf.rep_po_pdf', ['orders'=>$orders, 'logo'=>$image, 'paid' => $paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
+        $namepdf = 'Rep-PO'.$namepdf;
+
         return $pdf->download($namepdf.'.pdf');
     }
 

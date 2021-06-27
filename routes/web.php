@@ -148,6 +148,14 @@ Route::get('/report_houses', 'Framing\ReportsController@report_houses')->middlew
 Route::get('/rep_houses_PDF/{status}/{community_id}/{subcontractor_id}', 'Framing\ReportsController@rep_houses_PDF')->middleware('auth');
 
 
+//Reports PO
+Route::get('/rep_po', 'Framing\ReportsController@rep_po')->middleware('auth');
+
+Route::get('/report_po', 'Framing\ReportsController@report_po')->middleware('auth');
+
+Route::get('/rep_po_PDF/{paid}/{FromDate}/{ToDate}', 'Framing\ReportsController@rep_po_PDF')->middleware('auth');
+
+
 //Reports Subcontractors
 Route::get('/rep_subcontractors', 'Framing\ReportsController@rep_subcontractors')->middleware('auth');
 
