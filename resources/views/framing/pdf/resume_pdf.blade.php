@@ -41,12 +41,13 @@
 			<div class="row">
 				<div>Date: {{ date("m-d-Y") }}</div>
 			</div>
+			<br>
 			<div class="row">
 				<table width="100%">
 					<tr>
 						<td>
-							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
-							<h3>PAYMENT SUMMARY</h3>
+							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="150px" height="70px"/>
+							<h3 align="center">PAYMENT SUMMARY</h3>
 						</td>
 					</tr>
 				</table>

@@ -26,11 +26,12 @@
 			<div class="col-md-6"><a href="/invoicePdf/{{ $invoice->idInvoice }}" class="btn btn-default pull-right"><i class="fa fa-download"></i></a></div>
 		</div>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="col-md-1"><img src="/images/logos/GAD_Logo6.png" class="pull-left" width="450%" height="450%"></div>
-				<h3>INVOICE: {{ $invoice->num_invoice }}</h3>
+				<br><h3 align="center">INVOICE: {{ $invoice->num_invoice }}</h3>
 			</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-12">
 				<table class="table table-bordered">

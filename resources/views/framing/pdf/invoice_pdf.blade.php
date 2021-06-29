@@ -56,17 +56,18 @@
 			<div class="row">
 				<div class="col-md-12"><strong>Date: {{ date("m-d-Y", strtotime($invoice->created_at)) }}</strong></div>
 			</div>
+			<br>
 			<div class="row">
 				<table>
 					<tr>
 						<td>
-							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
-							<h3>INVOICE: {{ $invoice->num_invoice }}</h3>
+							<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="150px" height="70px"/>
+							<h3 align="center">INVOICE: {{ $invoice->num_invoice }}</h3>
 						</td>
 					</tr>
 				</table>
-
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-12">
 					<table class="table">
