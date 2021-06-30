@@ -17,14 +17,16 @@
 				<div class="col-md-1"><img src="/images/logos/GAD_Logo6.png" class="pull-left" width="450%" height="450%"></div>
 				<h3 align="center">Report of Houses</h3>
 				<h4 align="center">
+					@php $num =""; @endphp
 					@if($status <> "0")
 						<b>Status:</b> {{$status}}
+						@php $num = " - "; @endphp
 					@endif
 					@if($community_id <> 0)
-						- <b>Community:</b> {{$community->name}}
+						{{$num}}<b>Community:</b> {{$community->name}}
 					@endif
 					@if($subcontractor_id <> 0)
-						- <b>Subcontractor:</b> {{$subcontractor->name}}
+						<br><b>Subcontractor:</b> {{$subcontractor->name}}
 					@endif
 				</h4>
 			</div>

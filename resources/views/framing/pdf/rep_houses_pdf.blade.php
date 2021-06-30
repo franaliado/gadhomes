@@ -45,12 +45,13 @@
 				<img src="data:image/png;base64,{{ $logo }}" class="pull-left"  width="25%" height="60%"/>
 				<br><FONT SIZE=3><b>REPORT OF HOUSES</b></font><br><br>
 				<FONT SIZE=2>
-
+					@php $num =""; @endphp
 					@if($status <> "0")
 						<b>Status:</b> {{$status}}
+						@php $num = " - "; @endphp
 					@endif
 					@if($community_id <> 0)
-						- <b>Community:</b> {{$community->name}}
+						{{$num}}<b>Community:</b> {{$community->name}}
 					@endif
 					@if($subcontractor_id <> 0)
 						<br><b>Subcontractor:</b> {{$subcontractor->name}}

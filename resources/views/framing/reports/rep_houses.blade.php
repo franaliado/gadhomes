@@ -2,62 +2,6 @@
 
 @section('content')
 
-<script>
-    $(document).ready(function(){
-        var communitys = @json($communitys);
-        var subcontractors = @json($subcontractors);
-        var houses = @json($houses);
-
-
-        $("#status").on('change', (function(event){
-            var status=$(this).val();
-            if($.trim(status) != ''){
-                $('#community').empty();
-                $('#community').append("<option value='0'>All</option>");
-                $('#subcontractor').empty();
-                $('#subcontractor').append("<option value='0'>All</option>");
-                var comunidades = [];
-                $.each(houses, function(index, value){
-                    if(value.status==status) {
-                        if(!comunidades.includes(value.community_id)) {
-                            comunidades.push(value.community_id);
-                        }
-                    }
-                });
-                $.each(comunidades, function(i, v) {
-                    let c = communitys.find(function(e, index) {if(e.id == v)return e;});
-                    $('#community').append("<option value='"+ v + "'>"+ c.name +"</option>");
-                });
-            }
-        }));
-
-        $("#community").on('change', (function(event){
-            var comm=$(this).val();
-            if($.trim(comm) != ''){
-                $('#subcontractor').empty();
-                $('#subcontractor').append("<option value='0'>All</option>");
-                var subcontratores = [];
-                $.each(houses, function(index, value){
-                    if(value.status==$('#status').val()) {
-                        let c = communitys.find(function(e, index) {if(e.id == $("#community").val())return e;});
-                        if(value.community_id==c.id) {
-                            if(!subcontratores.includes(value.subcontractor_id)) {
-                                subcontratores.push(value.subcontractor_id);
-                            }
-                        }
-                    }
-                });
-
-
-                $.each(subcontratores, function(i, v) {
-                    let s = subcontractors.find(function(e, index) {if(e.id == v)return e;});
-                    $('#subcontractor').append("<option value='"+ v + "'>"+ s.name +"</option>");
-                });
-            }
-        }));
-    });
-</script> 
-
     @if(session('error'))
     <div class="row">
     <div class="col-md-10 col-md-offset-1">
@@ -97,7 +41,7 @@
                 <div class="form-group row col-md-4">
                     <label for="status" class="col-md-6 col-form-label text-md-right">{{ __('Status') }}</label>
                     <div class="col-md-12">
-                        <select id="status" name="status" class="form-control" style="width:250px" required>
+                        <select id="status" name="status" class="form-control" style="width:250px">
                             <option value="0">All</option>
                             <option value="Pending">Pending</option>
                             <option value="Billed">Billed</option>
@@ -107,19 +51,27 @@
                 </div>
 
                 <div class="form-group row col-md-4">
+                    <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
                     <div class="col-md-12">
-                        <label for="community" class="col-md-6 col-form-label text-md-right">{{ __('Community') }}</label>
-                        <select id="community" name="community" class="form-control" required>
+                        <select id="community" name="community" class="form-control">
                             <option value="0">All</option>
+                            @foreach($communitys as $community)
+                                <option value="{{ $community->id }}" {{ old('community') == $community->id ? 'selected' : '' }}> 
+                                    {{ $community->name }} 
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group row col-md-4">
+                    <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
                     <div class="col-md-12">
-                        <label for="subcontractor" class="col-md-6 col-form-label text-md-right">{{ __('Subcontractor') }}</label>
-                        <select id="subcontractor" name="subcontractor" class="form-control" required>
+                        <select id="subcontractor" name="subcontractor" class="form-control">
                             <option value="0">All</option>
+                            @foreach($subcontractors as $subcontractor)
+                                <option value="{{ $subcontractor->id }}" {{ old('subcontractor') == $subcontractor->id ? 'selected': '' }}> {{ $subcontractor->name }} </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
