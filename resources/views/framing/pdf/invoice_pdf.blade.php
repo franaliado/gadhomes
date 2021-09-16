@@ -81,7 +81,7 @@
 								<p><strong>Phone:</strong> (850) 598-1758 - (850) 401-8477</p>
 								<p><strong>Owner:</strong> Saul Francisco - Cristian Espinoza</p>
 								<p><strong>Email:</strong> gaditasflaming1@gmail.com</p>
-								<p><strong>Address:</strong> 4137 Corbin Rd. Panama City FL. 32404</p>
+								<p><strong>Address:</strong> 2084 Sherman Avenue. Panama City FL. 32401</p>
 							</td>
 							<td>
 								<p><strong>Address:</strong> D.R. Horton - Panama City <br>&emsp;&emsp;&emsp;:25366 Profit Drive Daphne Al. 36526</p>
