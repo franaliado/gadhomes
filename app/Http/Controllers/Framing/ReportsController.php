@@ -11,6 +11,7 @@ use DB;
 use App\User;
 use App\House;
 use App\Order;
+use App\Descriptionpo;
 use App\Community;
 use App\Subcontractor;
 use App\Tool;
@@ -128,7 +129,9 @@ class ReportsController extends Controller
             }
             $orders = $query->get();
 
-            return view('framing.reports.report_po')->with(['orders' => $orders, 'paid' => $request->paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
+        $descriptionpos = Descriptionpo::all();
+
+            return view('framing.reports.report_po')->with(['orders' => $orders, 'descriptionpos' => $descriptionpos, 'paid' => $request->paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate]);
     }
 
 
@@ -154,7 +157,9 @@ class ReportsController extends Controller
             }
             $orders = $query->get();
 
-        $pdf = PDF::loadView('framing.pdf.rep_po_pdf', ['orders'=>$orders, 'logo'=>$image, 'paid' => $paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
+        $descriptionpos = Descriptionpo::all();
+
+        $pdf = PDF::loadView('framing.pdf.rep_po_pdf', ['orders'=>$orders, 'descriptionpos' => $descriptionpos, 'logo'=>$image, 'paid' => $paid, 'FromDate' => $FromDate, 'ToDate' => $ToDate])->setPaper("letter", "portrait");
         $namepdf = 'Rep-PO'.$namepdf;
 
         return $pdf->download($namepdf.'.pdf');

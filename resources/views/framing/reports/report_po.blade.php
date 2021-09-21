@@ -68,19 +68,35 @@
 							<th style="text-align:center;vertical-align: middle">Nº P.O.</th>
 							<th style="text-align:center;vertical-align: middle">Type P.O.</th>
 							<th style="text-align:center;vertical-align: middle">Date P.O.</th>
+							<th style="text-align:center;vertical-align: middle">Amount</th>
 						</tr>
 					</thead>
 			
 					<tbody>
-						@foreach ($orders as $order)			
+						@php $total = 0; @endphp
+						@foreach ($orders as $order)	
+							@php $totaldescriptionpo = 0; @endphp	
+							@foreach ($descriptionpos as $descriptionpo)
+								@if ($descriptionpo->order_id == $order->id)
+									@php $totaldescriptionpo += ($descriptionpo->unit_price * $descriptionpo->qty_po); @endphp
+								@endif
+							@endforeach
+
 							<tr>
 								<td align="center">{{ $loop->iteration }}</td>    
 								<td align="center">{{ $order->num_po }}</td>
 								<td align="center">{{ $order->type_PO }}</td> 
 								<td align="center">{{date("m-d-Y", strtotime($order->date_order))}}</td>  
-							</tr>                
+								<td align="right">{{ number_format($totaldescriptionpo, 2, '.', ',') }}</td>
+							</tr>   
+							@php $total += $totaldescriptionpo; @endphp        
 						@endforeach
 					</tbody>
+					<tr>
+						<td align="right" colspan="5"> 
+							<h4><strong>TOTAL: &emsp;&emsp;&emsp;$  {{ number_format($total, 2, '.', ',') }} </strong></h4>
+						</td>
+					</tr>
 				</table>
 			</div>
 		</div>

@@ -61,9 +61,11 @@
 		</tr>
 	</table>
    </div>
+
   <div id="footer">
     <p class="page">Page </p>
   </div>
+  
   <div id="content">
 	<table id="houses-table" class="table" border='1' >
 		<thead class="thead-light">
